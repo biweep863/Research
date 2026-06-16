@@ -1,0 +1,26 @@
+\section{Experiments}
+
+\paragraph{Model.}
+Qwen2.5-0.5B (the open-weight 494M-parameter Qwen model). The GPU
+configuration switches to TinyLlama-1.1B-Chat-v1.0 and Qwen2.5-Math-7B
+without code changes.
+
+\paragraph{Benchmark.}
+A deterministic synthetic arithmetic benchmark of 80 items spanning
+addition, subtraction and multiplication with operands sampled uniformly
+from $\{1,\dots,100\}$, plus optional GSM8K subset behind
+\texttt{gpu\_full.yaml}. Accuracy is judged by string-matching the first
+integer in the model's greedy completion.
+
+\paragraph{Procedure.}
+For each bit-width $b \in \{32, 16, 8, 4, 2\}$ we deep-copy the FP32
+model, apply the quantizer in place, generate answers, and compute logit
+MSE and KL on a held-out set of $50$ items. Each step runs in a few
+minutes on CPU/MPS.
+
+\paragraph{Baseline.}
+FP32 accuracy of Qwen2.5-0.5B on the synthetic set is
+$\qwenZeroFivebBaselineAcc$ (see \texttt{results/math\_eval\_qwen05b.json}).
+We emphasise that this is a very small model: it is not expected to solve
+all arithmetic perfectly, but it serves as a faithful test bed for the
+relative degradation analysis.

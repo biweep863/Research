@@ -1,0 +1,74 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{ethayarajh2019contextual}
+\citation{cai2021isotropy}
+\citation{bis2021too}
+\citation{facco2017twonn}
+\citation{ansuini2019id}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{1}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{1}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Anisotropy in contextual embeddings.}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Intrinsic dimensionality of representations.}{1}{section.2}\protected@file@percent }
+\citation{liu2024lost}
+\citation{xiong2024effective}
+\citation{wang2022interpret}
+\citation{nanda2023progress}
+\citation{ethayarajh2019contextual}
+\@writefile{toc}{\contentsline {paragraph}{Long-context behaviour.}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Mechanistic interpretability.}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{2}{section.3}\protected@file@percent }
+\newlabel{sec:method}{{3}{2}{Methodology}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Setup}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Intrinsic dimension (TwoNN)}{2}{subsection.3.2}\protected@file@percent }
+\newlabel{eq:twonn}{{1}{2}{Intrinsic dimension (TwoNN)}{equation.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Anisotropy}{2}{subsection.3.3}\protected@file@percent }
+\newlabel{eq:aniso}{{2}{2}{Anisotropy}{equation.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Local-PCA curvature proxy}{2}{subsection.3.4}\protected@file@percent }
+\newlabel{eq:curv}{{3}{2}{Local-PCA curvature proxy}{equation.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Effective rank}{2}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{2}{section.4}\protected@file@percent }
+\newlabel{sec:experiments}{{4}{2}{Experiments}{section.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Models.}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Corpus.}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Context-length sweep.}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Hyperparameters.}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Implementation.}{2}{section.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Intrinsic dimension (TwoNN) heatmap on GPT-2. Rows index transformer blocks, columns index context length $T$. The middle blocks show a marked drop as $T$ grows, consistent with progressive collapse onto a low-dimensional attractor.}}{3}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:id-heat}{{1}{3}{Intrinsic dimension (TwoNN) heatmap on GPT-2. Rows index transformer blocks, columns index context length $T$. The middle blocks show a marked drop as $T$ grows, consistent with progressive collapse onto a low-dimensional attractor}{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{3}{section.5}\protected@file@percent }
+\newlabel{sec:results}{{5}{3}{Results}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Headline numbers.}{3}{figure.caption.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Layer-resolved view.}{3}{figure.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reproducibility.}{3}{figure.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{3}{section.6}\protected@file@percent }
+\newlabel{sec:discussion}{{6}{3}{Discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Geometric interpretation.}{3}{section.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Anisotropy $A(\mathcal  {X})$ heatmap on GPT-2. Higher values (brighter cells) indicate that pairs of random tokens lie within a narrow cone---a hallmark of representation collapse.}}{3}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:aniso-heat}{{2}{3}{Anisotropy $A(\mathcal {X})$ heatmap on GPT-2. Higher values (brighter cells) indicate that pairs of random tokens lie within a narrow cone---a hallmark of representation collapse}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Why it might matter for retrieval.}{3}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations.}{3}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Significance testing.}{3}{section.6}\protected@file@percent }
+\bibstyle{plain}
+\bibdata{references}
+\bibcite{ansuini2019id}{1}
+\bibcite{bis2021too}{2}
+\bibcite{cai2021isotropy}{3}
+\bibcite{ethayarajh2019contextual}{4}
+\bibcite{facco2017twonn}{5}
+\bibcite{liu2024lost}{6}
+\bibcite{nanda2023progress}{7}
+\bibcite{wang2022interpret}{8}
+\bibcite{xiong2024effective}{9}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Intrinsic dimension as a function of context length, for selected layers. Curves are nearly monotone in $T$; the steepest descent occurs in the mid-network blocks, in agreement with the heatmap of Figure~\ref {fig:id-heat}.}}{4}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:id-lines}{{3}{4}{Intrinsic dimension as a function of context length, for selected layers. Curves are nearly monotone in $T$; the steepest descent occurs in the mid-network blocks, in agreement with the heatmap of Figure~\ref {fig:id-heat}}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{4}{section.7}\protected@file@percent }
+\newlabel{sec:conclusion}{{7}{4}{Conclusion}{section.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Anisotropy as a function of context length for the same selected layers. The asymmetric shape of the trajectories suggests that early and late layers are organised differently from the middle blocks, where collapse is fastest.}}{4}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:aniso-lines}{{4}{4}{Anisotropy as a function of context length for the same selected layers. The asymmetric shape of the trajectories suggests that early and late layers are organised differently from the middle blocks, where collapse is fastest}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Local-PCA curvature proxy $\overline  {C}$ across blocks and context lengths. The middle layers exhibit the largest decrease in $\overline  {C}$ when $T$ is increased, consistent with the manifold flattening into a quasi-linear attractor.}}{5}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:curv-heat}{{5}{5}{Local-PCA curvature proxy $\overline {C}$ across blocks and context lengths. The middle layers exhibit the largest decrease in $\overline {C}$ when $T$ is increased, consistent with the manifold flattening into a quasi-linear attractor}{figure.caption.5}{}}
+\gdef \@abspage@last{5}

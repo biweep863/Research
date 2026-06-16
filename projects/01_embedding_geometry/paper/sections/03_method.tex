@@ -1,0 +1,53 @@
+\section{Methodology}\label{sec:method}
+
+\subsection{Setup}
+Let $f_\theta$ be a decoder-only transformer with $L$ layers and hidden
+dimension $d$. For input $x \in V^*$, denote by $h^{(\ell)}_i(x) \in
+\mathbb{R}^d$ the residual-stream activation at layer $\ell$ and position $i$.
+Given a context length $T$, we sample documents from a corpus, truncate to
+$T$ tokens, and assemble a point cloud
+\[
+\mathcal{X}^{(\ell)}_T \;=\; \{\, h^{(\ell)}_i(x) \,\mid\, x \in \mathcal{D},\, 1\le i \le T \,\}\subset \mathbb{R}^d.
+\]
+We then compute three diagnostics on each cloud.
+
+\subsection{Intrinsic dimension (TwoNN)}
+For each point $p \in \mathcal{X}$ let $r_1(p), r_2(p)$ be its first- and
+second-nearest-neighbour distances. Facco et al.\ show that
+$\mu(p) := r_2(p)/r_1(p)$ follows a Pareto distribution with parameter $d$,
+yielding the maximum-likelihood estimator
+\begin{equation}
+\hat{d}_{\mathrm{TwoNN}} = \frac{N}{\sum_{p} \log\mu(p)},
+\label{eq:twonn}
+\end{equation}
+where $N$ is the number of valid samples. We truncate the upper tail at the
+$90$th percentile of $\mu$ to suppress boundary effects.
+
+\subsection{Anisotropy}
+Following~\cite{ethayarajh2019contextual}, we draw $M$ random index pairs
+$(i,j)$ uniformly without replacement and define
+\begin{equation}
+A(\mathcal{X}) = \frac{1}{M}\sum_{(i,j)}\frac{\langle x_i, x_j\rangle}{\lVert x_i\rVert\,\lVert x_j\rVert}.
+\label{eq:aniso}
+\end{equation}
+A spherically uniform cloud satisfies $A \approx 0$; $A$ close to $1$
+indicates collapse onto a narrow cone.
+
+\subsection{Local-PCA curvature proxy}
+For a subsample of $S \le N$ anchor points, retrieve the $k$ nearest
+neighbours, centre them, and compute singular values
+$\sigma_1 \ge \dots \ge \sigma_k$. Let
+\begin{equation}
+C(p) = \frac{\sum_{j>m}\sigma_j^2}{\sum_{j\le m}\sigma_j^2 + \varepsilon},
+\label{eq:curv}
+\end{equation}
+where $m$ is the count of \emph{leading} directions (we use $m=3$). A flat
+manifold concentrates mass in the leading directions ($C\to 0$); a
+high-curvature region spreads mass across all directions ($C$ large).
+We report $\overline{C} = \mathbb{E}_p[C(p)]$.
+
+\subsection{Effective rank}
+For completeness we report the effective rank of the centred activation
+covariance, $\exp\!\big({-\sum_i p_i\log p_i}\big)$, where $p_i = \sigma_i/\sum_j\sigma_j$.
+This gives a smooth, dimensionless measure of how many directions carry
+appreciable variance and complements the discrete TwoNN estimate.

@@ -1,0 +1,32 @@
+\section{Discussion}\label{sec:discussion}
+
+\paragraph{Geometric interpretation.} The simultaneous drop in intrinsic
+dimension, rise in anisotropy, and decrease in effective rank are mutually
+consistent: each is a different lens on a manifold whose effective volume in
+$\mathbb{R}^d$ is shrinking. At long contexts, the residual stream is
+ceasing to use most of its available capacity in the middle layers---a kind
+of representational sticky regime.
+
+\paragraph{Why it might matter for retrieval.} Retrieval-augmented
+generation often concatenates many candidate passages into a single context.
+If middle-layer representations have collapsed by the time the model
+finishes attending, distinguishing between two semantically similar passages
+becomes proportionally harder. Our geometric diagnostics provide a
+hardware-agnostic, label-free signal for when this happens, which could
+inform passage-budget heuristics.
+
+\paragraph{Limitations.} (a) GPT-2 is far from a long-context model; the
+qualitative claim that the effect persists into 8B-scale models with rotary
+or ALiBi positional encodings remains to be verified on the GPU
+configuration. (b) The curvature proxy is a local-PCA estimator, not a
+true sectional curvature; alternative manifold-curvature estimators (e.g.,
+based on geodesic--Euclidean ratio) could be cross-checked. (c) The
+choice of corpus matters: legal or scientific text with strong long-range
+dependencies likely exposes the collapse earlier than narrative text.
+
+\paragraph{Significance testing.} For the headline numbers we use bootstrap
+confidence intervals across documents (implementation in
+\texttt{shared/utils/stats.py}); the trends reported survive the lower
+bootstrap quantile. We caution however that the small sample of eight
+documents on the local configuration limits statistical power, which is
+why the GPU configuration uses sixteen documents and a longer sweep.

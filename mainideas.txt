@@ -1,0 +1,57 @@
+Propuesta de Investigación: LLMs, Ciencia de Datos y Matemáticas
+Luis Benvenuto, tu perfil en Ingeniería en Ciencia de Datos y Matemáticas, tienes una ventaja competitiva única: la capacidad de no solo usar modelos, sino de entender la arquitectura subyacente y la teoría de optimización. Para publicar papers de alto impacto en áreas "pioneras", el enfoque debe moverse de la simple aplicación al análisis mecanístico y geométrico de los LLMs.
+
+A continuación, presento tres propuestas de proyectos de investigación que combinan rigor matemático, procesamiento de lenguaje natural (NLP) y experimentación científica.
+Proyecto 1: Geometría de la Información y Colapso de Embeddings en Contextos Largos
+Este proyecto busca entender cómo la estructura geométrica de las representaciones vectoriales (embeddings) cambia a medida que el contexto del LLM aumenta, un área crítica dado el auge de modelos como Gemini o GPT-4 con ventanas de contexto masivas.
+Pregunta de Investigación
+¿Existe un punto crítico de transición de fase en la topología del espacio de embeddings donde la información semántica comienza a colapsar hacia un centroide común (anisotropía) a medida que el contexto se expande?
+Experimentación
+Dataset: Utilizar un corpus de documentos legales o científicos técnicos extensos.
+Metodología:
+Extraer capas intermedias de activación de modelos Open Source (como Llama 3 o Mistral) con diferentes longitudes de entrada (desde 1k hasta 128k tokens).
+Calcular la Dimensión Intrínseca (ID) del espacio de activaciones y la Similitud de Coseno Promedio entre tokens irrelevantes.
+Aplicar métricas de Geometría Diferencial para medir la curvatura de la variedad (manifold) de datos a distintas profundidades de la red.
+Contribución: Identificar límites matemáticos para la "atención efectiva" antes de que el ruido numérico domine la señal.
+Proyecto 2: Interpretabilidad Mecanística en el Razonamiento Lógico-Simbólico
+Como estudiante de matemáticas, puedes investigar si los LLMs realmente "entienden" reglas lógicas o simplemente mapean patrones estadísticos de alta frecuencia.
+Pregunta de Investigación
+¿Pueden identificarse "circuitos de inducción" específicos dentro de los pesos de un transformer que ejecuten operaciones de lógica booleana o inferencia silogística de manera independiente al lenguaje natural?
+Experimentación
+Dataset: Generar un dataset sintético basado en lógica de predicados pura expresada en lenguajes inventados (para evitar el sesgo de entrenamiento).
+Metodología:
+Parcheo de Activación (Activation Patching): Intercambiar activaciones entre una ejecución "correcta" y una "incorrecta" para localizar qué neuronas exactas deciden la validez de un argumento.
+Ablación Estructural: Desactivar cabezales de atención específicos para observar el impacto en la precisión del razonamiento simbólico vs. la fluidez gramatical.
+Contribución: Mapear el primer "grafo de razonamiento" interno de un modelo, separando la sintaxis de la semántica lógica.
+Proyecto 3: Robustez de LLMs ante la Cuantización Extrema en Tareas Matemáticas
+La eficiencia es clave en la industria. Este proyecto explora cómo la pérdida de precisión numérica (de FP32 a INT4 o menos) afecta desproporcionadamente a la capacidad de resolución de problemas matemáticos complejos.
+Pregunta de Investigación
+¿Cuál es la relación de escala entre la precisión de los parámetros (bit-width) y el error residual en la aproximación de funciones no lineales realizadas por LLMs?
+Experimentación
+Dataset: Conjunto de problemas de cálculo y álgebra lineal (MATH benchmark).
+Metodología:
+Tomar un modelo base y aplicar diferentes técnicas de Cuantización Post-Entrenamiento (PTQ): 8-bit, 4-bit, y 1.58-bit (Binary/Ternary).
+Medir el Error Cuadrático Medio (MSE) entre la salida del modelo FP32 y el modelo cuantizado en tareas de regresión simbólica.
+Analizar si la cuantización afecta más a las capas de Feed-Forward o a los mecanismos de Self-Attention.
+Contribución: Proponer un nuevo método de cuantización "consciente del razonamiento" que preserve los pesos críticos para las matemáticas.
+Marco Metodológico Sugerido para tus Papers
+Para que tu investigación sea aceptada en conferencias como NeurIPS, ICLR o EMNLP, sigue este flujo basado en el método científico:
+
+Fase
+Acción
+Observación
+Identificar una anomalía (ej. el modelo falla en sumas de 5 dígitos pero no de 4).
+Hipótesis
+Formular una explicación matemática (ej. "La limitación reside en el registro de acarreo del cabezal de atención 7").
+Experimentación
+Diseñar un experimento controlado con variables aisladas (usando modelos Open Weights).
+Análisis
+Aplicar pruebas de significancia estadística (p-values) sobre los resultados.
+Conclusión
+Validar o refutar la hipótesis y proponer una mejora técnica o teórica.
+
+Próximos pasos recomendados
+Explora herramientas: Familiarízate con librerías de interpretabilidad como TransformerLens de NDIF.
+Lectura de estado del arte: Revisa los últimos papers de "Mechanistic Interpretability" en arXiv.org.
+Mentoría: Busca un profesor en tu ingeniería que trabaje con optimización numérica para guiar el rigor formal de tus propuestas.
+

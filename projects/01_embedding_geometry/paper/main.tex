@@ -1,0 +1,43 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Information Geometry and Embedding Collapse in Long-Context Transformers}
+\author[1]{Luis Benvenuto}
+\affil[1]{Data Science \& Mathematics, Independent Research}
+\date{\today}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent We study how the geometry of contextual embeddings in autoregressive
+language models deforms as the input context grows. Three complementary
+diagnostics are proposed: a TwoNN-based intrinsic dimension, a pairwise
+anisotropy measurement extending Ethayarajh~(2019), and a discrete curvature
+proxy based on local PCA over $k$-nearest-neighbour patches. Applied to a
+GPT-2 backbone on a long-document corpus across context lengths from
+$128$ to $\gptTwoMaxCtx$ tokens, we observe a clean drop of intrinsic
+dimension in the middle layers from $\gptTwoIDmidShort$ to $\gptTwoIDmidLong$
+and an anisotropy shift from $\gptTwoAnisoMidShort$ to $\gptTwoAnisoMidLong$, with
+effective rank decreasing monotonically. The pipeline is configuration-driven
+and rescales to 7B-parameter open-weight models and $131{,}072$-token contexts
+without code changes.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_method.tex}
+\input{sections/04_experiments.tex}
+\input{sections/05_results.tex}
+\input{sections/06_discussion.tex}
+\input{sections/07_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

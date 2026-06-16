@@ -1,0 +1,23 @@
+project: embedding_geometry
+seed: 0
+device: cuda
+dtype: bf16
+
+models:
+  - name: meta-llama/Meta-Llama-3-8B
+    short: llama3_8b
+  - name: mistralai/Mistral-7B-v0.3
+    short: mistral_7b
+
+context_lengths: [512, 2048, 8192, 32768, 65536, 131072]
+num_documents: 16
+tokens_for_metrics: 4096
+random_pairs: 4000
+neighborhood_k: 32
+
+corpus:
+  source: hf_arxiv
+  hf_dataset: ccdv/arxiv-summarization
+  hf_split: train[:64]
+
+output_dir: results

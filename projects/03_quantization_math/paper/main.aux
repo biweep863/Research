@@ -1,0 +1,50 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{frantar2022gptq}
+\citation{lin2023awq}
+\citation{xiao2022smoothquant}
+\citation{wang2023bitnet}
+\citation{cobbe2021gsm8k}
+\citation{hendrycks2021math}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Question.}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Contributions.}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Post-training quantization (PTQ).}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Ternary and BitNet.}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Mathematical capabilities of LLMs.}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{1}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Quantizer}{1}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Logit divergence}{2}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Submodule sensitivity}{2}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Model.}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Benchmark.}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Procedure.}{2}{section.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Math accuracy vs.\ bit-width on Qwen2.5-0.5B (synthetic arithmetic benchmark). The dashed line is the FP32 baseline.}}{2}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:acc-bits}{{1}{2}{Math accuracy vs.\ bit-width on Qwen2.5-0.5B (synthetic arithmetic benchmark). The dashed line is the FP32 baseline}{figure.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Logit MSE and KL divergence to the FP32 reference as a function of bit-width. Both metrics span many orders of magnitude across the sweep, consistent with the expected scaling law of weight perturbation $\sim 2^{-b}$.}}{2}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:mse-bits}{{2}{2}{Logit MSE and KL divergence to the FP32 reference as a function of bit-width. Both metrics span many orders of magnitude across the sweep, consistent with the expected scaling law of weight perturbation $\sim 2^{-b}$}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Baseline.}{2}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{2}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Bit-width sweep.}{2}{figure.caption.2}\protected@file@percent }
+\bibstyle{plain}
+\bibdata{references}
+\bibcite{cobbe2021gsm8k}{1}
+\bibcite{frantar2022gptq}{2}
+\bibcite{hendrycks2021math}{3}
+\bibcite{lin2023awq}{4}
+\bibcite{wang2023bitnet}{5}
+\bibcite{xiao2022smoothquant}{6}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Submodule sensitivity at 4-bit. Quantizing only attention weights yields $\Delta \text  {Acc}=-0.062$ and logit MSE $1.7806$; quantizing only the MLP yields $\Delta \text  {Acc}=-0.375$ and logit MSE $4.0926$.}}{3}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:sens}{{3}{3}{Submodule sensitivity at 4-bit. Quantizing only attention weights yields $\Delta \text {Acc}=\qwenZeroFivebSensAttnDeltaAcc $ and logit MSE $\qwenZeroFivebSensAttnMSE $; quantizing only the MLP yields $\Delta \text {Acc}=\qwenZeroFivebSensMlpDeltaAcc $ and logit MSE $\qwenZeroFivebSensMlpMSE $}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Submodule asymmetry.}{3}{figure.caption.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{3}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scaling law.}{3}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reasoning-aware mixed precision.}{3}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations.}{3}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{3}{section.7}\protected@file@percent }
+\gdef \@abspage@last{3}

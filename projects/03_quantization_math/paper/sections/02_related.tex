@@ -1,0 +1,22 @@
+\section{Related Work}
+
+\paragraph{Post-training quantization (PTQ).}
+GPTQ~\cite{frantar2022gptq} and AWQ~\cite{lin2023awq} achieve nearly
+loss-less INT4 weights via second-order error correction and
+activation-aware scaling. SmoothQuant~\cite{xiao2022smoothquant} migrates
+activation outliers into the weights. We deliberately use a simpler
+per-channel symmetric quantizer to establish a clear lower bound on the
+quality--bit-width trade-off; better quantizers are a strict improvement,
+not a contradiction.
+
+\paragraph{Ternary and BitNet.} BitNet~\cite{wang2023bitnet} demonstrates
+that training from scratch with ternary weights $\{-1,0,+1\}$ can match
+FP16 baselines at sufficient scale. Our 2-bit setting is post-training and
+is best interpreted as a stress test, not a recipe.
+
+\paragraph{Mathematical capabilities of LLMs.}
+GSM8K~\cite{cobbe2021gsm8k} and the Hendrycks MATH benchmark
+\cite{hendrycks2021math} are the canonical evaluations. Our local
+configuration uses synthetic arithmetic problems so that the pipeline runs
+deterministically without network access; the GPU configuration substitutes
+GSM8K and MATH subsets.

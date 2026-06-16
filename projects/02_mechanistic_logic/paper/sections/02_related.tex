@@ -1,0 +1,26 @@
+\section{Related Work}
+\paragraph{Mechanistic interpretability.} Wang et al.~\cite{wang2022interpret}
+identified an interpretable circuit for indirect object identification in
+GPT-2, demonstrating that small models support tractable circuit-level
+analyses. Nanda et al.~\cite{nanda2023progress} apply similar tools to
+modular arithmetic, isolating a Fourier-feature circuit. Our work is in the
+same lineage but targets a different task family: propositional and
+syllogistic logic.
+
+\paragraph{Probing.} Linear probing was popularised
+by~\cite{alain2017understanding} and extended to language models
+by~\cite{hewitt2019structural}. We use standard logistic-regression probes
+at every layer, with cross-validation; we deliberately avoid more expressive
+probes which can fit the labels even in randomly initialised features.
+
+\paragraph{Reasoning benchmarks and surface bias.} Several papers report
+that LLMs' apparent reasoning can be brittle under paraphrase
+\cite{webson2022prompt}. A conlang test set sidesteps the question by
+testing on a vocabulary essentially absent from pretraining data, in the
+spirit of \cite{lake2023human}'s compositional benchmarks.
+
+\paragraph{Activation patching.} Activation patching \cite{meng2022locating}
+is the canonical localisation tool. For runtime budget reasons our ablation
+study is restricted to per-head zero-ablation on the local config; the
+\texttt{gpu\_full.yaml} configuration extends the analysis to causal
+patching between identified heads.

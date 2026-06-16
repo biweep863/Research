@@ -1,0 +1,22 @@
+{
+  "baseline_acc": 0.6875,
+  "bits": 4,
+  "rows": [
+    {
+      "module": "attn",
+      "bits": 4,
+      "acc": 0.625,
+      "delta_acc": -0.0625,
+      "logit_mse": 1.780611827969551,
+      "logit_kl": 0.13788881991058588
+    },
+    {
+      "module": "mlp",
+      "bits": 4,
+      "acc": 0.3125,
+      "delta_acc": -0.375,
+      "logit_mse": 4.092553839087486,
+      "logit_kl": 0.2556236768141389
+    }
+  ]
+}

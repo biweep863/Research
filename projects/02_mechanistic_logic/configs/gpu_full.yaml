@@ -1,0 +1,23 @@
+project: mechanistic_logic
+seed: 0
+device: cuda
+dtype: bf16
+
+models:
+  - name: EleutherAI/pythia-2.8b
+    short: pythia28b
+
+dataset:
+  n_per_template: 256
+  templates: [modus_ponens, modus_tollens, syllogism_barbara, syllogism_celarent,
+              syllogism_darii, syllogism_ferio, and_chain, or_chain, xor_chain, not_chain]
+  surface_forms: [english, conlang]
+
+probe:
+  layers_to_probe: all
+  cv_folds: 5
+
+ablation:
+  baseline: mean
+
+output_dir: results

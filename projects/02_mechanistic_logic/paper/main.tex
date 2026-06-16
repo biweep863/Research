@@ -1,0 +1,46 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Mechanistic Probes of Logical-Symbolic Reasoning in Small Transformers:\\
+Evidence for a Surface-Form-Invariant Validity Direction}
+\author[1]{Luis Benvenuto}
+\affil[1]{Data Science \& Mathematics, Independent Research}
+\date{\today}
+
+\begin{document}
+\twocolumn[\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent We probe whether a small autoregressive transformer (GPT-2) carries
+an internal representation of \emph{logical validity} that is decoupled from
+natural-language surface form. To control for memorisation, we construct
+parallel English and invented-conlang versions of five logical templates
+(modus ponens, modus tollens, Barbara syllogism, AND-chain, OR-chain) and
+report two diagnostics: (i) per-layer linear probes for validity, and (ii)
+exhaustive attention-head ablations. Probes reach
+$\gptTwoProbeEnPeak$ accuracy at layer $\gptTwoProbeEnPeakLayer$ on English
+and $\gptTwoProbeClPeak$ at layer $\gptTwoProbeClPeakLayer$ on the conlang;
+cross-surface transfer reaches $\gptTwoCrossEnCl$ (English $\to$ conlang),
+clearly above the $0.5$ chance level despite the conlang vocabulary lying
+outside pretraining distribution. Head-ablation flags a single early head
+(layer $\gptTwoWorstHeadLayer$, head $\gptTwoWorstHeadIndex$) whose
+removal hurts logic accuracy by $\gptTwoWorstHeadDeltaAcc$ while
+simultaneously inflating LM cross-entropy by $\gptTwoWorstHeadDeltaLM$,
+suggesting it is more than a logic-specific component. We discuss methodological implications for
+mechanistic interpretability of reasoning.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_method.tex}
+\input{sections/04_experiments.tex}
+\input{sections/05_results.tex}
+\input{sections/06_discussion.tex}
+\input{sections/07_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

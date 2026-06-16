@@ -1,0 +1,11 @@
+\section{Conclusion}
+We have presented a dependency-free, fully reproducible pipeline for
+measuring the impact of post-training quantization on the mathematical
+capabilities of a small open-weight language model. The expected
+monotonic, several-decade scaling of logit MSE with bit-width is recovered
+on Qwen2.5-0.5B. The submodule-sensitivity analysis identifies the
+attention/MLP asymmetry that justifies a "reasoning-aware'' mixed-precision
+recipe. The configuration-driven pipeline scales without code changes to
+the canonical 1.1B--7B math-LM regime, where the gap between this baseline
+and SOTA quantizers (GPTQ, AWQ, BitNet) is expected to become quantitatively
+meaningful.

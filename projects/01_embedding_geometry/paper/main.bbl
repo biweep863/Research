@@ -1,0 +1,52 @@
+\begin{thebibliography}{1}
+
+\bibitem{ansuini2019id}
+Alessio Ansuini, Alessandro Laio, Jakob~H Macke, and Davide Zoccolan.
+\newblock Intrinsic dimension of data representations in deep neural networks.
+\newblock In {\em NeurIPS}, 2019.
+
+\bibitem{bis2021too}
+Daniel Bi{\'s}, Maksim Podkorytov, and Xiuwen Liu.
+\newblock Too much in common: Shifting of embeddings in transformer language
+  models.
+\newblock In {\em NAACL}, 2021.
+
+\bibitem{cai2021isotropy}
+Xingyu Cai, Jiaji Huang, Yuchen Bian, and Kenneth Church.
+\newblock Isotropy in the contextual embedding space: clusters and manifolds.
+\newblock In {\em ICLR}, 2021.
+
+\bibitem{ethayarajh2019contextual}
+Kawin Ethayarajh.
+\newblock How contextual are contextualized word representations?
+\newblock In {\em EMNLP-IJCNLP}, 2019.
+
+\bibitem{facco2017twonn}
+Elena Facco, Maria d'Errico, Alex Rodriguez, and Alessandro Laio.
+\newblock Estimating the intrinsic dimension of datasets by a minimal
+  neighborhood information.
+\newblock {\em Scientific Reports}, 7(12140), 2017.
+
+\bibitem{liu2024lost}
+Nelson~F Liu et~al.
+\newblock Lost in the middle: How language models use long contexts.
+\newblock {\em TACL}, 2024.
+
+\bibitem{nanda2023progress}
+Neel Nanda, Lawrence Chan, Tom Lieberum, Jess Smith, and Jacob Steinhardt.
+\newblock Progress measures for grokking via mechanistic interpretability.
+\newblock In {\em ICLR}, 2023.
+
+\bibitem{wang2022interpret}
+Kevin Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob
+  Steinhardt.
+\newblock Interpretability in the wild: a circuit for indirect object
+  identification in gpt-2 small.
+\newblock In {\em ICLR}, 2023.
+
+\bibitem{xiong2024effective}
+Wenhan Xiong et~al.
+\newblock Effective long-context scaling of foundation models.
+\newblock {\em arXiv:2309.16039}, 2024.
+
+\end{thebibliography}

@@ -1,0 +1,37 @@
+\section{Methodology}
+
+\subsection{Quantizer}
+Let $W \in \mathbb{R}^{n_{\text{out}} \times n_{\text{in}}}$ be the weight
+of a linear layer. We use the following per-row symmetric quantizer:
+\begin{itemize}
+\item \textbf{32-bit:} identity.
+\item \textbf{16-bit:} cast to FP16, round-trip back to working dtype.
+\item \textbf{8 / 4-bit:} symmetric per-row scale
+$s_i = \max_j |W_{ij}| / q_{\max}$, with
+$q_{\max}\in\{127,7\}$ and the quantized weight
+$W'_{ij} = s_i \cdot \mathrm{clip}\bigl(\mathrm{round}(W_{ij}/s_i),\,\pm q_{\max}\bigr)$.
+\item \textbf{2-bit (ternary):} per-row threshold $\tau_i = 0.7\,\bar{|W|}_i$,
+where $\bar{|W|}_i$ is the row's mean absolute value.
+Weights below the threshold are zeroed; surviving weights take values
+$\pm s_i$, where $s_i$ is the mean magnitude of surviving weights.
+This is a deterministic, dependency-free approximation of BitNet's
+ternary regime.
+\end{itemize}
+
+\subsection{Logit divergence}
+For each problem we record the model's last-token logits under FP32 and
+under each quantization regime, and compute
+$\mathrm{MSE} = \mathbb{E}\bigl[(\ell^{\mathrm{ref}} - \ell^{q})^2\bigr]$
+and the forward KL divergence
+$\mathrm{KL}(p \,\|\, q)$ between the corresponding softmax distributions.
+MSE measures raw drift; KL is sensitive to the decisive directions of the
+distribution.
+
+\subsection{Submodule sensitivity}
+We isolate attention vs.\ feed-forward error contributions by applying
+quantization \emph{only} to layers whose module path contains
+$\{\texttt{attn}, \texttt{attention}, \texttt{self\_attn}\}$ or
+$\{\texttt{mlp}, \texttt{ffn}, \texttt{feed\_forward}, \texttt{fc}\}$
+respectively, holding the complement at FP32.
+The bit-width used for this experiment is 4, the regime where the global
+sweep shows the steepest accuracy degradation.

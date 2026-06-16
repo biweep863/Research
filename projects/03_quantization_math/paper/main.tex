@@ -1,0 +1,40 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Bit-Width Scaling Laws for Mathematical Reasoning in Small Language Models}
+\author[1]{Luis Benvenuto}
+\affil[1]{Data Science \& Mathematics, Independent Research}
+\date{\today}
+
+\begin{document}
+\twocolumn[\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent We study how post-training quantization of the weights of a small
+autoregressive language model affects its ability to approximate
+elementary mathematical functions. A dependency-free per-channel symmetric
+quantizer is applied at bit-widths $\{32, 16, 8, 4, 2\}$, where 2-bit
+corresponds to a ternary BitNet-style approximation. On the open-weight
+Qwen2.5-0.5B model evaluated on a synthetic arithmetic benchmark, we observe
+the expected monotonic degradation: logit MSE versus the FP32 reference
+spans many orders of magnitude across the sweep. Layer-wise submodule
+sensitivity reveals that attention and feed-forward weights contribute
+asymmetrically to the residual error. The pipeline is configuration-driven
+and rescales to GSM8K, the Hendrycks MATH benchmark, and 7B-parameter
+mathematical models behind a GPU configuration.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_method.tex}
+\input{sections/04_experiments.tex}
+\input{sections/05_results.tex}
+\input{sections/06_discussion.tex}
+\input{sections/07_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

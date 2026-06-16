@@ -1,0 +1,37 @@
+\section{Introduction}
+
+Large language models pass classical logic benchmarks at impressive rates,
+but it is not obvious whether they do so by carrying internal representations
+of logical structure or by matching surface statistics. The distinction is
+methodologically important: only the former predicts generalisation to novel
+formal languages.
+
+We adopt the working hypothesis from the mechanistic interpretability
+literature \cite{wang2022interpret,nanda2023progress}: that components of a
+trained transformer can be localised and that their roles can be tested by
+selective perturbation. We specialise the question to logic:
+
+\begin{quote}
+\emph{Does the model carry a linearly decodable representation of validity
+that survives a change of surface form to an invented symbolic language?}
+\end{quote}
+
+We answer affirmatively for GPT-2 with two complementary diagnostics. First,
+per-layer logistic-regression probes trained on either English or a
+controlled conlang reach high accuracy; the linear separability is highest
+in the middle blocks (layer~$\gptTwoProbeEnPeakLayer$ for English,
+layer~$\gptTwoProbeClPeakLayer$ for conlang). Second, cross-surface
+probes---train on one surface, test on the other---transfer at a rate well
+above chance, confirming that the validity direction is not entirely
+language-specific. Finally, we exhaustively ablate every attention head and
+report layer-wise sensitivity profiles.
+
+\paragraph{Contributions.}
+\begin{enumerate}
+\item A reproducible parallel English/conlang benchmark of propositional
+and syllogistic logic, balanced across templates and labels.
+\item Per-layer probe accuracies on both surfaces, with cross-surface
+transfer scores.
+\item Exhaustive head-ablation diagrams contrasting impact on logic
+accuracy against impact on language modelling.
+\end{enumerate}

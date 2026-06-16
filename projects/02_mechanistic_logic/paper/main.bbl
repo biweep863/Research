@@ -1,0 +1,42 @@
+\begin{thebibliography}{1}
+
+\bibitem{alain2017understanding}
+Guillaume Alain and Yoshua Bengio.
+\newblock Understanding intermediate layers using linear classifier probes.
+\newblock {\em arXiv:1610.01644}, 2017.
+
+\bibitem{hewitt2019structural}
+John Hewitt and Christopher~D. Manning.
+\newblock A structural probe for finding syntax in word representations.
+\newblock In {\em NAACL}, 2019.
+
+\bibitem{lake2023human}
+Brenden~M Lake and Marco Baroni.
+\newblock Human-like systematic generalization through a meta-learning neural
+  network.
+\newblock {\em Nature}, 2023.
+
+\bibitem{meng2022locating}
+Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov.
+\newblock Locating and editing factual associations in gpt.
+\newblock In {\em NeurIPS}, 2022.
+
+\bibitem{nanda2023progress}
+Neel Nanda, Lawrence Chan, Tom Lieberum, Jess Smith, and Jacob Steinhardt.
+\newblock Progress measures for grokking via mechanistic interpretability.
+\newblock In {\em ICLR}, 2023.
+
+\bibitem{wang2022interpret}
+Kevin Wang, Alexandre Variengien, Arthur Conmy, Buck Shlegeris, and Jacob
+  Steinhardt.
+\newblock Interpretability in the wild: a circuit for indirect object
+  identification in gpt-2 small.
+\newblock In {\em ICLR}, 2023.
+
+\bibitem{webson2022prompt}
+Albert Webson and Ellie Pavlick.
+\newblock Do prompt-based models really understand the meaning of their
+  prompts?
+\newblock In {\em NAACL}, 2022.
+
+\end{thebibliography}

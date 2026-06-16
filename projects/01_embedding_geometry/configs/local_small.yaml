@@ -1,0 +1,20 @@
+project: embedding_geometry
+seed: 0
+device: auto             # auto | cpu | mps | cuda
+dtype: fp32              # fp32 | fp16 | bf16
+
+models:
+  - name: gpt2
+    short: gpt2
+
+context_lengths: [128, 256, 512, 1024]
+num_documents: 8
+tokens_for_metrics: 1024  # cap tokens per doc passed into metrics
+random_pairs: 2000        # pairs sampled for anisotropy
+neighborhood_k: 20        # k-NN for curvature estimate
+
+corpus:
+  source: arxiv_local      # arxiv_local | hf_arxiv | hf_eurlex
+  arxiv_path: ../../arxiv_seed.txt   # synthetic fallback corpus
+
+output_dir: results

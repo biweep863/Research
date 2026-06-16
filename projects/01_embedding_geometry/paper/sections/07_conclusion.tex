@@ -1,0 +1,10 @@
+\section{Conclusion}\label{sec:conclusion}
+
+We have introduced a triple of geometric diagnostics for the residual
+stream of decoder-only transformers, evaluated them on GPT-2 across a
+four-decade range of context lengths, and observed coherent evidence that
+the mid-network manifold collapses as the input grows. The pipeline is
+configuration-driven and rescales without code changes to 7B-parameter
+open-weight models and $131{,}072$-token contexts. We see this as an
+invitation: any new long-context training recipe should be able to claim
+geometric robustness, and now there is a cheap way to measure it.

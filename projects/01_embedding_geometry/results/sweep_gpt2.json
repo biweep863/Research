@@ -1,0 +1,522 @@
+[
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 0,
+    "n_tokens": 1024,
+    "twonn": 21.575701895454085,
+    "anisotropy": 0.4763125683681069,
+    "curvature": 2.1620735844688382e-32,
+    "eff_rank": 91.86083347296905
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 1,
+    "n_tokens": 1024,
+    "twonn": 5.624629230918449,
+    "anisotropy": 0.6301082696655763,
+    "curvature": 2.747980518931951e-32,
+    "eff_rank": 94.69452545340982
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 2,
+    "n_tokens": 1024,
+    "twonn": 5.1127455922221445,
+    "anisotropy": 0.6214397766168073,
+    "curvature": 2.449750225154974e-32,
+    "eff_rank": 77.69567500330592
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 3,
+    "n_tokens": 1024,
+    "twonn": 5.870098786628056,
+    "anisotropy": 0.5952528804513921,
+    "curvature": 2.690204823986787e-32,
+    "eff_rank": 35.51647832737706
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 4,
+    "n_tokens": 1024,
+    "twonn": 4.518161658336378,
+    "anisotropy": 0.5594808628518438,
+    "curvature": 2.1409314818221325e-32,
+    "eff_rank": 39.228636565977425
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 5,
+    "n_tokens": 1024,
+    "twonn": 8.128899769532165,
+    "anisotropy": 0.5430359182279166,
+    "curvature": 2.1759498908876338e-32,
+    "eff_rank": 41.95522729065836
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 6,
+    "n_tokens": 1024,
+    "twonn": 8.60865203242667,
+    "anisotropy": 0.5225124443875455,
+    "curvature": 2.076452253136227e-32,
+    "eff_rank": 45.25453188017807
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 7,
+    "n_tokens": 1024,
+    "twonn": 14.75681037223388,
+    "anisotropy": 0.508268747966983,
+    "curvature": 2.0882555169874532e-32,
+    "eff_rank": 48.79414543392658
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 8,
+    "n_tokens": 1024,
+    "twonn": 5.1737296312084915,
+    "anisotropy": 0.4991763944927797,
+    "curvature": 1.854338283622072e-32,
+    "eff_rank": 53.553035017926554
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 9,
+    "n_tokens": 1024,
+    "twonn": 3.3856789087788797,
+    "anisotropy": 0.5180113815233308,
+    "curvature": 2.1678396595715022e-32,
+    "eff_rank": 58.602178229849365
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 10,
+    "n_tokens": 1024,
+    "twonn": 9.783990199091786,
+    "anisotropy": 0.5537431454230126,
+    "curvature": 2.0577246596825438e-32,
+    "eff_rank": 64.29497383562604
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 11,
+    "n_tokens": 1024,
+    "twonn": 2.5063803203693724,
+    "anisotropy": 0.6813461999822453,
+    "curvature": 2.2296842370631995e-32,
+    "eff_rank": 69.56808445907272
+  },
+  {
+    "model": "gpt2",
+    "ctx": 128,
+    "layer": 12,
+    "n_tokens": 1024,
+    "twonn": 97.89930389714695,
+    "anisotropy": 0.9169977865654688,
+    "curvature": 4.094670090878661e-32,
+    "eff_rank": 35.03336380854584
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 0,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.3980165237369271,
+    "curvature": 2.275087612215201e-32,
+    "eff_rank": 150.6280130529877
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 1,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.5759376752917822,
+    "curvature": 2.7384826702778685e-32,
+    "eff_rank": 160.88514935542182
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 2,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.577609493138574,
+    "curvature": 2.4778579545806075e-32,
+    "eff_rank": 145.4711895377822
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 3,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.5613105542018891,
+    "curvature": 2.476464898169391e-32,
+    "eff_rank": 87.701458199388
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 4,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.5322284246879557,
+    "curvature": 2.4368030322765568e-32,
+    "eff_rank": 98.20729827058291
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 5,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.5158143923498216,
+    "curvature": 2.3759858669764636e-32,
+    "eff_rank": 105.38195296751424
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 6,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.49605253128516574,
+    "curvature": 2.143600519344484e-32,
+    "eff_rank": 113.39294656207903
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 7,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.4825331501706256,
+    "curvature": 2.2308849754349181e-32,
+    "eff_rank": 121.4417831876097
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 8,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.4825788409173994,
+    "curvature": 2.1802576285033684e-32,
+    "eff_rank": 130.34790072603303
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 9,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.5015619737333626,
+    "curvature": 2.0259807550726614e-32,
+    "eff_rank": 138.61827716027318
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 10,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.5433038677637257,
+    "curvature": 2.076454326859907e-32,
+    "eff_rank": 147.09134458815606
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 11,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.6666095358284975,
+    "curvature": 2.3213140302098908e-32,
+    "eff_rank": 152.8233416627116
+  },
+  {
+    "model": "gpt2",
+    "ctx": 256,
+    "layer": 12,
+    "n_tokens": 2048,
+    "twonn": NaN,
+    "anisotropy": 0.9018095267920715,
+    "curvature": 3.957994987220844e-32,
+    "eff_rank": 56.30625016652123
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 0,
+    "n_tokens": 4000,
+    "twonn": NaN,
+    "anisotropy": 0.26603714804277184,
+    "curvature": 2.6647462014886113e-32,
+    "eff_rank": 194.108695710959
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 1,
+    "n_tokens": 4000,
+    "twonn": 371.67777673001973,
+    "anisotropy": 0.4869278278977423,
+    "curvature": 3.995529201006249e-32,
+    "eff_rank": 211.0291592943151
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 2,
+    "n_tokens": 4000,
+    "twonn": 280.4040411960431,
+    "anisotropy": 0.5200016454220756,
+    "curvature": 3.6729237311106046e-32,
+    "eff_rank": 206.36659191802295
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 3,
+    "n_tokens": 4000,
+    "twonn": 82.92878816488407,
+    "anisotropy": 0.51854857879503,
+    "curvature": 3.636016990181773e-32,
+    "eff_rank": 162.42370373235022
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 4,
+    "n_tokens": 4000,
+    "twonn": 156.50942853397714,
+    "anisotropy": 0.5009952354685567,
+    "curvature": 3.673524116552075e-32,
+    "eff_rank": 188.97494384544137
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 5,
+    "n_tokens": 4000,
+    "twonn": 104.7465321433102,
+    "anisotropy": 0.46352336511608844,
+    "curvature": 3.278179287677552e-32,
+    "eff_rank": 201.26389928417547
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 6,
+    "n_tokens": 4000,
+    "twonn": 2771.2335463921145,
+    "anisotropy": 0.4504960043934783,
+    "curvature": 2.9826210104339837e-32,
+    "eff_rank": 226.9634959220282
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 7,
+    "n_tokens": 4000,
+    "twonn": 3417.5827668075603,
+    "anisotropy": 0.4009239237841207,
+    "curvature": 2.610474072504219e-32,
+    "eff_rank": 242.40413285876795
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 8,
+    "n_tokens": 4000,
+    "twonn": 58.44930438140972,
+    "anisotropy": 0.3971833086600309,
+    "curvature": 2.2738591089409675e-32,
+    "eff_rank": 265.10922575992646
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 9,
+    "n_tokens": 4000,
+    "twonn": 43.876840539195406,
+    "anisotropy": 0.3842496817591957,
+    "curvature": 2.384017932449492e-32,
+    "eff_rank": 276.36315620161105
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 10,
+    "n_tokens": 4000,
+    "twonn": NaN,
+    "anisotropy": 0.40050178744081527,
+    "curvature": 2.4284526323201976e-32,
+    "eff_rank": 286.77021126920414
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 11,
+    "n_tokens": 4000,
+    "twonn": 131.19068173840006,
+    "anisotropy": 0.5390546661707201,
+    "curvature": 2.6381491692139103e-32,
+    "eff_rank": 288.4852397500078
+  },
+  {
+    "model": "gpt2",
+    "ctx": 512,
+    "layer": 12,
+    "n_tokens": 4000,
+    "twonn": NaN,
+    "anisotropy": 0.773481269992833,
+    "curvature": 4.6064488441278924e-32,
+    "eff_rank": 59.41569535275469
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 0,
+    "n_tokens": 4000,
+    "twonn": 1.5452343075059178,
+    "anisotropy": 0.11877525083572046,
+    "curvature": 0.10525286037974366,
+    "eff_rank": 204.9443052747806
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 1,
+    "n_tokens": 4000,
+    "twonn": 2.7997473093599687,
+    "anisotropy": 0.3952760476148614,
+    "curvature": 0.09721227903703941,
+    "eff_rank": 218.86378389760225
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 2,
+    "n_tokens": 4000,
+    "twonn": 37.25189320485686,
+    "anisotropy": 0.4579085853549509,
+    "curvature": 0.0863904918905049,
+    "eff_rank": 223.67367102800404
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 3,
+    "n_tokens": 4000,
+    "twonn": 32.392814849788586,
+    "anisotropy": 0.46650164726951143,
+    "curvature": 0.11140633870099273,
+    "eff_rank": 197.88020815992508
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 4,
+    "n_tokens": 4000,
+    "twonn": 2.9997005695266252,
+    "anisotropy": 0.4750139299923153,
+    "curvature": 0.13699818318837084,
+    "eff_rank": 226.83810295526607
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 5,
+    "n_tokens": 4000,
+    "twonn": 1.3887243438457528,
+    "anisotropy": 0.3980915899389313,
+    "curvature": 0.14656843844911166,
+    "eff_rank": 279.48551941080365
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 6,
+    "n_tokens": 4000,
+    "twonn": 0.891761885747794,
+    "anisotropy": 0.4144793803313273,
+    "curvature": 0.1479910088373776,
+    "eff_rank": 312.81745195386895
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 7,
+    "n_tokens": 4000,
+    "twonn": 6.867921679419543,
+    "anisotropy": 0.3199168789736442,
+    "curvature": 0.17378032666068718,
+    "eff_rank": 342.8601436356817
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 8,
+    "n_tokens": 4000,
+    "twonn": 26.45159018197092,
+    "anisotropy": 0.2988921074026333,
+    "curvature": 0.14892237745898423,
+    "eff_rank": 357.7057718154281
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 9,
+    "n_tokens": 4000,
+    "twonn": 22.40185645684102,
+    "anisotropy": 0.27946149524990604,
+    "curvature": 0.1291958148847141,
+    "eff_rank": 382.3370328325282
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 10,
+    "n_tokens": 4000,
+    "twonn": 18.53480655219375,
+    "anisotropy": 0.2938577664433831,
+    "curvature": 0.13907324903159868,
+    "eff_rank": 375.49895125702506
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 11,
+    "n_tokens": 4000,
+    "twonn": 32.79695000768691,
+    "anisotropy": 0.43562805541883254,
+    "curvature": 0.1329693616319465,
+    "eff_rank": 382.00893540301945
+  },
+  {
+    "model": "gpt2",
+    "ctx": 1024,
+    "layer": 12,
+    "n_tokens": 4000,
+    "twonn": 58.07285405909574,
+    "anisotropy": 0.7864013656328025,
+    "curvature": 0.13308561749689843,
+    "eff_rank": 74.8707921126998
+  }
+]

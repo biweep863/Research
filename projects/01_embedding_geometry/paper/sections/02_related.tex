@@ -1,0 +1,32 @@
+\section{Related Work}\label{sec:related}
+
+\paragraph{Anisotropy in contextual embeddings.} Ethayarajh~\cite{ethayarajh2019contextual}
+showed that average pairwise cosine similarity between contextualised tokens
+in BERT, GPT-2, and ELMo grows with depth, contradicting the implicit
+assumption that contextual vectors live on a uniform unit sphere. Subsequent
+work~\cite{cai2021isotropy,bis2021too} confirmed the phenomenon, attributed
+it to a small number of dominant directions, and proposed whitening-based
+corrections. Our anisotropy measurement is a direct extension of
+Ethayarajh's, sampled across context lengths rather than across depths.
+
+\paragraph{Intrinsic dimensionality of representations.} The TwoNN estimator
+of Facco et al.~\cite{facco2017twonn} provides a non-parametric estimate of
+the intrinsic dimension of a point cloud from the ratio of first and second
+nearest-neighbour distances. It has been applied to image classifiers
+\cite{ansuini2019id} and, more recently, to language models, where intrinsic
+dimension has been argued to track generalisation and abstraction depth.
+We adopt TwoNN because it is robust in the high-dimensional regime where
+covariance-based estimators degenerate.
+
+\paragraph{Long-context behaviour.} Several works~\cite{liu2024lost,xiong2024effective}
+report systematic degradation of long-context accuracy. Most are
+task-driven (question answering, needle-in-a-haystack). Our angle is
+orthogonal: we instrument the residual stream geometrically and check
+whether collapse precedes task failure.
+
+\paragraph{Mechanistic interpretability.} Activation patching and circuit
+discovery~\cite{wang2022interpret,nanda2023progress} are complementary
+lenses. Where they ask \emph{which heads carry a computation}, we ask
+\emph{what shape the representation has at all}. The two approaches share
+a methodological commitment: study what is actually there, before
+proposing remediation.

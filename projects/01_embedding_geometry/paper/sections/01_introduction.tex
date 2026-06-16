@@ -1,0 +1,38 @@
+\section{Introduction}
+
+Long-context language models have become routine: Gemini 1.5, Claude, GPT-4,
+and open-weight architectures such as Llama 3 routinely ingest tens of
+thousands of tokens. The empirical observation that downstream quality often
+degrades super-linearly with context length is widely reported but poorly
+understood from a geometric standpoint. We ask a specific question:
+
+\begin{quote}
+\emph{Does the hidden-state manifold of a transformer language model undergo
+a measurable phase transition as the context length grows, and if so, where
+in the network does it occur?}
+\end{quote}
+
+A geometric account is attractive because it sits beneath the architectural
+details. Whatever positional encoding, attention pattern, or rotary
+modification is in use, the residual stream lives in $\mathbb{R}^d$ and
+inherits a metric, a dimension, and a curvature. If long-context degradation
+were primarily geometric---an attractor collapse of the residual stream
+toward a low-dimensional subspace---we should be able to detect that collapse
+without any reference to the task.
+
+We make three contributions. \textbf{(i)} We define a triple of cheap, easily
+implementable geometric diagnostics: an intrinsic dimension estimator
+(TwoNN), a pairwise anisotropy measure, and a local-PCA curvature proxy.
+\textbf{(ii)} We sweep these diagnostics over a four-decade range of context
+lengths on GPT-2, releasing a reproducible pipeline that scales without code
+changes to Llama-3-8B and Mistral-7B at $131{,}072$ tokens given GPU
+resources. \textbf{(iii)} We show that, even on a small backbone, the
+predicted collapse is visible: intrinsic dimension drops by roughly an order
+of magnitude in the middle layers between short and long contexts, anisotropy
+rises, and effective rank decreases monotonically.
+
+The remainder of the paper is organised as follows. Section~\ref{sec:related}
+reviews related work on anisotropy and intrinsic dimensionality. Section~\ref{sec:method}
+formalises the diagnostics and Section~\ref{sec:experiments} the sweep.
+Section~\ref{sec:results} reports findings, Section~\ref{sec:discussion}
+interprets them, and Section~\ref{sec:conclusion} concludes.

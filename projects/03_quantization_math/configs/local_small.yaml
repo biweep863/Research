@@ -1,0 +1,24 @@
+project: quantization_math
+seed: 0
+device: auto
+dtype: fp32
+
+models:
+  - name: Qwen/Qwen2.5-0.5B
+    short: qwen05b
+
+bit_widths: [32, 16, 8, 4, 2]   # fp32, fp16, int8, int4, ternary (1.58-bit proxy)
+
+dataset:
+  symbolic_n: 16         # synthetic arithmetic eval set (small for local CPU)
+  max_value: 100
+
+mse_eval:
+  n_samples: 16          # held-out tokens to compare logit distributions
+  max_length: 64
+
+layerwise_sensitivity:
+  bit_width: 4
+  modules: [attn, mlp]   # which submodule to test individually
+
+output_dir: results

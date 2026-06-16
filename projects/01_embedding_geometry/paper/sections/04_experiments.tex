@@ -1,0 +1,25 @@
+\section{Experiments}\label{sec:experiments}
+
+\paragraph{Models.} The local pipeline uses GPT-2 small ($\gptTwoNumLayers$
+blocks, hidden $d=768$); the GPU configuration (\texttt{configs/gpu\_full.yaml})
+switches to Llama-3-8B and Mistral-7B without code changes.
+
+\paragraph{Corpus.} For reproducibility on commodity hardware we use a
+self-contained ArXiv-style abstract corpus (eight long documents,
+concatenated to reach the target context length). The GPU configuration
+streams ArXiv summarisation data via Hugging Face datasets.
+
+\paragraph{Context-length sweep.} We sweep $T \in \{128, 256, 512, \gptTwoMaxCtx\}$
+on the local configuration; the GPU configuration extends the sweep to
+$131{,}072$ tokens. For each $T$ and each layer $\ell$, all metrics are
+computed on a subsample of up to $4000$ tokens to bound running time.
+
+\paragraph{Hyperparameters.} TwoNN uses the $90$th-percentile truncation
+recommended by Facco et al. Anisotropy uses $M=2000$ random pairs.
+Curvature uses $k=20$ neighbours, $m=3$ leading directions, and $S=512$
+anchors.
+
+\paragraph{Implementation.} All metrics are pure-NumPy with scikit-learn
+nearest-neighbour search. The complete sweep runs in roughly two minutes on
+an Apple-silicon Mac in CPU/MPS mode, producing the figures and macros
+embedded in this paper.

@@ -1,0 +1,21 @@
+\section{Introduction}
+Quantization is now the dominant technique for deploying large language
+models on commodity hardware. Yet whilst memory and latency benefits are
+well-understood, the question of \emph{which capabilities degrade first}
+under aggressive precision reduction remains open. Mathematical reasoning
+is a natural stress test: arithmetic and symbolic problems require many
+sequential non-linear approximations and amplify errors quickly.
+
+\paragraph{Question.} How does the residual error in non-linear function
+approximation by a small open-weight language model scale with the
+bit-width of its parameters, and which submodules---attention or
+feed-forward---contribute most to that error?
+
+\paragraph{Contributions.} (i) A dependency-free per-channel symmetric
+quantizer covering FP32, FP16, INT8, INT4, and ternary (1.58-bit) regimes.
+(ii) A reproducible evaluation pipeline combining a synthetic arithmetic
+benchmark with optional GSM8K loading. (iii) A submodule-sensitivity test
+isolating attention from feed-forward contributions to logit error. (iv) An
+end-to-end paper whose numbers and figures are regenerated from raw results
+on each run; the same code rescales to TinyLlama-1.1B and Qwen2.5-Math-7B
+via the GPU configuration.

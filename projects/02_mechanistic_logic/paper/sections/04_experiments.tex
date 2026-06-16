@@ -1,0 +1,25 @@
+\section{Experiments}
+
+\paragraph{Model.} GPT-2 small (124M parameters, 12 transformer blocks, 12
+attention heads per block). The \texttt{gpu\_full.yaml} configuration
+switches to Pythia-2.8B without code changes.
+
+\paragraph{Data.} $5$ templates $\times 2$ surfaces $\times 64$ items
+$= 640$ prompts. Generation is fully deterministic given the seed.
+
+\paragraph{Probes.} 5-fold stratified cross-validated logistic regression
+($C=1.0$, $\ell_2$-regularised). One probe per (layer, surface).
+
+\paragraph{Ablation.} All $144$ heads of GPT-2 are ablated one at a time
+($12 \times 12$). For each head we score (a) logic accuracy on a held-out
+subset of $60$ prompts and (b) LM cross-entropy on a fixed
+$\sim$50-token neutral snippet. Per-head wall time is $\sim$1 s on CPU;
+the full sweep completes in about 2.5 minutes.
+
+\paragraph{Baseline.} With no ablation, GPT-2 small achieves
+$\gptTwoBaselineAcc$ next-token accuracy on the validity-prediction task
+and an LM cross-entropy of $\gptTwoBaselineLM$ on the neutral snippet. We
+emphasise that GPT-2 is a small model: the next-token validity-prediction
+task is not the right scale for it to perform well at logic without
+fine-tuning. Probes therefore carry the load of detecting any internal
+structure that exists despite the baseline being near chance.

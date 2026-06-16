@@ -1,0 +1,55 @@
+\section{Methodology}
+
+\subsection{Dataset construction}
+We construct items in five logical templates: modus ponens, modus tollens,
+the Barbara syllogism, AND-chain, and OR-chain. Each item is rendered in
+two parallel surface forms:
+\begin{itemize}
+\item \textbf{English.} ``If something is a cat then it is an animal. Alex
+is a cat. Therefore Alex is an animal. This argument is \_\_''.
+\item \textbf{Conlang.} A controlled invented vocabulary
+(\texttt{glip}, \texttt{blarn}, \texttt{drev}, \texttt{tav}, \texttt{nyx},
+\texttt{qol}, \dots) renders the same logical content as predicate symbols
+and connectives. The conlang vocabulary is selected so that subword
+tokenisation produces uncommon multi-piece sequences.
+\end{itemize}
+Each (template, surface) cell contributes $N$ items with a $50/50$
+valid/invalid split; the local configuration uses $N=64$.
+
+\subsection{Per-layer probing}
+For each item we extract the residual-stream activation at the
+final token of every block $\ell \in \{0, \dots, L\}$. We then fit a
+logistic-regression probe $w_\ell \in \mathbb{R}^d$ predicting the binary
+validity label using $k$-fold cross-validation (with $k=5$).
+
+We report three quantities per layer:
+\[
+\mathrm{Acc}_\ell^{\mathrm{en}}, \quad
+\mathrm{Acc}_\ell^{\mathrm{cl}}, \quad
+\mathrm{Acc}_\ell^{\mathrm{en}\to\mathrm{cl}} \text{ and } \mathrm{Acc}_\ell^{\mathrm{cl}\to\mathrm{en}},
+\]
+where the last two are cross-surface accuracies (train on one surface, test
+on the other).
+
+\subsection{Head ablation}
+For each attention head $(\ell, h)$ in GPT-2 we apply a pre-projection
+zero-ablation: the corresponding $\mathrm{head\_dim}$-slice of the input to
+the layer's output projection is replaced by zeros, then the rest of the
+forward pass runs unchanged. We measure two effects:
+
+\begin{align}
+\Delta\mathrm{Acc}(\ell, h) &= \mathrm{Acc}_{\text{ablated}} - \mathrm{Acc}_{\text{baseline}},\\
+\Delta\mathrm{LM}(\ell, h) &= \mathrm{NLL}_{\text{ablated}} - \mathrm{NLL}_{\text{baseline}},
+\end{align}
+
+where the LM loss is computed on a fixed neutral text snippet (see
+\texttt{run\_head\_ablation.py}). A head whose ablation lowers logic
+accuracy without inflating LM loss is candidate \emph{logic-specific};
+a head that hurts both is more likely a general-purpose component.
+
+\subsection{Implementation}
+All code is pure HuggingFace \texttt{transformers} with hooks on
+\texttt{c\_proj}. We deliberately avoid framework-specific libraries (such
+as TransformerLens) on the local configuration so that the pipeline is
+self-contained. A drop-in TransformerLens version is straightforward and
+included as a follow-up.

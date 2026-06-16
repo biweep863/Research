@@ -1,0 +1,27 @@
+\section{Discussion}
+
+\paragraph{Probes vs.\ behaviour.} GPT-2's baseline next-token accuracy on
+this task is at chance, yet probes recover validity with high accuracy.
+This decoupling is methodologically interesting: the model \emph{represents}
+something that it does not \emph{output}. Such gaps are precisely what
+mechanistic interpretability is for.
+
+\paragraph{No single logic head.} The ablation result is a negative finding,
+but it should not be over-interpreted: at GPT-2 scale, attention heads
+overwhelmingly mix functional roles. The hypothesis that purer
+specialisation appears at larger scale (Pythia-2.8B, Llama-3-8B) is exactly
+what the \texttt{gpu\_full.yaml} configuration is set up to test.
+
+\paragraph{Limitations.} (i) Five templates is a small grammar;
+generalisation to first-order logic, quantifier interactions, and
+counterfactual reasoning is not yet covered. (ii) The conlang vocabulary
+was hand-chosen for tokeniser-controlled fragmentation; a fuller study
+should systematically sweep token frequency. (iii) Probes recover
+\emph{linear} structure; nonlinearly entangled structure could exist and be
+missed.
+
+\paragraph{Toward circuit graphs.} The probe direction $w_\ell$ found at
+the peak layer is a natural target for path patching: which earlier heads
+contribute most to $w_\ell^\top h_\ell$? The same hooks already in place
+make this addition mechanical, and we plan to release the extension
+together with the GPU-scale run.

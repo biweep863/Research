@@ -1,0 +1,28 @@
+project: quantization_math
+seed: 0
+device: cuda
+dtype: fp32
+
+models:
+  - name: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+    short: tinyllama
+  - name: Qwen/Qwen2.5-Math-7B
+    short: qwen_math_7b
+
+bit_widths: [32, 16, 8, 4, 2]
+
+dataset:
+  gsm8k_n: 500
+  math_n: 200
+  symbolic_n: 200
+  max_value: 1000
+
+mse_eval:
+  n_samples: 200
+  max_length: 512
+
+layerwise_sensitivity:
+  bit_width: 4
+  modules: [attn, mlp]
+
+output_dir: results
