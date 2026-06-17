@@ -1,0 +1,30 @@
+\section{Introduction}
+A transformer attends differently to different prompts. Intuition
+suggests that a maximally random prompt forces every token to attend
+broadly, while a highly compressible prompt admits attention that
+concentrates on a small number of pattern-matching keys. We make this
+intuition quantitative.
+
+\paragraph{Question.} Is there a measurable, monotone relationship
+between the algorithmic complexity of the prompt and the density of
+attention used to process it?
+
+Kolmogorov complexity $K(x)$ is uncomputable, but it admits an
+upper-bound proxy via any reasonable lossless compressor:
+$K(x) \le |\text{gzip}(x)| + O(1)$~\cite{li2008introduction}. The
+gzip-ratio
+$\rho(x) := |\text{gzip}(x)|/|x|$ has been used as a complexity proxy
+in many recent works~\cite{jiang2023low,delete2024gzip}.
+
+\paragraph{Findings.} Across seven prompt families and GPT-2's twelve
+layers, mean attention entropy is well-predicted by $\rho(x)$ in the
+mid-network: at layer $\gptTwoMaxRsqLayer$ a univariate linear
+regression achieves $R^2=\gptTwoMaxRsq$. The relationship is weaker
+in the embedding-near and deepest layers, suggesting a U-shaped
+dependence of attention adaptability on depth.
+
+\paragraph{Contributions.} (i) A reproducible pipeline mapping
+compressibility to per-layer attention-density metrics (entropy, Gini,
+sparsity); (ii) a per-layer regression analysis isolating the depth
+range in which the relationship holds; (iii) an open dataset of
+controlled prompt families spanning the algorithmic-complexity spectrum.

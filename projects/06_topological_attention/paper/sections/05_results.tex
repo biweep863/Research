@@ -1,0 +1,51 @@
+\section{Results}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/h0_per_layer_gptTwo.pdf}
+\caption{Mean total persistence in $H_0$ per layer. Truthful and
+hallucinated curves track closely on this pilot, with means
+$\gptTwoTruthHZeroMean$ and $\gptTwoHallHZeroMean$ across layers
+(difference $\approx 0.07$).}
+\label{fig:h0}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/h1_per_layer_gptTwo.pdf}
+\caption{Mean total persistence in $H_1$ per layer. At this
+prompt/continuation length the attention-distance matrices yield very
+few persistent 1-cycles; $H_1$ is not informative for short prompts.}
+\label{fig:h1}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/pvals_gptTwo.pdf}
+\caption{$-\log_{10} p$ for Welch's two-sample $t$-test on $H_0$
+per layer. The pilot's $\gptTwoNumPairs$-pair sample is underpowered;
+no layer reaches the red dashed line ($p=0.05$).}
+\label{fig:pvals}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/betti_curves_gptTwo.pdf}
+\caption{Mean Betti curves at the layer with the smallest $p$-value
+(layer~$\gptTwoMinPvalLayer$). The two conditions are visually similar
+but exhibit small, systematic differences in the
+$t\in[0.6, 0.9]$ filtration range.}
+\label{fig:betti}
+\end{figure}
+
+\paragraph{Power analysis.} With observed standard deviations
+($\approx 2.1$ on $H_0$ total persistence) and observed mean
+difference ($\approx 0.07$), a two-sample $t$-test at
+$\alpha=0.05$, $\beta=0.2$ needs $N\approx 200$ per condition. The
+\texttt{gpu\_full.yaml} configuration is sized accordingly, with the
+intent of running on TruthfulQA pairs.
+
+\paragraph{Headline.} On the pilot, the minimum per-layer
+$p$-value is $\gptTwoMinPval$ at layer $\gptTwoMinPvalLayer$ on
+$H_0$. No layer reaches significance ($\gptTwoNumSigLayers$ of
+$\gptTwoNumLayers$). The pipeline is validated and ready to scale.

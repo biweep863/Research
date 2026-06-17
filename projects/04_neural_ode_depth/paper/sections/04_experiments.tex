@@ -1,0 +1,22 @@
+\section{Experiments}
+\paragraph{Setup.} $d_{\text{model}}=64$, $4$ attention heads, FFN
+multiplier $4$, $\approx 56$k parameters. Training: $1500$ steps,
+batch $64$, learning rate $3\times 10^{-3}$, AdamW. Evaluation: a fixed
+batch of $256$ held-out sequences seeded deterministically.
+
+\paragraph{Hardware.} CPU. The runs in this paper complete in
+$\approx 90$ seconds on an Apple Silicon Mac in CPU mode. The
+\texttt{gpu\_full.yaml} configuration scales the model to
+$d_{\text{model}}=256$, the task to length 64 sort, and training to
+$20{,}000$ steps; the same scripts run.
+
+\paragraph{Metrics.}
+\begin{itemize}
+\item \textbf{Accuracy:} fraction of correctly predicted next tokens
+on the supervised positions.
+\item \textbf{Loss:} next-token cross-entropy (lower is better;
+the theoretical floor on this task is $\approx 1.47$ nats).
+\item \textbf{Latency:} wall-clock time of a single forward pass on the
+$256$-example evaluation batch.
+\item \textbf{NFE:} the integer number of vector-field evaluations.
+\end{itemize}

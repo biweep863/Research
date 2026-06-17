@@ -1,0 +1,23 @@
+\section{Discussion}
+\paragraph{Why the loss collapses for discrete depth.}
+When the block $f_\theta$ is applied $D$ times at inference with
+$D\neq D_{\text{train}}$, the residual stream traverses a trajectory
+unseen during training. Cross-entropy explodes catastrophically. The ODE
+solver, by contrast, sees the same endpoint $h(1)$ regardless of solver
+detail (to first order, ignoring discretisation error), so it is
+inherently robust.
+
+\paragraph{When does the latency advantage flip?}
+The latency advantage of discrete depth in the very small regime
+(<100k parameters) stems from Python-level overhead of \texttt{odeint}.
+At the scale of the \texttt{gpu\_full.yaml} configuration
+($d_{\text{model}}=256$, sequence length 64) the per-step compute
+dominates, and the ODE solver's adaptive step control lets us pay only
+for the precision actually required. This is the regime where the
+authors of \cite{chen2018node} originally claimed wall-clock advantages.
+
+\paragraph{Limitations.}
+(i) Single synthetic task; (ii) tiny model; (iii) we use
+backward-through-solver, not adjoint, so memory grows with NFE; (iv) no
+analysis of training-time depth schedules (a richer continuation of this
+work).

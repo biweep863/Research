@@ -1,0 +1,17 @@
+\section{Related Work}
+\paragraph{Compression-based complexity.}
+The use of gzip and other off-the-shelf compressors as Kolmogorov-complexity
+proxies has a long history in information theory~\cite{li2008introduction}
+and has been re-popularised by parameter-free text classification
+\cite{jiang2023low} and compression-based generation diagnostics.
+
+\paragraph{Attention sparsity.} Adaptive-sparsity inference, sparse
+attention~\cite{child2019sparse}, and structured-pruning approaches
+all rely on prompt-dependent sparsity patterns. Our analysis suggests
+that the right prompt-side variable to predict sparsity is
+$\rho(x)$, the compressibility itself.
+
+\paragraph{Information content and attention.} Several papers report
+that attention entropy peaks in mid-network and collapses near the
+unembedding~\cite{voita2019analyzing,clark2019does}. We orthogonalise
+that observation against $\rho(x)$ as the independent variable.

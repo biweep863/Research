@@ -1,0 +1,36 @@
+\begin{thebibliography}{1}
+
+\bibitem{child2019sparse}
+Rewon Child, Scott Gray, Alec Radford, and Ilya Sutskever.
+\newblock Generating long sequences with sparse transformers.
+\newblock {\em arXiv:1904.10509}, 2019.
+
+\bibitem{clark2019does}
+Kevin Clark, Urvashi Khandelwal, Omer Levy, and Christopher~D. Manning.
+\newblock What does bert look at? an analysis of bert's attention.
+\newblock In {\em ACL BlackboxNLP}, 2019.
+
+\bibitem{jiang2023low}
+Zhiying Jiang, Matthew Yang, Mikhail Tsirlin, Raphael Tang, Yiqin Dai, and
+  Jimmy Lin.
+\newblock "low-resource" text classification: a parameter-free classification
+  method with compressors.
+\newblock In {\em ACL Findings}, 2023.
+
+\bibitem{li2008introduction}
+Ming Li and Paul Vit{\'a}nyi.
+\newblock {\em An Introduction to Kolmogorov Complexity and Its Applications}.
+\newblock Springer, 2008.
+
+\bibitem{delete2024gzip}
+Various.
+\newblock Compression as the lens on language complexity, 2024.
+\newblock survey, in preparation.
+
+\bibitem{voita2019analyzing}
+Elena Voita, David Talbot, Fedor Moiseev, Rico Sennrich, and Ivan Titov.
+\newblock Analyzing multi-head self-attention: specialized heads do the heavy
+  lifting.
+\newblock In {\em ACL}, 2019.
+
+\end{thebibliography}

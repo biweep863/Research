@@ -1,0 +1,27 @@
+\section{Methodology}
+\subsection{Complexity proxy}
+For each prompt $x$ we report two complexity descriptors:
+\begin{align}
+C(x) &:= |\text{gzip}(x)|,\\
+\rho(x) &:= C(x)/|x|.
+\end{align}
+The ratio $\rho(x) \in (0,1]$ is the headline scalar; it is small for
+periodic / low-entropy text and large for random strings.
+
+\subsection{Attention-density metrics}
+For a layer $\ell$ with attention tensor
+$A^{(\ell)}\in\mathbb{R}^{H\times Q\times K}$ (heads, queries, keys), we
+collapse each row $a$ to three scalars:
+\begin{align}
+\mathrm{Entropy}(a) &= -\textstyle\sum_k a_k\log a_k,\\
+\mathrm{Gini}(a) &\in [0,1] \quad(\text{0=uniform; 1=Dirac}),\\
+\mathrm{Sparsity}(a) &= \text{frac.\ of keys carrying 90\% mass}.
+\end{align}
+We then average over heads and queries:
+$\overline{H}_\ell = \mathbb{E}[\mathrm{Entropy}]$, etc.
+
+\subsection{Regression}
+For each layer $\ell$ we fit
+$\overline{H}_\ell(x) = \alpha_\ell + \beta_\ell\,\rho(x) + \varepsilon$
+across the prompt corpus and report $R^2_\ell$, the slope, and the
+intercept.

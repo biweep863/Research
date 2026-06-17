@@ -1,0 +1,35 @@
+\begin{thebibliography}{1}
+
+\bibitem{azaria2023internal}
+Amos Azaria and Tom Mitchell.
+\newblock The internal state of an llm knows when it's lying.
+\newblock In {\em EMNLP Findings}, 2023.
+
+\bibitem{burns2023discovering}
+Collin Burns, Haotian Ye, Dan Klein, and Jacob Steinhardt.
+\newblock Discovering latent knowledge in language models without supervision.
+\newblock In {\em ICLR}, 2023.
+
+\bibitem{edelsbrunner2008persistent}
+Herbert Edelsbrunner and John Harer.
+\newblock Persistent homology---a survey.
+\newblock {\em Contemporary Mathematics}, 453, 2008.
+
+\bibitem{horoi2022exploring}
+Stefan Horoi, Jian Huang, Bastian Rieck, Guillaume Lajoie, Guy Wolf, and Smita
+  Krishnaswamy.
+\newblock Exploring the geometry and topology of neural network loss
+  landscapes.
+\newblock {\em IDA}, 2022.
+
+\bibitem{naitzat2020topology}
+Gregory Naitzat, Andrey Zhitnikov, and Lek-Heng Lim.
+\newblock Topology of deep neural networks.
+\newblock {\em JMLR}, 2020.
+
+\bibitem{vig2019analyzing}
+Jesse Vig and Yonatan Belinkov.
+\newblock Analyzing the structure of attention in a transformer language model.
+\newblock In {\em ACL BlackboxNLP}, 2019.
+
+\end{thebibliography}

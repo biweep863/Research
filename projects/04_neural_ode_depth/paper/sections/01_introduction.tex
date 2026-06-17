@@ -1,0 +1,28 @@
+\section{Introduction}
+A transformer of $L$ layers is conventionally an architectural commitment:
+once trained, it is also evaluated at $L$ layers. The Neural Ordinary
+Differential Equation (Neural ODE) framework~\cite{chen2018node} suggests
+an alternative: a single block $f_\theta$ defines a vector field, and the
+forward pass solves
+\begin{equation}
+\frac{dh}{dt}=f_\theta(h),\quad h(0)=\text{embed}(x),\quad h(1)=\text{logits}.
+\end{equation}
+The number of function evaluations (NFE) becomes a solver budget chosen at
+inference time. We ask:
+\begin{quote}\emph{Does a continuous-depth transformer obtain a more
+favourable latency/accuracy trade-off than discrete-depth baselines, or
+at least a more robust one?}\end{quote}
+
+\paragraph{Findings.} On a synthetic copy task, both formulations reach
+similar accuracy. The crucial difference is robustness to inference-time
+budget: across seven solver settings the ODE next-token cross-entropy
+varies by only $\OdeLossRange$ nats; discrete depth, when run at a depth
+other than its training depth, varies by $\DiscreteLossRange$ nats.
+Continuous depth therefore yields an \emph{anytime} model in the
+algorithmic sense.
+
+\paragraph{Contributions.} (i) A clean ODE-block transformer; (ii) a
+solver-budget sweep covering Euler, RK4 and adaptive Dormand-Prince
+schemes; (iii) a head-to-head comparison with discrete depths showing
+that the loss-range gap is two orders of magnitude in favour of
+continuous depth.

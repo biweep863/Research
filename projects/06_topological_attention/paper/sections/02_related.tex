@@ -1,0 +1,18 @@
+\section{Related Work}
+\paragraph{Hallucination detection.} Internal-state probes
+\cite{azaria2023internal} and contrast-consistent search
+\cite{burns2023discovering} both rely on supervised access to
+internal features. Our approach uses an entirely structural
+descriptor of the attention graph, with no learned parameters.
+
+\paragraph{Topological data analysis (TDA).} Persistent homology
+\cite{edelsbrunner2008persistent} provides a multi-scale topological
+summary robust to noise. Applications to neural networks include
+analyses of loss landscapes \cite{horoi2022exploring} and feature
+spaces \cite{naitzat2020topology}. To our knowledge no published
+work measures topology of the attention graph as a hallucination
+signal.
+
+\paragraph{Attention graphs.} Treating attention as a graph has a
+long history~\cite{vig2019analyzing}, but typically for visualisation;
+quantitative graph invariants are uncommon.

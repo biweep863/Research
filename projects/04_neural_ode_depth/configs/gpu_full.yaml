@@ -1,0 +1,34 @@
+project: neural_ode_depth
+seed: 0
+device: cuda
+dtype: fp32
+
+model:
+  d_model: 256
+  n_heads: 8
+  ffn_mult: 4
+  vocab_size: 64
+
+task:
+  type: sort
+  seq_len: 64
+
+train:
+  steps: 20000
+  batch_size: 256
+  lr: 0.0005
+
+eval:
+  n_examples: 4096
+
+ode_configs:
+  - {name: "euler_4",  solver: "euler",  step_size: 0.25}
+  - {name: "euler_8",  solver: "euler",  step_size: 0.125}
+  - {name: "rk4_4",    solver: "rk4",    step_size: 0.25}
+  - {name: "rk4_8",    solver: "rk4",    step_size: 0.125}
+  - {name: "dopri5_lo",solver: "dopri5", atol: 1e-3, rtol: 1e-3}
+  - {name: "dopri5_hi",solver: "dopri5", atol: 1e-5, rtol: 1e-5}
+
+discrete_depths: [4, 8, 16]
+
+output_dir: results

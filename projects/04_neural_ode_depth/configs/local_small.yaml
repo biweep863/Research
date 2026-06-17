@@ -1,0 +1,40 @@
+project: neural_ode_depth
+seed: 0
+device: cpu     # avoid MPS float64 issue in torchdiffeq
+dtype: fp32
+
+# Small encoder-only NODE-Transformer trained on a synthetic copy/sort task.
+# The point is to measure how varying the ODE solver tolerance / step count
+# trades latency against accuracy, vs. discrete-depth baselines.
+
+model:
+  d_model: 64
+  n_heads: 4
+  ffn_mult: 4
+  vocab_size: 32
+
+task:
+  type: copy           # copy | sort
+  seq_len: 16
+
+train:
+  steps: 1500
+  batch_size: 64
+  lr: 0.003
+
+eval:
+  n_examples: 256
+
+# ODE solver sweep: (solver, atol, rtol, max_steps); discrete baselines added.
+ode_configs:
+  - {name: "euler_2",  solver: "euler",  step_size: 0.5}
+  - {name: "euler_4",  solver: "euler",  step_size: 0.25}
+  - {name: "euler_8",  solver: "euler",  step_size: 0.125}
+  - {name: "rk4_4",    solver: "rk4",    step_size: 0.25}
+  - {name: "rk4_8",    solver: "rk4",    step_size: 0.125}
+  - {name: "dopri5_lo",solver: "dopri5", atol: 1e-2, rtol: 1e-2}
+  - {name: "dopri5_hi",solver: "dopri5", atol: 1e-4, rtol: 1e-4}
+
+discrete_depths: [2, 4, 8]
+
+output_dir: results

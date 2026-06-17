@@ -1,0 +1,25 @@
+\section{Methodology}
+\subsection{Attention to distance}
+For each layer $\ell$ we collect the head-averaged attention matrix
+$G^{(\ell)}\in\mathbb{R}^{T\times T}$, symmetrise it by
+$G \leftarrow \max(G, G^\top)$, and convert to a metric:
+\begin{equation}
+d^{(\ell)}_{ij} = 1 - G^{(\ell)}_{ij}, \qquad d^{(\ell)}_{ii}=0.
+\end{equation}
+
+\subsection{Vietoris--Rips filtration}
+We feed the distance matrix $d^{(\ell)}$ to \texttt{ripser}, computing
+the persistence diagram in dimensions $0$ and $1$. From each diagram
+we extract:
+\begin{itemize}
+\item \textbf{Total persistence} in $H_k$: $\sum_i (\text{death}_i - \text{birth}_i)$
+over all finite bars.
+\item \textbf{Betti curve} $\beta_k(t)$: the number of bars alive at
+each filtration threshold $t \in \{0, \tfrac{1}{32}, \dots, 1\}$.
+\end{itemize}
+
+\subsection{Statistical test}
+For each layer we run a Welch two-sample $t$-test on
+$\text{total persistence}(H_0)$ between the truthful and hallucinated
+conditions. We report the per-layer $p$-value as
+$-\log_{10} p$.

@@ -1,0 +1,17 @@
+\section{Experiments}
+\paragraph{Pairs.} Ten curated factual pairs. Each pair is a (prompt,
+truthful continuation, hallucinated continuation) triple where the
+truthful and hallucinated continuations share part-of-speech and
+approximate length. For example
+\begin{quote}\small
+``The capital of France is'' $\to$ ``Paris'' (true) vs.\ ``Berlin'' (false).
+\end{quote}
+
+\paragraph{Model.} GPT-2 small ($12$ blocks). Run with
+\texttt{attn\_implementation="eager"} so attention is captured.
+
+\paragraph{Forward.} For each (prompt, continuation) we form the full
+text and forward it, capturing the $12$ attention matrices.
+
+\paragraph{Wall time.} The full pipeline runs in $\approx 2$ seconds
+on CPU for the local pilot.

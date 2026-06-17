@@ -1,0 +1,18 @@
+\section{Related Work}
+\paragraph{Neural ODEs.} Chen et al.~\cite{chen2018node} introduced Neural
+ODEs and the adjoint method for memory-efficient back-propagation.
+Subsequent work has applied the idea to image classification
+\cite{dupont2019augmented} and language modelling
+\cite{lu2019understanding}. Our contribution is the latency--robustness
+analysis under fixed solver budgets, which is methodologically novel.
+
+\paragraph{Anytime inference.} Anytime networks are typically obtained
+through stochastic depth~\cite{huang2016stochastic} or early-exit
+heuristics~\cite{schwartz2020right}. The Neural ODE provides anytime
+inference \emph{by construction}: any integration scheme that reaches
+$t=1$ produces a valid prediction.
+
+\paragraph{Adaptive computation.} Adaptive computation
+time~\cite{graves2016adaptive} learns per-token compute budgets. The ODE
+view subsumes this idea continuously and removes the discrete halting
+decision.

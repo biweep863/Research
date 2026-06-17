@@ -1,0 +1,25 @@
+project: kolmogorov_attention
+seed: 0
+device: auto
+dtype: fp32
+
+models:
+  - name: gpt2
+    short: gpt2
+
+corpus:
+  source: synthetic    # synthetic | hf
+  n_prompts: 96
+  max_tokens: 128
+
+prompt_families:
+  - random_uniform
+  - repeating_short
+  - repeating_long
+  - english_text
+  - code_like
+  - arithmetic
+  - low_entropy_pattern
+
+attention_layers: all
+output_dir: results

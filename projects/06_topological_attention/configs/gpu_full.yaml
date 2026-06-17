@@ -1,0 +1,24 @@
+project: topological_attention
+seed: 0
+device: cuda
+dtype: bf16
+
+models:
+  - name: meta-llama/Meta-Llama-3-8B
+    short: llama3_8b
+
+corpus:
+  n_truthful: 200
+  n_hallucinated: 200
+  max_tokens: 256
+
+# in the GPU configuration we would source truthful/hallucinated pairs
+# from TruthfulQA + an offline hallucination detector. Locally we use the
+# curated pairs below.
+truthful_pairs: []   # use TruthfulQA via the loader at gpu time
+
+filtration:
+  thresholds: 32
+  max_dimension: 2
+
+output_dir: results

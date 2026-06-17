@@ -1,0 +1,35 @@
+\begin{thebibliography}{1}
+
+\bibitem{chen2018node}
+Ricky T.~Q. Chen, Yulia Rubanova, Jesse Bettencourt, and David~K. Duvenaud.
+\newblock Neural ordinary differential equations.
+\newblock In {\em NeurIPS}, 2018.
+
+\bibitem{dupont2019augmented}
+Emilien Dupont, Arnaud Doucet, and Yee~Whye Teh.
+\newblock Augmented neural odes.
+\newblock In {\em NeurIPS}, 2019.
+
+\bibitem{graves2016adaptive}
+Alex Graves.
+\newblock Adaptive computation time for recurrent neural networks.
+\newblock {\em arXiv:1603.08983}, 2016.
+
+\bibitem{huang2016stochastic}
+Gao Huang, Yu~Sun, Zhuang Liu, Daniel Sedra, and Kilian~Q. Weinberger.
+\newblock Deep networks with stochastic depth.
+\newblock In {\em ECCV}, 2016.
+
+\bibitem{lu2019understanding}
+Yiping Lu, Aoxiao Zhong, Quanzheng Li, and Bin Dong.
+\newblock Understanding and improving transformer from a multi-particle dynamic
+  system point of view.
+\newblock In {\em ICLR Workshop}, 2019.
+
+\bibitem{schwartz2020right}
+Roy Schwartz, Gabriel Stanovsky, Swabha Swayamdipta, Jesse Dodge, and Noah~A.
+  Smith.
+\newblock The right tool for the job: matching model and instance complexities.
+\newblock In {\em ACL}, 2020.
+
+\end{thebibliography}

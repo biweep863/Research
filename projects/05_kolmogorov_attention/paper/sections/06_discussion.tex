@@ -1,0 +1,19 @@
+\section{Discussion}
+\paragraph{Practical use.} The regression coefficients
+$(\alpha_\ell, \beta_\ell)$ give a per-layer prediction of attention
+entropy from the prompt alone—-no forward pass through the model is
+required. This in turn gives a principled way to budget sparse-attention
+masks or to skip layers whose entropy is predicted to be already saturated.
+
+\paragraph{Why mid-network?}
+Following Voita et al.~\cite{voita2019analyzing}, early layers carry
+syntactic role information and late layers act as token-prediction
+read-outs. The middle layers carry global semantic structure, which
+is exactly where prompt-level Kolmogorov content is expected to live.
+
+\paragraph{Limitations.}
+(i) Gzip is a poor proxy for $K(x)$; better compressors and reference
+machines remain to be explored. (ii) GPT-2 small is one data point;
+the GPU configuration extends to Llama-3-8B and Wikitext-103.
+(iii) The synthetic families are deliberately stylised; natural prompts
+are an obvious next step.

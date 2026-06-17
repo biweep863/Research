@@ -1,0 +1,36 @@
+project: topological_attention
+seed: 0
+device: auto
+dtype: fp32
+
+models:
+  - name: gpt2
+    short: gpt2
+
+corpus:
+  n_truthful: 40
+  n_hallucinated: 40
+  max_tokens: 96
+
+# We construct (truthful, hallucinated) pairs by completing a factual prompt
+# in two ways: (a) with the correct continuation from a curated list (truthful)
+# and (b) with a deliberate factual swap (hallucinated). The two continuations
+# share surface form so any TDA signal we detect comes from semantic
+# consistency, not from string-length differences.
+truthful_pairs:
+  - {prompt: "The capital of France is", true_cont: " Paris.", false_cont: " Berlin."}
+  - {prompt: "The chemical symbol of water is", true_cont: " H2O.", false_cont: " CO2."}
+  - {prompt: "The largest planet in the Solar System is", true_cont: " Jupiter.", false_cont: " Mercury."}
+  - {prompt: "The author of the play Hamlet is", true_cont: " William Shakespeare.", false_cont: " Charles Dickens."}
+  - {prompt: "The square root of 144 is", true_cont: " twelve.", false_cont: " seventeen."}
+  - {prompt: "The boiling point of water at sea level is", true_cont: " one hundred degrees Celsius.", false_cont: " seventy degrees Celsius."}
+  - {prompt: "The longest river in South America is the", true_cont: " Amazon.", false_cont: " Mississippi."}
+  - {prompt: "The first person to set foot on the Moon was", true_cont: " Neil Armstrong.", false_cont: " Yuri Gagarin."}
+  - {prompt: "The number of bones in the adult human body is", true_cont: " two hundred and six.", false_cont: " four hundred and twelve."}
+  - {prompt: "The fastest land animal is the", true_cont: " cheetah.", false_cont: " elephant."}
+
+filtration:
+  thresholds: 20            # number of edge-weight thresholds for the filtration
+  max_dimension: 1          # Betti0, Betti1 (cycles)
+
+output_dir: results

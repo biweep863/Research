@@ -1,0 +1,18 @@
+\section{Experiments}
+\paragraph{Model.} GPT-2 small ($12$ blocks, $12$ heads, $d=768$). Run
+with \texttt{attn\_implementation="eager"} so attention tensors are
+captured. The \texttt{gpu\_full.yaml} configuration scales to
+Llama-3-8B on Wikitext-103 at $1024$ tokens.
+
+\paragraph{Corpus.} Seven prompt families, each instantiated with
+multiple seeds (total $\approx 91$ prompts at the local config). Each
+prompt is truncated to $128$ tokens.
+
+\paragraph{Families.}
+\textit{random\_uniform} (high $\rho$), \textit{repeating\_short},
+\textit{repeating\_long}, \textit{english\_text}, \textit{code\_like},
+\textit{arithmetic}, \textit{low\_entropy\_pattern}
+("aaaa\ldots", smallest $\rho$). The families span the
+compression-ratio spectrum from $\approx 0.05$ to $\approx 0.55$.
+
+\paragraph{Wall time.} The full sweep runs in $\approx 30$ s on CPU.

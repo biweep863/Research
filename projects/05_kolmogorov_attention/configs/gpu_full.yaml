@@ -1,0 +1,25 @@
+project: kolmogorov_attention
+seed: 0
+device: cuda
+dtype: bf16
+
+models:
+  - name: meta-llama/Meta-Llama-3-8B
+    short: llama3_8b
+
+corpus:
+  source: hf
+  hf_dataset: wikitext
+  hf_subset: wikitext-103-v1
+  hf_split: "test[:512]"
+  n_prompts: 512
+  max_tokens: 1024
+
+prompt_families:
+  - random_uniform
+  - english_text
+  - code_like
+  - arithmetic
+
+attention_layers: all
+output_dir: results

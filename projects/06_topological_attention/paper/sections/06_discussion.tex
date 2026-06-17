@@ -1,0 +1,22 @@
+\section{Discussion}
+\paragraph{Why $H_1$ is uninformative at this scale.}
+At a sequence length of $\le 30$ tokens, the Vietoris--Rips complex of
+the attention-distance matrix has few opportunities to develop
+persistent 1-cycles before collapsing into a single component. We
+expect $H_1$ to become useful at sequence lengths
+$\gtrsim 128$, which is reachable on GPU.
+
+\paragraph{Why $H_0$ might work.}
+Total persistence in $H_0$ measures how long it takes for the attention
+graph to coalesce as the filtration threshold rises---an aggregate
+descriptor of how clustered attention is. Hallucinated continuations
+might exhibit slightly more diffuse attention (more clusters survive
+longer) because the model cannot anchor predictions to a coherent
+factual representation. The direction of the effect in our pilot
+($\gptTwoTruthHZeroMean$ vs.\ $\gptTwoHallHZeroMean$) is consistent
+with this intuition, but the magnitude is too small to call.
+
+\paragraph{Limitations.}
+(i) GPT-2 is small and not strongly factual; (ii) curated pairs are
+a tiny sample and stylised; (iii) the metric
+$d=1-\max(A,A^\top)$ is one of several reasonable choices.

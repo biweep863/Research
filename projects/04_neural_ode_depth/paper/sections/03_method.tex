@@ -1,0 +1,33 @@
+\section{Methodology}
+\subsection{Architecture}
+A single pre-norm transformer block
+\(f_\theta = \text{FFN}\circ\text{LN}\circ(\text{Attn}\circ\text{LN}+\mathrm{id})\)
+serves as the vector field.
+
+\textbf{Continuous mode:} integrate
+$h(0) \mapsto h(1)$ via \texttt{torchdiffeq.odeint} with one of
+\{Euler, RK4, dopri5\} schemes. The number of function evaluations
+(NFE) is determined by the solver budget.
+
+\textbf{Discrete mode:} apply
+$h_{k+1} = h_k + f_\theta(h_k)$ for $k=0,\dots,D-1$. NFE equals $D$.
+
+The two modes share parameters; the only difference is whether the depth
+unrolls in a Python loop or as an ODE solve.
+
+\subsection{Training}
+We train with a fixed cheap continuous schedule (RK4 with step
+$0.25$, 4 NFE) and AdamW. Training uses next-token cross-entropy on the
+synthetic task. At evaluation, we vary the solver / discrete depth and
+report accuracy, loss, latency, and NFE.
+
+\subsection{Synthetic task}
+A copy task with vocabulary of $32$ symbols and body length $16$:
+the model sees \texttt{BOS x1 ... x16 SEP} and is supervised to emit
+\texttt{x1 ... x16 EOS}. The optimum next-token cross-entropy is
+\(\bar{\ell}^*\approx 1.47\) nats (random body tokens are irreducible).
+
+\subsection{Solver budgets}
+We sweep seven ODE configurations: Euler at step sizes $\{0.5, 0.25, 0.125\}$,
+RK4 at $\{0.25, 0.125\}$, and adaptive Dormand-Prince at
+tolerances $\{10^{-2}, 10^{-4}\}$. Discrete baselines use depths $\{2, 4, 8\}$.

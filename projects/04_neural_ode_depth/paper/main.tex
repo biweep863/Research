@@ -1,0 +1,41 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Continuous-Depth Transformers as Anytime Inference:\\
+A Latency--Robustness Trade-off Study}
+\author[1]{Luis Benvenuto}
+\affil[1]{Data Science \& Mathematics, Independent Research}
+\date{\today}
+
+\begin{document}
+\twocolumn[\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent We treat the depth of a transformer as a continuous variable by
+parameterising a single block as the vector field of an ordinary
+differential equation (Neural ODE). At inference time, depth becomes a
+solver-budget choice rather than an architectural constant. We compare
+this Neural-ODE transformer against discrete-depth baselines on a
+synthetic copy task across seven solver configurations and three discrete
+depths. The headline result is the \emph{robustness} of continuous depth:
+across solver configurations, the next-token cross-entropy varies by only
+$\OdeLossRange$ nats, whereas a discrete model run at depths different
+from its training depth diverges by $\DiscreteLossRange$ nats. Continuous
+depth therefore enables a form of anytime inference that discrete depth
+does not, even when raw latency parity is close.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_method.tex}
+\input{sections/04_experiments.tex}
+\input{sections/05_results.tex}
+\input{sections/06_discussion.tex}
+\input{sections/07_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

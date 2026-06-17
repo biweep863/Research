@@ -1,0 +1,34 @@
+\section{Introduction}
+A widespread concern with large language models is hallucination: the
+production of fluent text that is not factually grounded. Recent work
+has approached the problem from the activation side
+\cite{azaria2023internal,burns2023discovering}; in this paper we ask
+whether a purely structural signal---the topology of the per-layer
+attention graph---suffices.
+
+\paragraph{Question.} \emph{Do truthful and hallucinated continuations
+yield statistically distinguishable persistent-homology summaries of
+the attention graph?}
+
+\paragraph{Setup.} For each factual prompt we generate two
+continuations: one factually correct (e.g.\ ``Paris'') and one
+plausible but wrong (``Berlin''). The surface form is matched. We
+forward both through GPT-2, extract every layer's attention matrix,
+convert to a Vietoris--Rips filtration over the metric
+$d_{ij}=1-\max(A_{ij},A_{ji})$, and compute persistence in $H_0$ and
+$H_1$.
+
+\paragraph{Pilot.} The local configuration uses $\gptTwoNumPairs$ curated
+pairs; this is intentionally underpowered. The point of the pilot is to
+(i) validate the pipeline and (ii) measure the effect size so that the
+GPU configuration can be sized correctly. The local pilot finds no
+layer with $p<0.05$ on $H_0$ (minimum $p=\gptTwoMinPval$ at layer
+$\gptTwoMinPvalLayer$); under the observed effect-size estimate, a
+sample of $N\ge 200$ pairs would be required to reach $\alpha=0.05$ at
+$\beta=0.2$, which is exactly what the
+\texttt{gpu\_full.yaml} configuration supplies via TruthfulQA.
+
+\paragraph{Contributions.} (i) An open, reproducible pipeline for
+attention-graph persistent homology; (ii) a curated factual pair
+dataset (10 pairs in this release); (iii) effect-size estimation for
+$H_0$ and $H_1$ persistence to plan future runs.

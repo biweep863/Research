@@ -1,0 +1,42 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Predicting Attention Density from Prompt Compressibility:\\
+A Kolmogorov-Complexity Account of Transformer Attention}
+\author[1]{Luis Benvenuto}
+\affil[1]{Data Science \& Mathematics, Independent Research}
+\date{\today}
+
+\begin{document}
+\twocolumn[\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Kolmogorov complexity is uncomputable, but it admits cheap
+upper-bound proxies through lossless compression. We use gzip
+compression ratio as a per-prompt complexity estimate and ask whether
+it predicts the geometry of attention in a pretrained language model.
+On GPT-2 across seven prompt families (uniform-random, short and long
+periodic, English, code, arithmetic, and degenerate single-character),
+mean attention entropy is well-explained by compression ratio at
+intermediate depth: a linear regression at layer
+$\gptTwoMaxRsqLayer$ achieves $R^2 = \gptTwoMaxRsq$. The relationship
+is most pronounced in the middle layers and substantially weaker at
+the deepest block ($R^2 = \gptTwoDeepRsq$).
+We discuss implications for adaptive-sparsity inference and for
+complexity-aware prompting.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_method.tex}
+\input{sections/04_experiments.tex}
+\input{sections/05_results.tex}
+\input{sections/06_discussion.tex}
+\input{sections/07_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
