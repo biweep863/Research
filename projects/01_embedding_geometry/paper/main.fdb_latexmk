@@ -1,14 +1,15 @@
 # Fdb version 4
-["bibtex main"] 1781572550.03283 "main.aux" "main.bbl" "main" 1781572550.85453 0
+["bibtex main"] 1781572550.03283 "main.aux" "main.bbl" "main" 1782024826.74293 0
   "./references.bib" 1781572457.57688 2009 f5464e34fed64f22d13237580ab94dab ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/bibtex/bst/base/plain.bst" 1741388039 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1781572550.62245 7489 b99675142eb267bf38bbab9b74c66f32 "pdflatex"
+  "main.aux" 1782024826.53903 7489 b99675142eb267bf38bbab9b74c66f32 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1781572550.0987 "main.tex" "main.pdf" "main" 1781572550.85467 0
+["pdflatex"] 1782024825.89952 "/Users/luisbenvenuto/Desktop/Research/projects/01_embedding_geometry/paper/main.tex" "main.pdf" "main" 1782024826.74306 0
   "../../shared/latex/twocolumn_preamble.tex" 1781572036.27179 1091 b25cff1ed133d0be2683f6a781d1e979 ""
+  "/Users/luisbenvenuto/Desktop/Research/projects/01_embedding_geometry/paper/main.tex" 1782024707.0631 1559 e46c91dd8b305f14843578444a187244 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1741388039 2375 baa924870cfb487815765f9094cf3728 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1741388039 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1741388039 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -163,10 +164,10 @@
   "figures/id_heat_gpt2.pdf" 1781572511.0212 17296 0a49d6004b78c4f614686edf9d732abe ""
   "figures/id_lines_gpt2.pdf" 1781572511.30514 15230 8cd4c54b25ef59567e1cdde4962e6055 ""
   "macros.tex" 1781572511.37532 262 d475a0f06071e7e07b6d2142b87d2ddc ""
-  "main.aux" 1781572550.62245 7489 b99675142eb267bf38bbab9b74c66f32 "pdflatex"
+  "main.aux" 1782024826.53903 7489 b99675142eb267bf38bbab9b74c66f32 "pdflatex"
   "main.bbl" 1781572550.09632 1799 e6be611d8215b9f2efd8f097baadfc78 "bibtex main"
-  "main.out" 1781572550.62332 1383 fc896e42a2a808d7fdbcedc71e6abc4c "pdflatex"
-  "main.tex" 1781572522.49983 1588 6a3eede46a8c66f2709bfef8dc6e55e3 ""
+  "main.out" 1782024826.53978 1383 fc896e42a2a808d7fdbcedc71e6abc4c "pdflatex"
+  "main.tex" 1782024707.0631 1559 e46c91dd8b305f14843578444a187244 ""
   "sections/01_introduction.tex" 1781572522.51289 2177 86f8411963cfd5c974dff84072629eab ""
   "sections/02_related.tex" 1781572522.52938 1921 434f9910f360ece9f39ca0af54691704 ""
   "sections/03_method.tex" 1781572522.52123 2430 e6cedfcc145b50a2b970f240101e8a30 ""

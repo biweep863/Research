@@ -1,7 +1,7 @@
 PWD /Users/luisbenvenuto/Desktop/Research/projects/01_embedding_geometry/paper
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/web2c/texmf.cnf
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT main.tex
+INPUT /Users/luisbenvenuto/Desktop/Research/projects/01_embedding_geometry/paper/main.tex
 OUTPUT main.log
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/base/article.cls
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/base/article.cls
