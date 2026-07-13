@@ -40,6 +40,26 @@ function today() {
   return new Date().toISOString().slice(0, 10);
 }
 
+// Vercel does a shallow clone by default (depth ~10), which breaks
+// `git log` for projects whose most recent commit falls outside that
+// window. Unshallow once, best-effort, before we start reading history.
+function ensureFullGitHistory() {
+  try {
+    const isShallow = execFileSync(
+      "git",
+      ["-C", repoRoot, "rev-parse", "--is-shallow-repository"],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    ).trim();
+    if (isShallow === "true") {
+      execFileSync("git", ["-C", repoRoot, "fetch", "--unshallow", "--quiet"], {
+        stdio: "ignore",
+      });
+    }
+  } catch {
+    /* no git, no remote, or already full — carry on */
+  }
+}
+
 function gitLastModified(projectDir) {
   const rel = relative(repoRoot, projectDir);
   try {
@@ -54,6 +74,8 @@ function gitLastModified(projectDir) {
   }
   return null;
 }
+
+ensureFullGitHistory();
 
 // Reset output PDF dir so removed papers don't linger.
 if (existsSync(outPdfDir)) rmSync(outPdfDir, { recursive: true, force: true });

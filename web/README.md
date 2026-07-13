@@ -26,16 +26,28 @@ npm run dev           # http://localhost:3000
 The `predev` hook runs the manifest step, so newly added
 `meta.yaml`s show up on the next reload.
 
-## Local static build (simulates GitHub Pages)
+## Local production build
 
 ```bash
-NEXT_PUBLIC_BASE_PATH="" npm run build
-npx serve out
+npm run build
+npm start          # serves the built app on http://localhost:3000
 ```
 
-For a real GH Pages URL like `luisbenvenuto.github.io/<repo>/`,
-set `NEXT_PUBLIC_BASE_PATH=/<repo>` before `npm run build`
-(the CI workflow does this automatically).
+## Deploy (Vercel)
+
+The site is deployed on Vercel. Vercel's GitHub integration
+auto-builds and deploys on every push to `main` — no workflow
+or CI file needed in this repo.
+
+Project settings on Vercel:
+- **Root Directory:** `web`
+- **Framework Preset:** Next.js (auto-detected)
+- **Build Command:** default (`npm run build`) — the `prebuild`
+  hook runs `scripts/build-manifest.mjs` automatically.
+
+The manifest script self-heals a shallow clone (`git fetch --unshallow`)
+so the git-derived `updated` date is accurate even in Vercel's
+default shallow checkout.
 
 ## Adding a new paper
 
@@ -56,7 +68,7 @@ created: "2027-01-15"
 YAML
 git add ../projects/07_new_topic
 git commit -m "Add project 07"
-git push          # GH Actions redeploys the site automatically
+git push          # Vercel redeploys the site automatically
 ```
 
 ## meta.yaml schema
