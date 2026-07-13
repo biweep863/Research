@@ -1,0 +1,9 @@
+slug: kolmogorov_attention
+title: "Predicting Attention Density from Prompt Compressibility: A Kolmogorov-Complexity Account of Transformer Attention"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Attention"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Gzip compression ratio linearly predicts mean attention entropy in GPT-2 (R^2 = 0.68 at layer 5), with the relationship peaking mid-network and vanishing at the head."
+pdf: "paper/main.pdf"

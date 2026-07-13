@@ -1,0 +1,9 @@
+slug: topological_attention
+title: "Persistent Homology of Attention Graphs: A Topological Pilot for Hallucination Detection"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Topology"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Vietoris-Rips persistence of GPT-2 attention-distance matrices on 10 truthful/hallucinated pairs; the pipeline is validated and a power analysis prescribes N>=200 for the scaled run."
+pdf: "paper/main.pdf"

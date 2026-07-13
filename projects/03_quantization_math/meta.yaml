@@ -1,0 +1,9 @@
+slug: quantization_math
+title: "Bit-Width Scaling Laws for Mathematical Reasoning in Small Language Models"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Efficiency"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Post-training quantization sweep on Qwen-0.5B shows accuracy collapse from 0.69 (FP32) to 0.31 (INT4) to 0.0 (ternary), with MLP weights ~6x more fragile than attention."
+pdf: "paper/main.pdf"

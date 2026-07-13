@@ -1,0 +1,9 @@
+slug: embedding_geometry
+title: "Information Geometry and Embedding Collapse in Long-Context Transformers"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Geometry"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Intrinsic dimension, anisotropy and local-curvature diagnostics reveal a phase transition in the residual stream as context length grows from 128 to 1024 tokens on GPT-2."
+pdf: "paper/main.pdf"

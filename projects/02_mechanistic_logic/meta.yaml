@@ -1,0 +1,9 @@
+slug: mechanistic_logic
+title: "Mechanistic Probes of Logical-Symbolic Reasoning in Small Transformers: Evidence for a Surface-Form-Invariant Validity Direction"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Interpretability"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Linear probes on GPT-2 recover logical validity across a natural-language and an OOD conlang surface, with moderate cross-surface transfer and no purely logic-specific attention head."
+pdf: "paper/main.pdf"

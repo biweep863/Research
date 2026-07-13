@@ -1,0 +1,9 @@
+slug: neural_ode_depth
+title: "Continuous-Depth Transformers as Anytime Inference: A Latency-Robustness Trade-off Study"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Architecture"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "A Neural-ODE transformer varies by only 0.05 nats across seven solver budgets, while its discrete-depth counterpart diverges by 22.9 nats — anytime inference from a single trained block."
+pdf: "paper/main.pdf"
