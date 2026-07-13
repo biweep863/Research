@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import manifest from "@/data/publications.json";
 import type { Manifest, Publication } from "@/lib/types";
 import { PaperCard } from "@/components/PaperCard";
+import { PaperModal } from "@/components/PaperModal";
 import { FilterBar, type Filters } from "@/components/FilterBar";
 
 const AUTHOR_NAME = "Luis Benvenuto";
@@ -24,6 +25,7 @@ export default function HomePage() {
     type: ALL,
     sort: "recent",
   });
+  const [openPub, setOpenPub] = useState<Publication | null>(null);
 
   const years = useMemo(
     () => unique(publications.map((p) => String(p.year))).sort((a, b) => Number(b) - Number(a)),
@@ -60,9 +62,9 @@ export default function HomePage() {
       </header>
 
       <section className="mt-8">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Publicaciones científicas</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Scientific publications</h1>
         <p className="mt-2 text-sm text-slate-500">
-          {publications.length} artículos, actas y preprints — sincronizados automáticamente desde GitHub.
+          {publications.length} articles, proceedings and preprints — automatically synced from GitHub.
         </p>
 
         <div className="mt-6">
@@ -77,16 +79,18 @@ export default function HomePage() {
 
         {filtered.length === 0 ? (
           <div className="mt-10 rounded-xl border border-dashed border-slate-300 p-10 text-center text-sm text-slate-500">
-            No se encontraron publicaciones que coincidan con los filtros.
+            No publications match the current filters.
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((pub) => (
-              <PaperCard key={pub.slug} pub={pub} />
+              <PaperCard key={pub.slug} pub={pub} onOpen={setOpenPub} />
             ))}
           </div>
         )}
       </section>
+
+      <PaperModal pub={openPub} onClose={() => setOpenPub(null)} />
     </main>
   );
 }

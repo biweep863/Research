@@ -28,34 +28,34 @@ export function FilterBar({ filters, setFilters, years, topics, types }: Props) 
   return (
     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-[1fr_repeat(4,minmax(0,10rem))]">
       <Input
-        placeholder="Buscar por título, autor o palabra clave"
+        placeholder="Search by title, author or keyword"
         value={filters.q}
         onChange={(e) => setFilters({ ...filters, q: e.target.value })}
       />
       <Select
-        label="Año"
+        label="Year"
         value={filters.year}
         onChange={(v) => setFilters({ ...filters, year: v })}
-        options={opts(years, "todos")}
+        options={opts(years, "all")}
       />
       <Select
-        label="Tema"
+        label="Topic"
         value={filters.topic}
         onChange={(v) => setFilters({ ...filters, topic: v })}
-        options={opts(topics, "todos")}
+        options={opts(topics, "all")}
       />
       <Select
-        label="Tipo"
+        label="Type"
         value={filters.type}
         onChange={(v) => setFilters({ ...filters, type: v })}
-        options={opts(types, "todos")}
+        options={opts(types, "all")}
       />
       <Select
         value={filters.sort}
         onChange={(v) => setFilters({ ...filters, sort: v as Filters["sort"] })}
         options={[
-          { value: "recent", label: "Más reciente" },
-          { value: "oldest", label: "Más antiguo" },
+          { value: "recent", label: "Most recent" },
+          { value: "oldest", label: "Oldest" },
           { value: "az", label: "A–Z" },
         ]}
       />

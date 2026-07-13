@@ -8,6 +8,8 @@ export type Publication = {
   venue?: string;
   tldr: string;
   pdf: string;
+  created: string;    // ISO YYYY-MM-DD
+  updated: string;    // ISO YYYY-MM-DD
   pdfHref: string | null;
 };
 

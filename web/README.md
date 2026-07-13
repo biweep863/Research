@@ -52,6 +52,7 @@ type: "Preprint"
 venue: "arXiv preprint"
 tldr: "One-sentence hook."
 pdf: "paper/main.pdf"
+created: "2027-01-15"
 YAML
 git add ../projects/07_new_topic
 git commit -m "Add project 07"
@@ -71,6 +72,14 @@ git push          # GH Actions redeploys the site automatically
 | venue   | string     | no       | free text; shown in card footer              |
 | tldr    | string     | yes      | one-sentence hook (1–2 lines)                |
 | pdf     | string     | yes      | path to PDF relative to the project dir      |
+| created | YYYY-MM-DD | yes      | date the paper was first added (static)      |
+
+The `updated` date is **not** in `meta.yaml` — it is derived on every build
+from `git log -1 --format=%cs -- projects/NN_name/`, so it bumps
+automatically whenever any file inside the project directory is committed.
+The GitHub Actions workflow checks out with `fetch-depth: 0` so full
+history is available. Locally, if the working tree hasn't been committed
+yet, the script falls back to today's date.
 
 To add a new topic color, edit the `TOPIC_COLORS` map in
 `src/lib/utils.ts`.

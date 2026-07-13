@@ -1,10 +1,26 @@
-import type { Publication } from "@/lib/types";
-import { cn, topicColor, withBasePath } from "@/lib/utils";
+"use client";
 
-export function PaperCard({ pub }: { pub: Publication }) {
+import type { Publication } from "@/lib/types";
+import { cn, topicColor } from "@/lib/utils";
+
+type Props = {
+  pub: Publication;
+  onOpen: (pub: Publication) => void;
+};
+
+export function PaperCard({ pub, onOpen }: Props) {
   return (
-    <article className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-3 flex items-start justify-between gap-3">
+    <button
+      type="button"
+      onClick={() => onOpen(pub)}
+      className={cn(
+        "group flex w-full flex-col rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm",
+        "transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400",
+      )}
+      aria-label={`Open details for ${pub.title}`}
+    >
+      <div className="flex items-center justify-between gap-3">
         <span
           className={cn(
             "inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium ring-1 ring-inset",
@@ -16,29 +32,13 @@ export function PaperCard({ pub }: { pub: Publication }) {
         <span className="text-sm text-slate-500">{pub.year}</span>
       </div>
 
-      <h3 className="text-base font-semibold leading-snug text-slate-900">{pub.title}</h3>
+      <h3 className="mt-3 text-base font-semibold leading-snug text-slate-900 line-clamp-2 group-hover:text-slate-950">
+        {pub.title}
+      </h3>
 
-      <p className="mt-1 text-sm text-slate-500">{pub.authors.join(", ")}</p>
-
-      <p className="mt-3 text-sm leading-relaxed text-slate-700">{pub.tldr}</p>
-
-      <div className="mt-4 flex items-end justify-between border-t border-slate-100 pt-3">
-        <span className="text-xs text-slate-500">
-          {pub.venue ? `${pub.venue} · ${pub.type}` : pub.type}
-        </span>
-        {pub.pdfHref ? (
-          <a
-            href={withBasePath(pub.pdfHref)}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-medium text-blue-700 hover:text-blue-900"
-          >
-            PDF ↓
-          </a>
-        ) : (
-          <span className="text-xs text-slate-400">PDF pendiente</span>
-        )}
-      </div>
-    </article>
+      <span className="mt-auto pt-4 text-xs font-medium text-slate-400 group-hover:text-slate-600">
+        View details →
+      </span>
+    </button>
   );
 }
