@@ -1,0 +1,22 @@
+\section{Related Work}
+\paragraph{The secretary problem.} The best-choice problem and its $1/e$ law
+were popularised in the 1960s; Ferguson~\cite{ferguson1989solved} traces its
+tangled history and Freeman~\cite{freeman1983secretary} surveys the many
+variants. Gilbert and Mosteller~\cite{gilbert1966recognizing} solved the
+\emph{full-information} version, in which cardinal values (not just ranks) are
+observed and the optimal win probability rises to $\approx 0.580$.
+
+\paragraph{The parking problem.} MacQueen and Miller~\cite{macqueen1960optimal}
+introduced the ``optimal persistence'' or parking formulation, where the payoff
+depends on how far one stops from a goal rather than on picking a unique best.
+It is the canonical example in which the $37\%$ intuition breaks down, because
+the optimal rule is a distance threshold that depends on how often spots are
+free.
+
+\paragraph{Optimal stopping and RL.} Optimal stopping is a classical topic in
+dynamic programming~\cite{chow1971great}; more recently it has been attacked
+with reinforcement learning and neural function approximation, e.g.\ for
+option pricing~\cite{becker2019deep}. Our aim is narrower and pedagogical:
+using problems small enough to solve exactly, we ask what \emph{tabular},
+assumption-free agents recover, and use the closed forms as ground truth rather
+than as training signal.

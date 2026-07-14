@@ -1,0 +1,12 @@
+\section{Conclusion}
+The $37\%$ rule is a beautiful but narrow result: exact for the classic
+secretary problem in the large-$n$, rank-only, cost-free limit, and badly wrong
+once any of those assumptions slips. Placing the secretary and parking problems
+in a common MDP with exact ground truth, we quantified the failure --- naive
+regret up to $\ParkNaiveRegretHi\%$ on parking, and a cutoff dragged from
+$\OneOverE$ to $\CostMaxXstar$ by a modest search cost --- and showed that a
+tabular $Q$-learning agent, given only rewards, recovers the correct
+problem-specific threshold where a one-parameter policy-gradient learner cannot.
+The lesson for ``when to stop looking'' is not a magic percentage but a
+procedure: estimate the value of continuing, and stop the moment your current
+option beats it.

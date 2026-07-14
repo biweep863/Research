@@ -1,0 +1,48 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{When Should You Stop Looking? The 37\% Rule, the Parking Problem,
+and What Model-Free Agents Rediscover}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{\today}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent The ``37\% rule'' states that when choosing sequentially from $n$
+options you should reject the first $1/e$ of them and then take the next
+record. We revisit this folklore result, place it inside a common
+Markov-decision-process (MDP) skeleton alongside the parking problem of
+MacQueen and Miller~(1960), and ask an empirical question: do model-free
+reinforcement-learning agents, told nothing about the theory, rediscover the
+optimal stopping thresholds from reward alone? Exact backward induction gives
+computable ground truth. Tabular $Q$-learning recovers the secretary optimum
+to within $\AgentQregret\%$ regret at $n=\AgentSecN$ and matches the parking
+optimum exactly at high occupancy. In contrast, transplanting the $37\%$ rule
+onto the parking problem is catastrophic --- its regret reaches
+$\ParkNaiveRegretHi\%$ when free spots are common --- and a per-observation
+search cost pulls the optimal cutoff from $\OneOverE$ down to
+$\CostMaxXstar$. The $37\%$ rule is thus a fragile special case, not a
+universal law of search; agents that learn from experience track the true,
+problem-dependent threshold instead.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_method.tex}
+\input{sections/04_experiments.tex}
+\input{sections/05_results.tex}
+\input{sections/06_discussion.tex}
+\input{sections/07_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,28 @@
+\section{Discussion}
+\paragraph{When does the 37\% rule actually apply?} Our sweeps make the
+conditions concrete. The $1/e$ cutoff is close to optimal only when four things
+hold at once: the number of options is fixed and reasonably large; you observe
+ranks but care only about getting the single best; looking is free; and there is
+no recall. Loosen any one and the threshold moves --- toward $0$ under search
+cost, and toward the destination (hold out longer) as good options become
+common in the parking problem. Treating $37\%$ as a universal heuristic for
+apartments, dates, or parking spots is therefore usually wrong; the quantity
+that transfers is the \emph{method} (compute the continuation value and stop
+when the current option beats it), not the number.
+
+\paragraph{What the agents tell us.} The value-based agent recovers the optimal
+policy because its tabular representation can express the true, state-dependent
+threshold, and because exact scoring lets us read off regret rather than a
+noisy return. The policy-gradient agent's difficulty is instructive: a single
+learned cutoff is the right hypothesis class for the stationary secretary rule
+but cannot express the parking optimum at all. ``Learning the rule from
+experience'' thus decomposes into two requirements --- enough data to estimate
+the continuation values, and a policy class rich enough to hold the answer.
+
+\paragraph{Limitations.} The problems are deliberately small so that exact
+ground truth exists; we do not claim these particular learners scale to
+high-dimensional stopping tasks. The parking model assumes independent
+occupancy and a known street; correlated availability and unknown length are
+natural next steps. The residual $Q$-learning regret in the sparse-occupancy
+regime reflects finite-sample estimation of the acceptance boundary, not a
+failure of the method, and shrinks under the larger-budget configuration.

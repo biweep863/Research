@@ -1,0 +1,10 @@
+slug: optimal_stopping
+title: "When Should You Stop Looking? The 37% Rule, the Parking Problem, and What Model-Free Agents Rediscover"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Decision"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Tabular Q-learning rediscovers the 1/e (37%) stopping rule from reward alone, while the parking problem shows the rule collapses (regret up to 1602%) once spot occupancy and search costs enter."
+pdf: "paper/main.pdf"
+created: "2026-07-13"

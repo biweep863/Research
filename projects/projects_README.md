@@ -13,8 +13,12 @@ projects/
 ├── 03_quantization_math/         Bit-width scaling laws for math reasoning
 ├── 04_neural_ode_depth/          Continuous-depth transformers via Neural ODE
 ├── 05_kolmogorov_attention/      Gzip complexity ↔ attention density
-└── 06_topological_attention/     Persistent homology of attention graphs
+├── 06_topological_attention/     Persistent homology of attention graphs
+└── 07_optimal_stopping/          The 37% rule, parking problem, and RL agents
 ```
+
+See `PROJECT_TEMPLATE.md` for the structure and intake questions used to add a
+new project.
 
 ## Setup
 ```bash
@@ -53,3 +57,4 @@ config-driven.
 | 4 | Neural ODE depth | ODE loss range 0.05 vs discrete 22.9 across solver budgets |
 | 5 | Kolmogorov attention | R²=0.68 at layer 5 (entropy ~ gzip ratio) |
 | 6 | Topological attention | Pipeline validated; pilot underpowered (p=0.85, N=10); GPU run sized for N≥200 |
+| 7 | Optimal stopping | 37% rule emerges only asymptotically; naive-37% regret up to 1602% on parking; Q-learning recovers optima to ~1.4% |

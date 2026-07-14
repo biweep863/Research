@@ -1,0 +1,42 @@
+\section{Introduction}
+You are looking for a parking spot, driving toward your destination. Each spot
+you pass is either free or taken, and once you drive past a free one you cannot
+return. Stop too early and you walk a long way; hold out for the perfect spot
+and you may overshoot and find nothing. When should you take what you have?
+
+The popular answer invokes the \emph{secretary problem}: examine and reject the
+first $37\%$ of the options, then take the next one that beats everything seen
+so far. The cutoff $1/e\approx\OneOverE$ is genuinely optimal --- but only for
+the exact problem the secretary story describes: a fixed, known number of
+candidates, no recall, no cost to looking, and a payoff that rewards \emph{only}
+selecting the single best. The parking problem violates several of these
+assumptions, and the $37\%$ answer is simply wrong for it.
+
+\paragraph{Question.} Two questions organise this paper. (i) How fragile is the
+$37\%$ rule --- how far does the optimal stopping threshold move as we relax the
+secretary assumptions toward the parking problem and toward costly search?
+(ii) If an agent is given only the reward signal and no theory, does it
+\emph{rediscover} the correct threshold from experience?
+
+\paragraph{Approach.} We cast the classic secretary problem, the parking
+problem, and two variants (a per-observation cost; cardinal ``full
+information'') inside one MDP skeleton: observe, then \texttt{stop} or
+\texttt{continue}. For the secretary problem the optimal policy has a
+closed form; for the parking problem we obtain exact ground truth by backward
+induction. Against these references we run tabular $Q$-learning and a
+one-parameter policy-gradient (REINFORCE) learner.
+
+\paragraph{Findings.} (i) The $37\%$ rule emerges cleanly only in the classic
+rank-only, cost-free limit: at $n=\SecNhi$ the optimum sits at
+$x^*=\SecXstarHi$ with success $\SecPstarHi$, but for $n=\SecNlo$ it is already
+$\SecXstarLo$. (ii) Transplanted onto parking, the $37\%$ rule is disastrous:
+regret up to $\ParkNaiveRegretHi\%$ at occupancy $p=\ParkPhi$. (iii) A search
+cost of $\CostMax$ per look pulls the optimal secretary cutoff down to
+$\CostMaxXstar$. (iv) $Q$-learning recovers the secretary optimum
+($\AgentQregret\%$ regret at $n=\AgentSecN$) and the parking optimum (exact at
+$p=\ParkPhi$) from reward alone; the one-parameter policy-gradient agent finds
+the right regime but with higher variance.
+
+\paragraph{Contributions.} A unified MDP treatment of the stopping family with
+exact-DP ground truth; a quantification of how badly the $37\%$ rule fails off
+its home turf; and an empirical study of what model-free agents recover.

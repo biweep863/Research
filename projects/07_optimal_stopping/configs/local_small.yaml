@@ -1,0 +1,27 @@
+project: optimal_stopping
+seed: 0
+
+# --- Secretary problem ---
+secretary:
+  n_values: [10, 100, 1000]      # candidate-pool sizes (MC / analytic curves)
+  agent_n_values: [10, 50, 100]  # sizes trained by RL agents (dense states)
+  mc_episodes: 50000             # Monte-Carlo episodes per threshold
+  cost_n: 100                    # pool size for the cost-variant study
+  costs: [0.0, 0.0002, 0.0005, 0.001, 0.002, 0.005]  # per-observation cost
+
+# --- Parking problem ---
+parking:
+  street_half_length: 8          # distances [8..0..8], 17 spots
+  occupancy_p: [0.3, 0.5, 0.7, 0.9]   # probability a spot is FREE
+  fail_cost: 20.0                # penalty for driving off the end unparked
+  mc_episodes: 50000
+
+# --- RL agents ---
+agents:
+  q_episodes: 80000
+  reinforce_episodes: 60000
+  seeds: [0, 1, 2, 3, 4]         # independent training runs per cell
+  alpha: 0.3                     # decayed to 10% over training
+  epsilon: 0.2
+
+output_dir: results

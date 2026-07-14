@@ -1,0 +1,53 @@
+\section{Problems and Optimal Policies}
+All four problems share one skeleton: observe items in sequence; at each item
+choose \texttt{stop} (commit, ending the episode) or \texttt{continue}. They
+differ in what is observed and how the terminal reward is scored.
+
+\subsection{Classic secretary (rank-only)}
+$n$ candidates arrive in uniform random order; only relative ranks are visible;
+the reward is $1$ iff the candidate committed to is the global best. The
+optimal policy rejects the first $r$ candidates and then takes the first
+\emph{record} (best-so-far). Its success probability is
+\begin{equation}
+P(r,n) = \frac{r}{n}\sum_{i=r+1}^{n}\frac{1}{i-1},
+\label{eq:sec}
+\end{equation}
+and as $n\to\infty$ with $x=r/n$ this tends to $P(x)=-x\ln x$, maximised at
+$x^\star=1/e$ with $P^\star=1/e$. We also score \emph{arbitrary} (possibly
+non-threshold) policies exactly: a per-position take-mask $S$ wins with
+probability $\sum_{i\in S}\tfrac1n\prod_{j<i,\,j\in S}\tfrac{j-1}{j}$, using the
+independence of record events (Eq.~\ref{eq:sec} is the threshold special case).
+
+\subsection{Parking problem}
+Driving toward a destination, we pass spots at known distances
+$c_1,\dots,c_T$ (we use $[k,\dots,1,0,1,\dots,k]$). Each spot is
+\emph{free} independently with probability $p$. At a free spot we park (pay its
+distance, stop) or skip; running off the end pays a penalty $F$. The expected
+remaining cost obeys the backward recursion
+\begin{equation}
+V_t = p\,\min(c_t, V_{t+1}) + (1-p)\,V_{t+1},\qquad V_{T}=F,
+\label{eq:park}
+\end{equation}
+so the optimal action at a free spot is to park iff $c_t \le V_{t+1}$. The
+threshold $V_{t+1}$ is \emph{per-step}, not a single distance: near the end of
+the street one accepts almost anything rather than fail. Equation~\ref{eq:park}
+is exact and serves as ground truth for the agents.
+
+\subsection{Variants}
+\textbf{Costly search.} Each inspected candidate costs $c$; the payoff is
+$P(\text{win}) - c\,\mathbb{E}[\#\text{inspected}]$. As $c$ grows the optimal
+cutoff shrinks below $1/e$. \textbf{Full information.} Cardinal values are
+observed; the optimal win probability rises toward $\approx0.580$
+\cite{gilbert1966recognizing}, showing that the $37\%$ ceiling is an artefact
+of discarding magnitude information.
+
+\subsection{Agents}
+Neither agent is given the closed forms. \emph{Tabular $Q$-learning} operates on
+the discrete decision states (record position for secretary; street step for
+parking) with two actions, an $\epsilon$-greedy behaviour policy, and linearly
+annealed exploration and learning rate; we score its greedy policy exactly via
+the formulas above. \emph{REINFORCE} learns a single threshold parameter passed
+through a sigmoid, so the learned scalar \emph{is} the cutoff --- a natural fit
+for the stationary secretary rule, but deliberately mis-specified for the
+non-stationary parking optimum, which we use to illustrate that the policy
+class, not just the learner, matters.

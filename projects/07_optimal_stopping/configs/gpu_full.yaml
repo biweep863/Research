@@ -1,0 +1,28 @@
+project: optimal_stopping
+seed: 0
+
+# Larger sweeps; still CPU-friendly (no neural net required), but sized for a
+# machine with more cores / time budget. Everything is config-gated so the
+# code path is identical to local_small.yaml.
+
+secretary:
+  n_values: [10, 50, 100, 500, 1000, 5000]
+  agent_n_values: [10, 25, 50, 100, 200]
+  mc_episodes: 500000
+  cost_n: 100
+  costs: [0.0, 0.0002, 0.0005, 0.001, 0.002, 0.003, 0.005]
+
+parking:
+  street_half_length: 20         # distances [20..0..20], 41 spots
+  occupancy_p: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95]
+  fail_cost: 50.0
+  mc_episodes: 500000
+
+agents:
+  q_episodes: 200000
+  reinforce_episodes: 150000
+  seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  alpha: 0.3
+  epsilon: 0.2
+
+output_dir: results

@@ -1,0 +1,16 @@
+\section{Experimental Setup}
+Everything is synthetic and config-driven; no external data or pretrained
+models are used. The local configuration sweeps pool sizes
+$n\in\{10,100,1000\}$ (agents trained on $\{10,50,100\}$, where the tabular
+state space stays dense), parking occupancies $p\in\{0.3,0.5,0.7,0.9\}$ on a
+street of half-length $k=8$ with failure penalty $F=20$, and observation costs
+$c\in\{0,\dots,\CostMax\}$ at $n=100$. Monte-Carlo estimates use
+$5\times10^4$ episodes per point; agents train for up to $8\times10^4$
+episodes per cell over five seeds, and we report means with bootstrap $95\%$
+confidence intervals. The \texttt{gpu\_full.yaml} configuration widens every
+sweep and raises the episode and seed counts; no code changes are required.
+
+Reproduce with \texttt{make all}: \texttt{run\_montecarlo} writes the
+closed-form and simulated curves, \texttt{run\_agents} trains and scores the
+learners, and \texttt{plot\_stopping} regenerates every figure together with
+the numeric macros used in this text.
