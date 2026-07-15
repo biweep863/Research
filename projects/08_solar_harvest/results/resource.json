@@ -1,0 +1,74 @@
+{
+  "solar_constant": 1361.0,
+  "intercepted_power_W": 1.7354943656730547e+17,
+  "toa_horizontal_mean_W_m2": 340.3712780686327,
+  "surface_ghi_mean_W_m2": 183.735,
+  "cascade": [
+    {
+      "label": "Solar constant (noon, equator)",
+      "irradiance": 1361.0
+    },
+    {
+      "label": "TOA horizontal avg (geometry + day/night)",
+      "irradiance": 340.25
+    },
+    {
+      "label": "after cloud/aerosol reflection",
+      "irradiance": 261.9925
+    },
+    {
+      "label": "after ozone absorption",
+      "irradiance": 255.1875
+    },
+    {
+      "label": "surface GHI (after water/aerosol absorption)",
+      "irradiance": 183.735
+    }
+  ],
+  "band_ghi": [
+    {
+      "lat": 5,
+      "ghi": 185.57537524661868
+    },
+    {
+      "lat": 15,
+      "ghi": 247.0327348142207
+    },
+    {
+      "lat": 25,
+      "ghi": 231.6968120555162
+    },
+    {
+      "lat": 35,
+      "ghi": 169.61954038546807
+    },
+    {
+      "lat": 45,
+      "ghi": 148.36822789491052
+    },
+    {
+      "lat": 55,
+      "ghi": 104.57309910752524
+    },
+    {
+      "lat": 65,
+      "ghi": 84.88011399095271
+    },
+    {
+      "lat": 75,
+      "ghi": 73.63968830823625
+    }
+  ],
+  "land": {
+    "land_area_m2": 148938825797658.16,
+    "deployable_area_m2": 6106491857703.985,
+    "deployable_power_W": 244259674308159.4,
+    "frac_of_primary": 13.569981906008856,
+    "frac_of_electricity": 81.41989143605313,
+    "area_for_world_electricity_m2": 75000000000.0,
+    "n_million_cities": 651359.1314884251,
+    "n_country_equivalents": 15876.87883003036,
+    "world_electricity_W": 3000000000000.0,
+    "world_primary_W": 18000000000000.0
+  }
+}

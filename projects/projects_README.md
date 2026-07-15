@@ -1,8 +1,9 @@
-# Research Program (Six Papers)
+# Research Program (Eight Papers)
 
-Six LLM research projects, each with a runnable pipeline, real
+Eight research projects, each with a runnable pipeline, real
 experimental results, figures, two-column scientific paper, and full
-methodology documentation.
+methodology documentation. Projects 1–6 study LLMs; projects 7–8 are
+computational studies of decision theory and planetary solar energy.
 
 ## Layout
 ```
@@ -14,7 +15,8 @@ projects/
 ├── 04_neural_ode_depth/          Continuous-depth transformers via Neural ODE
 ├── 05_kolmogorov_attention/      Gzip complexity ↔ attention density
 ├── 06_topological_attention/     Persistent homology of attention graphs
-└── 07_optimal_stopping/          The 37% rule, parking problem, and RL agents
+├── 07_optimal_stopping/          The 37% rule, parking problem, and RL agents
+└── 08_solar_harvest/             Planetary solar budget + ecosystem-aware harvesting
 ```
 
 See `PROJECT_TEMPLATE.md` for the structure and intake questions used to add a
@@ -58,3 +60,4 @@ config-driven.
 | 5 | Kolmogorov attention | R²=0.68 at layer 5 (entropy ~ gzip ratio) |
 | 6 | Topological attention | Pipeline validated; pilot underpowered (p=0.85, N=10); GPU run sized for N≥200 |
 | 7 | Optimal stopping | 37% rule emerges only asymptotically; naive-37% regret up to 1602% on parking; Q-learning recovers optima to ~1.4% |
+| 8 | Solar harvest | Earth intercepts ~174,000 TW; deserts+rooftops beat world electricity 81×; scheduling harvest around each ecosystem's daily light budget unlocks up to 45% more energy at zero ecological cost |

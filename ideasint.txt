@@ -1,5 +1,0 @@
-orchestrador, como nav y manip pero para todass las areas - sistema industrial - siempre logara moniterear todo, monitoaraear performance de la jetson 
-mas alla, implemenatr agent para que fixee solo los problemas que haya surgido en plena ronda.
-mejorar lo de los docker workflows
-
-

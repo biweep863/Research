@@ -1,0 +1,33 @@
+\section{Background and related work}
+
+\paragraph{Solar resource physics.} The astronomical geometry of insolation ---
+declination, hour angle, and the daily integral of extraterrestrial radiation
+on a horizontal surface --- is textbook material \cite{duffie2013solar}. The
+partition of incoming sunlight into reflection, atmospheric absorption, and
+surface absorption is quantified by global energy-budget studies
+\cite{trenberth2009earth}, and the accepted total solar irradiance is
+$1361~\mathrm{W/m^2}$ \cite{kopp2011total}. We reuse these closed forms as
+computable ground truth rather than fitting data.
+
+\paragraph{Space-based solar power.} Collecting sunlight in orbit and beaming
+it down was proposed by Glaser \cite{glaser1968power} and has been revisited in
+modern phased-array concepts \cite{mankins2014sps}. It is the practical cousin
+of Dyson's stellar-scale collector \cite{dyson1960search}: rather than
+enclosing the star, place a collector where the light is undiminished and
+uninterrupted. We treat it quantitatively as one option among several, not as
+science fiction.
+
+\paragraph{Sharing land and light with ecosystems.} Human appropriation of net
+primary production already claims a large share of the biosphere's energy
+throughput \cite{haberl2007quantifying}. Agrivoltaics shows that photovoltaics
+and biological light demand can co-exist on the same land when light is shared
+rather than monopolised \cite{barron2019agrivoltaics}. Our ecosystem-aware
+optimisation abstracts that idea to a schedulable light budget and asks for the
+allocation that maximises harvest while keeping each ecosystem whole.
+
+\paragraph{Our contribution.} We unify the resource ceiling, land feasibility,
+and the orbital alternative in one reproducible budget, and add a novel
+optimisation layer: because an ecosystem's light requirement is a daily
+integral, not an instantaneous one, the harvest schedule has temporal slack we
+can exploit. We characterise the optimum in closed form and measure the energy
+it unlocks.

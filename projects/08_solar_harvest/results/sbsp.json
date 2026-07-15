@@ -1,0 +1,31 @@
+{
+  "chain": [
+    {
+      "label": "collected (S0 x availability)",
+      "power": 1347.39
+    },
+    {
+      "label": "after PV conversion",
+      "power": 404.21700000000004
+    },
+    {
+      "label": "after DC->RF",
+      "power": 323.37360000000007
+    },
+    {
+      "label": "after atmospheric transmission",
+      "power": 307.2049200000001
+    },
+    {
+      "label": "delivered to grid (after rectenna)",
+      "power": 261.1241820000001
+    }
+  ],
+  "ground_per_m2_W": 40.0,
+  "space_per_m2_W": 261.1241820000001,
+  "ratio": 6.528104550000002,
+  "ground_capacity_factor": 0.25,
+  "space_capacity_factor": 0.99,
+  "ground_area_for_world_m2": 75000000000.0,
+  "space_area_for_world_m2": 11488786588.13759
+}

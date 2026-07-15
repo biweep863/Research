@@ -1,0 +1,53 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{How Much of the Sun Can We Take Without Turning Off the Lights on Life?
+A First-Principles Budget for Planetary Solar Harvesting}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{\today}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Earth intercepts about \InterceptedTW~terawatts of sunlight --- four
+orders of magnitude more than humanity uses --- yet ``cover the planet in
+panels'' is the wrong mental model, because most of that light is already
+doing a job: driving the biosphere. We build a self-contained, first-principles
+budget that tracks sunlight from the solar constant through the atmosphere
+(with the ozone layer's share broken out) to the surface, estimates how much
+energy is deployable on land \emph{without} displacing ecosystems, and compares
+ground panels with an orbital collector. A conservative desert-and-rooftop
+footprint already yields \DeployableTW~TW, about \TimesElec$\times$ world
+electricity demand; the entire electricity supply fits on a \AreaWorldSide~km
+square of panel. Space-based solar delivers \SbspRatio$\times$ more power per
+collector square metre, but its advantage is continuous sunlight, not
+``catching light before the atmosphere.'' Our headline contribution is an
+\emph{ecosystem-aware harvesting} problem: each biome must keep a minimum daily
+light budget, but is flexible about \emph{when}. Casting this as a constrained
+optimisation, we show the optimum is greedy water-filling --- reserve the
+ecosystem's light during low-value hours --- and that this temporal scheduling
+recovers \TemporalGainHead\% more harvest value than a flat reservation at a
+\FminHead\ reserve, rising to \TemporalGainMax\% as the reserve grows. The
+constraint on solar power is not the Sun; it is the biosphere, and it is
+schedulable.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_resource.tex}
+\input{sections/04_feasibility.tex}
+\input{sections/05_ecosystem.tex}
+\input{sections/06_results.tex}
+\input{sections/07_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,40 @@
+\section{Introduction}
+
+A popular way to frame the renewable-energy question is ``how much of the Earth
+would we need to cover in solar panels?'' The framing is seductive because the
+raw numbers are staggering: the Sun deposits roughly \InterceptedTW~TW on
+Earth's cross-section, against a human primary-energy appetite near 18~TW. By
+that arithmetic the problem is trivially solved and the only question is cost.
+
+This paper argues that the arithmetic hides the real constraint. The
+\InterceptedTW~TW is not idle: after the atmosphere reflects and absorbs its
+share, the sunlight that reaches the ground is what powers photosynthesis,
+evaporation, and every ecosystem on the planet. Harvesting solar energy at
+civilisational scale is therefore not a question of \emph{area} but of
+\emph{allocation} --- how much light can we divert to electricity before we
+starve the biosphere that light supports?
+
+We approach this with a deliberately self-contained, first-principles model
+(no external datasets; every number is reproducible from published physical
+constants) organised around four questions:
+
+\begin{enumerate}
+\item \textbf{The ceiling.} How much sunlight actually reaches the surface,
+  and where does the rest go? We track the cascade from the solar constant to
+  surface irradiance, breaking out the ozone layer's contribution, and map the
+  resource by latitude band (Section~\ref{sec:resource}).
+\item \textbf{Feasibility.} How much energy is deployable on land without
+  displacing forests, croplands, or protected habitat, and how does that
+  compare to demand? (Section~\ref{sec:feasibility}).
+\item \textbf{The orbital alternative.} Is a collector in space --- a ``layer''
+  above the atmosphere rather than a Dyson sphere --- fundamentally better, and
+  why? (Section~\ref{sec:feasibility}).
+\item \textbf{Sharing light with life.} If an ecosystem needs a certain amount
+  of light but is flexible about \emph{when} it receives it, how much more can
+  we harvest by scheduling around it? (Section~\ref{sec:ecosystem}).
+\end{enumerate}
+
+The fourth question is our main contribution. We formalise ecosystem-aware
+harvesting as a constrained optimisation, prove its optimum is a simple
+water-filling rule, and quantify the energy unlocked purely by respecting
+\emph{when} --- not just how much --- light a biome needs.

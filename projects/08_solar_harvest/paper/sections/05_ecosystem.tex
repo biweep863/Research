@@ -1,0 +1,40 @@
+\section{Ecosystem-aware harvesting}
+\label{sec:ecosystem}
+
+The previous section shows that raw potential and even land are not the binding
+constraint. The binding constraint is that surface light is already spoken for
+by the biosphere. We now make that constraint precise and, crucially,
+\emph{schedulable}.
+
+\paragraph{Formulation.} Partition the surface into cells $i$ (here, latitude
+bands standing in for biomes) and the day into hours $h$. Let $L_{i,h}\ge 0$ be
+the available surface light (from the model of Section~\ref{sec:resource}) and
+$w_{i,h}>0$ the \emph{value} of harvesting in that hour --- we use a diurnal
+net-demand (``duck curve'') weight, since energy captured at a peak-demand hour
+is worth more than energy captured at midday when supply is already abundant.
+We choose a harvest fraction $a_{i,h}\in[0,1]$; the ecosystem receives the
+reserved light $(1-a_{i,h})L_{i,h}$. Each cell must keep a daily light integral
+$D_i = f_{\min}\sum_h L_{i,h}$ to remain intact:
+\begin{equation}
+\max_{a\in[0,1]} \sum_{i,h} w_{i,h}\, a_{i,h}\, L_{i,h}
+\quad\text{s.t.}\quad
+\sum_h (1-a_{i,h}) L_{i,h} \ge D_i \;\; \forall i.
+\label{eq:opt}
+\end{equation}
+
+\paragraph{The optimum is water-filling.} Reserving one unit of light in hour
+$h$ forfeits $w_{i,h}$ of harvest value, so to meet the quota $D_i$ at minimum
+cost we reserve the ecosystem's light from the \emph{lowest-value} hours first,
+up to each hour's availability. This greedy rule is the exact optimum of the
+per-cell linear program in~\eqref{eq:opt}; we verify it against
+\texttt{scipy}'s LP solver to $10^{-6}$ on random instances. Intuitively: give
+the biosphere its light when we least want to sell it, and harvest the peaks.
+
+\paragraph{Baselines.} We compare three feasible-or-bounding policies:
+(i)~\emph{no-cap}, harvest everything ($a\equiv 1$) --- an ecosystem-blind
+upper bound that would collapse the biome; (ii)~\emph{flat}, reserve the same
+fraction $f_{\min}$ every hour, which is feasible but wastes valuable
+peak-hour light; and (iii)~\emph{optimal}, the water-filling schedule. The
+flat and optimal policies reserve \emph{exactly the same} total light --- the
+ecosystem is equally protected --- so any difference between them is pure
+scheduling gain.

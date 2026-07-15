@@ -1,0 +1,19 @@
+project: solar_harvest
+seed: 0
+
+# --- Solar-resource / surface model ---
+resource:
+  lat_bands: [5, 15, 25, 35, 45, 55, 65, 75]   # abs-latitude band centres (deg)
+  doy_samples: 24                              # days sampled across the year for annual means
+
+# --- Ecosystem light-budget optimisation ---
+optimize:
+  # Representative biomes given by their latitude band; light supply L[i,h]
+  # comes from the insolation model at a representative day.
+  cells_lat: [5, 25, 45, 65]      # tropical, subtropical desert, temperate, boreal
+  representative_doy: 80          # near the March equinox (all bands have daylight)
+  n_hours: 24
+  f_min_grid: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]   # ecosystem light-reserve fractions
+  f_min_headline: 0.3             # fraction used for the headline comparison
+
+output_dir: results

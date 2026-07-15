@@ -13,6 +13,7 @@ const TOPIC_COLORS: Record<string, string> = {
   Attention: "bg-rose-50 text-rose-700 ring-rose-200",
   Topology: "bg-violet-50 text-violet-700 ring-violet-200",
   Decision: "bg-teal-50 text-teal-700 ring-teal-200",
+  Energy: "bg-yellow-50 text-yellow-800 ring-yellow-200",
 };
 
 export function topicColor(topic: string) {

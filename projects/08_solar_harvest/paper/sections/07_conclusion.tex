@@ -1,0 +1,35 @@
+\section{Discussion and conclusion}
+
+We set out to answer a simple-sounding question --- how much of the Sun's
+energy can humanity take --- and found that the honest answer inverts the usual
+framing. The resource is astronomically abundant (\InterceptedTW~TW), land is
+not scarce (world electricity fits on a \AreaWorldSide~km square of desert
+panel), and even orbit, the ``layer above the atmosphere,'' is a
+capacity-factor improvement rather than a new source of free power. The one
+real, physical constraint is that the light reaching the ground is already
+running the biosphere.
+
+The contribution we are most confident in is turning that constraint into an
+optimisation. Because an ecosystem's light requirement is a daily
+\emph{integral}, harvesting has temporal slack, and exploiting it --- yielding
+light to life at low-value hours and harvesting the peaks --- recovers
+\TemporalGainHead\% more usable energy at $f_{\min}=\FminHead$ and up to
+\TemporalGainMax\% at higher reserves, all at zero additional ecological cost.
+The optimum is a transparent water-filling rule, not a black box.
+
+\paragraph{Limitations.} The model is deliberately coarse and self-contained:
+latitude bands stand in for biomes, the ecosystem constraint is a single
+daily-integral floor rather than a species- and process-specific light
+response, and demand is a stylised duck curve. The \texttt{gpu\_full} config
+refines the spatial and temporal grids and the reserve sweep; substituting
+gridded insolation and land-cover data, per-biome light-response curves, and
+real regional demand would sharpen the numbers without changing the structure.
+The qualitative claim --- that solar harvesting is an allocation problem
+against the biosphere, and that the allocation is schedulable --- is what the
+model is built to show.
+
+\paragraph{Outlook.} The framing suggests a research programme: replace the
+integral floor with measured net-primary-production light responses, couple the
+harvest schedule to storage and grid dynamics, and let space-based collectors
+relax the temporal constraint entirely for the hours the biosphere claims. The
+Sun is not the limit; the biosphere is, and it is one we can plan around.
