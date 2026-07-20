@@ -1,0 +1,64 @@
+\section{Method}
+\label{sec:method}
+
+\subsection{Scene and renderer}
+The canonical scene is a procedural grass field: a jittered grid of blades on a
+ground plane, with a few coloured spheres, lit by a single directional sun over
+a gradient sky. Each blade is a canonical shape in local space (four triangles
+at full detail) placed by an affine transform $x \mapsto Ax + b$ encoding
+position, yaw, tilt, and height. Everything is deterministic given a seed. Our
+rendered scene uses \SceneBlades\ blades (\SceneTris\ triangles) at
+$64\times48$; the accompanying \texttt{gpu\_full} config scales this up without
+code changes.
+
+The renderer is a Monte-Carlo path tracer: a primary ray per pixel (jittered for
+anti-aliasing), a shadow ray to the sun, and one cosine-weighted diffuse bounce
+whose contribution is estimated from direct light at the second hit or the sky.
+Averaging $N$ samples per pixel (spp) reduces variance. A deterministic centre
+ray also records a G-buffer (albedo, normal, depth) used by the denoiser.
+
+\subsection{Cost as a currency}
+We report cost as the count of \emph{ray/primitive intersection tests}
+(triangle, sphere, plane, and bounding-box tests), incremented by every routine
+that performs one. Unlike wall-clock time, this is exact and machine
+independent. For the acceleration study we count the tests to cast one primary
+plus one shadow ray per pixel; for the Pareto study we use
+\begin{equation}
+\text{cost}(\text{method}, N) \;=\; \text{tests}_{\text{1 pass}} \times N,
+\end{equation}
+a single currency that combines geometric cost (the intersection structure) with
+sampling cost (spp), normalised so brute force at the reference sample count is
+$1$.
+
+\subsection{The four techniques}
+\paragraph{Brute force (baseline).} Every ray is tested against every triangle:
+$O(\text{rays}\times\text{triangles})$.
+
+\paragraph{BVH.} A median-split bounding-volume hierarchy over triangle
+centroids. A ray descends the tree, testing a box before its subtree and only
+reaching the few triangles in leaves it cannot rule out. The image is identical
+to brute force; only the test count changes.
+
+\paragraph{Instancing.} A two-level BVH: the canonical blade is stored once as a
+BLAS, and each blade is an instance in a TLAS. A ray is transformed into an
+instance's local frame ($A^{-1}(o-b)$, $A^{-1}d$, without renormalising $d$ so
+the hit distance $t$ is preserved) and tested against the shared blade. Geometry
+is stored once rather than duplicated $K$ times; the image is bit-identical.
+
+\paragraph{Level of detail.} Beyond a distance threshold, a blade is baked with a
+cheaper shape --- a single triangle (\emph{simplified}) or a flat two-triangle
+card (\emph{billboard}). The threshold in $[0,1]$ is the fraction of the
+camera-distance range kept at full detail; lower means cheaper and more
+approximate.
+
+\paragraph{Sample budget and denoising.} We sweep spp and, at each, apply a
+cross-bilateral denoiser whose weights combine spatial distance, colour
+similarity, and geometric similarity (normal agreement to the eighth power and a
+depth term), so it smooths noise within a surface without blurring across
+silhouettes.
+
+\subsection{Metrics}
+Quality is measured against a high-sample reference (\RefSpp\ spp) with PSNR and
+windowed SSIM \cite{wang2004image}, both implemented in numpy. Lossless methods
+attain SSIM $=1$ by construction (verified to floating-point in the tests);
+lossy methods produce a curve.

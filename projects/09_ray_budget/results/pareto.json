@@ -1,0 +1,117 @@
+{
+  "width": 64,
+  "height": 48,
+  "reference_spp": 24,
+  "blades": 200,
+  "cp_brute": 4013568,
+  "cp_bvh": 97824,
+  "cp_instanced": 84517,
+  "lossless_speedup_bvh": 41.02845927379784,
+  "lossless_speedup_instanced": 47.48829229622443,
+  "points": [
+    {
+      "label": "brute force",
+      "class": "lossless",
+      "rel_cost": 1.0,
+      "tests": 96325632,
+      "spp": 24,
+      "ssim": 1.0
+    },
+    {
+      "label": "BVH",
+      "class": "lossless",
+      "rel_cost": 0.02437332567929583,
+      "tests": 2347776,
+      "spp": 24,
+      "ssim": 1.0
+    },
+    {
+      "label": "BVH + instancing",
+      "class": "lossless",
+      "rel_cost": 0.021057821868222987,
+      "tests": 2028408,
+      "spp": 24,
+      "ssim": 1.0
+    },
+    {
+      "label": "BVH, 1 spp",
+      "class": "sampling",
+      "rel_cost": 0.0010155552366373263,
+      "tests": 97824,
+      "spp": 1,
+      "ssim": 0.7078027393609875
+    },
+    {
+      "label": "BVH, 1 spp + denoise",
+      "class": "denoise",
+      "rel_cost": 0.0010155552366373263,
+      "tests": 97824,
+      "spp": 1,
+      "ssim": 0.7469946244467955
+    },
+    {
+      "label": "BVH, 4 spp",
+      "class": "sampling",
+      "rel_cost": 0.004062220946549305,
+      "tests": 391296,
+      "spp": 4,
+      "ssim": 0.8781947561528893
+    },
+    {
+      "label": "BVH, 4 spp + denoise",
+      "class": "denoise",
+      "rel_cost": 0.004062220946549305,
+      "tests": 391296,
+      "spp": 4,
+      "ssim": 0.9129241968137717
+    },
+    {
+      "label": "BVH, 16 spp",
+      "class": "sampling",
+      "rel_cost": 0.01624888378619722,
+      "tests": 1565184,
+      "spp": 16,
+      "ssim": 0.9456049760654442
+    },
+    {
+      "label": "BVH, 16 spp + denoise",
+      "class": "denoise",
+      "rel_cost": 0.01624888378619722,
+      "tests": 1565184,
+      "spp": 16,
+      "ssim": 0.9454329539397669
+    },
+    {
+      "label": "LOD thr=0.6",
+      "class": "lod",
+      "rel_cost": 0.009587894528426245,
+      "tests": 923560,
+      "spp": 10,
+      "ssim": 0.9269752868631549
+    },
+    {
+      "label": "LOD thr=0.3",
+      "class": "lod",
+      "rel_cost": 0.009021171021229324,
+      "tests": 868970,
+      "spp": 10,
+      "ssim": 0.9238651237457329
+    },
+    {
+      "label": "LOD thr=0.0",
+      "class": "lod",
+      "rel_cost": 0.008105319257079985,
+      "tests": 780750,
+      "spp": 10,
+      "ssim": 0.9128054953568107
+    },
+    {
+      "label": "full stack",
+      "class": "stack",
+      "rel_cost": 0.0036084684084917292,
+      "tests": 347588,
+      "spp": 4,
+      "ssim": 0.9076384320537535
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+project: ray_budget
+seed: 0
+
+# Full-resolution configuration. Pure-numpy CPU still runs it (just slower);
+# no GPU is actually required -- the name mirrors the other projects' convention
+# for the "big" config. Scale render size, samples, and scene complexity here.
+render:
+  width: 384
+  height: 288
+  reference_spp: 512
+  scene_blades: 8000
+  spheres: 5
+
+accel:
+  blade_counts: [200, 500, 1000, 2000, 4000, 8000, 16000]
+  primary_only: false
+  bvh_leaf_size: 4
+
+lod:
+  thresholds: [1.0, 0.85, 0.7, 0.55, 0.4, 0.3, 0.2, 0.1, 0.0]
+  modes: ["full", "simplified", "billboard"]
+  spp: 64
+
+sampling:
+  spp_grid: [1, 2, 4, 8, 16, 32, 64, 128, 256]
+  denoise_sigma_spatial: 1.5
+  denoise_sigma_color: 0.10
+
+output_dir: results

@@ -1,0 +1,151 @@
+{
+  "width": 64,
+  "height": 48,
+  "leaf_size": 4,
+  "rows": [
+    {
+      "blades": 50,
+      "triangles": 200,
+      "brute": {
+        "tests": 1018368,
+        "tri": 998400,
+        "time_s": 0.26987695693969727
+      },
+      "bvh": {
+        "tests": 62832,
+        "tri": 7168,
+        "box": 35696,
+        "nodes": 127,
+        "time_s": 0.2797980308532715
+      },
+      "instanced": {
+        "tests": 53084,
+        "tri": 1172,
+        "box": 31944,
+        "time_s": 0.21106982231140137
+      },
+      "mem_duplicated_floats": 1800,
+      "mem_instanced_floats": 636
+    },
+    {
+      "blades": 100,
+      "triangles": 400,
+      "brute": {
+        "tests": 2016768,
+        "tri": 1996800,
+        "time_s": 0.3000199794769287
+      },
+      "bvh": {
+        "tests": 97154,
+        "tri": 10850,
+        "box": 66336,
+        "nodes": 255,
+        "time_s": 0.4369018077850342
+      },
+      "instanced": {
+        "tests": 82919,
+        "tri": 3348,
+        "box": 59603,
+        "time_s": 0.35538411140441895
+      },
+      "mem_duplicated_floats": 3600,
+      "mem_instanced_floats": 1236
+    },
+    {
+      "blades": 200,
+      "triangles": 800,
+      "brute": {
+        "tests": 4013568,
+        "tri": 3993600,
+        "time_s": 0.37172484397888184
+      },
+      "bvh": {
+        "tests": 97824,
+        "tri": 13580,
+        "box": 64276,
+        "nodes": 511,
+        "time_s": 0.4643080234527588
+      },
+      "instanced": {
+        "tests": 84517,
+        "tri": 5216,
+        "box": 59333,
+        "time_s": 0.37093019485473633
+      },
+      "mem_duplicated_floats": 7200,
+      "mem_instanced_floats": 2436
+    },
+    {
+      "blades": 400,
+      "triangles": 1600,
+      "brute": {
+        "tests": 8018396,
+        "tri": 7998400,
+        "time_s": 0.5050320625305176
+      },
+      "bvh": {
+        "tests": 156629,
+        "tri": 25952,
+        "box": 110681,
+        "nodes": 1023,
+        "time_s": 0.8023488521575928
+      },
+      "instanced": {
+        "tests": 134190,
+        "tri": 12880,
+        "box": 101314,
+        "time_s": 0.650177001953125
+      },
+      "mem_duplicated_floats": 14400,
+      "mem_instanced_floats": 4836
+    },
+    {
+      "blades": 800,
+      "triangles": 3200,
+      "brute": {
+        "tests": 16020000,
+        "tri": 16000000,
+        "time_s": 0.7852959632873535
+      },
+      "bvh": {
+        "tests": 182694,
+        "tri": 33060,
+        "box": 129634,
+        "nodes": 2047,
+        "time_s": 0.979712963104248
+      },
+      "instanced": {
+        "tests": 162062,
+        "tri": 19864,
+        "box": 122198,
+        "time_s": 0.8176541328430176
+      },
+      "mem_duplicated_floats": 28800,
+      "mem_instanced_floats": 9636
+    },
+    {
+      "blades": 1600,
+      "triangles": 6400,
+      "brute": {
+        "tests": 31987980,
+        "tri": 31968000,
+        "time_s": 1.3212239742279053
+      },
+      "bvh": {
+        "tests": 237949,
+        "tri": 48006,
+        "box": 169963,
+        "nodes": 4095,
+        "time_s": 1.3018519878387451
+      },
+      "instanced": {
+        "tests": 215277,
+        "tri": 34892,
+        "box": 160405,
+        "time_s": 1.1560490131378174
+      },
+      "mem_duplicated_floats": 57600,
+      "mem_instanced_floats": 19236
+    }
+  ]
+}

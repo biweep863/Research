@@ -1,9 +1,10 @@
-# Research Program (Eight Papers)
+# Research Program (Nine Papers)
 
-Eight research projects, each with a runnable pipeline, real
+Nine research projects, each with a runnable pipeline, real
 experimental results, figures, two-column scientific paper, and full
-methodology documentation. Projects 1–6 study LLMs; projects 7–8 are
-computational studies of decision theory and planetary solar energy.
+methodology documentation. Projects 1–6 study LLMs; projects 7–9 are
+computational studies of decision theory, planetary solar energy, and
+ray-tracing efficiency.
 
 ## Layout
 ```
@@ -16,7 +17,8 @@ projects/
 ├── 05_kolmogorov_attention/      Gzip complexity ↔ attention density
 ├── 06_topological_attention/     Persistent homology of attention graphs
 ├── 07_optimal_stopping/          The 37% rule, parking problem, and RL agents
-└── 08_solar_harvest/             Planetary solar budget + ecosystem-aware harvesting
+├── 08_solar_harvest/             Planetary solar budget + ecosystem-aware harvesting
+└── 09_ray_budget/                Ray-tracing cost vs quality: BVH, instancing, LOD, sampling
 ```
 
 See `PROJECT_TEMPLATE.md` for the structure and intake questions used to add a
@@ -61,3 +63,4 @@ config-driven.
 | 6 | Topological attention | Pipeline validated; pilot underpowered (p=0.85, N=10); GPU run sized for N≥200 |
 | 7 | Optimal stopping | 37% rule emerges only asymptotically; naive-37% regret up to 1602% on parking; Q-learning recovers optima to ~1.4% |
 | 8 | Solar harvest | Earth intercepts ~174,000 TW; deserts+rooftops beat world electricity 81×; scheduling harvest around each ecosystem's daily light budget unlocks up to 45% more energy at zero ecological cost |
+| 9 | Ray budget | BVH + instancing (the Zelda grass trick) cut intersection tests 134–149× at a bit-identical image; LOD and sample-budget+denoise trade measurable SSIM for another order of magnitude; full stack ~277× cheaper at SSIM 0.91 |

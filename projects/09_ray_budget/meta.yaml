@@ -1,0 +1,10 @@
+slug: ray_budget
+title: "Ray Tracing on a Budget: Measuring the Cost of Zelda's Grass Trick and Three Other Ways to Trace Fewer Rays"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Graphics"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "A from-scratch path tracer measures four ways to cut ray-tracing cost against an exact reference: a BVH and geometry instancing (the Zelda grass trick) shift the cost-quality frontier for free with 100x+ fewer intersection tests at identical images, while level-of-detail and sample budgeting buy further speedups at a measurable, quantified quality price."
+pdf: "paper/main.pdf"
+created: "2026-07-18"

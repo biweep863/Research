@@ -1,0 +1,40 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Ray tracing and path tracing.} Whitted's recursive ray tracing
+\cite{whitted1980improved} introduced shadows, reflection, and refraction by
+spawning secondary rays; Kajiya's rendering equation \cite{kajiya1986rendering}
+cast image synthesis as an integral over all light paths, solved by Monte-Carlo
+path tracing. Our tracer is a minimal path tracer (direct sun plus one diffuse
+bounce), enough to exhibit both the geometric cost that acceleration structures
+attack and the stochastic noise that sample budgets and denoisers attack. The
+ray/triangle test is Möller--Trumbore \cite{moller1997fast}; the standard
+reference for the whole pipeline is \emph{Physically Based Rendering}
+\cite{pharr2016physically}.
+
+\paragraph{Acceleration structures.} The idea that a ray should not be tested
+against every primitive dates to the earliest complex-scene renderers
+\cite{rubin1980representation}. Bounding-volume hierarchies are now the dominant
+structure, including for dynamic scenes \cite{wald2007ray} and in hardware
+ray-tracing cores. We use a textbook median-split BVH; our interest is not in a
+better build but in \emph{measuring} what it buys.
+
+\paragraph{Instancing.} Storing one mesh and referencing it through many
+transforms --- a two-level hierarchy with a bottom-level structure (BLAS) per
+mesh and a top-level structure (TLAS) over instances --- is standard in production
+and is the mechanism behind dense vegetation such as the grass of \emph{Breath of
+the Wild}. It is lossless by construction; we verify this and quantify its cost
+and memory savings.
+
+\paragraph{Level of detail.} Replacing distant geometry with cheaper
+approximations is a classic real-time technique \cite{luebke2003level}; billboard
+impostors are its aggressive limit. Unlike the lossless methods, LOD changes the
+image, and the quality/cost trade is exactly what we measure.
+
+\paragraph{Sampling and denoising.} Monte-Carlo estimators converge as
+$N^{-1/2}$ in the number of samples, so halving noise costs four times the rays.
+Learned and hand-built denoisers \cite{chaitanya2017interactive} make low-sample
+renders usable and underpin production systems (e.g.\ NVIDIA OptiX, DLSS). Our
+denoiser is a cross-bilateral filter \cite{tomasi1998bilateral} guided by
+G-buffer normals and depth --- the minimal version of that idea, chosen so its
+behaviour is transparent rather than opaque.

@@ -1,0 +1,93 @@
+{
+  "width": 64,
+  "height": 48,
+  "spp": 10,
+  "full_triangles": 800,
+  "full_cost_tests": 97824,
+  "modes": {
+    "simplified": [
+      {
+        "threshold": 1.0,
+        "triangles": 800,
+        "tri_frac": 1.0,
+        "cost_tests": 97824,
+        "cost_frac": 1.0,
+        "ssim": 1.0,
+        "psnr": 100.0,
+        "n_simplified": 0
+      },
+      {
+        "threshold": 0.6,
+        "triangles": 578,
+        "tri_frac": 0.7225,
+        "cost_tests": 92356,
+        "cost_frac": 0.9441036964344128,
+        "ssim": 0.9965739236165085,
+        "psnr": 44.615272681033915,
+        "n_simplified": 74
+      },
+      {
+        "threshold": 0.3,
+        "triangles": 374,
+        "tri_frac": 0.4675,
+        "cost_tests": 86897,
+        "cost_frac": 0.8882993948315342,
+        "ssim": 0.9907026176005478,
+        "psnr": 40.397637634476325,
+        "n_simplified": 142
+      },
+      {
+        "threshold": 0.0,
+        "triangles": 203,
+        "tri_frac": 0.25375,
+        "cost_tests": 78075,
+        "cost_frac": 0.7981170264965652,
+        "ssim": 0.9734694687145886,
+        "psnr": 34.676749020671444,
+        "n_simplified": 199
+      }
+    ],
+    "billboard": [
+      {
+        "threshold": 1.0,
+        "triangles": 800,
+        "tri_frac": 1.0,
+        "cost_tests": 97824,
+        "cost_frac": 1.0,
+        "ssim": 1.0,
+        "psnr": 100.0,
+        "n_simplified": 0
+      },
+      {
+        "threshold": 0.6,
+        "triangles": 652,
+        "tri_frac": 0.815,
+        "cost_tests": 96523,
+        "cost_frac": 0.9867006051684658,
+        "ssim": 0.9901974537867462,
+        "psnr": 38.91718391641872,
+        "n_simplified": 74
+      },
+      {
+        "threshold": 0.3,
+        "triangles": 516,
+        "tri_frac": 0.645,
+        "cost_tests": 93229,
+        "cost_frac": 0.953027886817141,
+        "ssim": 0.9804907282367747,
+        "psnr": 35.05177117931148,
+        "n_simplified": 142
+      },
+      {
+        "threshold": 0.0,
+        "triangles": 402,
+        "tri_frac": 0.5025,
+        "cost_tests": 86825,
+        "cost_frac": 0.8875633791298659,
+        "ssim": 0.9487289923299718,
+        "psnr": 29.79996030626664,
+        "n_simplified": 199
+      }
+    ]
+  }
+}

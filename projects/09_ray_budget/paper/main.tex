@@ -1,0 +1,52 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Ray Tracing on a Budget: Measuring the Cost of Zelda's Grass Trick
+and Three Other Ways to Trace Fewer Rays}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{\today}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Ray tracing is expensive because every ray is tested, independently,
+against the scene's geometry --- which is why photoreal rendering wants very
+capable GPUs. Games do not pay that bill in full: \emph{The Legend of Zelda:
+Breath of the Wild} did not treat every blade of grass as unique geometry, it
+replicated one blade and instanced it, and faded distant detail to a cheaper
+form. We build a from-scratch path tracer whose cost is measured in
+machine-independent ray/primitive tests, and use it to quantify four ways to
+trace fewer rays against an exact high-sample reference. Two are lossless: a
+bounding-volume hierarchy (BVH) and geometry instancing (the grass trick) cut
+intersection tests by \AccelSpeedup$\times$ and \AccelSpeedupInst$\times$ on our
+largest scene while producing a \emph{bit-identical} image. Two are lossy: level
+of detail and a Monte-Carlo sample budget rescued by a normal/depth-guided
+denoiser, each buying further speedups at a quality price we read off directly
+(Monte-Carlo error falls with the theoretical $N^{-1/2}$ slope,
+$\McSlope$ measured). Placing every method on a single cost--quality plane, the
+lossless methods move the frontier for free and the lossy methods trade a
+measurable amount of structural similarity for another order of magnitude of
+cost: the full stack reaches SSIM $\StackSsim$ at \StackSpeedup$\times$ less cost
+than brute force. The grass trick is not an approximation --- it is free, and the
+right question is what to spend the savings on.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_method.tex}
+\input{sections/04_accel.tex}
+\input{sections/05_lossy.tex}
+\input{sections/06_results.tex}
+\input{sections/07_conclusion.tex}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

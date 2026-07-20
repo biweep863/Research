@@ -1,0 +1,51 @@
+\section{Introduction}
+\label{sec:intro}
+
+Ray tracing produces images by simulating light transport: for each pixel a ray
+is cast into the scene and tested against geometry, and the rays that matter ---
+shadows, reflections, indirect bounces --- spawn more rays
+\cite{whitted1980improved, kajiya1986rendering}. The method is physically
+principled and embarrassingly parallel, but it is also expensive in a very
+literal sense: cost scales with the number of ray/primitive intersection tests,
+and a naive renderer tests every ray against every primitive. A field of grass,
+where each blade is a handful of triangles and there are tens of thousands of
+blades, is exactly the kind of scene that makes this bill explode, which is why
+real-time ray tracing waits on ever more capable GPUs.
+
+Games do not pay the bill in full. \emph{The Legend of Zelda: Breath of the
+Wild} is famous for its rolling grass, and it did not achieve that by treating
+every blade as unique, independently simulated geometry. It stored essentially
+one blade and \emph{replicated} it thousands of times as cheap transformed
+copies, and it faded distant grass to simpler stand-ins. These are two of the
+oldest ideas in rendering --- instancing and level of detail --- and they are the
+starting point for this paper: \emph{how much does each trick actually save, and
+what, if anything, does it cost in image quality?}
+
+We answer this with a deliberately self-contained tool: a from-scratch path
+tracer, a few hundred lines of numpy, whose cost we measure not only in
+wall-clock time but in \emph{ray/primitive intersection tests} --- a
+machine-independent currency that is reproducible on any computer. On one
+canonical scene (a procedural grass field with a few spheres under a sun) we
+study four ways to trace fewer rays:
+
+\begin{enumerate}
+\item \textbf{Bounding-volume hierarchy (BVH).} A spatial tree so a ray tests
+  only nearby primitives. Lossless: the image is unchanged.
+\item \textbf{Instancing} --- the grass trick. One canonical blade, many affine
+  transforms, a two-level hierarchy. Lossless: the image is unchanged, but the
+  geometry is stored once.
+\item \textbf{Level of detail (LOD).} Distant blades collapse to a single
+  triangle or a flat billboard. Lossy: the image changes, measurably.
+\item \textbf{Sample budget and denoising.} Fewer Monte-Carlo samples per pixel
+  (cheaper, noisier), rescued by a normal/depth-guided denoiser. Lossy.
+\end{enumerate}
+
+Our contribution is measurement rather than a new algorithm. We (i) confirm the
+two lossless methods are lossless --- bit-identical images --- and quantify their
+savings and how they scale with scene size; (ii) chart the quality price of the
+two lossy methods against an exact reference using PSNR and SSIM
+\cite{wang2004image}; and (iii) place all of them on a single cost--quality
+Pareto frontier, so the ``opportunity cost'' of each shortcut, and the way they
+compose, can be read off one plot. The headline is simple: the grass trick is
+not an approximation, it is free; the interesting decisions begin only after you
+have spent the free savings.

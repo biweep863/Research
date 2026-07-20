@@ -1,0 +1,31 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations.} This is a measurement study on a toy, not a renderer to
+ship. The tracer is pure numpy on a CPU, so absolute times are irrelevant --- we
+deliberately report machine-independent intersection tests instead, but that
+currency ignores memory bandwidth, cache behaviour, SIMD/GPU divergence, and the
+hardware BVH traversal that dominates real systems. The scene is a single grass
+field with one bounce of diffuse global illumination; reflection, refraction,
+and deep light paths --- where ray tracing's cost and its advantage over
+rasterisation truly live --- are absent. The BVH is a plain median split, not the
+surface-area-heuristic builds used in practice, and the denoiser is a single
+bilateral pass rather than a temporal or learned reconstructor. Finally, the LOD
+result (that it saves little intersection cost once a BVH exists) is specific to
+a geometry-light, sampling-heavy regime; a scene with far more geometry per pixel
+would shift that balance. Every one of these is a knob in the \texttt{gpu\_full}
+config or a natural extension, not a rewrite.
+
+\paragraph{Conclusion.} We measured, against an exact reference, four standard
+ways to trace fewer rays. The two lossless ones --- a BVH and the instancing
+trick behind \emph{Breath of the Wild}'s grass --- cut intersection tests by one
+to two orders of magnitude while leaving the image bit-identical, and their
+advantage grows with scene size. The two lossy ones --- level of detail and a
+denoised sample budget --- extend the frontier further at a quality price we
+quantified with SSIM and PSNR, and we showed they compose into a stack that is
+\StackSpeedup$\times$ cheaper than brute force at SSIM \StackSsim. The most
+useful output is not any single number but the ordering it implies: take the free
+lossless savings first, spend samples and denoise second, and reach for
+approximation last and deliberately, knowing exactly what each shortcut costs.
+Ray tracing is expensive, but a large part of that expense is avoidable without
+compromise --- and the rest is a trade you can price.
