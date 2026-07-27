@@ -148,6 +148,8 @@ INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/titlese
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/titlesec/titlesec.sty
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/preprint/authblk.sty
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/preprint/authblk.sty
+INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/placeins.sty
+INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/placeins.sty
 INPUT ./macros.tex
 INPUT ./macros.tex
 INPUT macros.tex

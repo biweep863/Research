@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1781580334.5084 "main.aux" "main.bbl" "main" 1781580335.30167 0
+["bibtex main"] 1781580334.5084 "main.aux" "main.bbl" "main" 1784674272.40213 0
   "./references.bib" 1781574139.8679 1344 d985dd7c76bc62795d338ac9ccca5369 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/bibtex/bst/base/plain.bst" 1741388039 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1781580335.07877 4825 af8a5077d7d3c6843f8b1ff14732c053 "pdflatex"
+  "main.aux" 1784674272.17033 4825 af8a5077d7d3c6843f8b1ff14732c053 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1781580334.56647 "main.tex" "main.pdf" "main" 1781580335.30178 0
-  "../../shared/latex/twocolumn_preamble.tex" 1781572036.27179 1091 b25cff1ed133d0be2683f6a781d1e979 ""
+["pdflatex"] 1784674271.64772 "main.tex" "main.pdf" "main" 1784674272.40223 0
+  "../../shared/latex/twocolumn_preamble.tex" 1784674234.2535 1699 b8aa4f723bf7d9858a2c6503c8052dc9 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1741388039 2375 baa924870cfb487815765f9094cf3728 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1741388039 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1741388039 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -159,6 +159,7 @@
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/microtype/mt-msa.cfg" 1741388039 5929 11976688d7d8ed4d0d05efd1b3d5a7e9 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/microtype/mt-msb.cfg" 1741388039 5594 d52d5015abe666fae752ed7674c2dd73 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/multirow/multirow.sty" 1741388039 6696 886c9f3087d0b973ed2c19aa79cb3023 ""
+  "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/placeins.sty" 1741388039 4087 636308456f60d2b31cbf97867db5708d ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/preprint/authblk.sty" 1741388039 7016 985a983ce041cc8959cd31133cba0244 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/refcount/refcount.sty" 1741388039 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1741388039 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
@@ -171,10 +172,10 @@
   "figures/mse_vs_bits_qwenZeroFiveb.pdf" 1781576180.77773 16309 faeaa5178f256b629b594aeae3ff668c ""
   "figures/sensitivity_qwenZeroFiveb.pdf" 1781576180.82232 16448 21e060085ad82db6aa1e00708f84280d ""
   "macros.tex" 1781576188.32195 427 10ec152041efc0a428a52aa69635c597 ""
-  "main.aux" 1781580335.07877 4825 af8a5077d7d3c6843f8b1ff14732c053 "pdflatex"
+  "main.aux" 1784674272.17033 4825 af8a5077d7d3c6843f8b1ff14732c053 "pdflatex"
   "main.bbl" 1781580334.56414 1235 b36899b7a69eb2ab204f676f0aa03891 "bibtex main"
-  "main.out" 1781580335.07947 1077 d473797f226043dbd123d01790675805 "pdflatex"
-  "main.tex" 1781576188.32792 1575 5efb0621a7ceb75ef7acbda495c0c5de ""
+  "main.out" 1784674272.1709 1077 d473797f226043dbd123d01790675805 "pdflatex"
+  "main.tex" 1784674262.42892 1567 579002cae355ef185bdcae89d05d0b76 ""
   "sections/01_introduction.tex" 1781576188.34252 1251 8b9634f9cb9b8affd3eec396dced0bbc ""
   "sections/02_related.tex" 1781576188.36012 1133 f8a04391c7fa5e2d13235a76587a4552 ""
   "sections/03_method.tex" 1781576188.35283 1789 71e30d74551ba1a41f05e45b08663bb1 ""

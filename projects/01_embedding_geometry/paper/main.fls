@@ -1,7 +1,7 @@
 PWD /Users/luisbenvenuto/Desktop/Research/projects/01_embedding_geometry/paper
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/web2c/texmf.cnf
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/luisbenvenuto/Desktop/Research/projects/01_embedding_geometry/paper/main.tex
+INPUT main.tex
 OUTPUT main.log
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/base/article.cls
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/base/article.cls
@@ -148,6 +148,8 @@ INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/titlese
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/titlesec/titlesec.sty
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/preprint/authblk.sty
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/preprint/authblk.sty
+INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/placeins.sty
+INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/placeins.sty
 INPUT ./macros.tex
 INPUT ./macros.tex
 INPUT macros.tex

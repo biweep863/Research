@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Homebrew) (preloaded format=pdflatex 2025.3.15)  16 JUN 2026 21:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Homebrew) (preloaded format=pdflatex 2025.3.15)  21 JUL 2026 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -553,7 +553,11 @@ Package: authblk 2001/02/27 1.3 (PWD)
 \c@authors=\count315
 \c@affil=\count316
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 24.
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/pl
+aceins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 40.
 \c@theorem=\count317
 ) (./macros.tex)
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
@@ -810,23 +814,20 @@ ine 25.
 (pdftex.def)             Requested size: 243.91125pt x 211.49608pt.
 ) (./sections/06_discussion.tex
 
-) (./sections/07_conclusion.tex) (./main.bbl
-Underfull \vbox (badness 1902) has occurred while \output is active []
-
 
 
 [2{/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/
-lm-mathex.enc} <./figures/r2_per_layer_gptTwo.pdf>]
+lm-mathex.enc} <./figures/r2_per_layer_gptTwo.pdf> <./figures/scatter_deep_gptT
+wo.pdf>]) (./sections/07_conclusion.tex) (./main.bbl
 Underfull \hbox (badness 1297) in paragraph at lines 14--19
 []\T1/lmr/m/n/10 (+20) Zhiying Jiang, Matthew Yang, Mikhail Tsir-lin,
  []
 
+
+
 )
 
-
-
-[3 <./figures/scatter_deep_gptTwo.pdf> <./figures/entropy_per_family_gptTwo.pdf
->] (./main.aux)
+[3 <./figures/entropy_per_family_gptTwo.pdf>] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -835,13 +836,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 1C0835B85DFDA2B7A48E1B572295EAB4;1102.
  ) 
 Here is how much of TeX's memory you used:
- 15641 strings out of 473190
- 252944 string characters out of 5704335
- 696099 words of memory out of 5000000
- 38423 multiletter control sequences out of 15000+600000
+ 15668 strings out of 473190
+ 253680 string characters out of 5704335
+ 696128 words of memory out of 5000000
+ 38446 multiletter control sequences out of 15000+600000
  634616 words of font info for 175 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,10n,82p,1001b,576s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,10n,82p,1001b,483s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/type1/public/
 lm/lmbx10.pfb></opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/t
 ype1/public/lm/lmbx12.pfb></opt/homebrew/Cellar/texlive/20250308_1/share/texmf-
@@ -866,7 +867,7 @@ fonts/type1/public/lm/lmsy10.pfb></opt/homebrew/Cellar/texlive/20250308_1/share
 308_1/share/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></opt/homebrew/Cellar/t
 exlive/20250308_1/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.p
 fb>
-Output written on main.pdf (3 pages, 396779 bytes).
+Output written on main.pdf (3 pages, 395556 bytes).
 PDF statistics:
  340 PDF objects out of 1000 (max. 8388607)
  173 compressed objects within 2 object streams

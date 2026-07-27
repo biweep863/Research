@@ -20,6 +20,22 @@
 \usepackage{multirow}
 \usepackage{titlesec}
 \usepackage{authblk}
+\usepackage{placeins}
+
+% Float placement: encourage figures to pack onto text pages rather than
+% piling up and spilling onto the references page. Combined with a
+% \FloatBarrier just before the bibliography, this keeps figures from
+% crashing into the References section.
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.75}
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\dblfloatpagefraction}{0.75}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{5}
+\setcounter{dbltopnumber}{3}
 
 \hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Homebrew) (preloaded format=pdflatex 2025.3.15)  16 JUN 2026 16:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Homebrew) (preloaded format=pdflatex 2025.3.15)  21 JUL 2026 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -553,7 +553,11 @@ Package: authblk 2001/02/27 1.3 (PWD)
 \c@authors=\count315
 \c@affil=\count316
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 24.
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/pl
+aceins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 40.
 \c@theorem=\count317
 ) (./macros.tex)
 LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
@@ -804,17 +808,17 @@ Package pdftex.def Info: figures/train_loss.pdf  used on input line 25.
 ) (./sections/06_discussion.tex
 
 [2{/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/
-lm-ts1.enc} <./figures/pareto.pdf>]) (./sections/07_conclusion.tex) (./main.bbl
+lm-ts1.enc} <./figures/pareto.pdf> <./figures/acc_vs_nfe.pdf>])
+(./sections/07_conclusion.tex)
 
-
-
+(./main.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 30--34
 []\T1/lmr/m/n/10 (+20) Roy Schwartz, Gabriel Stanovsky, Swabha
  []
 
 )
 
-[3 <./figures/acc_vs_nfe.pdf> <./figures/train_loss.pdf>] (./main.aux)
+[3 <./figures/train_loss.pdf>] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -823,13 +827,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: CB24400CA11380E29604F214D7488902;1145.
  ) 
 Here is how much of TeX's memory you used:
- 15697 strings out of 473190
- 254008 string characters out of 5704335
- 696105 words of memory out of 5000000
- 38464 multiletter control sequences out of 15000+600000
+ 15724 strings out of 473190
+ 254744 string characters out of 5704335
+ 696134 words of memory out of 5000000
+ 38487 multiletter control sequences out of 15000+600000
  635475 words of font info for 183 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,6n,82p,1001b,455s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,6n,82p,1001b,453s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/type1/public/
 lm/lmbx10.pfb></opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/t
 ype1/public/lm/lmbx12.pfb></opt/homebrew/Cellar/texlive/20250308_1/share/texmf-
@@ -850,7 +854,7 @@ ew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/type1/public/lm/lmri9.pfb><
 lmsy10.pfb></opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/type
 1/public/lm/lmsy7.pfb></opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist
 /fonts/type1/public/lm/lmtt10.pfb>
-Output written on main.pdf (3 pages, 381367 bytes).
+Output written on main.pdf (3 pages, 380074 bytes).
 PDF statistics:
  315 PDF objects out of 1000 (max. 8388607)
  162 compressed objects within 2 object streams

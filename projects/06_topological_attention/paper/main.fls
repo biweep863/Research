@@ -148,6 +148,8 @@ INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/titlese
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/titlesec/titlesec.sty
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/preprint/authblk.sty
 INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/preprint/authblk.sty
+INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/placeins.sty
+INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/placeins/placeins.sty
 INPUT ./macros.tex
 INPUT ./macros.tex
 INPUT macros.tex
@@ -302,14 +304,14 @@ INPUT ./figures/betti_curves_gptTwo.pdf
 INPUT ./sections/06_discussion.tex
 INPUT ./sections/06_discussion.tex
 INPUT sections/06_discussion.tex
+INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
+INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT ./sections/07_conclusion.tex
 INPUT ./sections/07_conclusion.tex
 INPUT sections/07_conclusion.tex
 INPUT ./main.bbl
 INPUT ./main.bbl
 INPUT main.bbl
-INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
-INPUT /opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
