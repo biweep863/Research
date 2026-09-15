@@ -1,0 +1,10 @@
+slug: boot_contact
+title: "Who Touched First? Detecting, Ordering and Placing Boot-Ball and Boot-Player Contacts from a Shoe-Mounted Inertial Sensor"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Decision"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "A physics-based simulation of a boot-mounted IMU (with real ankle-IMU background) shows a ball impact and a player contact are separable at >0.9 macro-F1, the ball onset is timed to ~1 ms at 1 kHz, near-simultaneous contacts can be ordered above ~10 ms of separation, and a calibrated Bayesian fusion of boot, ball sensor and base rates turns this into a 'ball first vs player first' probability with ~0.95 accuracy; foot INS with ZUPT and sparse UWB fixes places the contact within ~0.1-0.3 m."
+pdf: "paper/main.pdf"
+created: "2026-09-14"

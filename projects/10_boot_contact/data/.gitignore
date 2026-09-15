@@ -1,0 +1,4 @@
+# Raw PAMAP2 download (688 MB) stays out of git; the small ankle cache is kept.
+PAMAP2_Dataset/
+*.zip
+!pamap2_ankle.npz

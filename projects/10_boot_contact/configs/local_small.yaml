@@ -1,0 +1,115 @@
+project: boot_contact
+seed: 0
+
+# --------------------------------------------------------------------------- #
+# Physical simulation (src/sim). All signals are generated at `sim_rate` Hz and
+# then passed through the sensor model (bandwidth, noise, bias, clipping) and
+# decimated to each tested sampling rate.
+# --------------------------------------------------------------------------- #
+sim:
+  sim_rate: 4000               # Hz, internal integration rate
+  window_s: 0.6                # seconds of signal per window (event near the middle)
+  gait:
+    cadence_hz: [2.4, 3.2]     # running stride frequency range (strides / s)
+    strike_peak_g: [6.0, 14.0] # foot-strike peak, g
+    strike_dur_ms: [25.0, 40.0]
+  ball:                        # foot-ball impact (Nunome 2006: ~10 ms contact)
+    peak_g: [50.0, 130.0]
+    dur_ms: [7.0, 12.0]
+    ring_hz: [150.0, 260.0]    # boot/ball stiffness ringing after impact
+    ring_decay_ms: [8.0, 20.0]
+  player:                      # foot-player contact (soft tissue, oblique)
+    peak_g: [8.0, 45.0]
+    dur_ms: [18.0, 55.0]
+    push_g: [0.5, 3.0]         # low-frequency push tail
+    push_ms: [60.0, 160.0]
+  both:                        # anomalous: ball and player nearly simultaneous
+    gap_ms: [-40.0, 40.0]      # t_player - t_ball; negative = player first
+
+# Sensor model (src/sim/imu.py). `consumer` mimics a phone-grade +-16 g part,
+# `sport` a wide-range impact-rated part like those in kicking studies.
+sensors:
+  sport:
+    range_g: 200.0
+    acc_noise_g: 0.08          # white-noise std per sample at 1 kHz
+    gyr_noise_dps: 0.5
+    bias_g: 0.02
+    bandwidth_frac: 0.45       # low-pass cutoff as fraction of Nyquist
+  consumer:
+    range_g: 16.0
+    acc_noise_g: 0.03
+    gyr_noise_dps: 0.3
+    bias_g: 0.02
+    bandwidth_frac: 0.45
+  ball:                        # ball-embedded IMU (connected-ball style, 500 Hz)
+    fs_hz: 500
+    range_g: 200.0
+    acc_noise_g: 0.10
+    sync_jitter_ms: 1.0        # clock offset std between ball and boot
+
+# --------------------------------------------------------------------------- #
+# Experiment 1: contact classification (none / ball / player / both)
+# --------------------------------------------------------------------------- #
+detect:
+  n_per_class: 300             # windows per class per condition
+  fs_grid: [100, 200, 500, 1000]
+  sensors: ["sport", "consumer"]
+  backgrounds: ["synthetic", "pamap2"]   # pamap2 falls back to synthetic if absent
+  pamap2_fs: 100               # real background is only used at its native rate
+  test_frac: 0.3
+  gb_max_iter: 200
+
+# --------------------------------------------------------------------------- #
+# Experiment 2: onset timing precision and who-touched-first ordering
+# --------------------------------------------------------------------------- #
+timing:
+  n_events: 400
+  fs_grid: [100, 200, 500, 1000]
+  noise_scale: [0.5, 1.0, 2.0, 4.0]      # multiplies sensor noise
+  gap_grid_ms: [1, 2, 5, 10, 20, 40]     # ball-vs-player separation for ordering
+
+# --------------------------------------------------------------------------- #
+# Experiment 3: the anomalous overlap -- two pulses inside one window
+# --------------------------------------------------------------------------- #
+overlap:
+  n_per_gap: 120
+  gap_grid_ms: [-40, -30, -20, -15, -10, -6, -3, 0, 3, 6, 10, 15, 20, 30, 40]
+  fs: 1000
+  sensor: sport
+  grid_step_ms: 1.0            # search resolution of the two-template fit
+
+# --------------------------------------------------------------------------- #
+# Experiment 4: probabilistic decision (ball-first vs direct-to-player)
+# --------------------------------------------------------------------------- #
+decision:
+  n_cases: 1500
+  fs: 500
+  sensor: sport
+  # Knowledge base: prior probability that a challenge of each kind plays the
+  # ball first. Illustrative base rates, documented in doc/05_decisions.md.
+  situations:
+    standing_tackle: {prior_ball_first: 0.70, freq: 0.45}
+    sliding_tackle:  {prior_ball_first: 0.55, freq: 0.30}
+    fifty_fifty:     {prior_ball_first: 0.50, freq: 0.15}
+    late_challenge:  {prior_ball_first: 0.20, freq: 0.10}
+  cost_false_foul: 1.0         # cost of calling a foul when the ball was played
+  cost_missed_foul: 1.0        # cost of waving play on when it was a foul
+  review_band: 0.15            # |p - 0.5| < band => send to video review
+  calib_bins: 10
+
+# --------------------------------------------------------------------------- #
+# Experiment 5: 3-D localisation of the contact (foot INS + ZUPT + UWB anchors)
+# --------------------------------------------------------------------------- #
+localize:
+  n_runs: 20
+  fs: 500
+  duration_s: 6.0
+  speed_mps: 6.0
+  uwb_rate_hz: [0, 1, 2, 5, 10, 20]
+  uwb_sigma_m: 0.10
+  imu_grades:
+    sport:   {acc_noise_g: 0.08, gyr_noise_dps: 0.5, gyr_bias_dps: 0.5}
+    consumer: {acc_noise_g: 0.03, gyr_noise_dps: 0.3, gyr_bias_dps: 2.0}
+  line_distances_m: [0.1, 0.25, 0.5, 1.0]   # contact-to-line distance for the box call
+
+output_dir: results

@@ -1,0 +1,45 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Instrumented balls and officiating.} The connected ball
+\cite{fifa2022connected} embeds a 500\,Hz IMU whose impact detection, fused
+with optical limb tracking, feeds semi-automated offside and has been used to
+adjudicate touches. Our ball-sensor model (a detected impact time with a
+clock-sync error and sample quantisation) is an abstraction of that device; the
+boot sensor is the missing complement.
+
+\paragraph{Kicking biomechanics.} Foot--ball contact in the instep kick lasts
+roughly 8--12\,ms with foot speeds of 15--25\,m/s \cite{nunome2006impact,
+lees1998biomechanics}; the foot decelerates by tens of $g$ over that interval,
+which is why impact-rated accelerometers ($\pm 200$\,g) are used in kicking
+studies and why a $\pm16$\,g consumer part clips. These figures set the ball
+template in our simulator.
+
+\paragraph{Inertial sensing and change detection.} Sensor error models (white
+noise, bias, bandwidth) follow the standard inertial-navigation treatment
+\cite{woodman2007introduction}. Onset estimation uses a threshold crossing
+with sub-sample interpolation and a matched filter on the pulse's rising edge
+\cite{turin1960introduction}; two-pulse separation is non-negative least
+squares \cite{lawson1974solving} over a lag grid with a BIC-like penalty for
+the second pulse.
+
+\paragraph{Activity recognition from wearable IMUs.} PAMAP2
+\cite{reiss2012introducing} provides ankle-mounted IMU recordings including
+running and playing football; we use it strictly as background under which
+synthetic contacts are injected. Gradient boosting \cite{friedman2001greedy}
+on hand-crafted features is the classical strong baseline for such windows.
+
+\paragraph{Calibrated probabilities and decisions.} Isotonic calibration
+\cite{zadrozny2002transforming}, the Brier score \cite{brier1950verification}
+and expected calibration error are the standard tools for asking whether a
+probability is honest; stacked generalisation \cite{wolpert1992stacked} is the
+standard fix when naively fused sources are correlated. The decision rule is
+Bayes-optimal thresholding under asymmetric costs with an abstention band,
+which is how a video-review protocol is naturally formalised.
+
+\paragraph{Foot-mounted navigation.} Zero-velocity updates during stance make
+shoe-mounted inertial navigation drift linearly rather than cubically
+\cite{foxlin2005pedestrian, skog2010zero}; ultra-wideband anchors bound the
+remaining drift \cite{alarifi2016ultra}. We combine both in a small Kalman
+filter \cite{kalman1960new} and score the error where it matters: at the
+contact, against a line on the pitch.

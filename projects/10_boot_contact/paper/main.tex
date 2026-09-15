@@ -1,0 +1,67 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Who Touched First? Detecting, Ordering and Placing Boot--Ball and
+Boot--Player Contacts from a Shoe-Mounted Inertial Sensor}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{September 14, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent The connected match ball detects the instant it is struck from an
+inertial sensor suspended at its centre. A foul is decided by the other half of
+that event: what the boot hit, and in which order. We ask whether a
+boot-mounted inertial measurement unit (IMU) can supply that half. Because no
+public recording of instrumented fouls exists, we build a physics-based
+simulator of the boot's signal --- a running gait with foot strikes, a short
+stiff ball impact with post-impact ringing, a longer softer oblique player
+contact with a push tail, and their near-simultaneous superposition --- passed
+through a sensor model (bandwidth, noise, bias, full-scale clipping, sampling
+rate), with real ankle-IMU recordings of walking, running and playing football
+(PAMAP2) as an alternative background. Four results follow. (i) A
+gradient-boosting classifier on interpretable pulse features separates
+\{none, ball, player, both\} at macro-F1 \DetGbFBest\ on synthetic and
+\DetPamGbSport\ on real background, against \DetThrFMin--\DetThrFMax\ for the
+ball-style threshold rule; a $\pm16$\,g phone-grade part clips
+\DetConsClipPct\% of ball impacts yet still reaches \DetConsFBest. (ii) The
+ball-contact onset is timed to \TimBallOneK\,ms at 1\,kHz (\TimBallHundred\,ms
+at 100\,Hz), and combining it with the ball's own sensor orders a ball contact
+and a player contact correctly at $\geq 90$\% once they are
+\OrdGapNinetyOneK\,ms apart. (iii) In the anomalous case where the boot hits
+ball and opponent inside one pulse width, a two-template non-negative
+least-squares separator recovers the order in \OvlAccTen\ of cases at 10\,ms
+and \OvlAccTwenty\ at 20\,ms, but is at chance below 3\,ms --- a physical
+limit, not an algorithmic one. (iv) Fusing boot posterior, ball-sensor timing,
+separator order and a knowledge base of situational base rates in a
+calibrated stacked model yields a \emph{probability} that the ball was played
+first with accuracy \DecStackAcc\ and Brier score \DecStackBrier\ (prior
+alone: \DecPriorAcc\ / \DecPriorBrier), from which a cost-weighted rule with a
+review band decides fouls at \DecErrDecided\% error while referring
+\DecReviewRate\% of cases. Finally, foot-mounted inertial navigation with
+zero-velocity updates and sparse ultra-wideband fixes places the contact
+within \LocUwbTenSport\,m at 10\,Hz, enough to make a penalty-area call
+wrong with probability \LocWrongQuarterTen\% at 25\,cm from the line. The
+pipeline is configuration-driven and reproduces in minutes on a laptop.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_method.tex}
+\input{sections/04_detection.tex}
+\input{sections/05_decision.tex}
+\input{sections/06_localize.tex}
+\input{sections/07_conclusion.tex}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

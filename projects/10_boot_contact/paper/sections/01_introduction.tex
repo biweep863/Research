@@ -1,0 +1,60 @@
+\section{Introduction}
+\label{sec:intro}
+
+Modern football already instruments one of the two bodies in every contact.
+The match ball used at the 2022 World Cup carries an inertial sensor suspended
+at its centre, sampled at 500\,Hz, whose sudden change of acceleration marks
+the instant the ball is touched; that timestamp, fused with limb tracking from
+cameras, is what made semi-automated offside possible and what settled whether
+a striker's head had grazed a goal-bound cross \cite{fifa2022connected}. The
+ball, in other words, knows \emph{when} it was hit. It does not know
+\emph{what} hit it, nor whether the boot that hit it had struck an opponent a
+few milliseconds earlier --- which is precisely the question a referee must
+answer to call a foul.
+
+This paper asks whether the other body in the contact can be instrumented in
+the same spirit. A small IMU in the boot (in the heel counter or under the
+insole) sees every impact the foot delivers. Three signatures matter: the
+\emph{ball}, a short, hard, forward-axis deceleration (foot--ball contact lasts
+about ten milliseconds \cite{nunome2006impact}) followed by a high-frequency
+ringing from the stiff boot--ball interface; the \emph{player}, a longer,
+softer, oblique pulse as soft tissue compresses, followed by a low-frequency
+push as the bodies keep moving into each other; and the \emph{ground}, a
+periodic, mostly vertical foot strike that is the boot's normal background.
+The interesting --- and contested --- case is the fourth: the boot hits ball and
+opponent almost at once, and the call turns on which came first.
+
+We treat this as a measurement problem with a decision-theoretic ending, and
+we answer it by simulation. There is no public dataset of instrumented fouls,
+so we build a physics-based generator for the boot's signal and pass it through
+an explicit sensor model, using real ankle-IMU recordings of walking, running
+and playing football \cite{reiss2012introducing} as an alternative background
+to check that the synthetic gait is not doing the work. The study then runs in
+four stages:
+
+\begin{enumerate}
+\item \textbf{Detection.} Can the boot tell ball from player from ground, and
+  at what sampling rate and sensor grade? We compare the threshold logic of a
+  connected ball (``a sudden change of the acceleration vector'') with a
+  gradient-boosting classifier on interpretable pulse features.
+\item \textbf{Timing and ordering.} How precisely is a contact onset timed,
+  and --- combining the boot with the ball's own sensor --- how far apart must a
+  ball contact and a player contact be for their order to be recovered?
+\item \textbf{The anomalous overlap.} When both pulses fall inside one pulse
+  width, a two-template non-negative least-squares fit separates them; we map
+  where it works and where the physics says nothing can.
+\item \textbf{The probabilistic call.} A knowledge base of situational base
+  rates (how often a sliding tackle plays the ball first) is fused with the
+  boot posterior, the ball-sensor timing and the separator's order into a
+  calibrated probability that the ball was played first, and a cost-weighted
+  rule with a video-review band decides.
+\end{enumerate}
+A fifth section places the contact in space: foot-mounted inertial navigation
+with zero-velocity updates \cite{foxlin2005pedestrian} and sparse
+ultra-wideband anchor fixes, evaluated as the probability of putting a contact
+on the wrong side of the penalty-area line.
+
+Our contribution is a quantified map of what a boot sensor can and cannot
+settle, not a product. The numbers are specific to a simulator whose
+assumptions we state and whose knobs we expose; every figure and every number
+in the text regenerates from one command.

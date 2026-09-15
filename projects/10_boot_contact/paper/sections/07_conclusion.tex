@@ -1,0 +1,39 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations.} Everything here is simulated. The templates are
+half-sine pulses with parameters taken from kicking biomechanics, not measured
+boot signals from tackles; real player contacts come in more shapes (a shin, a
+stud on an ankle, a shoulder that never reaches the foot), some fouls involve
+no foot contact at all, and the boot sensor sees nothing of holding, pushing or
+simulation. The real PAMAP2 background guards against an easy synthetic gait
+but it is 100\,Hz ankle data, not a boot at 1\,kHz in a match. The knowledge
+base of situational base rates is illustrative; a deployed system would learn
+it from adjudicated matches, and it would also learn the templates and the
+separator's penalty. The ball-sensor model abstracts a real device to an onset
+time with a 1\,ms clock offset; the actual figure sets the floor of the
+ordering curve directly, so it deserves measurement. The localisation study
+uses an idealised trajectory and a linear filter with no multipath or
+non-line-of-sight on the UWB. Every one of these is a configuration knob or a
+data swap, not a redesign, and the \texttt{gpu\_full} configuration scales the
+sweeps and case counts by an order of magnitude.
+
+\paragraph{Conclusion.} A boot-mounted IMU can supply the half of the contact
+event that the connected ball cannot. The boot reliably tells ball from
+player from ground (macro-F1 $\approx$ \DetGbFBest\ synthetic,
+\DetPamGbSport\ on real background), and it does so with a phone-grade sensor
+once the sampling rate is high enough. It times the ball contact to
+\TimBallOneK\,ms, which --- with the ball's own clock --- orders a ball touch and
+a player touch at 90\% once they are \OrdGapNinetyOneK\,ms apart. In the
+contested overlap the two-template separator recovers the order down to
+about one ball-pulse duration (\OvlAccTen\ at 10\,ms) and is at chance below
+3\,ms; that boundary is physics, and a referee's technology should report it
+as such --- as a probability near one half --- rather than as a verdict. The
+calibrated stacked fusion does exactly that, reaching \DecStackAcc\ accuracy
+and Brier \DecStackBrier\ against a base-rate prior at \DecPriorAcc, and it
+turns the cost of a false foul versus a missed foul into a threshold and a
+review band rather than a retraining. Finally, ZUPT-aided inertial navigation
+with a few UWB fixes per second places the contact to about a tenth of a
+metre, enough for the penalty-area line except within a boot's width of it.
+The instrumented ball told us \emph{when}; the instrumented boot can tell us
+\emph{what}, \emph{in which order}, \emph{how sure}, and \emph{where}.

@@ -1,0 +1,96 @@
+project: boot_contact
+seed: 0
+
+# Full-scale configuration. Pure numpy/sklearn on CPU still runs it (just
+# slower); the name mirrors the other projects' convention for the "big"
+# config. More windows per class, finer sweeps, more localisation runs, and
+# the complete PAMAP2 background (all five subjects).
+sim:
+  sim_rate: 8000
+  window_s: 0.8
+  gait:
+    cadence_hz: [2.2, 3.4]
+    strike_peak_g: [5.0, 16.0]
+    strike_dur_ms: [22.0, 45.0]
+  ball:
+    peak_g: [40.0, 160.0]
+    dur_ms: [6.0, 14.0]
+    ring_hz: [120.0, 300.0]
+    ring_decay_ms: [6.0, 25.0]
+  player:
+    peak_g: [5.0, 60.0]
+    dur_ms: [15.0, 70.0]
+    push_g: [0.3, 4.0]
+    push_ms: [50.0, 200.0]
+  both:
+    gap_ms: [-60.0, 60.0]
+
+sensors:
+  sport:
+    range_g: 200.0
+    acc_noise_g: 0.08
+    gyr_noise_dps: 0.5
+    bias_g: 0.02
+    bandwidth_frac: 0.45
+  consumer:
+    range_g: 16.0
+    acc_noise_g: 0.03
+    gyr_noise_dps: 0.3
+    bias_g: 0.02
+    bandwidth_frac: 0.45
+  ball:
+    fs_hz: 500
+    range_g: 200.0
+    acc_noise_g: 0.10
+    sync_jitter_ms: 1.0
+
+detect:
+  n_per_class: 2000
+  fs_grid: [100, 200, 400, 500, 800, 1000, 2000]
+  sensors: ["sport", "consumer"]
+  backgrounds: ["synthetic", "pamap2"]
+  pamap2_fs: 100
+  test_frac: 0.3
+  gb_max_iter: 500
+
+timing:
+  n_events: 2000
+  fs_grid: [100, 200, 400, 500, 800, 1000, 2000]
+  noise_scale: [0.25, 0.5, 1.0, 2.0, 4.0, 8.0]
+  gap_grid_ms: [0.5, 1, 2, 3, 5, 8, 10, 15, 20, 30, 40, 60]
+
+overlap:
+  n_per_gap: 500
+  gap_grid_ms: [-60, -40, -30, -20, -15, -10, -8, -6, -4, -3, -2, -1, 0, 1, 2, 3, 4, 6, 8, 10, 15, 20, 30, 40, 60]
+  fs: 2000
+  sensor: sport
+  grid_step_ms: 0.5
+
+decision:
+  n_cases: 20000
+  fs: 1000
+  sensor: sport
+  situations:
+    standing_tackle: {prior_ball_first: 0.70, freq: 0.45}
+    sliding_tackle:  {prior_ball_first: 0.55, freq: 0.30}
+    fifty_fifty:     {prior_ball_first: 0.50, freq: 0.15}
+    late_challenge:  {prior_ball_first: 0.20, freq: 0.10}
+  cost_false_foul: 1.0
+  cost_missed_foul: 1.0
+  review_band: 0.15
+  calib_bins: 15
+
+localize:
+  n_runs: 200
+  fs: 1000
+  duration_s: 10.0
+  speed_mps: 7.0
+  uwb_rate_hz: [0, 0.5, 1, 2, 5, 10, 20, 50]
+  uwb_sigma_m: 0.10
+  imu_grades:
+    sport:    {acc_noise_g: 0.08, gyr_noise_dps: 0.5, gyr_bias_dps: 0.5}
+    consumer: {acc_noise_g: 0.03, gyr_noise_dps: 0.3, gyr_bias_dps: 2.0}
+    tactical: {acc_noise_g: 0.01, gyr_noise_dps: 0.05, gyr_bias_dps: 0.05}
+  line_distances_m: [0.05, 0.1, 0.25, 0.5, 1.0, 2.0]
+
+output_dir: results

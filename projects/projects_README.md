@@ -1,10 +1,10 @@
-# Research Program (Nine Papers)
+# Research Program (Ten Papers)
 
-Nine research projects, each with a runnable pipeline, real
+Ten research projects, each with a runnable pipeline, real
 experimental results, figures, two-column scientific paper, and full
-methodology documentation. Projects 1–6 study LLMs; projects 7–9 are
-computational studies of decision theory, planetary solar energy, and
-ray-tracing efficiency.
+methodology documentation. Projects 1–6 study LLMs; projects 7–10 are
+computational studies of decision theory, planetary solar energy,
+ray-tracing efficiency, and sensor-based foul detection in football.
 
 ## Layout
 ```
@@ -18,7 +18,8 @@ projects/
 ├── 06_topological_attention/     Persistent homology of attention graphs
 ├── 07_optimal_stopping/          The 37% rule, parking problem, and RL agents
 ├── 08_solar_harvest/             Planetary solar budget + ecosystem-aware harvesting
-└── 09_ray_budget/                Ray-tracing cost vs quality: BVH, instancing, LOD, sampling
+├── 09_ray_budget/                Ray-tracing cost vs quality: BVH, instancing, LOD, sampling
+└── 10_boot_contact/              Boot-mounted IMU: ball vs player contact, who touched first, P(foul), where
 ```
 
 See `PROJECT_TEMPLATE.md` for the structure and intake questions used to add a
@@ -64,3 +65,4 @@ config-driven.
 | 7 | Optimal stopping | 37% rule emerges only asymptotically; naive-37% regret up to 1602% on parking; Q-learning recovers optima to ~1.4% |
 | 8 | Solar harvest | Earth intercepts ~174,000 TW; deserts+rooftops beat world electricity 81×; scheduling harvest around each ecosystem's daily light budget unlocks up to 45% more energy at zero ecological cost |
 | 9 | Ray budget | BVH + instancing (the Zelda grass trick) cut intersection tests 134–149× at a bit-identical image; LOD and sample-budget+denoise trade measurable SSIM for another order of magnitude; full stack ~277× cheaper at SSIM 0.91 |
+| 10 | Boot contact | Boosting tells ball/player/both/none at F1 0.97 (0.91 on real ankle-IMU background); ball onset timed to 0.5 ms at 1 kHz; with the ball's clock, order is ≥90% right at 20 ms and chance below 3 ms; stacked Bayesian fusion gives P(ball first) at 0.944 acc / 0.038 Brier vs 0.667 for base rates; ZUPT + 10 Hz UWB places the boot to 0.12 m |
