@@ -1,0 +1,42 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations.} The sensing budget uses textbook closed forms:
+spherical-then-cylindrical spreading rather than a ray or parabolic-equation
+propagation model, a single sea state and shipping level, a generic Wenz
+spectrum rather than a measured deep-sea soundscape, and an eDNA plume with
+illustrative shedding and decay rates. The synthetic species are four
+parametric families; real deep-sea sound includes many mechanisms we did not
+model and many animals that make no sound at all, for which acoustics offers
+nothing and only cameras, eDNA or trawls apply. The real-data result is a
+pilot: \RealClips\ clips of \RealSpecies\ species, a CNN trained from scratch,
+three holdout draws; it demonstrates the gap to synthetic performance, not
+the ceiling of the method, and the scaled configuration replaces the
+from-scratch CNN by a pretrained audio embedding. Clustering uses one
+criterion (silhouette) whose failure at larger $U$ we report rather than
+tune away. The survey model assumes detections are independent Poisson
+events with rates proportional to abundance, and the habitat prior's
+reliability is a free parameter. All of these are configuration knobs or data
+swaps.
+
+\paragraph{Conclusion.} Nothing sees the abyss but sound. Sunlight, radar and
+radio are gone within metres to a few hundred metres of the surface even for
+an ideal detector, so no satellite will ever image a hadal animal; the
+satellite's contribution is bathymetry and surface productivity, a prior for
+where to look that is worth \SurGainNine\% more species per sensor budget
+when it is reliable and nothing when it is not. Low-frequency sound crosses
+the full water column --- a 180\,dB call at 50\,Hz is detectable at
+\RangeBaleenHyb\,km --- while quiet animals must be within metres of an in-situ
+camera or an eDNA sampler. Given sensors in the water, an open-set model can
+tell that a call belongs to no catalogued species: distance-based scores on a
+learned embedding reach AUROC \NovBestAuroc\ on a physically simulated
+soundscape, degrade gracefully with range and catalogue size, and let the
+flagged clips be grouped into a handful of candidate species when there are
+few of them. On real marine-mammal calls the same pipeline trained from
+scratch only reaches \RealBestAuroc, which locates the real bottleneck:
+discovery needs an embedding trained on far more bioacoustic data than the
+deep sea will ever supply on its own. And whatever the model, the statistics
+of rare species set the pace --- the probability that the next detection is
+new falls from \SurDiscTen\% to \SurDiscThousand\% between 10 and 1000
+sensor-hours. An AI can recognise the unknown; finding it is still a matter
+of where you drop the hydrophone, and for how long.

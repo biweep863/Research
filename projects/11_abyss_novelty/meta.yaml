@@ -1,0 +1,10 @@
+slug: abyss_novelty
+title: "Nothing Sees the Abyss but Sound: A Physical Sensing Budget and an Open-Set AI for Discovering Unknown Species Below 4,000 m"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Ocean"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "No satellite signal penetrates more than ~100 m of seawater, so the abyss can only be heard, sampled (eDNA) or visited; with a passive-sonar budget showing low-frequency sound reaches hadal depths, an open-set AI trained on known calls flags unknown species at AUROC ~0.9 on synthetic and real (Watkins) bioacoustics, clusters them into candidate new species, and Chao/Good-Turing estimates plus a satellite habitat prior say how many remain and where to spend sensor hours."
+pdf: "paper/main.pdf"
+created: "2026-09-15"

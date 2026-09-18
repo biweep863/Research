@@ -1,0 +1,43 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Ocean optics and remote sensing.} Diffuse attenuation coefficients
+of the Jerlov water types \cite{jerlov1976marine, solonenko2015inherent} set
+the penetration of sunlight; ocean-colour sensors integrate roughly one
+attenuation length. Satellite altimetry recovers bathymetry from the gravity
+signature of seafloor topography \cite{smith1997global}, which is how most
+seamounts are known --- a habitat prior, not an animal detector.
+
+\paragraph{Underwater acoustics.} The passive sonar equation, Thorp's
+absorption formula and the Wenz ambient-noise curves are textbook material
+\cite{urick1983principles, thorp1967analytic, wenz1962acoustic}. Low-frequency
+baleen calls are routinely detected at hundreds of kilometres on ocean-bottom
+hydrophones; deep-sea soundscapes are sparse and poorly characterised.
+
+\paragraph{Environmental DNA.} eDNA decays over hours to days and is
+transported by currents, so a sample integrates a footprint of hundreds of
+metres to kilometres \cite{harrison2019predicting}; it detects presence, not
+behaviour, and only for taxa with reference sequences --- a limitation for
+discovery that we return to.
+
+\paragraph{Bioacoustic machine learning.} The BEANS benchmark
+\cite{hagiwara2022beans} packages the Watkins Marine Mammal Sound Database
+with standard splits; strong results there rely on pretrained audio
+backbones. Our from-scratch CNN is deliberately minimal to keep the study
+reproducible on a laptop, and its weakness on real data is part of the
+result.
+
+\paragraph{Open-set recognition.} Max-softmax \cite{hendrycks2017baseline},
+energy \cite{liu2020energy}, Mahalanobis \cite{lee2018simple} and deep
+nearest-neighbour \cite{sun2022knn} scores are the standard families;
+reconstruction error from an autoencoder is the classifier-free alternative.
+Grouping the novel samples is open-world recognition \cite{bendale2015towards};
+we use agglomerative clustering with silhouette model selection and score it
+with the adjusted Rand index \cite{hubert1985comparing}.
+
+\paragraph{How many species remain.} Fisher's log-series
+\cite{fisher1943relation} describes communities with many rare species; Chao1
+\cite{chao1984nonparametric} and Good--Turing coverage
+\cite{good1953population} estimate unseen richness and the probability that
+the next sample is new. Allocating survey effort under uncertainty is a
+value-of-information problem; we use a greedy marginal-gain rule.

@@ -1,0 +1,69 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Nothing Sees the Abyss but Sound: A Physical Sensing Budget and an
+Open-Set AI for Discovering Unknown Species Below 4,000\,m}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{September 15, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Could satellites, or any remote sensor, reveal unknown animals in
+the abyssal and hadal ocean, and could an AI recognise a creature nobody has
+catalogued? We answer the first question with closed-form physics and the
+second with an open-set learning study. Seawater ends every remote modality
+within a few hundred metres: ocean-colour imagery integrates the top
+\OceanColourDepth\,m, an ideal noise-free two-way optical link would reach
+\OpticsReachI\,m in the clearest water, the skin depth of a 10\,GHz radar is
+\SkinRadar\,mm and even 3\,Hz submarine radio is attenuated to nothing by
+\ReachELF\,km. Only sound crosses the abyss: a 180\,dB baleen call at 50\,Hz is
+detectable at \RangeBaleenHyb\,km under deep-water spreading, a 210\,dB
+odontocete click at \RangeClick\,km, a 130\,dB fish chorus at \RangeFish\,m,
+while environmental DNA carries a signal \EdnaFootprint\,m downstream with a
+\EdnaMemory\,h memory and a bioluminescent flash is visible \BiolumRange\,m
+from an in-situ camera. The eyes must be in the water; the satellite's role is
+to say where to put them. We then simulate a deep-sea soundscape of parametric
+call families (tonal, click, drum, burst) with species-specific parameters,
+Thorp absorption and Wenz noise, train a small CNN on \NovNKnown\ known
+species and ask six novelty scores whether a held-out clip belongs to one of
+\NovNUnknown\ unknown species. Embedding-space scores (\NovBestScore,
+Mahalanobis) reach AUROC \NovBestAuroc\ (95\% CI
+\NovBestCiLo--\NovBestCiHi) where max-softmax gives \NovAurocMsp\ and an
+autoencoder \NovAurocAe; novelty degrades gracefully with range (SNR
+\NovSnrNear\ to \NovSnrFar\,dB: Mahalanobis \NovMahaNear\ to \NovMahaFar).
+Clustering the flagged clips recovers the true grouping of two or three new
+species (ARI \CluAriUTwo, \CluAriUThree) but merges larger sets. On real
+marine-mammal calls (Watkins, \RealSpecies\ species, six held out) a CNN
+trained from scratch on \RealClips\ clips reaches only \RealAcc\ known-class
+accuracy and \RealBestAuroc\ AUROC (\RealBestScore): real bioacoustics need
+pretrained audio embeddings, which we state as the scaled configuration.
+Finally, Chao1 tracks the unseen richness of a \SurS-species log-series
+community as sensor-hours grow, the Good--Turing probability that the next
+detection is a new species falls from \SurDiscTen\% at 10\,h to
+\SurDiscThousand\% at 1000\,h, and a greedy allocation of a fixed sensor
+budget over a satellite-derived habitat prior finds \SurGainNine\% more
+species than a uniform survey when the prior is 90\% right and none when it
+is a coin flip.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_budget.tex}
+\input{sections/04_method.tex}
+\input{sections/05_novelty.tex}
+\input{sections/06_survey.tex}
+\input{sections/07_conclusion.tex}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

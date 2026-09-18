@@ -1,0 +1,50 @@
+\section{Introduction}
+\label{sec:intro}
+
+The deep ocean is the largest habitat on Earth and the least catalogued. Below
+the abyssal boundary at 4,000\,m, and in the hadal trenches that reach
+11,000\,m, most expeditions still return with species new to science
+\cite{ramirez2010deep}. The question that motivates this paper is a natural
+one for the age of satellites and machine learning: \emph{could we find those
+species from above --- from orbit, or at least from a distance --- and could an
+AI recognise an animal that no one has ever described?}
+
+The first half of the question is a physics question, and we answer it before
+building anything. Seawater is opaque to almost everything a satellite can
+emit or receive. Sunlight is gone within a few hundred metres, radar and radio
+are absorbed within centimetres to metres, and gravity or magnetic anomalies
+respond to rock, not to animals. What a satellite \emph{can} see is the
+surface: temperature fronts, chlorophyll, and --- through the sea-surface
+height that gravity imposes --- the bathymetry of seamounts and trenches where
+life concentrates. Section~\ref{sec:budget} quantifies each modality with
+closed forms: Beer--Lambert attenuation for light, the skin depth for
+electromagnetic waves, the passive sonar equation with Thorp absorption and
+Wenz ambient noise for sound, and a shed--decay--transport plume for
+environmental DNA. One modality survives the trip: low-frequency sound. The
+eyes of a deep-sea discovery system must therefore be hydrophones, samplers
+and cameras in the water, and the satellite's job is to say where to put
+them.
+
+The second half is a learning question with an unusual twist. A classifier
+trained on known species will confidently assign a new species to the closest
+old one; discovery requires the model to say ``none of the above'' --- the
+\emph{open-set} recognition problem \cite{hendrycks2017baseline,
+lee2018simple, liu2020energy, sun2022knn}. Since no public recording of
+undescribed deep-sea animals exists (by definition), we build a simulator of a
+deep-sea soundscape: species are parametric call families with
+species-specific parameter distributions, propagated to a hydrophone with the
+physics of Section~\ref{sec:budget}. We train on $K$ known species, hold out
+$U$ unknown ones, and ask six novelty scores to separate them; we then cluster
+the clips flagged as novel and ask whether the clusters correspond to the
+unknown species --- the step from ``something new'' to ``how many new
+things''. To keep the simulator honest we run the same pipeline on real
+marine-mammal recordings from the Watkins database in the BEANS packaging
+\cite{hagiwara2022beans}.
+
+The last section closes the loop with survey statistics: given detections,
+how many species remain unseen (Chao1, Good--Turing \cite{chao1984nonparametric,
+good1953population}), and how should a fixed budget of sensor-hours be spread
+over sites when a satellite-derived habitat prior is only sometimes right? The
+paper's contribution is thus a quantified map --- what can be sensed, what can
+be recognised as new, and where to look --- rather than a claim of discovery;
+every number regenerates from one command.

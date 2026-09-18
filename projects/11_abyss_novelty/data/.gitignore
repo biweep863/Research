@@ -1,0 +1,4 @@
+# Raw BEANS-Watkins parquet shards (hundreds of MB) stay out of git; the small log-mel cache is kept.
+raw/
+*.parquet
+!watkins_mel.npz

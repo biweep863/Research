@@ -1,0 +1,227 @@
+{
+  "available": true,
+  "n_clips": 796,
+  "n_species": 29,
+  "species": [
+    "Atlantic_Spotted_Dolphin",
+    "Bearded_Seal",
+    "Beluga,_White_Whale",
+    "Bottlenose_Dolphin",
+    "Bowhead_Whale",
+    "Clymene_Dolphin",
+    "Common_Dolphin",
+    "False_Killer_Whale",
+    "Fin,_Finback_Whale",
+    "Frasers_Dolphin",
+    "Grampus,_Rissos_Dolphin",
+    "Harp_Seal",
+    "Humpback_Whale",
+    "Long-Finned_Pilot_Whale",
+    "Melon_Headed_Whale",
+    "Minke_Whale",
+    "Narwhal",
+    "Northern_Right_Whale",
+    "Pantropical_Spotted_Dolphin",
+    "Ross_Seal",
+    "Rough-Toothed_Dolphin",
+    "Short-Finned_Pacific_Pilot_Whale",
+    "Southern_Right_Whale",
+    "Sperm_Whale",
+    "Spinner_Dolphin",
+    "Striped_Dolphin",
+    "Walrus",
+    "White-beaked_Dolphin",
+    "White-sided_Dolphin"
+  ],
+  "rows": [
+    {
+      "msp": {
+        "auroc": 0.740673111349803,
+        "aupr": 0.6263084902515712,
+        "fpr95": 0.7714285714285715
+      },
+      "energy": {
+        "auroc": 0.7287146437522377,
+        "aupr": 0.603805184665251,
+        "fpr95": 0.861904761904762
+      },
+      "knn": {
+        "auroc": 0.5316147511636233,
+        "aupr": 0.4236719101900778,
+        "fpr95": 0.9047619047619048
+      },
+      "maha": {
+        "auroc": 0.4166129609738632,
+        "aupr": 0.4037316603742122,
+        "fpr95": 0.9619047619047619
+      },
+      "ae": {
+        "auroc": 0.3057286072323666,
+        "aupr": 0.2889453160394668,
+        "fpr95": 0.9952380952380953
+      },
+      "pca_msp": {
+        "auroc": 0.6711779448621553,
+        "aupr": 0.5361261267031029,
+        "fpr95": 0.8571428571428571
+      },
+      "known_acc_cnn": 0.5190476190476191,
+      "known_acc_pca": 0.5095238095238095,
+      "cluster": {
+        "n_flagged": 22,
+        "frac_flagged_unknown": 0.5,
+        "k_hat": 6,
+        "k_true": 2,
+        "ari": 0.2524271844660194,
+        "silhouette": 0.5241367220878601
+      },
+      "draw": 0,
+      "unknown_species": [
+        "Beluga,_White_Whale",
+        "Rough-Toothed_Dolphin",
+        "Narwhal",
+        "Fin,_Finback_Whale",
+        "Pantropical_Spotted_Dolphin",
+        "Bottlenose_Dolphin"
+      ],
+      "n_train": 453,
+      "n_test_known": 210,
+      "n_test_unknown": 133
+    },
+    {
+      "msp": {
+        "auroc": 0.5966222537664936,
+        "aupr": 0.4536523214258446,
+        "fpr95": 0.8878923766816144
+      },
+      "energy": {
+        "auroc": 0.5512630254540762,
+        "aupr": 0.4071016659785621,
+        "fpr95": 0.9417040358744395
+      },
+      "knn": {
+        "auroc": 0.6014614317514598,
+        "aupr": 0.4420536218984593,
+        "fpr95": 0.7982062780269058
+      },
+      "maha": {
+        "auroc": 0.5332290221634352,
+        "aupr": 0.4731426482610392,
+        "fpr95": 0.8878923766816144
+      },
+      "ae": {
+        "auroc": 0.4882569280898152,
+        "aupr": 0.44710655699274854,
+        "fpr95": 0.9013452914798207
+      },
+      "pca_msp": {
+        "auroc": 0.5785559892892861,
+        "aupr": 0.4573906255096114,
+        "fpr95": 0.9551569506726457
+      },
+      "known_acc_cnn": 0.547085201793722,
+      "known_acc_pca": 0.49327354260089684,
+      "cluster": {
+        "n_flagged": 19,
+        "frac_flagged_unknown": 0.3684210526315789,
+        "k_hat": 2,
+        "k_true": 3,
+        "ari": 0.015861875350926445,
+        "silhouette": 0.5225796699523926
+      },
+      "draw": 1,
+      "unknown_species": [
+        "Sperm_Whale",
+        "Frasers_Dolphin",
+        "False_Killer_Whale",
+        "Bottlenose_Dolphin",
+        "Southern_Right_Whale",
+        "Pantropical_Spotted_Dolphin"
+      ],
+      "n_train": 434,
+      "n_test_known": 223,
+      "n_test_unknown": 139
+    },
+    {
+      "msp": {
+        "auroc": 0.743674514600214,
+        "aupr": 0.5636120946353212,
+        "fpr95": 0.7677725118483413
+      },
+      "energy": {
+        "auroc": 0.7303737960556489,
+        "aupr": 0.6334782955185942,
+        "fpr95": 0.8056872037914692
+      },
+      "knn": {
+        "auroc": 0.6225921112979667,
+        "aupr": 0.45668434324207297,
+        "fpr95": 0.8672985781990521
+      },
+      "maha": {
+        "auroc": 0.5294488610304235,
+        "aupr": 0.39519190471538446,
+        "fpr95": 0.9052132701421801
+      },
+      "ae": {
+        "auroc": 0.46168399327319987,
+        "aupr": 0.3396006714401845,
+        "fpr95": 0.8862559241706162
+      },
+      "pca_msp": {
+        "auroc": 0.5853653875554196,
+        "aupr": 0.4378079996174329,
+        "fpr95": 0.9383886255924171
+      },
+      "known_acc_cnn": 0.6161137440758294,
+      "known_acc_pca": 0.4834123222748815,
+      "cluster": {
+        "n_flagged": 21,
+        "frac_flagged_unknown": 0.47619047619047616,
+        "k_hat": 9,
+        "k_true": 3,
+        "ari": 0.6296296296296297,
+        "silhouette": 0.5349534153938293
+      },
+      "draw": 2,
+      "unknown_species": [
+        "Minke_Whale",
+        "Common_Dolphin",
+        "Melon_Headed_Whale",
+        "Grampus,_Rissos_Dolphin",
+        "Sperm_Whale",
+        "Bottlenose_Dolphin"
+      ],
+      "n_train": 461,
+      "n_test_known": 211,
+      "n_test_unknown": 124
+    }
+  ],
+  "summary": {
+    "msp": {
+      "auroc_mean": 0.6936566265721701,
+      "auroc_std": 0.06862460314256187
+    },
+    "energy": {
+      "auroc_mean": 0.6701171550873211,
+      "auroc_std": 0.08404529054721462
+    },
+    "knn": {
+      "auroc_mean": 0.5852227647376832,
+      "auroc_std": 0.03887579147354419
+    },
+    "maha": {
+      "auroc_mean": 0.4930969480559073,
+      "auroc_std": 0.05410435974129134
+    },
+    "ae": {
+      "auroc_mean": 0.41855650953179396,
+      "auroc_std": 0.08051555489120865
+    },
+    "pca_msp": {
+      "auroc_mean": 0.611699773902287,
+      "auroc_std": 0.042149192097715615
+    }
+  },
+  "known_acc_mean": 0.5607488549723901
+}

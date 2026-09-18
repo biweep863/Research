@@ -1,0 +1,107 @@
+{
+  "n_species": 300,
+  "alpha": 40.0,
+  "accumulation": [
+    {
+      "hours": 1,
+      "s_obs": 4.633333333333334,
+      "chao1": 11.275,
+      "chao1_se": 8.376154375467605,
+      "discovery_prob": 0.6405627705627706,
+      "frac_seen": 0.015444444444444446
+    },
+    {
+      "hours": 3,
+      "s_obs": 10.4,
+      "chao1": 33.60833333333333,
+      "chao1_se": 25.554697366533286,
+      "discovery_prob": 0.42427762286844933,
+      "frac_seen": 0.034666666666666665
+    },
+    {
+      "hours": 10,
+      "s_obs": 21.933333333333334,
+      "chao1": 47.28374999999999,
+      "chao1_se": 20.97411424081492,
+      "discovery_prob": 0.1944934726484304,
+      "frac_seen": 0.07311111111111111
+    },
+    {
+      "hours": 30,
+      "s_obs": 39.06666666666667,
+      "chao1": 77.3194708994709,
+      "chao1_se": 26.60301042039914,
+      "discovery_prob": 0.10336597867309244,
+      "frac_seen": 0.13022222222222224
+    },
+    {
+      "hours": 100,
+      "s_obs": 64.16666666666667,
+      "chao1": 95.00539368039367,
+      "chao1_se": 17.708290450593026,
+      "discovery_prob": 0.03832851205125692,
+      "frac_seen": 0.2138888888888889
+    },
+    {
+      "hours": 300,
+      "s_obs": 90.4,
+      "chao1": 123.13173680486179,
+      "chao1_se": 17.384183755276176,
+      "discovery_prob": 0.014524768757805931,
+      "frac_seen": 0.30133333333333334
+    },
+    {
+      "hours": 1000,
+      "s_obs": 125.0,
+      "chao1": 159.51955962710605,
+      "chao1_se": 16.95513018417983,
+      "discovery_prob": 0.004900295376974342,
+      "frac_seen": 0.4166666666666667
+    },
+    {
+      "hours": 3000,
+      "s_obs": 157.0,
+      "chao1": 190.84761588758107,
+      "chao1_se": 16.3285757421696,
+      "discovery_prob": 0.0016706330663004054,
+      "frac_seen": 0.5233333333333333
+    }
+  ],
+  "allocation": [
+    {
+      "prior_quality": 0.5,
+      "species_greedy": 83.6,
+      "species_uniform": 84.025,
+      "gain_pct": -0.5058018446890911
+    },
+    {
+      "prior_quality": 0.7,
+      "species_greedy": 88.2,
+      "species_uniform": 86.95,
+      "gain_pct": 1.4376078205865506
+    },
+    {
+      "prior_quality": 0.9,
+      "species_greedy": 98.95,
+      "species_uniform": 87.925,
+      "gain_pct": 12.539095820301394
+    },
+    {
+      "prior_quality": 1.0,
+      "species_greedy": 99.15,
+      "species_uniform": 84.4,
+      "gain_pct": 17.476303317535535
+    }
+  ],
+  "habitats": {
+    "seamount": {
+      "richness": 300,
+      "area_frac": 0.15
+    },
+    "plain": {
+      "richness": 60,
+      "area_frac": 0.85
+    }
+  },
+  "budget_hours": 300
+}
