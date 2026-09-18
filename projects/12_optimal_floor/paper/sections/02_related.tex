@@ -1,0 +1,33 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Elevator traffic analysis.} The engineering of lifts has a mature
+literature on round-trip time, handling capacity and interval --- how many
+cars a building needs and how long people wait --- codified in CIBSE Guide D
+\cite{cibse2020guide} and the treatments of Barney and Al-Sharif
+\cite{barney2015elevator} and Strakosch \cite{strakosch2010vertical}. Those
+analyses take the population's floor distribution as given and size the
+system; we hold the system fixed and ask the passenger's question. The
+kinematic model (rated speed, acceleration, door and transfer times) and the
+collective-control logic we simulate come from that literature.
+
+\paragraph{Facility location on a line.} Minimising expected distance to a
+random point on a line is the 1-median problem, solved by the median of the
+destination distribution \cite{hakimi1964optimum}; a fixed ``retrieval''
+cost that depends on where a server is parked turns it into a location problem
+with a mobile server, close in spirit to the analysis of where to park a
+single ambulance or repair vehicle \cite{larson1974hypercube}. Our closed
+form is the 1-median with the elevator's parking position added to the
+distance.
+
+\paragraph{Stairs versus elevator.} Studies of stair use in buildings measure
+walking speeds per flight and the reluctance to climb more than a few floors
+\cite{fujiyama2010ascending}; the asymmetry between ascending and descending
+speeds is well documented and is what motivated our stairs model.
+
+\paragraph{Simulation of elevator systems.} Discrete-event simulation is the
+standard tool for evaluating dispatch and group control
+\cite{siikonen1993elevator}; our simulator is a minimal member of that family
+(collective control, nearest-car dispatch, capacity), chosen so that it can be
+validated exactly against the closed form at zero traffic and so that every
+effect we report can be traced to a single mechanism.

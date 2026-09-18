@@ -1,0 +1,46 @@
+\section{Introduction}
+\label{sec:intro}
+
+Ask which floor of a tall building is the best place to be based --- the flat
+you rent, the office you are assigned --- and the reflexive answer is ``the
+middle''. The reasoning is the one-median on a line: if destinations are
+spread uniformly over the floors, the median floor minimises the expected
+distance to them. It is a clean argument, and it is wrong for most buildings,
+because it treats the elevator as a distance. An elevator is a mechanism. When
+you press the button the car is somewhere else --- at the lobby where the
+controller parked it, or wherever it dropped its last passenger --- and it has
+to come to you before it can take you anywhere. Most of your trips do not go
+to a random floor at all: you leave the building and come back, so the lobby
+is the destination or origin of the majority of them. Other people are using
+the same car, and each of them adds a stop to your ride. And when you live on
+the second floor you do not call the elevator to go down --- you take the
+stairs, which is fast, whereas climbing back up is not.
+
+This paper treats the question as a facility-location problem with a
+mechanism inside it and answers it quantitatively. We write the expected trip
+time of a resident on floor $h$ as a function of the lobby-trip fraction
+$\alpha$, the elevator's kinematics (rated speed, acceleration, door and
+transfer times), its idle parking policy (return to the lobby, stay put, park
+in the middle, or --- the heavy-traffic limit --- be anywhere), the background
+passenger rate, the number of cars, and the stairs. For one car and no traffic
+the expectation has a closed form; for everything else we run a discrete-event
+simulator with collective control and nearest-car dispatch, validated against
+the closed form at zero traffic. The objective is the mean trip time, but we
+also report the 90th percentile, the \emph{regret} of a floor (how much worse
+than the best), and an \emph{indifference band} (the floors within 5\% of the
+best), because the practical question is as much ``does it matter?'' as
+``which floor?''.
+
+Four findings organise the paper. (i) The middle-floor answer holds only in
+the corner where no trip goes to the lobby and the car waits where you left
+it; with lobby trips and lobby parking the optimum drops to the lowest
+residential floor and the middle floor is far from indifferent. (ii)
+Background traffic flattens the curve but does not move the optimum up until
+the car is saturated, where an unexpected effect appears: on a loaded car the
+low floors are the last to be served on the down sweep, so the optimum drifts
+upward. (iii) Stairs shift the optimum upward by absorbing short trips, but
+the asymmetry between walking down and climbing up, which we expected to be
+the driver, contributes little. (iv) More cars make every floor faster and
+make the choice of floor matter \emph{more}, not less, because what is left
+of the trip is the ride, which is distance. A map over lobby fraction and load
+turns these into a rule of thumb.

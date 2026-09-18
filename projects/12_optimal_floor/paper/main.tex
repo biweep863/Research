@@ -1,0 +1,66 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Up or Down? The Optimal Floor to Live On When the Elevator Has to
+Come and Get You}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{September 18, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Which floor of a building minimises the time you spend getting
+around it? The textbook answer is the middle floor: the median minimises
+expected distance to a uniformly random destination. But an elevator is not a
+distance --- it is a car that has to come and get you from wherever it was
+left, most trips start or end at the lobby, other passengers add stops along
+the way, and for a floor or two the stairs beat waiting. We formalise the
+question as a facility-location problem with a mechanism, solve it in closed
+form for one car and no traffic, and validate a discrete-event simulator with
+real kinematics, collective control, nearest-car dispatch, Poisson background
+traffic, several cars and a stairs option against it (mean error
+\TraValidErr\%). The middle-floor intuition survives only when nobody goes to
+the lobby and the car waits where you left it (optimum floor
+\AnaMiddleLastZero\ of \CurveN); as soon as a quarter of trips go to the lobby
+and the car parks there, the optimum drops to floor \AnaLobbyQuarter, and at
+a residential mix ($\alpha = 0.9$) the middle floor costs
+\AnaRegretMidNineLobby\% more time than the best floor and the top floor
+\AnaRegretTopNineLobby\%. Background traffic does not restore the middle: at
+moderate load the optimum stays low while the curve flattens (regret of the
+middle \TraRegMidTwo\% at 2 passengers/min), and only at saturation does the
+optimum drift upward (floor \TraHFour\ at 4/min), because a car sweeping
+under load serves the low floors last on its way down. Stairs cut the best
+floor's trip time from \StaBestNone\ to \StaBestOn\,s by absorbing
+\StaWalked\% of trips, and in a lobby-free building they move the closed-form
+optimum up from floor \StaAnaZeroNone\ to \StaAnaZeroOn\ --- but the
+up/down asymmetry itself barely matters. A bigger fleet lowers every floor's
+time yet makes the choice matter \emph{more} in relative terms (regret of the
+middle \FleRegMidOne\% $\to$ \FleRegMidFour\% from one to four cars), because
+what remains is ride distance. Across a map of lobby fraction and load,
+\RobCellsFloorTwo\ of \RobCells\ settings put the optimum on the lowest
+residential floor; the middle floor is within 5\% of optimal only when
+lobby trips are rare. The practical rule: if you leave the building more than
+you move within it, live as low as you can, and the elevator's parking policy
+matters as much as the height.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_model.tex}
+\input{sections/04_closed_form.tex}
+\input{sections/05_traffic.tex}
+\input{sections/06_map.tex}
+\input{sections/07_conclusion.tex}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,87 @@
+project: optimal_floor
+seed: 0
+
+# Elevator kinematics (CIBSE Guide D typical mid-rise values).
+kinematics:
+  v: 1.6            # rated speed, m/s
+  a: 1.0            # acceleration, m/s^2
+  floor_h: 3.3      # floor-to-floor, m
+  t_door: 4.0       # door open + close, s
+  t_pass: 1.2       # transfer time per passenger, s
+
+# --------------------------------------------------------------------------- #
+# Experiment 1: closed form, one car, no traffic
+# --------------------------------------------------------------------------- #
+analytic:
+  n_floors_grid: [10, 20, 40]
+  alpha_grid: [0.0, 0.25, 0.5, 0.75, 0.9, 1.0]
+  parking: ["lobby", "middle", "last", "random"]
+  curve_n_floors: 20            # building used for the curves figure
+
+# Shared discrete-event settings.
+sim:
+  horizon_s: 14400              # 4 h of building time per run
+  warmup_s: 600
+  trip_interval_s: 120          # resident probes the system every ~2 min
+  capacity: 10
+
+# --------------------------------------------------------------------------- #
+# Experiment 2: background traffic, one car
+# --------------------------------------------------------------------------- #
+traffic:
+  n_floors: 20
+  alpha: 0.7
+  n_cars: 1
+  rate_grid: [0.0, 0.5, 1.0, 2.0, 4.0]   # background passengers per minute
+  parking_grid: ["lobby", "last"]
+  reps: 4
+
+# --------------------------------------------------------------------------- #
+# Experiment 3: stairs with up/down asymmetry
+# --------------------------------------------------------------------------- #
+stairs:
+  n_floors: 20
+  alpha: 0.7
+  n_cars: 1
+  parking: "lobby"
+  rate: 1.0
+  reps: 4
+  variants:
+    - {name: "none", enabled: false}
+    - {name: "15/10, climb<=3", t_up: 15.0, t_down: 10.0, max_climb: 3}
+    - {name: "20/10, climb<=3", t_up: 20.0, t_down: 10.0, max_climb: 3}
+    - {name: "12/12, climb<=3", t_up: 12.0, t_down: 12.0, max_climb: 3}
+    - {name: "15/10, any climb", t_up: 15.0, t_down: 10.0, max_climb: 100}
+    - {name: "15/10, down only", t_up: 15.0, t_down: 10.0, max_climb: 0}
+
+# --------------------------------------------------------------------------- #
+# Experiment 4: fleet size
+# --------------------------------------------------------------------------- #
+fleet:
+  n_floors: 20
+  alpha: 0.7
+  parking: "lobby"
+  cars_grid: [1, 2, 4]
+  rate_per_car: 1.5             # background load scales with the fleet
+  reps: 4
+
+# --------------------------------------------------------------------------- #
+# Experiment 5: the (alpha, traffic) map and two archetypes
+# --------------------------------------------------------------------------- #
+robust:
+  n_floors: 15
+  alpha_grid: [0.0, 0.25, 0.5, 0.75, 0.9, 1.0]
+  rate_grid: [0.0, 1.0, 2.0, 4.0]
+  n_cars: 1
+  parking: "lobby"
+  stairs: {t_up: 15.0, t_down: 10.0, max_climb: 3}
+  reps: 3
+  horizon_s: 10800
+  trip_interval_s: 90
+  archetypes:
+    residential: {alpha: 0.9, rate: 1.0, n_cars: 1, n_floors: 20, parking: "lobby"}
+    office:      {alpha: 0.5, rate: 3.0, n_cars: 2, n_floors: 20, parking: "lobby"}
+    hospital:    {alpha: 0.2, rate: 3.0, n_cars: 2, n_floors: 12, parking: "middle"}
+  archetype_reps: 6
+
+output_dir: results

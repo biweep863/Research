@@ -1,0 +1,32 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations.} The building is a stylised one: uniform floor
+population, a single lobby, no express zones or sky lobbies, no time-of-day
+peaks, and a resident whose destinations are uniform over the other floors.
+The simulator implements collective control with nearest-car dispatch, not a
+modern destination-dispatch group controller, and its parking policies are
+the three textbook ones; real controllers learn where to park, which would
+move our ``lobby'' and ``random'' limits toward each other. The kinematics are
+mid-rise values (\KinV\,m/s), so the floor-by-floor run model coincides with
+the trapezoid; high-speed cars would need the exact profile, which the code
+provides. The stairs rule is deterministic on expectations and ignores effort,
+carrying things, and the building's actual stair placement. The resident's
+probing trips are frequent enough to perturb a loaded single car slightly.
+All of these are configuration knobs, and the accompanying full-scale
+configuration widens every grid.
+
+\paragraph{Conclusion.} The middle floor is the right answer to a question
+nobody asks --- where to be if every trip is to a random floor and the
+elevator is waiting outside your door. Once the elevator has to come and get
+you, the answer depends on where it waits; once most trips go to the lobby,
+the answer is the lowest floor you can get, by a margin that grows with the
+building and with the number of cars. Traffic blurs the curve but does not
+move the optimum up until the car is saturated, and there the effect that
+lifts it is a queueing one (the low floors are served last on the down sweep)
+rather than a geometric one. Stairs make the low floors better still and shift
+a lobby-free building's optimum upward by absorbing short trips, but the
+cost of climbing is not what does it. And the sense in which ``it does not
+matter'' is precise: the indifference band is one floor wide wherever lobby
+trips are common, and spans most of the building only where they are rare
+and the car is busy. Up or down? Down, unless you never leave.

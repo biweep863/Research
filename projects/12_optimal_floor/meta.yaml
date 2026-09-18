@@ -1,0 +1,10 @@
+slug: optimal_floor
+title: "Up or Down? The Optimal Floor to Live On When the Elevator Has to Come and Get You"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Decision"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "A closed-form model and a discrete-event elevator simulator show the 'middle floor' intuition only holds when nobody goes to the lobby and the car waits where you left it; with lobby trips, lobby parking and background traffic the optimum sinks toward the ground floor, stairs (cheap to descend) pull it back up a little, and more cars flatten the curve so that the choice matters less."
+pdf: "paper/main.pdf"
+created: "2026-09-18"

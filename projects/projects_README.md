@@ -1,8 +1,8 @@
-# Research Program (Eleven Papers)
+# Research Program (Twelve Papers)
 
-Eleven research projects, each with a runnable pipeline, real
+Twelve research projects, each with a runnable pipeline, real
 experimental results, figures, two-column scientific paper, and full
-methodology documentation. Projects 1–6 study LLMs; projects 7–11 are
+methodology documentation. Projects 1–6 study LLMs; projects 7–12 are
 computational studies of decision theory, planetary solar energy,
 ray-tracing efficiency, sensor-based foul detection in football, and
 deep-sea species discovery.
@@ -21,7 +21,8 @@ projects/
 ├── 08_solar_harvest/             Planetary solar budget + ecosystem-aware harvesting
 ├── 09_ray_budget/                Ray-tracing cost vs quality: BVH, instancing, LOD, sampling
 ├── 10_boot_contact/              Boot-mounted IMU: ball vs player contact, who touched first, P(foul), where
-└── 11_abyss_novelty/             What reaches the abyss (light/radio/sound/eDNA) + open-set AI for unknown species
+├── 11_abyss_novelty/             What reaches the abyss (light/radio/sound/eDNA) + open-set AI for unknown species
+└── 12_optimal_floor/             Optimal floor to live on: elevator mechanism, lobby trips, traffic, stairs, fleet
 ```
 
 See `PROJECT_TEMPLATE.md` for the structure and intake questions used to add a
@@ -69,3 +70,4 @@ config-driven.
 | 9 | Ray budget | BVH + instancing (the Zelda grass trick) cut intersection tests 134–149× at a bit-identical image; LOD and sample-budget+denoise trade measurable SSIM for another order of magnitude; full stack ~277× cheaper at SSIM 0.91 |
 | 10 | Boot contact | Boosting tells ball/player/both/none at F1 0.97 (0.91 on real ankle-IMU background); ball onset timed to 0.5 ms at 1 kHz; with the ball's clock, order is ≥90% right at 20 ms and chance below 3 ms; stacked Bayesian fusion gives P(ball first) at 0.944 acc / 0.038 Brier vs 0.667 for base rates; ZUPT + 10 Hz UWB places the boot to 0.12 m |
 | 11 | Abyss novelty | Nothing optical or radio passes ~0.6 km even with an ideal detector; low-frequency sound reaches >100 km; an open-set CNN flags unknown synthetic species at AUROC ~0.9 (Mahalanobis/kNN) but only ~0.7 on real Watkins calls from scratch; Chao1 tracks unseen richness and a good satellite habitat prior buys +13–17% species per sensor budget |
+| 12 | Optimal floor | Middle floor is optimal only with no lobby trips and a car that stays put; with lobby trips + lobby parking the lowest floor wins (middle costs +163 % at α=0.9); traffic flattens the curve, saturation drifts the optimum up; stairs help low floors, asymmetry irrelevant; more cars make the floor matter more (16 → 30 % regret) |

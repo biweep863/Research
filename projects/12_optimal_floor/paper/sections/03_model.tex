@@ -1,0 +1,53 @@
+\section{Model}
+\label{sec:model}
+
+\subsection{Building, car and trips}
+Floors are $1..N$ with $1$ the lobby; the resident lives on $h \in \{2..N\}$.
+A run of $n$ floors takes $n H / v + v / a$ (per-floor cruise at rated speed
+$v = \KinV$\,m/s over $H = 3.3$\,m, plus one start/stop penalty at $a =
+\KinA$\,m/s$^2$), which coincides with the exact trapezoidal profile whenever a
+single floor suffices to reach rated speed, as it does here; each stop costs a
+door cycle of \KinDoor\,s plus \KinPass\,s per passenger transferring. The
+resident alternates \emph{outbound} and \emph{return} trips: outbound goes to
+the lobby with probability $\alpha$ and otherwise to a uniformly random other
+floor $f \ge 2$; the return brings them home. Chaining the trips makes the
+origin/destination pairs exactly symmetric --- the car has to fetch you at the
+lobby as often as at home --- and gives a precise meaning to ``the car stays
+where it last stopped''.
+
+\subsection{Closed form: one car, no traffic}
+A trip $(o, d)$ costs the car's approach, one dwell, and the ride,
+\begin{equation}
+T(o, d \mid c) = \text{run}(|c - o|) + \text{stop} + \text{run}(|o - d|),
+\end{equation}
+where $c$ is the car's position when called, given by the parking policy:
+\emph{lobby} ($c = 1$), \emph{middle} ($c = \lceil (N+1)/2 \rceil$),
+\emph{last} ($c = o$: with no other traffic the car is where the resident
+got off), or \emph{random} ($c \sim \text{Uniform}\{1..N\}$, the limit in
+which traffic has left the car anywhere). $E[T(h)]$ sums over the exact
+distribution of chained $(o, d)$ pairs; with stairs available, each pair
+costs $\min(\text{elevator}, \text{stairs})$ when the climb is allowed.
+
+\subsection{Discrete-event simulator}
+$K$ cars move floor by floor with the same run and stop costs. A car keeps its
+direction while there are calls ahead (car calls of passengers on board, hall
+calls in its direction), reverses when calls remain only behind, and otherwise
+parks (lobby, middle) or stays (last). A new hall call wakes the nearest idle
+car; moving cars pick up hall calls they pass in their direction, subject to
+capacity (10). Background passengers arrive as a Poisson process at
+$\lambda$ per minute with the same lobby fraction, travelling up from or down
+to the lobby, or between two floors $\ge 2$. The resident probes the system
+every two minutes for \TraHorizon\ hours of building time, with \TraReps\
+replications; replication $r$ uses the same background draw for every home
+floor (common random numbers), so the curves compare floors rather than
+traffic realisations. We record the resident's wait, ride, intermediate stops,
+and the cars' positions at the moment of the call.
+
+\subsection{Stairs and objective}
+Stairs cost $t_{\downarrow}$ per floor descended and $t_{\uparrow}$ per floor
+climbed (defaults 10 and 15\,s), with a maximum climb the resident is willing
+to make (3 floors); the resident walks when the stairs time is below the
+\emph{expected} elevator time for the trip (they do not know where the car
+is). For a home floor we report the mean trip time, its 90th percentile, the
+regret $E[T(h)] - \min_{h'} E[T(h')]$ in percent, and the indifference band of
+floors within 5\% of the best.
