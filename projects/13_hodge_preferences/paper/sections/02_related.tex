@@ -1,0 +1,35 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Neural tangent kernels and spectral bias.} The NTK
+\cite{jacot2018neural} describes gradient descent on wide networks as kernel
+regression; wide networks evolve as their linearisation \cite{lee2019wide},
+and their priors are Gaussian processes \cite{neal1996bayesian, lee2018deep}.
+Directions with large kernel eigenvalues are learned first --- the spectral or
+frequency bias \cite{rahaman2019spectral}. Output scaling moves a network
+between this lazy regime and feature learning \cite{chizat2019lazy}. We use
+all of these, but on a kernel defined over \emph{pairs} and decomposed by
+graph topology rather than by frequency.
+
+\paragraph{Hodge theory for rankings.} HodgeRank
+\cite{jiang2011statistical} fits the gradient component by least squares and
+reads the curl and harmonic residuals as measures of inconsistency; later work
+uses it for crowdsourced ranking and Bayesian intransitive models
+\cite{xu2018hodgerank}. No neural network or training dynamics is involved.
+
+\paragraph{Intransitive preference models.} Bradley--Terry
+\cite{bradley1952rank} underlies RLHF reward models \cite{ouyang2022training}.
+GPM \cite{zhang2025beyond} embeds responses and scores pairs with a
+skew-symmetric bilinear form; HRC \cite{hrc2026transitivity} decomposes
+preferences into an explicit transitive scalar and a cyclic vector part. These
+works establish expressivity and downstream gains; we study the learning
+dynamics that any such model is subject to.
+
+\paragraph{NTK for pairwise feedback.} Neural dueling bandits analyse
+Bradley--Terry preference learning in the NTK regime to obtain confidence
+bounds \cite{verma2024neural}; they do not decompose the kernel by Hodge
+structure. The closest work is the Topological NTK \cite{krishnagopal2026topological},
+which reports a ``topological spectral bias'' for message passing on edge
+signals of simplicial complexes; it concerns graph neural networks on a fixed
+complex, not preference models over item features, and does not address
+Bradley--Terry losses, annotator noise or early stopping.

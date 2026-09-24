@@ -1,0 +1,4 @@
+# Raw Arena CSV stays out of git; the small counts cache is kept.
+*.csv
+raw/
+!arena_counts.npz

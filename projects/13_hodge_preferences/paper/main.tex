@@ -1,0 +1,68 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Transitive First: Gradient Descent Learns the Ranking Before the
+Cycles --- a Hodge Decomposition of the Pairwise Neural Tangent Kernel}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{September 21, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Pairwise preferences --- which response is better, which player
+wins --- decompose on the comparison graph into a transitive part (a global
+ranking), local cycles (rock--paper--scissors) and global cycles, the
+combinatorial Hodge decomposition behind HodgeRank. Scalar reward models of
+the Bradley--Terry type cannot represent cycles; skew-symmetric models can.
+We ask the dynamical question that neither literature addresses: when a neural
+preference model is trained by gradient descent, \emph{in which order} does it
+learn these parts? We write the neural tangent kernel (NTK) between
+\emph{edges} for three models --- a scalar reward, an antisymmetric network
+$h(x,y)-h(y,x)$, and the General Preference Model --- and project it on the
+Hodge subspaces. For the scalar model the kernel annihilates every cycle
+exactly (measured $\le\SpeScalarCycMax$). For the antisymmetric network, in all
+\SpeNGraphs\ graphs we examined the mean kernel eigenvalue on the gradient
+subspace exceeds that on cycle space by a factor of \SpeRatioMin\ to
+\SpeRatioMax, growing with the mean degree of the graph; the top eigenvectors
+are \SpeTopTenGradMass\% transitive. The consequence is a spectral bias: in
+\DynOrderOk\ of \DynOrderTotal\ training runs, gradient descent fits the
+transitive part first and cycles \DynAntisymSqCurl$\times$ later (GPM:
+\DynGpmSqCurl$\times$), under the squared loss --- where the linearised NTK
+prediction tracks training to within \DynLinDev\ --- and under the
+Bradley--Terry loss on votes; the order survives feature learning
+(\WidOrderOk/\WidRuns\ runs across width and lazy/rich scale) although the
+gap narrows. Two predictions fail and we report them: curl and harmonic
+cycles are learned at the same rate (ratio \SpeCurlHarmMin--\SpeCurlHarmMax),
+and early stopping at the moment the ranking is fitted is too early, because
+it also discards real cycles. We prove that i.i.d.\ noise puts only a fraction
+$(|V|-1)/|E|$ of its energy in gradient space (measured within
+\NoiFracMaxDev\ in \NoiFracCases\ graphs), but show that annotator vote flips
+are different: they mostly shrink the transitive signal. Early stopping
+nonetheless buys up to \NoiGpmGainFlipFour\ accuracy points for GPM at 40\%
+flipped votes. On \AreVotes\ Chatbot Arena votes among \AreItems\ models the
+same order holds on real data, and the \AreCyc\% of cyclic energy in the
+votes is \emph{less} than a perfectly transitive model with the same counts
+would produce (\AreNullCyc\%, $p=\AreP$): at the model level, Arena cycles are
+sampling noise, and a scalar reward is the best held-out predictor.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_theory.tex}
+\input{sections/04_dynamics.tex}
+\input{sections/05_noise.tex}
+\input{sections/06_arena.tex}
+\input{sections/07_conclusion.tex}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

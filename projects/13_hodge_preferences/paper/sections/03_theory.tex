@@ -1,0 +1,54 @@
+\section{Hodge decomposition of the edge NTK}
+\label{sec:theory}
+
+\paragraph{Comparison graphs.} Items $1..n$ with features $x_i \in
+\mathbb{R}^d$; a graph with oriented edges $(i,j)$, $i<j$; an edge flow $y
+\in \mathbb{R}^E$, $y_{ij}$ the preference of $j$ over $i$ (a log-odds). With
+the gradient $B:\mathbb{R}^V\to\mathbb{R}^E$, $(Bs)_{ij}=s_j-s_i$, and the
+curl $C:\mathbb{R}^E\to\mathbb{R}^T$ over triangles, the Hodge decomposition
+is $\mathbb{R}^E = \operatorname{im}B \oplus \operatorname{im}C^\top \oplus
+\ker(BB^\top + C^\top C)$, with orthogonal projectors $P_{\text{grad}},
+P_{\text{curl}}, P_{\text{harm}}$ of ranks $|V|-1$ (connected graph), the
+number of independent triangles, and the first Betti number.
+
+\paragraph{Three models and their edge kernels.} A preference model predicts
+$g_{ij}$. The \emph{scalar} model $g_{ij}=f(x_j)-f(x_i)$; the
+\emph{antisymmetric} model $g_{ij} = h([x_i,x_j]) - h([x_j,x_i])$; GPM $g_{ij}
+= e(x_i)^\top R\, e(x_j)$ with $R$ block-skew. Each is an MLP in the NTK
+parameterisation. Under gradient descent with step $\eta$ on
+$\tfrac{1}{2E}\sum(g-y)^2$ the training residual evolves, in the linearised
+regime, as $r_{t+1} = (I-\tfrac{\eta}{E}\Theta_E)\,r_t$, where $\Theta_E$ is
+the NTK between edges. For the scalar model $\Theta_E = B\,\Theta_V B^\top$
+with $\Theta_V$ the ordinary NTK between items; for the antisymmetric model,
+with $z=[x_i,x_j]$ and $\tilde z=[x_j,x_i]$,
+\begin{equation}
+\Theta_E(e,e') = K(z,z') - K(z,\tilde z') - K(\tilde z,z') + K(\tilde z,\tilde z'),
+\end{equation}
+$K$ the closed-form ReLU NTK \cite{jacot2018neural} on concatenated inputs.
+We define the \emph{Hodge rate} of a component as the mean eigenvalue of
+$\Theta_E$ on its subspace, $\kappa_c = \operatorname{tr}(P_c\Theta_E P_c)
+/ \dim_c$ --- the expected Rayleigh quotient of a random flow in that
+component, hence its expected learning speed.
+
+\paragraph{Proposition 1 (the scalar kernel is blind to cycles).} For any
+cyclic flow $y_c \in \ker B^\top$, $\Theta_E\,y_c = B\Theta_V B^\top y_c = 0$.
+The cyclic residual of a scalar model therefore never changes under gradient
+descent on the squared loss, at any width and in any regime: it is not merely
+unrepresentable but invisible to the gradient. Numerically $|\kappa_{\text{cyc}}|
+\le \SpeScalarCycMax$ across all graphs.
+
+\paragraph{Why the antisymmetric kernel prefers rankings.} Split the kernel on
+concatenated inputs into a part additive in its two halves and an interaction
+part. The additive part yields, after antisymmetrisation, a term of the form
+$B\,\tilde K\,B^\top$ --- the scalar structure again --- whose action on cycles
+vanishes by Proposition 1, while on gradient flows it is amplified by the
+number of edges that share each item. Cycles are therefore learned only
+through the interaction part. This predicts (i) $\kappa_{\text{grad}} \gg
+\kappa_{\text{cyc}}$, (ii) a ratio that grows with the mean degree of the
+comparison graph, and (iii) no reason for curl and harmonic cycles to differ.
+
+\paragraph{Lemma 2 (i.i.d.\ noise is mostly cyclic).} If $z \sim
+\mathcal{N}(0,\sigma^2 I_E)$, rotational invariance makes $\|P_{\text{grad}}
+z\|^2/\|z\|^2 \sim \text{Beta}(\tfrac{|V|-1}{2}, \tfrac{|E|-|V|+1}{2})$, with
+mean $(|V|-1)/|E|$. On a complete graph that is $2/n$: almost all noise lives
+where a transitive-first learner looks last.

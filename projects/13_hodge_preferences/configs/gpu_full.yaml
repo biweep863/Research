@@ -1,0 +1,85 @@
+project: hodge_preferences
+# Full-scale configuration: larger graphs, more feature dims and depths, more
+# seeds, longer training, finer width/alpha sweeps. CPU is enough; the name
+# mirrors the other projects' convention for the big config.
+seed: 0
+
+# Network: NTK parameterisation, ReLU, one hidden layer unless swept.
+net:
+  width: 512
+  depth: 1
+  gpm_k: 4
+
+# --------------------------------------------------------------------------- #
+# Experiment 1: Hodge spectrum of the edge NTK (analytic + empirical at init)
+# --------------------------------------------------------------------------- #
+spectrum:
+  n_items: [20, 40, 80]
+  density: [0.15, 0.3, 0.6, 1.0]
+  feat_dim: [2, 4, 8, 16, 32, 64]
+  depth: [1, 2, 3]
+  reps: 5
+  empirical: {n_items: 30, density: 0.2, feat_dim: 8, widths: [128, 512, 2048], reps: 3}
+
+# Shared synthetic task.
+task:
+  n_items: 40
+  feat_dim: 8
+  density: 0.2
+  beta_g: 1.0
+  beta_c: 2.0             # ~70/22/8 % grad/curl/harm on the training graph
+  heldout_frac: 0.3
+
+# --------------------------------------------------------------------------- #
+# Experiment 2: learning dynamics per component
+# --------------------------------------------------------------------------- #
+dynamics:
+  models: ["scalar", "antisym", "gpm"]
+  losses: ["sq", "bt"]
+  lr_frac: 0.25           # eta = lr_frac * E / lambda_max(Theta_E)
+  steps: 20000
+  n_log: 60
+  n_votes: 200            # votes per edge for the Bradley-Terry loss
+  bt_lr: 0.5              # Adam-free GD step for BT, scaled like the squared loss
+  seeds: 10
+
+# --------------------------------------------------------------------------- #
+# Experiment 3: noise lives in cycle space; early stopping as a filter
+# --------------------------------------------------------------------------- #
+noise:
+  fraction_check: {n_items: [20, 40, 80], density: [0.1, 0.3, 1.0], trials: 2000}
+  sigma_grid: [0.0, 0.5, 1.0, 2.0]
+  flip_grid: [0.0, 0.1, 0.2, 0.3, 0.4]
+  n_votes: 30
+  models: ["antisym", "gpm", "scalar"]
+  steps: 20000
+  n_log: 60
+  seeds: 10
+
+# --------------------------------------------------------------------------- #
+# Experiment 4: width and lazy/rich scale
+# --------------------------------------------------------------------------- #
+width:
+  widths: [32, 64, 128, 256, 512, 1024, 2048, 4096]
+  alphas: [0.03, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0]
+  model: "antisym"
+  steps: 20000
+  n_log: 40
+  seeds: 6
+
+# --------------------------------------------------------------------------- #
+# Experiment 5: Chatbot Arena
+# --------------------------------------------------------------------------- #
+arena:
+  min_votes: 20
+  heldout_frac: 0.2
+  bootstrap: 2000
+  emb_dim: 16
+  width: 512
+  models: ["scalar", "antisym", "gpm"]
+  steps: 20000
+  n_log: 60
+  flip_grid: [0.0, 0.2, 0.4]
+  seeds: 10
+
+output_dir: results

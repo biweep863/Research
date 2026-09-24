@@ -1,0 +1,30 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations.} The kernel analysis is exact at infinite width and
+for the squared loss; the Bradley--Terry and feature-learning results are
+empirical. Our networks are small MLPs on low-dimensional features, not reward
+models on top of a language model, where the ``items'' are responses with rich
+embeddings and each response appears in few comparisons --- a sparse regime in
+which our ratio is smallest. The synthetic truth mixes one utility with one
+skew interaction; other cyclic structures could be learned at different
+speeds. The Arena analysis is at model level, so it says nothing about
+prompt-level intransitivity, where genuine cycles are more plausible, and
+held-out votes are split within pairs, so they test fitting of observed pairs
+more than generalisation to unseen ones. The NTK stopping rule we proposed
+failed; a rule that estimates the signal fraction in cycle space, for example
+with the transitive null of Section~\ref{sec:arena}, is the natural
+replacement. The full-scale configuration widens every sweep.
+
+\paragraph{Conclusion.} Gradient descent learns preferences in a fixed order:
+the ranking first, the cycles much later. For a scalar reward model the
+cycles are not merely unrepresentable but invisible to the gradient. For an
+antisymmetric network the edge NTK puts transitive flows 4 to over 100 times
+higher in the spectrum than cyclic ones, more so on denser comparison graphs,
+and training follows that ordering, closely in the lazy regime and robustly
+beyond it. Local and global cycles, by contrast, are learned at the same
+rate. The ordering turns training time into a knob on transitivity. It
+explains why early stopping helps cyclic preference models most when votes are
+noisy. It also cautions against reading learned cycles as signal: in Chatbot
+Arena, the cycles a flexible model eventually learns are sampling noise,
+fitted last.

@@ -1,0 +1,10 @@
+slug: hodge_preferences
+title: "Transitive First: Gradient Descent Learns the Ranking Before the Cycles — a Hodge Decomposition of the Pairwise Neural Tangent Kernel"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Theory"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Projecting the edge-level neural tangent kernel of preference models on the Hodge decomposition shows gradient descent learns the transitive ranking 4-100x faster than preference cycles; scalar Bradley-Terry models are provably blind to cycles, early stopping filters noisy cycles, and on 52k Chatbot Arena votes the observed cycles are no stronger than sampling noise."
+pdf: "paper/main.pdf"
+created: "2026-09-21"
