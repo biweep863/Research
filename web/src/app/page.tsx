@@ -28,11 +28,20 @@ export default function HomePage() {
   const [openPub, setOpenPub] = useState<Publication | null>(null);
 
   const years = useMemo(
-    () => unique(publications.map((p) => String(p.year))).sort((a, b) => Number(b) - Number(a)),
+    () =>
+      unique(publications.map((p) => String(p.year))).sort(
+        (a, b) => Number(b) - Number(a),
+      ),
     [],
   );
-  const topics = useMemo(() => unique(publications.map((p) => p.topic)).sort(), []);
-  const types = useMemo(() => unique(publications.map((p) => p.type)).sort(), []);
+  const topics = useMemo(
+    () => unique(publications.map((p) => p.topic)).sort(),
+    [],
+  );
+  const types = useMemo(
+    () => unique(publications.map((p) => p.type)).sort(),
+    [],
+  );
 
   const filtered = useMemo(() => {
     const q = filters.q.trim().toLowerCase();
@@ -41,14 +50,23 @@ export default function HomePage() {
       if (filters.topic !== ALL && p.topic !== filters.topic) return false;
       if (filters.type !== ALL && p.type !== filters.type) return false;
       if (!q) return true;
-      const haystack = [p.title, p.tldr, p.authors.join(" "), p.topic, p.venue ?? ""]
+      const haystack = [
+        p.title,
+        p.tldr,
+        p.authors.join(" "),
+        p.topic,
+        p.venue ?? "",
+      ]
         .join(" ")
         .toLowerCase();
       return haystack.includes(q);
     });
-    if (filters.sort === "recent") list.sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
-    if (filters.sort === "oldest") list.sort((a, b) => a.year - b.year || a.title.localeCompare(b.title));
-    if (filters.sort === "az") list.sort((a, b) => a.title.localeCompare(b.title));
+    if (filters.sort === "recent")
+      list.sort((a, b) => b.year - a.year || a.title.localeCompare(b.title));
+    if (filters.sort === "oldest")
+      list.sort((a, b) => a.year - b.year || a.title.localeCompare(b.title));
+    if (filters.sort === "az")
+      list.sort((a, b) => a.title.localeCompare(b.title));
     return list;
   }, [filters]);
 
@@ -58,13 +76,17 @@ export default function HomePage() {
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-sm font-semibold text-white">
           {AUTHOR_INITIALS}
         </div>
-        <span className="text-sm font-medium text-slate-700">{AUTHOR_NAME} — Papers</span>
+        <span className="text-sm font-medium text-slate-700">
+          {AUTHOR_NAME} — Papers
+        </span>
       </header>
 
       <section className="mt-8">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Scientific publications</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          Scientific publications
+        </h1>
         <p className="mt-2 text-sm text-slate-500">
-          {publications.length} articles, proceedings and preprints — automatically synced from GitHub.
+          {publications.length} articles, proceedings and preprints.
         </p>
 
         <div className="mt-6">
