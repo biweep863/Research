@@ -40,26 +40,35 @@ catalogue \emph{is} small.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/novelty_real.pdf}
-\caption{Novelty AUROC per score on the synthetic soundscape (base condition)
-and on real Watkins calls (\RealSpecies\ species, six held out as unknown,
-mean $\pm$ s.d.\ over three holdout draws).}
+\caption{Novelty AUROC per score on the synthetic soundscape (base
+condition), on real Watkins calls with a from-scratch CNN, and on the same
+real clips with a frozen pretrained backbone (AST) in place of the CNN
+(\RealSpecies\ species, \RealNUnknown\ held out as unknown, mean $\pm$
+s.d.\ over 10 holdout draws).}
 \label{fig:real}
 \end{figure}
 
-\paragraph{Real calls.} The orange bars of Figure~\ref{fig:real} are the
-honest part. A CNN trained from scratch on \RealClips\ clips reaches only
-\RealAcc\ closed-set accuracy on \RealSpecies\ species, and the best novelty
-score is \RealBestScore\ at AUROC \RealBestAuroc\ ($\pm$\RealStdMsp); the
-embedding-space scores that dominate on synthetic data fall to
-\RealAurocKnn\ (kNN) and \RealAurocMaha\ (Mahalanobis), i.e.\ the embedding
-has not learned species geometry. Real recordings vary in recorder, distance,
-background and duration far more than our simulator, and BEANS-level accuracy
-on this set is obtained with pretrained audio backbones
-\cite{hagiwara2022beans}. The synthetic result therefore bounds what the
-\emph{method} can do given an embedding that separates species; the real
-result says that embedding must come from far more data than a deep-sea
-catalogue will have --- from pretraining on the whole bioacoustic corpus,
-which is the scaled configuration of this project.
+\paragraph{Real calls, from-scratch CNN.} The orange bars of
+Figure~\ref{fig:real} are the honest part. A CNN trained from scratch on
+\RealClips\ clips reaches only \RealAcc\ closed-set accuracy on
+\RealSpecies\ species, and the best novelty score is \RealBestScore\ at
+AUROC \RealBestAuroc; the embedding-space scores that dominate on
+synthetic data fall to \RealAurocKnn\ (kNN) and \RealAurocMaha\
+(Mahalanobis), i.e.\ the embedding has not learned species geometry. Real
+recordings vary in recorder, distance, background and duration far more
+than our simulator.
+
+\paragraph{Real calls, pretrained backbone.} The green bars swap the
+from-scratch CNN for a frozen Audio Spectrogram Transformer embedding
+(\texttt{\RealPtBackbone}), with no
+fine-tuning, feeding the same six scores through a deterministic
+sklearn probe instead of a second from-scratch classifier. Accuracy rises
+to \RealPtAcc\ and the best score to \RealPtBestAuroc\ (\RealPtBestScore),
+a paired improvement of $\Delta=$\RealPtDelta\ that is positive in every
+one of the 10 holdout draws. This confirms the diagnosis directly: the
+embedding, not the scoring method, was the bottleneck on real data, and
+the fix is a frozen off-the-shelf model, not more deep-sea recordings
+(which do not exist at the scale a from-scratch embedding would need).
 
 \begin{figure*}[t]
 \centering

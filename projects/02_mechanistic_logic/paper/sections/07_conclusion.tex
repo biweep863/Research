@@ -1,8 +1,12 @@
 \section{Conclusion}
-GPT-2 carries a linearly decodable, surface-form-partially-invariant
-representation of logical validity in its middle layers. Per-head
-ablations do not isolate a "logic head'' at this scale: heads behave as
-broad-spectrum carriers. Both findings are consistent with the
-prevailing view that mechanistic specialisation grows with scale; the
-methodology we propose is a cheap baseline that any larger-scale circuit
-study should clear.
+Both GPT-2 and Pythia-2.8B carry a linearly decodable representation of
+logical validity in their middle layers, on both a natural-language and
+an invented, out-of-distribution surface. But scale does not make that
+representation more surface-form-invariant -- cross-surface transfer is
+weaker at 2.8B than at 124M -- and it does not concentrate ablation
+effects into an identifiable logic circuit either; if anything, the
+opposite on both counts. This contradicts the prevailing view that
+mechanistic specialisation and cross-context generalisation should both
+improve with scale, at least for this probe-and-ablate methodology on
+this task, and is reported as such rather than reconciled with that
+prior by construction.

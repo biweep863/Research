@@ -27,10 +27,16 @@ spectrum at sea state 3. Features are 64-band log-mel spectrograms of 2\,s at
 \subsection{Real calls}
 The Watkins Marine Mammal Sound Database ``best of'' cuts, in the BEANS
 packaging \cite{hagiwara2022beans}, provide \RealClips\ clips of
-\RealSpecies\ species with at least eight clips each (two of the four parquet
-shards). Clips are resampled to 16\,kHz, cropped or padded to 2\,s and
-featurised identically; a small quantised cache is checked in so the pipeline
-reproduces offline.
+\RealSpecies\ species with at least eight clips each, after deduplicating
+by content hash across four of the database's five parquet shards
+(\texttt{train\_low} is excluded: it is very likely a subset of the other
+train shard, and mixing it in risks the same clip appearing in both a
+training split and a held-out split). Clips are resampled to 16\,kHz,
+cropped or padded to 2\,s and featurised identically for the from-scratch
+CNN path; a small quantised cache is checked in so the pipeline reproduces
+offline. The pretrained-embedding path (Section~\ref{sec:novelty}) instead
+uses each clip's native duration up to 10\,s, matching the backbone's own
+training length.
 
 \subsection{Models and novelty scores}
 A three-block CNN (16--32--64 channels, global pooling, 64-d embedding,

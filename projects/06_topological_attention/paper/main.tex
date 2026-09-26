@@ -14,17 +14,25 @@ A Topological Pilot for Hallucination Detection}
 \begin{abstract}
 \noindent We test the hypothesis that hallucinated continuations of factual
 prompts shift the persistent-homology summary statistics of the attention
-graph relative to truthful continuations. On GPT-2 across $\gptTwoNumPairs$
-hand-curated truthful/hallucinated pairs (e.g.\ ``The capital of France
-is Paris'' vs.\ ``Berlin''), we compute the Vietoris--Rips persistent
-homology of the per-layer attention-distance matrix and report the total
-persistence in $H_0$ and $H_1$. The local pilot, by design, is
-underpowered: with only $\gptTwoNumPairs$ pairs, no layer reaches
-$p<0.05$ (minimum $p=\gptTwoMinPval$ at layer
-$\gptTwoMinPvalLayer$, on $H_0$). The mean $H_0$ totals are
-$\gptTwoTruthHZeroMean$ (truthful) vs.\ $\gptTwoHallHZeroMean$
-(hallucinated), giving an effect-size estimate that allows us to
-power-plan the larger run.
+graph relative to truthful continuations. A local pilot on GPT-2 across
+$\gptTwoNumPairs$ hand-curated pairs is, by design, underpowered on the
+\emph{unpaired} Welch test it uses (no layer reaches $p<0.05$) and
+motivates a scaled run. We source $\sim$500 truthful/hallucinated pairs
+per model from TruthfulQA, exactly matched by continuation token length,
+and pre-register a \emph{paired} test (appropriate since each pair shares
+a prompt) as primary. Across three models -- GPT-2 ($N=\gptTwotqaNumPairs$),
+Qwen3-8B ($N=\qwenThreeEightbNumPairs$), and Llama-3-8B
+($N=\llamaThreeEightbNumPairs$) -- the paired test finds statistically
+significant per-layer differences after Holm correction in all three
+(GPT-2: $\gptTwotqaPairedNumSigHolm$/$\gptTwotqaNumLayers$ layers; Qwen3-8B:
+$\qwenThreeEightbPairedNumSigHolm$/$\qwenThreeEightbNumLayers$; Llama-3-8B:
+$\llamaThreeEightbPairedNumSigHolm$/$\llamaThreeEightbNumLayers$), with a
+mean effect size that grows with model scale and flips sign for the small
+model ($d_z=\gptTwotqaMeanDz$ for GPT-2 vs.\ $d_z=\llamaThreeEightbMeanDz$
+for Llama-3-8B). The original pilot's own power analysis is also corrected:
+its unpaired-test arithmetic implied $N\approx200$ would suffice, but the
+correct unpaired calculation needs $N\approx14{,}000$; the paired design is
+what actually makes $N\approx500$ informative.
 \end{abstract}
 \vspace{1em}
 \end{@twocolumnfalse}]

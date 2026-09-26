@@ -2,8 +2,8 @@
 \input{../../shared/latex/twocolumn_preamble.tex}
 \input{macros.tex}
 
-\title{Mechanistic Probes of Logical-Symbolic Reasoning in Small Transformers:\\
-Evidence for a Surface-Form-Invariant Validity Direction}
+\title{Mechanistic Probes of Logical-Symbolic Reasoning in Transformers:\\
+Evidence for a Surface-Form-Invariant Validity Direction, and a Scale Puzzle}
 \author[1]{Luis Benvenuto}
 \affil[1]{Independent Research}
 \date{June 16, 2026}
@@ -12,23 +12,28 @@ Evidence for a Surface-Form-Invariant Validity Direction}
 \twocolumn[\maketitle
 \begin{@twocolumnfalse}
 \begin{abstract}
-\noindent We probe whether a small autoregressive transformer (GPT-2) carries
-an internal representation of \emph{logical validity} that is decoupled from
+\noindent We probe whether autoregressive transformers carry an internal
+representation of \emph{logical validity} that is decoupled from
 natural-language surface form. To control for memorisation, we construct
-parallel English and invented-conlang versions of five logical templates
-(modus ponens, modus tollens, Barbara syllogism, AND-chain, OR-chain) and
-report two diagnostics: (i) per-layer linear probes for validity, and (ii)
-exhaustive attention-head ablations. Probes reach
-$\gptTwoProbeEnPeak$ accuracy at layer $\gptTwoProbeEnPeakLayer$ on English
-and $\gptTwoProbeClPeak$ at layer $\gptTwoProbeClPeakLayer$ on the conlang;
-cross-surface transfer reaches $\gptTwoCrossEnCl$ (English $\to$ conlang),
-clearly above the $0.5$ chance level despite the conlang vocabulary lying
-outside pretraining distribution. Head-ablation flags a single early head
-(layer $\gptTwoWorstHeadLayer$, head $\gptTwoWorstHeadIndex$) whose
-removal hurts logic accuracy by $\gptTwoWorstHeadDeltaAcc$ while
-simultaneously inflating LM cross-entropy by $\gptTwoWorstHeadDeltaLM$,
-suggesting it is more than a logic-specific component. We discuss methodological implications for
-mechanistic interpretability of reasoning.
+parallel English and invented-conlang versions of ten logical templates
+(modus ponens/tollens, four categorical-syllogism moods, AND/OR/XOR
+chains, double negation) and report two diagnostics: per-layer linear
+probes for validity, and exhaustive attention-head ablations, on both
+GPT-2 small and Pythia-2.8B. On GPT-2, probes reach $\gptTwoProbeEnPeak$
+accuracy at layer $\gptTwoProbeEnPeakLayer$ on English and
+$\gptTwoProbeClPeak$ at layer $\gptTwoProbeClPeakLayer$ on the conlang,
+with cross-surface transfer reaching $\gptTwoCrossEnCl$. On Pythia-2.8B,
+probe accuracy is \emph{still} near-perfect on both surfaces
+($\pythiaTwoEightbProbeEnPeak$/$\pythiaTwoEightbProbeClPeak$), but
+cross-surface transfer is \emph{weaker}, not stronger
+($\pythiaTwoEightbCrossEnCl$/$\pythiaTwoEightbCrossClEn$, the latter
+barely above chance) -- the opposite of what a naive "scale improves
+generalisation'' story predicts. Head-ablation finds no purely
+logic-specific head at either scale; at 2.8B, the effect of any single
+head is an order of magnitude smaller and uncorrelated with
+language-modelling damage, consistent with a more distributed
+representation, not a more modular one. We discuss what this scale
+puzzle means for probing-based claims about mechanistic interpretability.
 \end{abstract}
 \vspace{1em}
 \end{@twocolumnfalse}]

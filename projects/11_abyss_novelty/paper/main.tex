@@ -38,10 +38,14 @@ autoencoder \NovAurocAe; novelty degrades gracefully with range (SNR
 \NovSnrNear\ to \NovSnrFar\,dB: Mahalanobis \NovMahaNear\ to \NovMahaFar).
 Clustering the flagged clips recovers the true grouping of two or three new
 species (ARI \CluAriUTwo, \CluAriUThree) but merges larger sets. On real
-marine-mammal calls (Watkins, \RealSpecies\ species, six held out) a CNN
-trained from scratch on \RealClips\ clips reaches only \RealAcc\ known-class
-accuracy and \RealBestAuroc\ AUROC (\RealBestScore): real bioacoustics need
-pretrained audio embeddings, which we state as the scaled configuration.
+marine-mammal calls (Watkins, \RealSpecies\ species, \RealNUnknown\ held
+out, \RealClips\ clips) a CNN trained from scratch reaches only
+\RealBestAuroc\ AUROC (\RealBestScore); swapping in a frozen pretrained
+audio embedding (AST) in place of the from-scratch CNN, with no
+fine-tuning, raises it to \RealPtBestAuroc\ (\RealPtBestScore), a gain
+positive in every one of 10 held-out draws (paired $\Delta=$
+\RealPtDelta) -- confirming that real bioacoustics were embedding-limited,
+not scoring-limited.
 Finally, Chao1 tracks the unseen richness of a \SurS-species log-series
 community as sensor-hours grow, the Good--Turing probability that the next
 detection is a new species falls from \SurDiscTen\% at 10\,h to

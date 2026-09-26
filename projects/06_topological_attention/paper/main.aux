@@ -19,8 +19,8 @@
 \@writefile{toc}{\contentsline {paragraph}{Hallucination detection.}{1}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Topological data analysis (TDA).}{1}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Attention graphs.}{1}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{1}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Attention to distance}{1}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Attention to distance}{2}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Vietoris--Rips filtration}{2}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Statistical test}{2}{subsection.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{2}{section.4}\protected@file@percent }
@@ -28,17 +28,26 @@
 \@writefile{toc}{\contentsline {paragraph}{Model.}{2}{section.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Forward.}{2}{section.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Wall time.}{2}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{2}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Power analysis.}{2}{figure.caption.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Headline.}{2}{figure.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}GPU-scale run}{2}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Pairs.}{2}{subsection.4.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Mean total persistence in $H_0$ per layer. Truthful and hallucinated curves track closely on this pilot, with means $3.406$ and $3.338$ across layers (difference $\approx 0.07$).}}{2}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:h0}{{1}{2}{Mean total persistence in $H_0$ per layer. Truthful and hallucinated curves track closely on this pilot, with means $\gptTwoTruthHZeroMean $ and $\gptTwoHallHZeroMean $ across layers (difference $\approx 0.07$)}{figure.caption.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Mean total persistence in $H_1$ per layer. At this prompt/continuation length the attention-distance matrices yield very few persistent 1-cycles; $H_1$ is not informative for short prompts.}}{2}{figure.caption.2}\protected@file@percent }
-\newlabel{fig:h1}{{2}{2}{Mean total persistence in $H_1$ per layer. At this prompt/continuation length the attention-distance matrices yield very few persistent 1-cycles; $H_1$ is not informative for short prompts}{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{2}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Why $H_1$ is uninformative at this scale.}{2}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Why $H_0$ might work.}{2}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Models.}{2}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Primary analysis (pre-registered).}{2}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{2}{section.5}\protected@file@percent }
+\newlabel{sec:results}{{5}{2}{Results}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Power analysis --- corrected.}{2}{figure.caption.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Mean total persistence in $H_1$ per layer. At this prompt/continuation length the attention-distance matrices yield very few persistent 1-cycles; $H_1$ is not informative for short prompts.}}{3}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:h1}{{2}{3}{Mean total persistence in $H_1$ per layer. At this prompt/continuation length the attention-distance matrices yield very few persistent 1-cycles; $H_1$ is not informative for short prompts}{figure.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces $-\log _{10} p$ for Welch's two-sample $t$-test on $H_0$ per layer. The pilot's $10$-pair sample is underpowered; no layer reaches the red dashed line ($p=0.05$).}}{3}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:pvals}{{3}{3}{$-\log _{10} p$ for Welch's two-sample $t$-test on $H_0$ per layer. The pilot's $\gptTwoNumPairs $-pair sample is underpowered; no layer reaches the red dashed line ($p=0.05$)}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Headline (local pilot).}{3}{figure.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Headline (GPU-scale, three models).}{3}{figure.caption.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Mean Betti curves at the layer with the smallest $p$-value (layer~$7$). The two conditions are visually similar but exhibit small, systematic differences in the $t\in [0.6, 0.9]$ filtration range.}}{3}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:betti}{{4}{3}{Mean Betti curves at the layer with the smallest $p$-value (layer~$\gptTwoMinPvalLayer $). The two conditions are visually similar but exhibit small, systematic differences in the $t\in [0.6, 0.9]$ filtration range}{figure.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Paired test, three models on TruthfulQA-sourced pairs.}}{3}{table.caption.5}\protected@file@percent }
+\newlabel{tab:threemodel}{{1}{3}{Paired test, three models on TruthfulQA-sourced pairs}{table.caption.5}{}}
 \bibstyle{plain}
 \bibdata{references}
 \bibcite{azaria2023internal}{1}
@@ -47,10 +56,9 @@
 \bibcite{horoi2022exploring}{4}
 \bibcite{naitzat2020topology}{5}
 \bibcite{vig2019analyzing}{6}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces $-\log _{10} p$ for Welch's two-sample $t$-test on $H_0$ per layer. The pilot's $10$-pair sample is underpowered; no layer reaches the red dashed line ($p=0.05$).}}{3}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:pvals}{{3}{3}{$-\log _{10} p$ for Welch's two-sample $t$-test on $H_0$ per layer. The pilot's $\gptTwoNumPairs $-pair sample is underpowered; no layer reaches the red dashed line ($p=0.05$)}{figure.caption.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Mean Betti curves at the layer with the smallest $p$-value (layer~$7$). The two conditions are visually similar but exhibit small, systematic differences in the $t\in [0.6, 0.9]$ filtration range.}}{3}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:betti}{{4}{3}{Mean Betti curves at the layer with the smallest $p$-value (layer~$\gptTwoMinPvalLayer $). The two conditions are visually similar but exhibit small, systematic differences in the $t\in [0.6, 0.9]$ filtration range}{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {paragraph}{Limitations.}{3}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{3}{section.7}\protected@file@percent }
-\gdef \@abspage@last{3}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{4}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why $H_1$ is uninformative at this scale.}{4}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Why $H_0$ might work.}{4}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations.}{4}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{4}{section.7}\protected@file@percent }
+\gdef \@abspage@last{4}
