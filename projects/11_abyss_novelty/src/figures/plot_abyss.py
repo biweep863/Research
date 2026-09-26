@@ -32,6 +32,8 @@ def main():
     bud = json.loads((R / "budget.json").read_text()); nov = json.loads((R / "novelty.json").read_text())
     real = json.loads((R / "real.json").read_text()); clu = json.loads((R / "cluster.json").read_text())
     sur = json.loads((R / "survey.json").read_text())
+    real_pt_path = R / "real_pretrained.json"
+    real_pt = json.loads(real_pt_path.read_text()) if real_pt_path.exists() else None
     cfg = yaml.safe_load(open(a.config))
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     macros = []; m = macros.append
@@ -90,7 +92,7 @@ def main():
         panels.append((f"synthetic: {fam}", log_mel(x, audio["fs_hz"], audio["n_mels"], audio["n_frames"], audio["n_fft"], audio["fmin_hz"], audio["fmax_hz"])))
     wk = load_watkins(HERE, audio)
     if wk is not None:
-        X, lab = wk
+        X, lab, _keys = wk
         for name in ("Sperm_Whale", "Humpback_Whale"):
             i = np.flatnonzero(lab == name)
             if len(i):
@@ -129,13 +131,22 @@ def main():
     # ------------------------------------------------------------------ #
     fig, ax = plt.subplots(figsize=(3.25, 2.3))
     xx = np.arange(len(scores))
-    ax.bar(xx - 0.2, [rows["base"][s]["auroc"] for s in scores], 0.4, color="#1565c0", label="synthetic (12 known + 5 unknown)")
+    b0 = rows["base"]
+    width = 0.27 if real_pt is not None else 0.2
+    ax.bar(xx - width, [b0[s]["auroc"] for s in scores], width, color="#1565c0",
+           label=f"synthetic ({b0['n_known']} known + {b0['n_unknown']} unknown)")
     if real.get("available"):
-        ax.bar(xx + 0.2, [real["summary"][s]["auroc_mean"] for s in scores], 0.4, color="#ef6c00",
-               yerr=[real["summary"][s]["auroc_std"] for s in scores], capsize=2, label=f"Watkins ({real['n_species']} species, 6 held out)")
+        n_unk_real = real.get("n_unknown", len(real["rows"][0]["unknown_species"]) if real["rows"] else "?")
+        ax.bar(xx, [real["summary"][s]["auroc_mean"] for s in scores], width, color="#ef6c00",
+               yerr=[real["summary"][s]["auroc_std"] for s in scores], capsize=2,
+               label=f"Watkins CNN ({real['n_species']} species, {n_unk_real} held out)")
+    if real_pt is not None and real_pt.get("available"):
+        ax.bar(xx + width, [real_pt["summary"][s]["auroc_mean"] for s in scores], width, color="#2e7d32",
+               yerr=[real_pt["summary"][s]["auroc_std"] for s in scores], capsize=2,
+               label=f"Watkins, pretrained ({real_pt['backbone'].split('/')[-1]})")
     ax.axhline(0.5, color="grey", lw=0.6, ls=":")
     ax.set_xticks(xx); ax.set_xticklabels([SC_NAME[s] for s in scores], fontsize=6, rotation=20)
-    ax.set_ylabel("AUROC"); ax.set_ylim(0.3, 1.0); ax.set_title("Is it a species we know?"); ax.legend(fontsize=5.5, loc="upper right")
+    ax.set_ylabel("AUROC"); ax.set_ylim(0.3, 1.0); ax.set_title("Is it a species we know?"); ax.legend(fontsize=5, loc="upper right")
     fig.tight_layout(); fig.savefig(out / "novelty_real.pdf"); plt.close(fig)
 
     # ------------------------------------------------------------------ #
@@ -210,8 +221,20 @@ def main():
         m(("RealBestScore", SC_NAME[best_r])); m(("RealBestAuroc", f"{real['summary'][best_r]['auroc_mean']:.2f}"))
         aris = [r["cluster"]["ari"] for r in real["rows"] if "cluster" in r]
         m(("RealAriMean", f"{np.mean(aris):.2f}" if aris else "--"))
+        m(("RealNUnknown", str(real.get("n_unknown", len(real["rows"][0]["unknown_species"]) if real["rows"] else 0))))
     else:
-        m(("RealAvailable", "no")); m(("RealAcc", "--")); m(("RealBestScore", "--")); m(("RealBestAuroc", "--")); m(("RealClips", "0")); m(("RealSpecies", "0")); m(("RealAriMean", "--"))
+        m(("RealAvailable", "no")); m(("RealAcc", "--")); m(("RealBestScore", "--")); m(("RealBestAuroc", "--")); m(("RealClips", "0")); m(("RealSpecies", "0")); m(("RealAriMean", "--")); m(("RealNUnknown", "0"))
+
+    if real_pt is not None and real_pt.get("available"):
+        m(("RealPtBackbone", real_pt["backbone"])); m(("RealPtAcc", f"{real_pt['known_acc_mean']:.2f}"))
+        for s in scores:
+            m((f"RealPtAuroc{s.replace('_','').title()}", f"{real_pt['summary'][s]['auroc_mean']:.2f}"))
+            m((f"RealPtStd{s.replace('_','').title()}", f"{real_pt['summary'][s]['auroc_std']:.2f}"))
+        best_pt = max(scores, key=lambda s: real_pt["summary"][s]["auroc_mean"])
+        m(("RealPtBestScore", SC_NAME[best_pt])); m(("RealPtBestAuroc", f"{real_pt['summary'][best_pt]['auroc_mean']:.2f}"))
+        aris_pt = [r["cluster"]["ari"] for r in real_pt["rows"] if "cluster" in r]
+        m(("RealPtAriMean", f"{np.mean(aris_pt):.2f}" if aris_pt else "--"))
+        m(("RealPtDelta", f"{real_pt['paired_delta_mean']:+.3f}"))
     for r in cr:
         m((f"CluAriU{r['n_unknown']}", f"{r['ari']:.2f}")); m((f"CluKhatU{r['n_unknown']}", str(r["k_hat"]))); m((f"CluKtrueU{r['n_unknown']}", str(r["k_true"])))
         m((f"CluRecallU{r['n_unknown']}", f"{r['recall_unknown']:.2f}")); m((f"CluPrecU{r['n_unknown']}", f"{r['precision_unknown']:.2f}"))
@@ -228,9 +251,17 @@ def main():
     # LaTeX command names cannot contain digits.
     WORDS = {"2": "Two", "3": "Three", "5": "Five", "8": "Eight", "10": "Ten", "100": "Hundred", "1000": "Thousand",
              "3000": "ThreeK", "05": "Half", "07": "Seven", "09": "Nine"}
+    DIGIT_WORD = {"0": "Zero", "1": "One", "2": "Two", "3": "Three", "4": "Four", "5": "Five",
+                  "6": "Six", "7": "Seven", "8": "Eight", "9": "Nine"}
     import re
     def _fix(k):
-        return re.sub(r"(\d+)", lambda mm: WORDS.get(mm.group(1), mm.group(1)), k)
+        def repl(mm):
+            run = mm.group(1)
+            if run in WORDS:
+                return WORDS[run]
+            # unmapped digit run (e.g. new survey prior_quality tags): spell digit-by-digit
+            return "".join(DIGIT_WORD[c] for c in run)
+        return re.sub(r"(\d+)", repl, k)
     macros = [(_fix(k), v) for k, v in macros]
     assert all(not re.search(r"\d", k) for k, _ in macros), [k for k, _ in macros if re.search(r"\d", k)]
     Path(a.macros).write_text("\n".join(f"\\newcommand{{\\{k}}}{{{v}}}" for k, v in macros) + "\n")

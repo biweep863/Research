@@ -2,7 +2,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "shared"))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import numpy as np
-from src.analysis.topology import attention_distance, persistence, betti_curve
+from src.analysis.topology import attention_distance, persistence, betti_curve, summarise
 
 
 def _toy_attention(n_heads=2, n=10, seed=0):
@@ -32,3 +32,24 @@ def test_betti_curve_runs():
     thr = np.linspace(0, 1, 10)
     out = betti_curve(D, thr, max_dim=1)
     assert "betti_0" in out and len(out["betti_0"]) == 10
+
+
+def test_summarise_matches_persistence_and_betti_curve():
+    A = _toy_attention(n=12)
+    D = attention_distance(A)
+    thr = np.linspace(0, 1, 10)
+    pers = persistence(D, max_dim=1)
+    betti = betti_curve(D, thr, max_dim=1)
+    summ = summarise(D, thr, max_dim=1)
+    for k, v in pers.items():
+        assert summ[k] == v
+    for k, v in betti.items():
+        assert summ[k] == v
+
+
+def test_summarise_max_dim_2_runs():
+    A = _toy_attention(n=12)
+    D = attention_distance(A)
+    thr = np.linspace(0, 1, 10)
+    out = summarise(D, thr, max_dim=2)
+    assert "total_persistence_H2" in out and "betti_2" in out

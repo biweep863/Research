@@ -87,6 +87,8 @@ real:
   cnn: {embed: 64, epochs: 50, lr: 3.0e-3, batch: 16}
   min_clips_per_species: 8
   cache_max_per_species: 60
+  cache: watkins_mel.npz
+  backbone: none
 
 cluster:
   score: knn

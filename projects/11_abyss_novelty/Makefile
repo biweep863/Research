@@ -1,7 +1,10 @@
 CONFIG ?= configs/local_small.yaml
-PY := ../../.venv/bin/python
+PY ?= ../../.venv/bin/python
 
-.PHONY: run figures paper all test clean
+.PHONY: run figures paper all test clean data
+
+data:
+	$(PY) -m src.data.fetch_watkins
 
 run:
 	$(PY) -m src.experiments.run_budget --config $(CONFIG)
@@ -11,7 +14,7 @@ run:
 	$(PY) -m src.experiments.run_survey --config $(CONFIG)
 
 figures:
-	$(PY) -m src.figures.plot_abyss --results results --out paper/figures --macros paper/macros.tex
+	$(PY) -m src.figures.plot_abyss --results results --out paper/figures --macros paper/macros.tex --config $(CONFIG)
 
 paper:
 	cd paper && latexmk -pdf -interaction=nonstopmode main.tex

@@ -1,0 +1,30 @@
+\section{Introduction}
+
+Genetic algorithms (GAs) are named for an evolutionary metaphor, but the
+population size $N$ is almost always set by heuristics internal to the GA
+literature -- schema-survival and noise-to-signal arguments
+\cite{goldberg1991sizing} -- rather than by population genetics' own
+quantitative account of when a population is ``too small'' for selection
+to matter. That account is precise: in a finite haploid population, a new
+mutation with selection advantage $s$ fixes with probability given by
+Kimura's diffusion approximation \cite{kimura1962probability},
+\[
+u(s,N) = \frac{1-e^{-2s}}{1-e^{-2Ns}},
+\]
+which is close to the neutral value $1/N$ when $Ns \ll 1$ (drift
+dominates) and close to $2s$ when $Ns \gg 1$ (selection dominates). The
+crossover, $N \approx 1/s$, is a specific, testable prediction for a
+critical population size $N_c$.
+
+We ask two questions about a GA searching an NK fitness landscape
+\cite{kauffman1987towards}, whose epistasis parameter $K$ tunes
+ruggedness (the number of local optima) directly: (1) is there a
+population size $N_c(K)$ below which the GA reliably fails to find the
+global optimum, and above which it reliably succeeds; and (2) if so, does
+$N_c(K)$ grow with $K$ for the reason population genetics would predict --
+a shrinking single-mutation selection coefficient $s(K)$, via
+$N_c \approx 1/s(K)$?
+
+We find a clear answer to (1) and a clear, negative answer to (2): a
+real threshold exists and grows sharply with $K$, but the mechanism
+proposed for it is falsified by direct measurement.

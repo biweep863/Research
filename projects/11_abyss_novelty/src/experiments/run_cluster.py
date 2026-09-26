@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from .common import dump, load_cfg
+from .common import dump, load_cfg, resolve_device
 from .run_novelty import evaluate
 from src.novelty.cluster import ari, cluster_novel
 from src.sim.dataset import make_clips, make_species_set
@@ -18,13 +18,14 @@ def main():
     cfg, out_dir = load_cfg()
     ncfg, sim, audio, cc = cfg["novelty"], cfg["sim"], cfg["audio"], cfg["cluster"]
     seed = cfg.get("seed", 0)
+    device = resolve_device(cfg)
     rows = []
     for n_unknown in (2, 3, 5, 8):
         for rep in range(1):
             rng = np.random.default_rng(seed + 10 * n_unknown + rep)
             sp = make_species_set(sim["n_known"], n_unknown, rng, sim["families"], tuple(sim["sl_db"]))
             cs = make_clips(sp, sim["n_known"], sim["clips_per_species"], audio, sim, rng)
-            res, sc, te_unk, z, y_te = evaluate(cs, sim["n_known"], ncfg, seed + rep, ncfg["test_frac"])
+            res, sc, te_unk, z, y_te = evaluate(cs, sim["n_known"], ncfg, seed + rep, ncfg["test_frac"], device)
             s = sc[cc["score"]]
             thr = np.quantile(s[~te_unk], cc["flag_quantile"])
             flag = s > thr

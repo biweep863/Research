@@ -1,5 +1,5 @@
 CONFIG ?= configs/local_small.yaml
-PY := ../../.venv/bin/python
+PY ?= ../../.venv/bin/python
 
 .PHONY: run figures paper all test clean
 run:

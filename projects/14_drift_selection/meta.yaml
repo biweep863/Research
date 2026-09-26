@@ -1,0 +1,10 @@
+slug: drift_selection
+title: "Bigger Populations for Rugged Landscapes: A Population-Genetics Test of Genetic-Algorithm Sizing"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Theory"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "A genetic algorithm on NK fitness landscapes needs a population up to ~8785x larger to reliably find the optimum as epistasis K grows from 0 to 9, but the classic population-genetics explanation (a shrinking single-locus selection coefficient driving drift to dominate) is falsified directly: the measured selection coefficient s(K) grows monotonically with K, not shrinks, so Kimura's fixation formula predicts the opposite trend from what is observed."
+pdf: "paper/main.pdf"
+created: "2026-09-26"

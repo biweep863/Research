@@ -1,5 +1,5 @@
 torch>=2.2
-transformers>=4.40
+transformers>=4.45,<5
 datasets>=2.18
 accelerate>=0.30
 numpy>=1.26
@@ -10,3 +10,6 @@ pyyaml>=6.0
 pytest>=8.0
 tqdm>=4.66
 pandas>=2.2
+ripser>=0.6.4
+pyarrow>=14
+huggingface_hub>=0.24

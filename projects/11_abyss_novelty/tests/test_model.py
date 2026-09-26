@@ -16,7 +16,8 @@ from src.physics import acoustics, edna, light, radio                      # noq
 from src.novelty.features import log_mel, mel_filterbank, to_uint8, from_uint8  # noqa: E402
 from src.sim.species import FAMILIES, make_species, synth_call             # noqa: E402
 from src.sim.dataset import make_clips, make_species_set                   # noqa: E402
-from src.novelty.models import train_classifier, logits_and_embed, fit_pca_logistic  # noqa: E402
+from src.novelty.models import train_classifier, logits_and_embed, fit_pca_logistic, fit_probe  # noqa: E402
+from src.data.watkins import load_watkins  # noqa: E402
 from src.novelty import scores as S                                        # noqa: E402
 from src.novelty.cluster import cluster_novel, ari                          # noqa: E402
 from src.survey.community import logseries_abundances, sample              # noqa: E402
@@ -126,6 +127,41 @@ def test_chao1_and_good_turing():
     assert 0 <= good_turing_discovery(c) <= 1
     assert chao1(np.array([5, 3, 1, 1, 2]))[0] == 5 + 4 / 2
     assert good_turing_discovery(np.array([5, 3, 1, 1, 2])) == 2 / 12
+
+
+def test_fit_probe_beats_chance_on_clustered_embeddings():
+    rng = np.random.default_rng(6)
+    centres = rng.normal(size=(4, 32)) * 5
+    E = np.concatenate([c + 0.5 * rng.normal(size=(30, 32)) for c in centres])
+    y = np.repeat(np.arange(4), 30)
+    tr = np.arange(len(y)) % 3 != 0
+    pipe = fit_probe(E[tr], y[tr], pca_dim=8, C=1.0, seed=0)
+    lg = pipe.decision_function(E[~tr])
+    acc = np.mean(lg.argmax(1) == y[~tr])
+    assert acc > 0.8
+
+
+def test_train_classifier_device_cpu_default_matches_prior_behaviour():
+    rng = np.random.default_rng(7)
+    X = rng.normal(size=(40, 1, 16, 16)).astype(np.float32).squeeze(1)
+    y = (np.arange(40) % 3)
+    m = train_classifier(X, y, 3, epochs=2, batch=8, lr=3e-3, device="cpu")
+    lg, z = logits_and_embed(m, X, device="cpu")
+    assert lg.shape == (40, 3) and z.shape[0] == 40
+
+
+def test_load_watkins_rejects_mismatched_cache_metadata(tmp_path, monkeypatch):
+    root = tmp_path
+    (root / "data").mkdir()
+    np.savez_compressed(root / "data" / "bad_cache.npz",
+                        X=np.zeros((2, 1), dtype=np.uint8), labels=np.array(["a", "b"]),
+                        keys=np.array(["k1", "k2"]), fs=8000, n_mels=32, n_frames=32, max_per_species=1)
+    audio = {"fs_hz": 16000, "n_mels": 64, "n_frames": 96}
+    try:
+        load_watkins(root, audio, 60, "bad_cache.npz")
+        assert False, "expected ValueError for mismatched cache metadata"
+    except ValueError:
+        pass
 
 
 def test_allocation_beats_uniform_with_good_prior():

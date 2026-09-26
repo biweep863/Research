@@ -1,0 +1,40 @@
+\section{Discussion}
+
+The population-size threshold is not the surprising part of this result --
+that bigger populations help on harder landscapes is close to the null
+expectation. The surprising part is that the specific, quantitative,
+textbook mechanism for \emph{why} -- shrinking per-mutation selection
+strength letting drift dominate, exactly as Kimura's formula describes for
+a single locus in a real population -- points the wrong way. NK-model
+epistasis does not appear to dilute the effect of a single beneficial
+mutation; if anything, in landscapes with more interacting loci, a bit
+flip that does help tends to help by more, not less, on average.
+
+A more plausible mechanism, consistent with what is already known about
+NK landscapes -- that the number of local optima grows with $K$
+\cite{kauffman1987towards,weinberger1991local} -- is that the binding
+constraint at high $K$ is not single-locus fixation probability but
+population-level exploration: a small population converges onto one local
+optimum's basin before crossover and mutation can discover a better one
+elsewhere, while a larger population maintains enough simultaneous
+diversity to explore multiple basins in parallel. This is a
+population-\emph{diversity} argument, not a population-\emph{genetics}
+one in the classical single-locus sense, and it was not tested directly
+here (it would require tracking, e.g., how many distinct basins of
+attraction a population's genomes span over time). We flag it as the
+natural next hypothesis rather than claim it is confirmed.
+
+A second limitation is resolution: the local pilot's 4-point $K$ grid gave
+a genuinely weak test of linear-vs-log-linear scaling. The GPU-scale run's
+10-point grid is a materially stronger test of the same question, and it
+reaches the same conclusion (linear preferred by AIC) -- so this is not
+merely "the pilot was underpowered and the real answer is log-linear
+after all," in the spirit of this repository's project 06 pilot, but a
+result that held up under more scrutiny, not one that dissolved under it.
+The non-monotonicity in the fitted $N_c(K)$ at high $K$, however, did not
+go away with more landscape averaging (10 draws per $K$ at GPU scale vs 5
+locally), which suggests either landscape-instance variance at high $K$
+needs substantially more than 10 draws to average out, or the true
+$N_c(K)$ relationship itself is not smooth -- we cannot distinguish these
+with the current data and report the non-monotonicity as-is rather than
+picking whichever explanation is more convenient.

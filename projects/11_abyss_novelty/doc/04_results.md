@@ -65,3 +65,46 @@ scores flag the unknown well and group a few new species almost perfectly;
 obtaining that embedding for real calls needs pretraining beyond what a
 deep-sea catalogue provides. And whatever the model, rare-species statistics
 set the pace of discovery. See `paper/main.pdf`.
+
+## GPU-scale results (full Watkins dataset, pretrained backbone, larger sweeps)
+
+### Open-set novelty, synthetic (40 known + 15 unknown, up to 200 clips, 18-point sweep)
+AUROC ranges 0.72–0.97 across the sweep (base: known-class acc 0.92, best
+score Mahalanobis 0.86); the qualitative ordering (embedding-geometry scores
+> confidence scores > autoencoder/PCA) from the local pilot holds at scale.
+Full sweep (18 runs) completed in ~17 minutes on GPU.
+
+### Open-set novelty, real Watkins — the CNN-vs-pretrained-backbone comparison
+Full dataset: 1,668 clips, 31 species, 8 held out, 10 holdout draws.
+
+| | from-scratch CNN (300 epochs) | AST embedding (frozen, probe only) |
+|---|---|---|
+| Known-class accuracy | 0.70 | **0.88** |
+| max-softmax AUROC | 0.66 ± 0.08 | **0.83 ± 0.02** |
+| energy AUROC | 0.60 ± 0.09 | **0.84 ± 0.03** |
+| kNN AUROC | 0.61 ± 0.05 | **0.73 ± 0.04** |
+| Mahalanobis AUROC | 0.61 ± 0.06 | **0.74 ± 0.07** |
+| Best score | msp, 0.66 | energy, **0.84** |
+
+Paired per-draw delta on the best score: **+0.125 ± 0.041, positive in
+10/10 draws** (range +0.047 to +0.197). This confirms the local pilot's own
+diagnosis — "the bottleneck is the embedding, not the scores" — and closes
+most of the gap to the synthetic-data ceiling (AUROC 0.88) without any
+fine-tuning: the backbone is used frozen, as a drop-in embedding swap.
+`ae` and `pca_msp` are identical between the two rows by construction (both
+scores are computed from the mel features, not from either embedding —
+documented in `doc/05_decisions.md`).
+
+### Cluster and survey at scale
+U=2: ARI 0.91; U=3: 0.52; U=5: 0.94; U=8: 0.76 (compare to the local pilot's
+0.98/0.95/0.31/0.43 — the qualitative pattern of "small U clusters near-
+perfectly, mid-range U is noisier" persists, but the exact ARI per U is not
+stable across the 40× larger species/clip counts, consistent with a single
+clustering replicate per U rather than a converged estimate).
+
+1000-species survey: seen 220/1000 at 1000 sensor-hours, Chao1 275 ± 21,
+P(next detection is new) falls from 44% at 1h to <0.1% at 10,000h+. Greedy
+allocation on the satellite habitat prior ranges from **−3% at q=0.34**
+(worse than uniform — a low-quality prior can actively hurt) to +13% at
+q≥0.9, extending the local pilot's monotone q=0.5→1.0 trend down into the
+regime where the prior is actively misleading.

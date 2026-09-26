@@ -30,7 +30,7 @@ remain and where to spend sensor hours.
 # from repo root
 source .venv/bin/activate
 cd projects/11_abyss_novelty
-make test           # 10 tests: physics closed forms, mel, species, scores, clustering, estimators (~6 s)
+make test           # 13 tests: physics closed forms, mel, species, scores, clustering, estimators (~6 s)
 make run            # 5 experiments -> results/*.json (~4.5 min on a laptop CPU)
 make figures        # 6 figures + paper/macros.tex
 make paper          # compile paper/main.pdf
@@ -67,7 +67,15 @@ low-frequency sound crosses the abyss (a 180 dB call at 50 Hz: ~120 km). On a
 physically simulated soundscape, embedding-space novelty scores flag unknown
 species at AUROC 0.88 (max-softmax 0.70, autoencoder 0.56), degrade gracefully
 with range, and cluster 2–3 new species almost perfectly (ARI ≥ 0.95) but merge
-larger sets. On real Watkins calls a from-scratch CNN reaches only 0.69 AUROC —
-the bottleneck is the embedding, not the scores. Chao1 tracks unseen richness;
-the probability that the next detection is new falls from 19 % at 10 h to 0.5 %
-at 1000 h; a 90 %-reliable satellite habitat prior buys +13 % species per budget.
+larger sets. On real Watkins calls a from-scratch CNN reaches only 0.66–0.69
+AUROC — the bottleneck is the embedding, not the scores; swapping in a frozen
+pretrained audio backbone (AST) raises it to 0.84, positive in 10/10 held-out
+draws, without any fine-tuning. Chao1 tracks unseen richness; the probability
+that the next detection is new falls from 19 % at 10 h to 0.5 % at 1000 h; a
+90 %-reliable satellite habitat prior buys +13 % species per budget, while an
+unreliable one (34 %) costs −3 % relative to no prior at all.
+
+## Scaling up (results)
+Full run on 4 of 5 BEANS-Watkins shards (1,668 clips, 31 species) with the
+AST backbone: see `doc/04_results.md` for the complete CNN-vs-backbone table,
+the 18-point synthetic sweep, and the 1000-species survey.

@@ -52,10 +52,32 @@ def betti_curve(D: np.ndarray, thresholds: np.ndarray, max_dim: int = 1) -> dict
     suitable for rapid visualisation."""
     res = ripser(D, distance_matrix=True, maxdim=max_dim)
     dgms = res["dgms"]
+    return _betti_from_dgms(dgms, thresholds)
+
+
+def _persistence_from_dgms(dgms) -> dict:
+    out = {}
+    for k, d in enumerate(dgms):
+        if d.size == 0:
+            out[f"total_persistence_H{k}"] = 0.0
+            out[f"n_features_H{k}"] = 0
+            continue
+        finite = d[np.isfinite(d[:, 1])]
+        if finite.size == 0:
+            out[f"total_persistence_H{k}"] = 0.0
+            out[f"n_features_H{k}"] = 0
+            continue
+        bars = finite[:, 1] - finite[:, 0]
+        out[f"total_persistence_H{k}"] = float(bars.sum())
+        out[f"n_features_H{k}"] = int(finite.shape[0])
+    return out
+
+
+def _betti_from_dgms(dgms, thresholds: np.ndarray) -> dict:
     out = {}
     for k, dgm in enumerate(dgms):
         if dgm.size == 0:
-            out[f"betti_{k}"] = np.zeros_like(thresholds)
+            out[f"betti_{k}"] = np.zeros_like(thresholds).tolist()
             continue
         births = dgm[:, 0]
         deaths = dgm[:, 1]
@@ -64,4 +86,14 @@ def betti_curve(D: np.ndarray, thresholds: np.ndarray, max_dim: int = 1) -> dict
         for i, t in enumerate(thresholds):
             b[i] = int(np.sum((births <= t) & (deaths > t)))
         out[f"betti_{k}"] = b.tolist()
+    return out
+
+
+def summarise(D: np.ndarray, thresholds: np.ndarray, max_dim: int = 1) -> dict:
+    """Persistence + Betti curves from a single ripser call (half the cost of
+    calling persistence() and betti_curve() separately)."""
+    res = ripser(D, distance_matrix=True, maxdim=max_dim)
+    dgms = res["dgms"]
+    out = _persistence_from_dgms(dgms)
+    out.update(_betti_from_dgms(dgms, thresholds))
     return out

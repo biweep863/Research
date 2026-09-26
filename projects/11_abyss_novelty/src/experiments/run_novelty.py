@@ -6,10 +6,11 @@ training clips per species.  Writes results/novelty.json."""
 from __future__ import annotations
 
 import time
+import zlib
 
 import numpy as np
 
-from .common import dump, load_cfg
+from .common import dump, load_cfg, resolve_device
 from src.novelty import scores as S
 from src.novelty.models import (fit_pca_logistic, logits_and_embed, recon_error, train_autoencoder,
                                 train_classifier)
@@ -17,21 +18,21 @@ from src.sim.dataset import make_clips, make_species_set
 from utils.stats import bootstrap_ci
 
 
-def evaluate(cs, n_known, ncfg, seed, test_frac):
+def evaluate(cs, n_known, ncfg, seed, test_frac, device="cpu"):
     rng = np.random.default_rng(seed)
     is_test = rng.random(len(cs.y)) < test_frac
     tr = ~is_test & cs.known
     te = is_test | ~cs.known
     te_unk = ~cs.known[te]
     c = ncfg["cnn"]
-    model = train_classifier(cs.X[tr], cs.y[tr], n_known, c["embed"], c["epochs"], c["lr"], c["batch"], seed)
-    lg, z = logits_and_embed(model, cs.X[te]); _, ztr = logits_and_embed(model, cs.X[tr])
+    model = train_classifier(cs.X[tr], cs.y[tr], n_known, c["embed"], c["epochs"], c["lr"], c["batch"], seed, device)
+    lg, z = logits_and_embed(model, cs.X[te], device); _, ztr = logits_and_embed(model, cs.X[tr], device)
     a = ncfg["ae"]
-    ae = train_autoencoder(cs.X[tr], a["latent"], a["epochs"], a["lr"], a["batch"], seed)
+    ae = train_autoencoder(cs.X[tr], a["latent"], a["epochs"], a["lr"], a["batch"], seed, device)
     pipe = fit_pca_logistic(cs.X[tr], cs.y[tr], ncfg["pca_dim"], seed)
     p_pca = pipe.predict_proba(cs.X[te].reshape(te.sum(), -1))
     sc = {"msp": S.msp(lg), "energy": S.energy(lg), "knn": S.knn(ztr, z, ncfg["knn_k"]),
-          "maha": S.mahalanobis(ztr, cs.y[tr], z), "ae": recon_error(ae, cs.X[te]), "pca_msp": 1 - p_pca.max(1)}
+          "maha": S.mahalanobis(ztr, cs.y[tr], z), "ae": recon_error(ae, cs.X[te], device), "pca_msp": 1 - p_pca.max(1)}
     res = {k: S.metrics(v, te_unk) for k, v in sc.items()}
     res["known_acc_cnn"] = float(np.mean(lg.argmax(1)[~te_unk] == cs.y[te][~te_unk]))
     res["known_acc_pca"] = float(np.mean(pipe.classes_[p_pca.argmax(1)][~te_unk] == cs.y[te][~te_unk]))
@@ -55,14 +56,17 @@ def main():
     cfg, out_dir = load_cfg()
     ncfg, sim, audio = cfg["novelty"], cfg["sim"], cfg["audio"]
     seed = cfg.get("seed", 0)
+    device = resolve_device(cfg)
     rows = []
 
     def run(tag, n_known, n_unknown, clips, range_km):
-        rng = np.random.default_rng(seed + hash(tag) % 1000)
+        # crc32 instead of hash(): Python randomizes str hash per process, which
+        # made synthetic species draws non-reproducible across runs (doc/03).
+        rng = np.random.default_rng(seed + zlib.crc32(tag.encode()) % 1000)
         sp = make_species_set(n_known, n_unknown, rng, sim["families"], tuple(sim["sl_db"]))
         cs = make_clips(sp, n_known, clips, audio, sim, rng, range_km=range_km)
         t0 = time.time()
-        res, _, _, _, _ = evaluate(cs, n_known, ncfg, seed, ncfg["test_frac"])
+        res, _, _, _, _ = evaluate(cs, n_known, ncfg, seed, ncfg["test_frac"], device)
         res.update({"tag": tag, "n_known": n_known, "n_unknown": n_unknown, "clips_per_species": clips,
                     "range_km": list(range_km), "time_s": time.time() - t0})
         rows.append(res)

@@ -1,0 +1,68 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Bigger Populations for Rugged Landscapes: A Population-Genetics
+Test of Genetic-Algorithm Sizing}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{September 26, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Genetic algorithms borrow their metaphor from evolution but
+rarely borrow population genetics' own quantitative theory of when
+selection stops dominating over chance. We ask whether a genetic algorithm
+on an NK fitness landscape needs a population above a critical size $N_c$
+to reliably reach the global optimum, and whether population genetics'
+classic mechanism for such a threshold -- a per-mutation selection
+coefficient $s$ shrinking until drift dominates (Kimura's fixation
+formula, $N_c \approx 1/s$) -- explains it. On a GPU-scale sweep ($L=20$,
+$K=0..9$, averaged over \SweepNumK\ landscape draws per $K$, \SweepReplicates\
+replicates), the population size needed to reliably reach the optimum
+grows by a factor of $\sim$8785 from $K=0$ ($N_c\approx\NcKZero$)
+to $K=9$ ($N_c\approx\NcKNine$) -- a real, large threshold, first seen in a
+4-point local pilot ($L=16$, $K\in\{0,2,4,6\}$: $N_c\approx$ 2.7 to 469, a
+175x increase) and confirmed here at more than double the $K$-resolution.
+But the mechanism is falsified directly, and more cleanly than in the
+pilot: the measured selection coefficient $s(K)$ increases
+\emph{monotonically} across all 10 points (\SKZero{} $\to$ \SKNine),
+not decreasing as the hypothesis required, so Kimura's formula predicts
+$N_c$ should \emph{fall} monotonically ($\NcKimuraKZero
+\to \NcKimuraKNine$) -- the opposite of what is observed. A model
+comparison between linear and log-linear scaling of $N_c(K)$ prefers the
+\FitPreferred{} fit (AIC \FitLinearAic{} vs \FitLogLinearAic) at both
+scales, and the fitted $N_c(K)$ itself is non-monotonic at high $K$ (e.g.
+$K=5$ exceeds $K=6$) even after averaging over 10 landscapes per $K$,
+which we report rather than smooth over. The population-size threshold
+appears real; the classical single-locus drift/selection mechanism for it
+is not the explanation, and a multi-peak metastability argument is
+proposed as a more plausible alternative, not yet tested directly. The
+entire pipeline -- NK landscape, batched GA, effective-population-size and
+fixation-probability analysis -- is one vectorised torch implementation
+that runs unchanged on CPU or GPU by moving tensors to the configured
+device; a naive CPU-generator-then-transfer approach to the GA's own
+random draws was, empirically, the dominant cost on GPU (a 110x slowdown
+at $N=1024$ vs $N=4$), fixed by drawing randomness with a device-native
+generator instead -- a reminder that vectorised batch size is not the only
+thing that needs to move to the GPU.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_methods.tex}
+\input{sections/04_results.tex}
+\input{sections/05_discussion.tex}
+\input{sections/06_conclusion.tex}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
