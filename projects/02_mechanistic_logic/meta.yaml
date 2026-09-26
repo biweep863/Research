@@ -5,6 +5,6 @@ year: 2026
 topic: "Interpretability"
 type: "Preprint"
 venue: "arXiv preprint"
-tldr: "Linear probes on GPT-2 recover logical validity across a natural-language and an OOD conlang surface, with moderate cross-surface transfer and no purely logic-specific attention head."
+tldr: "Linear probes on GPT-2 and Pythia-2.8B recover logical validity across a natural-language and an OOD conlang surface at near-perfect accuracy, but cross-surface transfer is weaker at 2.8B (0.58/0.51) than at GPT-2 scale (0.67/0.59), and no single attention head is logic-specific at either scale."
 pdf: "paper/main.pdf"
 created: "2026-06-16"

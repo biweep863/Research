@@ -70,4 +70,46 @@ We did not find a strictly logic-specific head, but the probe results are
 the more important quantitative claim. Cross-surface transfer at
 $\gptTwoCrossEnCl$ is statistically distinguishable from $0.5$ given
 $\sim$$320$ test points per direction (binomial 95\% CI excludes $0.5$);
-this is the central empirical finding.
+this is the central empirical finding at GPT-2 scale.
+
+\subsection{Pythia-2.8B: a scale puzzle}
+\label{sec:pythia}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/cross_pythiaTwoEightb.pdf}
+\caption{Cross-surface transfer at Pythia-2.8B scale. Both directions
+still beat chance, but the peaks
+($\pythiaTwoEightbCrossEnCl$/$\pythiaTwoEightbCrossClEn$) are lower than
+GPT-2's ($\gptTwoCrossEnCl$/$\gptTwoCrossClEn$).}
+\label{fig:cross-pythia}
+\end{figure}
+
+Probe accuracy is still near-perfect at 2.8B scale: $\pythiaTwoEightbProbeEnPeak$
+(English, layer $\pythiaTwoEightbProbeEnPeakLayer$) and
+$\pythiaTwoEightbProbeClPeak$ (conlang, layer
+$\pythiaTwoEightbProbeClPeakLayer$). But cross-surface transfer is
+\emph{weaker} than at GPT-2 scale: $\pythiaTwoEightbCrossEnCl$
+(English$\to$conlang, vs.\ $\gptTwoCrossEnCl$ at GPT-2 scale) and
+$\pythiaTwoEightbCrossClEn$ (conlang$\to$English), the latter barely
+distinguishable from chance. Taken at face value, the linearly decodable
+representation a probe recovers does not become more surface-form-
+invariant with scale -- if anything, the opposite in this comparison. A
+probe's cross-surface transfer measures whether \emph{the same linear
+direction} works on both surfaces; a larger model could encode validity
+more accurately per-surface while using two increasingly different
+directions to do it, which is exactly compatible with near-perfect
+within-surface accuracy alongside weaker cross-surface transfer.
+
+Ablation effects are an order of magnitude smaller at 2.8B: the worst
+head (layer $\pythiaTwoEightbWorstHeadLayer$, head
+$\pythiaTwoEightbWorstHeadIndex$) has
+$\Delta\text{Acc}=\pythiaTwoEightbWorstHeadDeltaAcc$ and
+$\Delta\text{LM}=\pythiaTwoEightbWorstHeadDeltaLM$ (both tiny, and of
+opposite sign to each other, unlike GPT-2's worst head). Across all 1024
+heads, $\Delta\text{Acc}$ and $\Delta\text{LM}$ are essentially
+uncorrelated ($r\approx0.03$), whereas GPT-2's clearer worst-case link
+between the two metrics suggested at least a loosely shared substrate.
+This is consistent with logical-validity behaviour becoming more
+distributed across heads as the model grows, rather than concentrating
+into a smaller, more identifiable circuit.

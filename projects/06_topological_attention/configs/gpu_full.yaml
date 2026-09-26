@@ -2,23 +2,46 @@ project: topological_attention
 seed: 0
 device: cuda
 dtype: bf16
+deterministic: false   # true is slower; flip on for a final reproducibility run
 
 models:
-  - name: meta-llama/Meta-Llama-3-8B
+  # Meta-Llama-3-8B is the intended model (see doc/05_decisions.md), but its
+  # HF access request was still pending approval at run time. Substituting
+  # the plan's documented fallback: Qwen2.5-7B (Apache-2.0, ungated), a
+  # comparably-sized model, so the run isn't blocked on an external approval
+  # of unknown duration. Swap back once Llama access is granted.
+  - name: meta-llama/Meta-Llama-3-8B  # access approved mid-session; run as replication of qwen3_8b
     short: llama3_8b
+    device_map: auto              # exact bf16 weights, partial CPU offload (12GB VRAM)
+    max_memory: {0: "10GiB", cpu: "24GiB"}
+    quantization: none            # fallback order if this fails: 8bit, then 4bit
 
 corpus:
-  n_truthful: 200
+  n_truthful: 200                 # nominal; actual N is pair_source.n_pairs
   n_hallucinated: 200
   max_tokens: 256
 
-# in the GPU configuration we would source truthful/hallucinated pairs
-# from TruthfulQA + an offline hallucination detector. Locally we use the
-# curated pairs below.
-truthful_pairs: []   # use TruthfulQA via the loader at gpu time
+# TruthfulQA-sourced pairs, matched exactly by continuation token length
+# (see src/data/truthfulqa_loader.py and doc/01_dataset.md). Falls back to
+# src/data/truthful_fallback.py only if pair_source is also absent.
+truthful_pairs: []
+pair_source:
+  name: truthfulqa
+  hf_id: truthfulqa/truthful_qa
+  config: generation
+  split: validation
+  n_pairs: -1                     # -1 = all eligible pairs (target >= 300-400)
+  max_len_diff_tokens: 0           # exact match; loader logs eligibility at 0/1/2
+
+# secondary graph variant to check the BOS attention-sink is not driving H0
+graph:
+  drop_first_token_variant: true
 
 filtration:
   thresholds: 32
   max_dimension: 2
+
+tda:
+  n_workers: 12   # ripser parallelism across (pair, kind, layer) jobs
 
 output_dir: results

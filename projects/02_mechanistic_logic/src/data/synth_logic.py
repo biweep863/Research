@@ -68,6 +68,36 @@ def en_or(rng, valid: bool) -> str:
     return f"{p} or {q}. {p[:0]}It is not the case that {p}. Therefore, {concl}. This argument is"
 
 
+def en_syllogism_celarent(rng, valid: bool) -> str:
+    a, b, c = rng.sample(["birds", "fish", "mammals", "insects", "reptiles", "spiders"], 3)
+    concl = f"no {a} are {c}" if valid else f"some {a} are {c}"
+    return f"No {b} are {c}. All {a} are {b}. Therefore, {concl}. This argument is"
+
+
+def en_syllogism_darii(rng, valid: bool) -> str:
+    a, b, c = rng.sample(["birds", "fish", "mammals", "insects", "reptiles", "spiders"], 3)
+    concl = f"some {a} are {c}" if valid else f"no {a} are {c}"
+    return f"All {b} are {c}. Some {a} are {b}. Therefore, {concl}. This argument is"
+
+
+def en_syllogism_ferio(rng, valid: bool) -> str:
+    a, b, c = rng.sample(["birds", "fish", "mammals", "insects", "reptiles", "spiders"], 3)
+    concl = f"some {a} are not {c}" if valid else f"all {a} are {c}"
+    return f"No {b} are {c}. Some {a} are {b}. Therefore, {concl}. This argument is"
+
+
+def en_xor(rng, valid: bool) -> str:
+    p, q = rng.sample(["the switch is up", "the switch is down"], 2)
+    concl = f"not {q}" if valid else q
+    return f"Exactly one of the following is true: {p}; {q}. {p}. Therefore, {concl}. This argument is"
+
+
+def en_not(rng, valid: bool) -> str:
+    p = rng.choice(["the alarm is armed", "the gate is locked", "the tank is full"])
+    concl = p if valid else f"not {p}"
+    return f"It is not the case that not {p}. Therefore, {concl}. This argument is"
+
+
 # ---------- Conlang templates ----------
 def cl_modus_ponens(rng, valid: bool) -> str:
     a = atom(rng)
@@ -101,19 +131,61 @@ def cl_or(rng, valid: bool) -> str:
     return f"{a} {TOKENS['or']} {b} . {TOKENS['not']} {a} . {TOKENS['therefore']} {concl} ."
 
 
+def cl_syllogism_celarent(rng, valid: bool) -> str:
+    a, b, c = atom(rng), atom(rng), atom(rng)
+    concl = f"{a} {TOKENS['impl']} {TOKENS['not']} {c}" if valid else f"{a} {TOKENS['impl']} {c}"
+    return (f"{b} {TOKENS['impl']} {TOKENS['not']} {c} . {a} {TOKENS['impl']} {b} . "
+            f"{TOKENS['therefore']} {concl} .")
+
+
+def cl_syllogism_darii(rng, valid: bool) -> str:
+    a, b, c = atom(rng), atom(rng), atom(rng)
+    concl = f"{a} {TOKENS['impl']} {c}" if valid else f"{a} {TOKENS['impl']} {TOKENS['not']} {c}"
+    return f"{b} {TOKENS['impl']} {c} . {a} {TOKENS['impl']} {b} . {TOKENS['therefore']} {concl} ."
+
+
+def cl_syllogism_ferio(rng, valid: bool) -> str:
+    a, b, c = atom(rng), atom(rng), atom(rng)
+    concl = f"{a} {TOKENS['impl']} {TOKENS['not']} {c}" if valid else f"{a} {TOKENS['impl']} {c}"
+    return f"{b} {TOKENS['impl']} {TOKENS['not']} {c} . {a} {TOKENS['impl']} {b} . {TOKENS['therefore']} {concl} ."
+
+
+def cl_xor(rng, valid: bool) -> str:
+    a, b = atom(rng), atom(rng)
+    concl = f"{TOKENS['not']} {b}" if valid else b
+    return (f"{a} {TOKENS['or']} {b} . {TOKENS['not']} ( {a} {TOKENS['and']} {b} ) . {a} . "
+            f"{TOKENS['therefore']} {concl} .")
+
+
+def cl_not(rng, valid: bool) -> str:
+    a = atom(rng)
+    concl = a if valid else f"{TOKENS['not']} {a}"
+    return f"{TOKENS['not']} {TOKENS['not']} {a} . {TOKENS['therefore']} {concl} ."
+
+
 _EN = {
     "modus_ponens": en_modus_ponens,
     "modus_tollens": en_modus_tollens,
     "syllogism_barbara": en_syllogism_barbara,
+    "syllogism_celarent": en_syllogism_celarent,
+    "syllogism_darii": en_syllogism_darii,
+    "syllogism_ferio": en_syllogism_ferio,
     "and_chain": en_and,
     "or_chain": en_or,
+    "xor_chain": en_xor,
+    "not_chain": en_not,
 }
 _CL = {
     "modus_ponens": cl_modus_ponens,
     "modus_tollens": cl_modus_tollens,
     "syllogism_barbara": cl_syllogism_barbara,
+    "syllogism_celarent": cl_syllogism_celarent,
+    "syllogism_darii": cl_syllogism_darii,
+    "syllogism_ferio": cl_syllogism_ferio,
     "and_chain": cl_and,
     "or_chain": cl_or,
+    "xor_chain": cl_xor,
+    "not_chain": cl_not,
 }
 
 

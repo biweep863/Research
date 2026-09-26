@@ -1,0 +1,22 @@
+project: drift_selection
+seed: 0
+device: cpu
+
+sweep:
+  L: 16
+  k_grid: [0, 2, 4, 6]
+  n_grid: [4, 8, 16, 32, 64, 128, 256]
+  replicates: 100
+  landscapes_per_k: 5
+  generations: 150
+  p_crossover: 0.7
+  p_mutation: 0.02
+  success_tol: 1.0e-6
+
+effective_size:
+  dfe_samples: 2000
+  ne_probe_n: 100
+  ne_replicates: 30
+  ne_generations: 100
+
+output_dir: results

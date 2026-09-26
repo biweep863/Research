@@ -57,11 +57,11 @@ def _tensor(X: np.ndarray) -> torch.Tensor:
 
 
 def train_classifier(X: np.ndarray, y: np.ndarray, n_classes: int, embed: int = 64, epochs: int = 18,
-                     lr: float = 2e-3, batch: int = 64, seed: int = 0) -> CNNClassifier:
+                     lr: float = 2e-3, batch: int = 64, seed: int = 0, device: str = "cpu") -> CNNClassifier:
     torch.manual_seed(seed)
-    model = CNNClassifier(n_classes, embed)
+    model = CNNClassifier(n_classes, embed).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
-    Xt, yt = _tensor(X), torch.as_tensor(y, dtype=torch.long)
+    Xt, yt = _tensor(X).to(device), torch.as_tensor(y, dtype=torch.long, device=device)
     n = len(Xt)
     g = torch.Generator().manual_seed(seed)
     model.train()
@@ -77,11 +77,11 @@ def train_classifier(X: np.ndarray, y: np.ndarray, n_classes: int, embed: int = 
 
 
 def train_autoencoder(X: np.ndarray, latent: int = 32, epochs: int = 18, lr: float = 2e-3, batch: int = 64,
-                      seed: int = 0) -> ConvAE:
+                      seed: int = 0, device: str = "cpu") -> ConvAE:
     torch.manual_seed(seed)
-    model = ConvAE(latent, shape=X.shape[1:])
+    model = ConvAE(latent, shape=X.shape[1:]).to(device)
     opt = torch.optim.Adam(model.parameters(), lr=lr)
-    Xt = _tensor(X)
+    Xt = _tensor(X).to(device)
     n = len(Xt)
     g = torch.Generator().manual_seed(seed)
     model.train()
@@ -96,15 +96,15 @@ def train_autoencoder(X: np.ndarray, latent: int = 32, epochs: int = 18, lr: flo
 
 
 @torch.no_grad()
-def logits_and_embed(model: CNNClassifier, X: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    out, z = model(_tensor(X), return_embed=True)
-    return out.numpy(), z.numpy()
+def logits_and_embed(model: CNNClassifier, X: np.ndarray, device: str = "cpu") -> tuple[np.ndarray, np.ndarray]:
+    out, z = model(_tensor(X).to(device), return_embed=True)
+    return out.cpu().numpy(), z.cpu().numpy()
 
 
 @torch.no_grad()
-def recon_error(model: ConvAE, X: np.ndarray) -> np.ndarray:
-    Xt = _tensor(X)
-    return ((model(Xt) - Xt) ** 2).mean(dim=(1, 2, 3)).numpy()
+def recon_error(model: ConvAE, X: np.ndarray, device: str = "cpu") -> np.ndarray:
+    Xt = _tensor(X).to(device)
+    return ((model(Xt) - Xt) ** 2).mean(dim=(1, 2, 3)).cpu().numpy()
 
 
 def fit_pca_logistic(X: np.ndarray, y: np.ndarray, dim: int = 40, seed: int = 0):
@@ -114,4 +114,21 @@ def fit_pca_logistic(X: np.ndarray, y: np.ndarray, dim: int = 40, seed: int = 0)
     pipe = make_pipeline(PCA(n_components=min(dim, len(X) - 1, X[0].size), random_state=seed),
                          LogisticRegression(max_iter=2000, C=1.0))
     pipe.fit(X.reshape(len(X), -1), y)
+    return pipe
+
+
+def fit_probe(E_tr: np.ndarray, y_tr: np.ndarray, pca_dim: int = 128, C: float = 1.0, seed: int = 0):
+    """Deterministic sklearn probe (StandardScaler -> PCA -> multinomial
+    logistic regression) trained on frozen backbone embeddings. Used on the
+    real-data path with a pretrained backbone in place of the CNN, since
+    sklearn avoids the run-to-run CPU/GPU non-determinism noted in doc/03
+    for from-scratch torch training."""
+    from sklearn.decomposition import PCA
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.pipeline import make_pipeline
+    from sklearn.preprocessing import StandardScaler
+    dim = min(pca_dim, len(E_tr) - 1, E_tr.shape[1])
+    pipe = make_pipeline(StandardScaler(), PCA(n_components=dim, random_state=seed),
+                         LogisticRegression(max_iter=5000, C=C))
+    pipe.fit(E_tr, y_tr)
     return pipe

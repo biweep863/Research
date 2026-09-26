@@ -5,6 +5,6 @@ year: 2026
 topic: "Ocean"
 type: "Preprint"
 venue: "arXiv preprint"
-tldr: "No satellite signal penetrates more than ~100 m of seawater, so the abyss can only be heard, sampled (eDNA) or visited; with a passive-sonar budget showing low-frequency sound reaches hadal depths, an open-set AI trained on known calls flags unknown species at AUROC ~0.9 on synthetic and real (Watkins) bioacoustics, clusters them into candidate new species, and Chao/Good-Turing estimates plus a satellite habitat prior say how many remain and where to spend sensor hours."
+tldr: "No satellite signal penetrates more than ~100 m of seawater, so the abyss can only be heard, sampled (eDNA) or visited; with a passive-sonar budget showing low-frequency sound reaches hadal depths, an open-set AI trained on known calls flags unknown species at AUROC ~0.9 on synthetic bioacoustics and, on real (Watkins) calls, AUROC 0.66 with a from-scratch embedding rising to 0.84 with a frozen pretrained audio backbone (positive in 10/10 held-out draws); it clusters flagged clips into candidate new species, and Chao/Good-Turing estimates plus a satellite habitat prior say how many remain and where to spend sensor hours."
 pdf: "paper/main.pdf"
 created: "2026-09-15"

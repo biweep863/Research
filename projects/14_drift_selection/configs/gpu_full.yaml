@@ -1,0 +1,23 @@
+project: drift_selection
+seed: 0
+device: cuda
+deterministic: false
+
+sweep:
+  L: 20
+  k_grid: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  n_grid: [4, 8, 16, 32, 64, 128, 256, 512, 1024]
+  replicates: 1000
+  landscapes_per_k: 10
+  generations: 200
+  p_crossover: 0.7
+  p_mutation: 0.02
+  success_tol: 1.0e-6
+
+effective_size:
+  dfe_samples: 20000
+  ne_probe_n: 500
+  ne_replicates: 100
+  ne_generations: 200
+
+output_dir: results

@@ -21,13 +21,34 @@
 Watkins Marine Mammal Sound Database "best of" cuts (WHOI), packaged by the
 BEANS benchmark (Hagiwara et al. 2022) and mirrored on the Hugging Face Hub as
 `DBD-research-group/beans_watkins` (parquet with wav bytes + species label).
-The WHOI site was under maintenance at build time. We downloaded two of the
-four shards (train-00000 + valid, 437 MB): 805 clips of 31 species; 796 clips
+The WHOI site was under maintenance at build time. Local pilot: two of the
+five shards (train-00000 + valid, 437 MB): 805 clips of 31 species; 796 clips
 of 29 species have ≥ 8 clips and are used. Clips are resampled to 16 kHz,
 cropped/padded to 2 s, featurised identically, quantised to uint8 and cached
 as `data/watkins_mel.npz` (3.1 MB, checked in). Raw shards are git-ignored;
 with `WATKINS_DIR` or `data/raw/` the cache rebuilds. Licence: research use
 per WHOI/BEANS.
+
+### GPU-scale real data
+All four non-`train_low` shards are downloaded (`src/data/fetch_watkins.py`;
+`train_low` is excluded as a likely subset of `train`, which would otherwise
+let the same clip land in both a training split and a held-out split). Clips
+are deduplicated by the sha1 of their wav bytes across shards. This yields
+1,668 clips across 31 species (vs. 796/29 locally), cached at
+`data/watkins_mel_full_32k_96x128.npz`.
+
+A frozen pretrained audio embedding is added alongside the from-scratch CNN
+on this path: **MIT/ast-finetuned-audioset-10-10-0.4593** (Audio Spectrogram
+Transformer, BSD-3, not gated, 86.6M params, no new dependency — its
+`transformers` feature extractor falls back to a numpy mel filterbank when
+`torchaudio` is absent). Waveforms for this path use the clip's native
+duration up to 10 s (AST's own training length) at 16 kHz, resampled with
+`scipy.signal.resample_poly` (anti-aliased, unlike the mel pipeline's
+`np.interp`). Embeddings are cached at `data/watkins_emb_ast_finetuned_audioset_10_10_0_4593.npz`
+(float16, 768-d, ~3 MB). Caveats: 16 kHz halves the Nyquist frequency
+available to high-frequency odontocete clicks (same limit as the local mel
+pipeline); AudioSet has a "whale vocalization" class with no confirmed
+Watkins overlap, but leakage cannot be fully ruled out.
 
 ## Survey community (`src/survey/community.py`)
 300 species with Fisher log-series relative abundances (α = 40); a sensor

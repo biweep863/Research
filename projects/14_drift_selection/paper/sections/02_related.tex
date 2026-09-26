@@ -1,0 +1,21 @@
+\section{Related work}
+
+Goldberg and Deb's population-sizing theory \cite{goldberg1991sizing}
+reasons about the statistical decision the GA makes between competing
+building blocks under fitness-variance noise, not about drift/selection
+balance in the population-genetics sense; it gives a population-sizing
+rule but not a mapping onto Kimura's fixation formula. ``Effective
+population size'' appears in the evolutionary-computation literature in
+the context of genetic drift reducing diversity in small GA populations,
+but we are not aware of a prior direct test of Kimura's formula, fed a
+landscape-measured selection coefficient, against a directly-fitted
+critical population size on an NK-model ruggedness sweep -- the specific
+comparison this paper reports. The NK model's ruggedness properties (local
+optima proliferating with $K$) are established
+\cite{kauffman1987towards,weinberger1991local}; we use $K$ only as a
+ruggedness dial, not to re-derive those properties. Temporal effective
+population size estimators \cite{krimbas1971drift,waples1989temporal}
+are standard population-genetics tools, applied here as a sanity check
+that the GA's population behaves like a finite Wright-Fisher process at
+all, which is a precondition for comparing it to Kimura's formula in the
+first place.

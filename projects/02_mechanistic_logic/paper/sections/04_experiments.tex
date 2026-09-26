@@ -1,25 +1,31 @@
 \section{Experiments}
 
-\paragraph{Model.} GPT-2 small (124M parameters, 12 transformer blocks, 12
-attention heads per block). The \texttt{gpu\_full.yaml} configuration
-switches to Pythia-2.8B without code changes.
+\paragraph{Models.} GPT-2 small (124M parameters, 12 blocks, 12 heads/block,
+local pilot) and Pythia-2.8B (32 blocks, 32 heads/block, GPU-scale run).
+The ablation hook required a GPT-NeoX/Pythia branch (Pythia's attention
+output projection lives at a different module path than GPT-2's),
+verified against the tiny \texttt{pythia-70m} before the full sweep.
 
-\paragraph{Data.} $5$ templates $\times 2$ surfaces $\times 64$ items
-$= 640$ prompts. Generation is fully deterministic given the seed.
+\paragraph{Data.} Local pilot: $5$ templates $\times2$ surfaces $\times64$
+items $=640$ prompts. GPU-scale: $10$ templates (adding four categorical-
+syllogism moods and XOR/double-negation chains, absent from the local
+generator and implemented for this run) $\times2$ surfaces $\times256$
+items $=5120$ prompts. Generation is fully deterministic given the seed.
 
 \paragraph{Probes.} 5-fold stratified cross-validated logistic regression
 ($C=1.0$, $\ell_2$-regularised). One probe per (layer, surface).
 
-\paragraph{Ablation.} All $144$ heads of GPT-2 are ablated one at a time
-($12 \times 12$). For each head we score (a) logic accuracy on a held-out
-subset of $60$ prompts and (b) LM cross-entropy on a fixed
-$\sim$50-token neutral snippet. Per-head wall time is $\sim$1 s on CPU;
-the full sweep completes in about 2.5 minutes.
+\paragraph{Ablation.} All attention heads are ablated one at a time: $144$
+for GPT-2 ($12\times12$), $1024$ for Pythia-2.8B ($32\times32$), scored on
+(a) logic accuracy on a held-out subset of $80$ prompts and (b) LM
+cross-entropy on a fixed neutral snippet. The GPT-2 sweep completes in
+about 2.5 minutes on CPU; the Pythia-2.8B sweep in about 37 minutes on a
+12GB GPU ($\approx2.2$s/head).
 
-\paragraph{Baseline.} With no ablation, GPT-2 small achieves
-$\gptTwoBaselineAcc$ next-token accuracy on the validity-prediction task
-and an LM cross-entropy of $\gptTwoBaselineLM$ on the neutral snippet. We
-emphasise that GPT-2 is a small model: the next-token validity-prediction
-task is not the right scale for it to perform well at logic without
-fine-tuning. Probes therefore carry the load of detecting any internal
-structure that exists despite the baseline being near chance.
+\paragraph{Baseline.} With no ablation, GPT-2 achieves $\gptTwoBaselineAcc$
+next-token accuracy on the validity-prediction task; Pythia-2.8B achieves
+$\pythiaTwoEightbBaselineAcc$ -- \emph{below} chance on the 10-template
+mix, i.e.\ the raw zero-shot preference between `` valid'' and `` invalid''
+is miscalibrated in direction on average, not merely noisy. Both baselines
+are near or below chance, so probes carry the load of detecting internal
+structure the model does not straightforwardly act on.

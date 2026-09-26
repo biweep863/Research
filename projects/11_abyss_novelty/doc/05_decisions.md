@@ -67,3 +67,31 @@ reliability from a coin flip to perfect makes that explicit (no gain at 0.5,
 ## Numbers are macros
 Every number in the paper comes from `paper/macros.tex`; LaTeX command names
 cannot contain digits, so the figure script maps them to words.
+
+## Pretrained backbone: AST, not a from-scratch fix
+The local pilot's own limitation ("the fix is a pretrained audio embedding")
+is implemented as `MIT/ast-finetuned-audioset-10-10-0.4593`, frozen, feeding
+a deterministic sklearn probe (`fit_probe`) rather than another from-scratch
+torch classifier — this avoids the CPU/GPU training non-determinism already
+noted in `doc/03_experiments_log.md` for the CNN path. `ae` and `pca_msp` are
+reused from the CNN path's mel features rather than recomputed on the
+backbone embedding, since neither score is architecture-specific (both look
+at mel-space reconstruction/variance, not the classifier's own embedding
+geometry); this is stated rather than silently assumed.
+
+## train_low excluded, not "the full dataset"
+BEANS-Watkins ships five shards; `train_low` is very likely a subset of
+`train` (unconfirmed from the dataset card alone), and including it risked
+duplicate clips crossing the train/held-out boundary, artificially inflating
+AUROC. sha1-based deduplication across the four shards that *are* used
+catches exact duplicates but not re-cut segments of the same recording — a
+residual leakage risk, listed rather than assumed away.
+
+## GPU passthrough required a real fix, not just a flag
+`run_novelty.py` and `run_cluster.py` build a torch `CNNClassifier`/`ConvAE`
+per sweep point but never passed a `device` argument to `train_classifier`
+(added in `models.py` for the `run_real.py` backbone comparison) — so the
+first `gpu_full` sweep ran entirely on CPU as if the GPU flag didn't exist,
+taking a projected many hours for 18 points. The 17-minute GPU sweep
+required plumbing `resolve_device(cfg)` through both entry points, not just
+enabling `device: cuda` in the config.

@@ -1,0 +1,41 @@
+\section{Methods}
+
+\subsection{NK landscapes}
+A genome is a bitstring of length $L$. Locus $i$'s fitness contribution is
+looked up from an independent random table indexed by its own bit and the
+next $K$ loci (circular adjacency); total fitness is the mean contribution
+over all $L$ loci, in $[0,1)$. $K=0$ is purely additive; larger $K$
+multiplies the number of local optima \cite{kauffman1987towards}. $L$ is
+kept small enough (16 locally, 20 at GPU scale) that the true global
+optimum is known exactly by brute-force enumeration, avoiding any
+ambiguity in the success criterion below.
+
+\subsection{Genetic algorithm}
+A generational GA with 2-way tournament selection, uniform crossover, and
+independent bit-flip mutation, batched across $(\text{replicates},
+\text{population}, L)$ as a single tensor so the identical code runs on
+CPU or GPU. There is no elitism: it has no population-genetics analogue
+and would make comparing to a Wright-Fisher process circular.
+
+\subsection{Success criterion and threshold fit}
+A replicate succeeds at generation $g$ if its population's best fitness
+reaches the exact global optimum within $10^{-6}$. $P(\text{success})$ at
+$(N,K)$ is averaged over `landscapes\_per\_k` independent landscape draws
+(\SweepReplicates\ replicates each), then fit with a logistic regression on
+$\log_2 N$ (weighted by the binomial trial counts) to extract $N_c$, the
+population size where fitted success probability crosses 0.5, with a
+bootstrap 95\% CI over trial-level noise.
+
+\subsection{Selection coefficient and Kimura's formula}
+$s(K)$ is the mean \emph{positive} relative fitness change of single
+random-locus flips on random genomes -- the mean of the beneficial tail of
+the landscape's distribution of fitness effects. Kimura's fixation formula
+(Section~1) with the measured $s(K)$ gives $N_c^{\text{Kimura}}(K) =
+1/s(K)$, compared directly against the logistic-fit $N_c(K)$.
+
+\subsection{Effective population size}
+As a sanity check that the GA is behaving like a finite Wright-Fisher
+population at all, $N_e$ is estimated from one tracked locus's
+allele-frequency trajectory via the temporal estimator $N_e = \bar
+p(1-\bar p)/(2\,\mathrm{Var}(\Delta p))$
+\cite{krimbas1971drift,waples1989temporal}.

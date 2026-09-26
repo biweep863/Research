@@ -15,3 +15,29 @@ text and forward it, capturing the $12$ attention matrices.
 
 \paragraph{Wall time.} The full pipeline runs in $\approx 2$ seconds
 on CPU for the local pilot.
+
+\subsection{GPU-scale run}
+\paragraph{Pairs.} Sourced from TruthfulQA (\texttt{generation} split):
+for each question, the correct answer and the closest-length incorrect
+answer (by tokenizer-specific token count) are used as the truthful and
+hallucinated continuations, so each model gets its own exactly
+length-matched set ($\gptTwotqaNumPairs$ pairs for GPT-2,
+$\qwenThreeEightbNumPairs$ for Qwen3-8B, $\llamaThreeEightbNumPairs$ for
+Llama-3-8B). One pair per question keeps pairs independent.
+
+\paragraph{Models.} Meta-Llama-3-8B was the intended scaled model, but its
+gated Hugging Face access was still pending when the run needed to start;
+Qwen3-8B (Apache-2.0, ungated) was substituted per a documented fallback
+order. Access was approved mid-session, so Llama-3-8B was added as a
+further replication rather than a replacement, alongside a GPT-2 control
+on the same TruthfulQA-sourced pairs (to separate ``bigger model'' from
+``more/different data''). Both 7--8B models run in bf16 with
+\texttt{device\_map=auto} CPU offload on a 12GB-VRAM GPU -- exact
+precision, not quantised.
+
+\paragraph{Primary analysis (pre-registered).} A paired $t$-test per layer
+on $H_0$ total persistence (truthful $-$ hallucinated, paired by
+question), with Holm correction across layers, restricted to pairs with
+exactly matched continuation length. This supersedes the pilot's own
+unpaired Welch test as primary, for the reason given in
+Section~\ref{sec:results}.

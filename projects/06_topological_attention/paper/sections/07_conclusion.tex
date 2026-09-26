@@ -1,7 +1,13 @@
 \section{Conclusion}
 We introduce a fully reproducible pipeline that computes persistent
-homology of GPT-2's attention graphs and tests whether truthful and
-hallucinated continuations differ topologically. The local pilot is
-honestly underpowered ($p=\gptTwoMinPval$, $N=\gptTwoNumPairs$) but
-yields an effect-size estimate that motivates a $N\ge 200$-pair GPU
-run. Code and curated pairs are released.
+homology of transformer attention graphs and tests whether truthful and
+hallucinated continuations differ topologically. The local GPT-2 pilot is
+honestly underpowered on its own unpaired test ($p=\gptTwoMinPval$,
+$N=\gptTwoNumPairs$); scaling to $\sim$500 TruthfulQA-sourced pairs with a
+pre-registered paired test finds a real, statistically robust effect in
+all three models tested, with a magnitude that grows roughly 3$\times$
+from Qwen3-8B to Llama-3-8B and flips sign at GPT-2 scale. The pilot's own
+power analysis is corrected in the process: the paired design, not a
+larger $N$ on the original unpaired test, is what makes this run
+informative. Code, curated pairs, and the TruthfulQA-derived pair caches
+are released.

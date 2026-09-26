@@ -17,6 +17,12 @@ factual representation. The direction of the effect in our pilot
 with this intuition, but the magnitude is too small to call.
 
 \paragraph{Limitations.}
-(i) GPT-2 is small and not strongly factual; (ii) curated pairs are
-a tiny sample and stylised; (iii) the metric
-$d=1-\max(A,A^\top)$ is one of several reasonable choices.
+(i) curated local pairs are a tiny, stylised sample, addressed by the
+TruthfulQA-sourced GPU run; (ii) the metric $d=1-\max(A,A^\top)$ is one of
+several reasonable choices; (iii) statistical significance at
+$N\sim500$ with $d_z$ in the 0.03--0.09 range is a real, replicated
+effect but a small one -- these results do not by themselves support a
+practical hallucination detector, only that the topological signal this
+project set out to test is not zero and grows with scale; (iv) the
+no-BOS-sink variant's inconsistent direction across the two large models
+(Section~\ref{sec:results}) is unresolved.

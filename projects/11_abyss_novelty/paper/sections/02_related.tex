@@ -23,9 +23,11 @@ discovery that we return to.
 \paragraph{Bioacoustic machine learning.} The BEANS benchmark
 \cite{hagiwara2022beans} packages the Watkins Marine Mammal Sound Database
 with standard splits; strong results there rely on pretrained audio
-backbones. Our from-scratch CNN is deliberately minimal to keep the study
-reproducible on a laptop, and its weakness on real data is part of the
-result.
+backbones. Our from-scratch CNN is deliberately minimal to keep the local
+pilot reproducible on a laptop, and its weakness on real data is part of
+the result; the GPU-scale run adds a direct comparison against a frozen,
+off-the-shelf pretrained backbone on the identical clips and splits,
+rather than only citing that pretrained backbones help elsewhere.
 
 \paragraph{Open-set recognition.} Max-softmax \cite{hendrycks2017baseline},
 energy \cite{liu2020energy}, Mahalanobis \cite{lee2018simple} and deep

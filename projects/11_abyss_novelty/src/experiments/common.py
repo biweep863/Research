@@ -19,12 +19,24 @@ from utils.seeds import set_seed  # noqa: E402
 def load_cfg() -> tuple[dict, Path]:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", required=True)
-    args = ap.parse_args()
+    ap.add_argument("--limit", type=int, default=None)
+    args, _unknown = ap.parse_known_args()
     cfg = yaml.safe_load(open(args.config))
-    set_seed(cfg.get("seed", 0))
+    set_seed(cfg.get("seed", 0), deterministic=cfg.get("deterministic", False))
+    cfg["_limit"] = args.limit
     out_dir = Path(cfg.get("output_dir", "results"))
     out_dir.mkdir(parents=True, exist_ok=True)
     return cfg, out_dir
+
+
+def resolve_device(cfg: dict) -> str:
+    dev = cfg.get("device", "cpu")
+    if dev == "cuda":
+        import torch
+        if not torch.cuda.is_available():
+            print("[common] device=cuda requested but CUDA is unavailable; falling back to cpu")
+            return "cpu"
+    return dev
 
 
 def dump(out_dir: Path, name: str, obj: dict) -> None:

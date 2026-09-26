@@ -46,3 +46,17 @@ All runs use `configs/local_small.yaml` (seed 0) on a laptop CPU.
   scores was identical in both runs.
   The paper always quotes the macros of the last run; doc numbers may differ
   in the second decimal.
+
+## GPU-scale run (2026-09-26)
+| Config | Command | Outcome |
+|--------|---------|---------|
+| gpu_full | env setup (Python 3.12, torch+cu128, RTX 3060 12GB confirmed) | Windows Smart App Control blocked scipy/sklearn native DLLs; disabled with user's explicit approval (was in Evaluation mode). |
+| gpu_full | `fetch_watkins.py` (4 of 5 shards, ~1.2GB, `train_low` excluded) + mel cache rebuild | 1,668 clips / 31 species (vs. 796/29 locally). |
+| gpu_full | AST embedding build (1,668 clips, 768-d) | ~2 min on GPU. |
+| gpu_full | `run_real.py` smoke test (`--limit 1`) | CNN acc 0.80, best msp 0.68; AST-probe acc 0.87, best msp 0.82 (paired_delta +0.144) — first sign the backbone swap helps. |
+| gpu_full | `run_real.py`, 10 draws — **first attempt killed after 5+ hours with 0 CPU progress** | A PowerShell `Start-Process -RedirectStandardOutput` pipe deadlocked against the process's own output (a known Windows issue). Fixed by launching all subsequent long jobs via a `.bat` file with native shell (`>`) redirection instead of PowerShell's pipe-based redirection. |
+| gpu_full | `run_real.py`, 10 draws (relaunched) | CNN mean best-score AUROC 0.66 (acc 0.70); AST-probe mean best-score AUROC 0.84 (acc 0.88). AST beats CNN on the paired best-score comparison in **10/10 draws**, delta +0.047 to +0.197 (mean +0.125, std 0.041). |
+| gpu_full | `run_novelty.py`, full 18-point sweep — **initially very slow on CPU** (CNN training in `run_novelty.py`/`run_cluster.py` had no `device` passthrough; the base point alone ran >45 min with no result) | Fixed by adding the same `device` passthrough already used in `run_real.py`, then relaunched on GPU: **all 18 points finished in ~17 minutes** (vs. an extrapolated many-hour CPU run). AUROCs 0.72–0.97 across sweeps, known-class accuracy 0.36–1.00 depending on clips/species. |
+| gpu_full | `run_cluster.py` (GPU) | U=2: ARI 0.91; U=3: 0.52; U=5: 0.94; U=8: 0.76. |
+| gpu_full | `run_survey.py` (numpy, CPU) | 1000-species survey; seen 220/1000 at 1000h, Chao1 275±21; greedy allocation gain ranges from **−3% at q=0.34** (worse than uniform) to +13% at q≥0.9. |
+| gpu_full | `make figures` | Two bugs found and fixed while rebuilding: `plot_abyss.py` read `rows['clips_15']`, absent from the original `[10,20,50,100,200]` sweep (added 15 to the sweep); `WORDS` digit-to-word map lacked entries for the new `prior_quality` tags (`034`,`06`,`08`,`095`) and asserted on any leftover digit (added a digit-by-digit spelling fallback instead of hardcoding every possible tag). |

@@ -21,14 +21,19 @@ from src.data.synth_logic import generate
 
 def get_attn_modules(model):
     """Return list[(layer_idx, head_dim, n_heads, module)] for each transformer block.
-    Works for GPT-2 (attn.c_proj) by hooking the *input* to c_proj which has shape
-    (batch, seq, n_heads * head_dim)."""
+    Works for GPT-2 (attn.c_proj) and GPT-NeoX/Pythia (attention.dense) by hooking
+    the *input* to the output projection, shape (batch, seq, n_heads * head_dim)."""
     pairs = []
     if hasattr(model, "transformer") and hasattr(model.transformer, "h"):
         for i, block in enumerate(model.transformer.h):
             n_heads = block.attn.num_heads if hasattr(block.attn, "num_heads") else block.attn.n_head
             head_dim = block.attn.head_dim if hasattr(block.attn, "head_dim") else (block.attn.embed_dim // n_heads)
             pairs.append((i, head_dim, n_heads, block.attn.c_proj))
+    elif hasattr(model, "gpt_neox"):
+        for i, block in enumerate(model.gpt_neox.layers):
+            n_heads = block.attention.config.num_attention_heads
+            head_dim = block.attention.head_size
+            pairs.append((i, head_dim, n_heads, block.attention.dense))
     return pairs
 
 
