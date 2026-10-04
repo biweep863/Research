@@ -1,0 +1,20 @@
+\section{Conclusion}
+
+On a four-microphone, 6.4\,cm array, the voice/silence split a robot's
+speech pipeline already computes is enough to turn the raw channels into
+a usable sense of where the talker is: a few degrees of angle error at
+0\,dB SNR when the silence frames are used both to subtract noise and to
+weight frequency bins, distance within about a third of a metre once the
+room's reverberation is known, and several dB of suppression of a
+competing talker with an MVDR filter steered at the estimate. Next steps
+are the hardware evaluation with labelled recordings (including the
+firmware DOA as a baseline and its RT$_{60}$ estimate as the room
+covariate), and integrating the localiser and spatial filter as ROS~2
+nodes ahead of the existing DeepFilterNet3 denoiser, evaluated by speech
+recognition accuracy with two simultaneous talkers.
+
+\paragraph{Reproducibility.} \texttt{make all} in
+\texttt{projects/15\_spatial\_audio\_attention} regenerates every number
+and figure from the simulation in about three minutes on a laptop CPU;
+\texttt{make live}, \texttt{make record} and \texttt{make calibrate} run
+the hardware study.

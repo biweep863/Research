@@ -1,0 +1,74 @@
+\section{Method}
+
+\paragraph{Signal model.} Four microphones $p_m$ on a 32\,mm circle, 16\,kHz,
+512-point Hann STFT, hop 256. A far-field source at azimuth $\theta$ gives
+$X_m(f)=S(f)e^{-j2\pi f\tau_m(\theta)}$, $\tau_m=-p_m^\top u(\theta)/c$. The
+largest inter-microphone delay is 0.19\,ms ($\approx$3 samples).
+
+\paragraph{VAD and silence model.} Per frame, the mean of the four
+channels over the last 1024 samples passes an energy gate and an
+autocorrelation test: the normalised autocorrelation peak in the lag band
+of 85--255\,Hz must exceed 0.6 (the robot pipeline's rule), which also
+yields $F_0$. The gate is $\max(g_0, \phi\cdot 10^{6/20})$ where $\phi$
+follows the RMS of non-speech frames (fast down, slow up), because the raw
+microphones are not gain-controlled. Non-speech frames, after a 0.3\,s
+hangover, update the noise cross-spectral matrix $\Phi_n$ (time constant
+2\,s). Speech frames update $\Phi_x^{\text{fast}}$ (0.25\,s) and
+$\Phi_x^{\text{slow}}$ (1\,s); both are reset when speech resumes after
+0.6\,s of silence.
+
+\paragraph{Angle.} SRP-PHAT on a $1^\circ$ grid in 200--3800\,Hz:
+\[
+P(\theta)\propto\sum_{i<j}\sum_f w_f\,\mathrm{Re}\Big\{\tfrac{R_{ij}(f)}{|R_{ij}(f)|}
+e^{j2\pi f(\tau_i(\theta)-\tau_j(\theta))}\Big\},
+\]
+with $R=\Phi_x^{\text{fast}}-\Phi_n$ (noise subtraction) and
+$w_f=\max(0,1-\mathrm{tr}\,\Phi_n/\mathrm{tr}\,\Phi_x)$ (speech-presence
+weight). Optional: a Gaussian comb at multiples of $F_0$. The peak is
+refined parabolically; confidence is the peak's height above the map
+mean. Baseline: per-pair GCC-PHAT upsampled $16\times$ and a least-squares
+fit of $u(\theta)$.
+
+\paragraph{Distance.} From $\Phi_s=\Phi_x^{\text{slow}}-\Phi_n$: (a) CDR
+with the DOA-independent estimator of \cite{schwarz2015cdr} per pair,
+using bins where the diffuse coherence $\mathrm{sinc}(2\pi fd/c)<0.7$ in
+0.4--7\,kHz, median over bins and over the six pairs; (b) speech level
+(dBFS); (c) SNR over $\Phi_n$; (d) spectral tilt. A ridge regression maps
+standardised features to $\log r$; RT$_{60}$ can be appended as a room
+covariate (the ReSpeaker firmware reports an estimate).
+
+\paragraph{Tracking.} An alpha-beta filter on the circle (residuals
+wrapped to $[-180^\circ,180^\circ)$) and an EMA of $\log r$; measurements
+below a confidence threshold are ignored, and tracks expire after 3\,s.
+
+\paragraph{Selective filtering.} MVDR
+$w=(\Phi_n+\delta I)^{-1}a/(a^H(\Phi_n+\delta I)^{-1}a)$ steered at the
+estimated azimuth, $\delta$ = 1\% of per-bin power, against delay-and-sum
+$w=a/4$. In the beamforming experiment the target's azimuth is estimated
+by SRP-PHAT on the difference between cross-spectra after and before the
+target's onset, and $\Phi_n$ is the pre-onset covariance (interferer plus
+noise).
+
+\paragraph{Simulation.} A shoebox room (8$\times$7$\times$3\,m,
+image-source order $\le$25, Sabine absorption for the target RT$_{60}$),
+array at 1.1\,m height placed off-centre, mouth at 1.5\,m. The talker is
+a synthetic voiced signal (random $F_0$ in 100--220\,Hz, vowel formants,
+syllabic envelope, pauses), $-30$\,dBFS at 1\,m with $\pm$4\,dB effort
+jitter in the distance sweep. Noise: spherically diffuse pink noise
+\cite{habets2008diffuse} plus mic self-noise, optionally a directional
+pink ``fan'' at $200^\circ$, 2\,m. Sweeps are listed in
+Table~\ref{tab:setup}.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+DOA & 8 angles $\times$ SNR \{0,10,20\} $\times$ RT$_{60}$ \{0.3,0.6\} $\times$ \{diffuse, fan\} \\
+Distance & 6 distances 0.5--3\,m $\times$ 3 angles $\times$ RT$_{60}$ \{0.3,0.45,0.6\} $\times$ 2 \\
+Beam & interferer at 45--180$^\circ$, SIR 0\,dB, RT$_{60}$ \{0.3,0.6\} \\
+Demo & 7 positions, 0.5--3\,m, RT$_{60}$ 0.45, 17.5\,s \\
+\bottomrule
+\end{tabular}
+\caption{Local simulation sweeps (\texttt{local\_small.yaml}).}
+\label{tab:setup}
+\end{table}

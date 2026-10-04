@@ -1,0 +1,32 @@
+\section{Discussion}
+
+\paragraph{The silence model is the method.} The estimators are textbook.
+What made them work on this array was getting ``noise'' right: which bins
+contain it, which frames it can be learned from (a fixed energy gate tuned
+for the processed channel missed a talker at 3\,m entirely), and when old
+statistics stop describing the scene (a talker who moved between
+utterances). The robot pipeline's VAD already provides the voice/silence
+split, so these gains come without new sensing.
+
+\paragraph{Distance is a room-calibrated quantity.} A 6.4\,cm array has no
+geometric range resolution; the CDR measures distance relative to the
+room's critical distance. This predicts, and the cross-room experiment
+confirms, that a room descriptor is needed. The ReSpeaker firmware's RT$_{60}$
+estimate is a candidate; its accuracy is untested. Without it, a short
+calibration per room (a few labelled utterances) or coarse
+near/mid/far buckets are the realistic outputs.
+
+\paragraph{Where simulation is optimistic.} The synthetic talker is more
+periodic and spectrally simpler than speech, which helps both the VAD and
+PHAT; the shoebox image-source model has specular reflections and no
+furniture, scattering or robot body; the diffuse field is ideal; and the
+microphones are perfectly matched and positioned. Real recordings will
+also reveal the mapping between raw channels, our azimuth convention and
+the firmware's. We expect larger angle errors at low SNR and a weaker
+within-room CDR correlation on hardware.
+
+\paragraph{Limitations.} Small sweeps (8 clips per DOA cell, 108 distance
+clips, 8 beamforming scenes) without confidence intervals; a larger
+configuration is provided. One interferer, equal levels; no moving
+interferer; no own-voice (TTS) handling; MVDR's noise covariance in the
+beamforming experiment comes from a clean pre-onset segment.

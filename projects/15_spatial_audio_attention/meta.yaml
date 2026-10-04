@@ -1,0 +1,10 @@
+slug: spatial_audio_attention
+title: "Where Is the Speaker? Silence-Informed Localization, Distance Cues and Selective Beamforming on a 4-Mic ReSpeaker"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Robotics"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "4-mic ReSpeaker sim: a silence-learned noise model cuts 0 dB DOA error from ~70 to ~3 deg; distance needs the room (CDR+RT60: 0.33 m vs 0.75 m baseline); MVDR +7.4 dB vs a rival talker."
+pdf: "paper/main.pdf"
+created: "2026-10-04"

@@ -1,0 +1,30 @@
+\section{Related work}
+
+\paragraph{DOA with small arrays.} GCC-PHAT \cite{knapp1976gcc} and
+steered-response power with PHAT weighting (SRP-PHAT)
+\cite{dibiase2001srp} are the standard robust estimators under
+reverberation; ODAS \cite{grondin2019odas} runs SRP-PHAT with tracking on
+the same ReSpeaker and similar arrays for robots. Speech-presence or
+SNR-dependent weighting of time--frequency bins is a known improvement for
+GCC-type methods in noise; we evaluate it, and noise cross-spectrum
+subtraction, as two uses of one silence model.
+
+\paragraph{Distance estimation.} Source distance from a compact array
+relies on the direct-to-reverberant ratio (DRR), level, or learned
+features \cite{vesa2009binaural}. The coherent-to-diffuse ratio (CDR) is a
+coherence-based DRR proxy with closed-form estimators
+\cite{schwarz2015cdr}; it depends on the room's critical distance, which
+scales with $\sqrt{V/\mathrm{RT}_{60}}$ \cite{kuttruff2016room}.
+
+\paragraph{Spatial filtering before enhancement.} MVDR beamforming
+\cite{capon1969mvdr} followed by single-channel enhancement is the classic
+multichannel speech-enhancement chain; small-aperture arrays need
+superdirective designs and are sensitive to steering errors. Neural
+single-channel denoisers such as DeepFilterNet3
+\cite{schroeter2023deepfilternet3} remove stationary and diffuse noise but
+cannot separate two talkers by direction.
+
+\paragraph{Simulation.} We use the image-source method
+\cite{allen1979image} via pyroomacoustics \cite{scheibler2018pra}, and a
+diffuse noise field with the exact spherical-isotropic coherence
+\cite{habets2008diffuse}.
