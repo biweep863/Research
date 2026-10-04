@@ -1,0 +1,98 @@
+{
+  "speech": {
+    "train": {
+      "hours": 4.036732152777778,
+      "files": 2039,
+      "synthetic": false
+    },
+    "val": {
+      "hours": 0.6735569791666667,
+      "files": 369,
+      "synthetic": false
+    },
+    "test": {
+      "hours": 0.6775221874999999,
+      "files": 295,
+      "synthetic": false
+    }
+  },
+  "noise": {
+    "train": {
+      "hours": 0.35000458333333334,
+      "synthetic": false
+    },
+    "val": {
+      "hours": 0.05000072916666667,
+      "synthetic": false
+    },
+    "test": {
+      "hours": 0.10000135416666667,
+      "synthetic": false
+    },
+    "heldout": {
+      "hours": 0.2500033333333333,
+      "synthetic": false
+    }
+  },
+  "banks": {
+    "train": {
+      "rooms": 150,
+      "hrtf": "mit_kemar_normal_pinna",
+      "rt60_mean": 0.48203884956660903,
+      "rt60_range": [
+        0.20395730237878024,
+        0.7975187510239314
+      ]
+    },
+    "val": {
+      "rooms": 15,
+      "hrtf": "mit_kemar_normal_pinna",
+      "rt60_mean": 0.5986934469931228,
+      "rt60_range": [
+        0.23385801104523019,
+        0.7794778293051745
+      ]
+    },
+    "test": {
+      "rooms": 40,
+      "hrtf": "mit_kemar_normal_pinna",
+      "rt60_mean": 0.4764992457558031,
+      "rt60_range": [
+        0.24037501299742758,
+        0.7850849467579684
+      ]
+    },
+    "heldout": {
+      "rooms": 40,
+      "hrtf": "subject_003",
+      "rt60_mean": 0.4725846991655973,
+      "rt60_range": [
+        0.22589527934816372,
+        0.7776564612820012
+      ]
+    }
+  },
+  "sets": {
+    "val": {
+      "n": 64,
+      "seconds": 3.0,
+      "snr_mean": 4.857933521270752,
+      "synthetic": false,
+      "hrtf": "mit_kemar_normal_pinna"
+    },
+    "test": {
+      "n": 300,
+      "seconds": 3.0,
+      "snr_mean": 4.763490200042725,
+      "synthetic": false,
+      "hrtf": "mit_kemar_normal_pinna"
+    },
+    "heldout": {
+      "n": 150,
+      "seconds": 3.0,
+      "snr_mean": 4.702253341674805,
+      "synthetic": false,
+      "hrtf": "subject_003"
+    }
+  }
+}

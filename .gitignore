@@ -28,3 +28,9 @@ ideas/
 
 work/
 tarea/
+
+# Project 16: downloaded corpora, decoded caches, checkpoints, listening examples
+projects/16_causal_binaural_separation/data/
+projects/16_causal_binaural_separation/results/ckpt/
+projects/16_causal_binaural_separation/results/audio/
+projects/16_causal_binaural_separation/results/sanity/

@@ -1,0 +1,19 @@
+Hearing aids and hearables must enhance speech within about 5\,ms, so
+they cannot use the future context that strong separators rely on. We ask
+how much a strictly causal binaural enhancer loses as its algorithmic
+latency drops from 32 to 1\,ms, and where that loss comes from. Real speech
+and noise are spatialised through measured heads in simulated rooms. We
+compare oracle masks, causal networks (an asymmetric-window GRU with deep
+filtering over past frames, a symmetric-window twin, and a binaural
+Conv-TasNet), their non-causal twins, and hop-matched lookahead. The window
+costs little: an ideal mask gains \OracleEarAsymOnems\,dB SI-SDRi at 1\,ms
+against \OracleEarAsymThreeTwoms\,dB at 32\,ms. The future costs almost
+nothing: at 4\,ms, non-causal and causal twins differ by
+\LongGapFutureFourms\,dB, and matched-hop lookahead changes quality by
+under 0.05\,dB. Learning dominates: trained models remain
+\LongGapLearningFourms\,dB below the oracle. Interaural level differences
+stay within the 1\,dB JND, but no model, and not even the oracle, keeps the
+ITD error under 20\,$\mu$s (best \stftasymFourmsearlongItd\,$\mu$s). A 4\,ms
+causal model streams at real-time factor \RtfstftasymFourms\ on one CPU
+thread. Short latencies are not what holds small causal enhancers back;
+training and binaural timing fidelity are.

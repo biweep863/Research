@@ -1,0 +1,96 @@
+project: causal_binaural_separation
+seed: 0
+device: cuda
+deterministic: false
+fs: 16000
+sanity: false
+
+data:
+  root: data
+  speech:
+    train: [train-clean-100]
+    val: [dev-clean]
+    test: [test-clean]
+    speaker_split: [0.75, 0.125, 0.125]   # unused: subsets are already speaker-disjoint
+  noise:
+    envs: [DKITCHEN, DLIVING, DWASHING, OOFFICE, OHALLWAY, PCAFETER, PRESTO, STRAFFIC, TMETRO, TBUS, NFIELD, NRIVER]
+    heldout_envs: [NPARK, OMEETING, SPSQUARE, SCAFE, TCAR, PSTATION]
+  hrtf:
+    main: mit_kemar_normal_pinna
+    heldout: subject_003
+
+rooms:
+  n_train: 1000
+  n_val: 50
+  n_test: 200
+  n_heldout: 100
+  length_m: [3.5, 9.0]
+  width_m: [3.0, 7.0]
+  height_m: [2.5, 3.5]
+  rt60_s: [0.2, 0.8]
+  listener_height_m: [1.2, 1.7]
+  wall_margin_m: 1.0
+  target_dist_m: [0.5, 2.5]
+  target_el_deg: [-20.0, 40.0]
+  n_noise_dirs: 6
+  ism_order: 6
+  early_ms: 50.0
+  brir_len_s: 0.8
+
+mix:
+  snr_db: [-5.0, 15.0]
+  level_dbfs: [-35.0, -15.0]
+  warmup_s: 0.5
+  train_seg_s: 3.0
+  test_seg_s: 4.0
+  n_val: 256
+  n_test: 2000
+  n_heldout: 500
+
+model:
+  stft:
+    analysis_ms: 32
+    hidden: 384
+    layers: 3
+    df_order: 3
+  tasnet:
+    n_filters: 256
+    bottleneck: 128
+    hidden: 256
+    kernel: 3
+    blocks: 8
+    repeats: 3
+
+train:
+  steps: 40000
+  batch: 24
+  lr: 1.0e-3
+  lr_min: 1.0e-5
+  grad_clip: 5.0
+  warmup_steps: 100
+  basis_lr_scale: 0.1
+  cue_weight: 1.0
+  val_every: 2000
+
+sweep:
+  latencies_ms: [1, 2, 4, 8, 16, 32]
+  families: [stft_asym, stft_sym, tasnet]
+  head: ear
+  head_ablation_ms: [2, 4, 8]
+  noncausal_ms: [2, 4, 8, 32]
+  lookahead_budget_ms: 8
+  lookahead_frames: [2, 6, 14]
+
+long_check: {}
+
+oracle:
+  latencies_ms: [1, 2, 4, 8, 16, 32]
+
+bench:
+  latencies_ms: [1, 2, 4, 8, 16, 32]
+  n_chunks: 5000
+  threads: 1
+
+sanity_overrides: {}
+
+output_dir: results

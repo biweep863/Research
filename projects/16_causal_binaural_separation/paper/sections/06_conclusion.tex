@@ -1,0 +1,16 @@
+\section{Conclusion}
+For causal binaural enhancement inside a hearing-aid budget, we split the
+cost of low latency into three parts:
+\begin{itemize}
+\item the window, about 1\,dB from 32\,ms to 1\,ms even for an ideal mask,
+and partly recoverable with asymmetric windows;
+\item the future, $\approx$0\,dB for the networks we trained;
+\item learning, several dB, by far the largest.
+\end{itemize}
+Level cues survive and timing cues do not. A strictly causal 4\,ms model
+runs comfortably in real time on one CPU thread. The practical message is
+that ``hearing the future'' is not what separates today's small causal
+models from good quality, and that the binaural ITD, not the SI-SDR, is the
+harder target. Code, configurations and the exact commands are in the
+project repository; \texttt{make all} reproduces every number in this
+paper.

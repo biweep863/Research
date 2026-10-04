@@ -1,0 +1,108 @@
+project: causal_binaural_separation
+seed: 0
+device: cuda              # falls back to cpu if CUDA is unavailable
+deterministic: false
+fs: 16000
+sanity: false             # true -> tiny data + few steps, end-to-end in < 5 min
+
+data:
+  root: data
+  speech:
+    train: [dev-clean]    # same subset in several splits -> speaker-disjoint split
+    val: [dev-clean]
+    test: [dev-clean]
+    speaker_split: [0.75, 0.125, 0.125]
+  noise:
+    envs: [DKITCHEN, DLIVING, OOFFICE, PCAFETER, STRAFFIC, TMETRO]   # time-split train/val/test
+    heldout_envs: [NPARK, OMEETING, SPSQUARE]                         # generalisation set only
+  hrtf:
+    main: mit_kemar_normal_pinna
+    heldout: subject_003  # CIPIC, a different head
+
+rooms:
+  n_train: 150
+  n_val: 15
+  n_test: 40
+  n_heldout: 40
+  length_m: [3.5, 9.0]
+  width_m: [3.0, 7.0]
+  height_m: [2.5, 3.5]
+  rt60_s: [0.2, 0.8]
+  listener_height_m: [1.2, 1.7]
+  wall_margin_m: 1.0
+  target_dist_m: [0.5, 2.5]
+  target_el_deg: [-20.0, 40.0]
+  n_noise_dirs: 6
+  ism_order: 6
+  early_ms: 50.0
+  brir_len_s: 0.8
+
+mix:
+  snr_db: [-5.0, 15.0]
+  level_dbfs: [-35.0, -15.0]
+  warmup_s: 0.5
+  train_seg_s: 2.0
+  test_seg_s: 3.0
+  n_val: 64
+  n_test: 300
+  n_heldout: 150
+
+model:
+  stft:
+    analysis_ms: 32       # long analysis window of the asymmetric family
+    hidden: 128
+    layers: 2
+    df_order: 3
+  tasnet:
+    n_filters: 128
+    bottleneck: 64
+    hidden: 128
+    kernel: 3
+    blocks: 6
+    repeats: 2
+
+train:
+  steps: 2000
+  batch: 16
+  lr: 1.0e-3
+  lr_min: 1.0e-5
+  grad_clip: 5.0
+  warmup_steps: 100
+  basis_lr_scale: 0.1
+  cue_weight: 1.0
+  val_every: 250
+
+sweep:
+  latencies_ms: [2, 4, 8, 32]
+  families: [stft_asym, stft_sym, tasnet]
+  head: ear
+  head_ablation_ms: [4]            # also train head=common here
+  noncausal_ms: [4, 32]            # non-causal references (stft_asym, tasnet)
+  lookahead_budget_ms: 8           # how to spend a fixed budget: window vs lookahead
+  lookahead_frames: [2, 6]         # hop = budget / (2 + D)
+
+long_check:
+  steps: 12000
+  cells:
+    - {family: stft_asym, latency_ms: 4}
+    - {family: stft_asym, latency_ms: 4, causal: false}
+    - {family: stft_asym, latency_ms: 32}
+
+oracle:
+  latencies_ms: [1, 2, 4, 8, 16, 32]
+
+bench:
+  latencies_ms: [1, 2, 4, 8, 16, 32]
+  n_chunks: 2000
+  threads: 1
+
+sanity_overrides:
+  rooms: {n_train: 12, n_val: 4, n_test: 6, n_heldout: 6}
+  mix: {n_val: 16, n_test: 32, n_heldout: 16}
+  train: {steps: 60, val_every: 30}
+  sweep: {latencies_ms: [4, 32], families: [stft_asym, tasnet], head_ablation_ms: [], noncausal_ms: [4], lookahead_frames: [2]}
+  oracle: {latencies_ms: [4, 32]}
+  bench: {latencies_ms: [4], n_chunks: 200}
+  long_check: {steps: 90, cells: [{family: stft_asym, latency_ms: 4}]}
+
+output_dir: results

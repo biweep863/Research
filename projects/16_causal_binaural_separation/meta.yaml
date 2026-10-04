@@ -1,0 +1,10 @@
+slug: causal_binaural_separation
+title: "How Much Does Hearing the Future Buy? Ultra-Low-Latency Causal Binaural Speech Enhancement"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Audio"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Causal binaural enhancement at 1-32 ms: the window costs ~1 dB, hearing the future ~0 dB, learning 3.6+ dB; ILD survives, ITD error stays >20 us; a 4 ms model runs at RTF 0.21 on one CPU core."
+pdf: "paper/main.pdf"
+created: "2026-10-04"

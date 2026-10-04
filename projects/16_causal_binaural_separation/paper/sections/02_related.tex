@@ -1,0 +1,31 @@
+\section{Related work}
+\paragraph{Low-latency enhancement.}
+Conv-TasNet~\cite{luo2019convtasnet} replaced the STFT with a short learned
+filterbank, which made millisecond-scale latency possible in a time-domain
+separator. Its causal variant reports a single operating point (2\,ms at
+8\,kHz). STFT-domain systems reach low latency with asymmetric analysis and
+synthesis windows~\cite{mauler2007lowdelay}. Wang et al.~\cite{wang2023lowlatency}
+showed that a DNN with a long asymmetric analysis window and a 2--4\,ms
+synthesis window keeps most of the quality of a 32\,ms system.
+DeepFilterNet~\cite{schroeter2022deepfilternet} adds complex filtering over
+neighbouring frames, which we restrict to \emph{past} frames.
+
+\paragraph{Binaural enhancement and cue preservation.}
+Classical binaural noise reduction keeps cues by applying one real gain to
+both ears, or by constraining the binaural multichannel Wiener
+filter~\cite{doclo2015assisted}. Han et al.~\cite{han2020binaural}
+preserved spatial cues in a real-time binaural Conv-TasNet, and Tokala et
+al.~\cite{tokala2024binaural} trained with explicit ILD/IPD losses. Both
+report one latency.
+
+\paragraph{What is new here.}
+A single controlled sweep that separates three costs:
+\begin{itemize}
+\item the window (an oracle bound),
+\item the future (causal vs.\ non-causal twins), and
+\item learning (oracle vs.\ non-causal model).
+\end{itemize}
+The sweep also includes a fixed-budget window-vs-lookahead split, target
+and residual-noise cue errors against JNDs, and measured single-thread
+real-time factors with streaming outputs verified to equal the offline
+ones.

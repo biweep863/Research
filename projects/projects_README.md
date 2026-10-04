@@ -24,7 +24,8 @@ projects/
 ├── 10_boot_contact/              Boot-mounted IMU: ball vs player contact, who touched first, P(foul), where
 ├── 11_abyss_novelty/             What reaches the abyss (light/radio/sound/eDNA) + open-set AI for unknown species
 ├── 12_optimal_floor/             Optimal floor to live on: elevator mechanism, lobby trips, traffic, stairs, fleet
-└── 13_hodge_preferences/         Hodge decomposition of the pairwise NTK: ranking learned before cycles
+├── 13_hodge_preferences/         Hodge decomposition of the pairwise NTK: ranking learned before cycles
+└── 16_causal_binaural_separation/ Causal binaural speech enhancement at 1–32 ms latency: window vs future vs learning
 ```
 
 See `PROJECT_TEMPLATE.md` for the structure and intake questions used to add a
@@ -74,3 +75,4 @@ config-driven.
 | 11 | Abyss novelty | Nothing optical or radio passes ~0.6 km even with an ideal detector; low-frequency sound reaches >100 km; an open-set CNN flags unknown synthetic species at AUROC ~0.9 (Mahalanobis/kNN) but only ~0.7 on real Watkins calls from scratch; Chao1 tracks unseen richness and a good satellite habitat prior buys +13–17% species per sensor budget |
 | 12 | Optimal floor | Middle floor is optimal only with no lobby trips and a car that stays put; with lobby trips + lobby parking the lowest floor wins (middle costs +163 % at α=0.9); traffic flattens the curve, saturation drifts the optimum up; stairs help low floors, asymmetry irrelevant; more cars make the floor matter more (16 → 30 % regret) |
 | 13 | Hodge preferences | Edge NTK ranks transitive flows 4–123× above cycles; GD fits the ranking first (12/12 runs, cycles 8–29× later, survives feature learning); scalar BT provably blind to cycles; early stopping +12 pts for GPM at 40 % flipped votes; Arena cycles (15.3 %) are below a transitive null (17.5 %) — sampling noise |
+| 16 | Causal binaural enhancement | Oracle mask loses ~1 dB from 32→1 ms (asym. window recovers 0.7 dB of the sym. loss); non-causal twins and matched-hop lookahead buy ≈0 dB; learning gap 3.6–4.7 dB dominates; ILD within JND but ITD error ≥48 µs (oracle 22 µs); 4 ms AsymDF streams at RTF 0.21 on one CPU thread |
