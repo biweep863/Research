@@ -1,0 +1,137 @@
+project: spatial_audio_attention
+seed: 0
+
+# ReSpeaker USB Mic Array v2.0, 6-ch firmware (ch0 processed, ch1-4 raw mics, ch5 playback)
+audio:
+  fs: 16000
+  nfft: 512
+  hop: 256
+  c: 343.0
+  mic_radius: 0.032
+  mic_channels: [1, 2, 3, 4]
+  device_channels: 6
+  device_name: "ReSpeaker"
+  # array frame -> robot frame; calibrate on hardware (calibrate_distance.py prints a suggestion)
+  azimuth_offset_deg: 0.0
+  mirror: false
+  band_hz: [200, 3800]
+  grid_step_deg: 1.0
+  doa_tau_s: 0.25          # speech cross-spectrum memory used for DOA
+  feat_tau_s: 1.0          # speech cross-spectrum memory used for distance
+  noise_tau_s: 2.0         # silence cross-spectrum memory (noise model)
+  doa_every: 2             # frames between SRP evaluations (2 x 16 ms)
+  min_speech_frames: 4
+  reset_after_silence_s: 0.6  # forget spatial stats after a pause (talker may have moved)
+  harmonic_weighting: false
+  srp_noise_subtract: true       # subtract silence cross-spectra (directional noise)
+  srp_snr_weighting: true        # weight bins by speech presence from the silence model
+  cdr_method: doa_independent   # or doa_dependent
+
+# Same gate as home2 voice_detection.yaml, made adaptive to the silence floor
+vad:
+  window: 1024
+  # hardware: 85% of the room-noise power on the raw mics is < 100 Hz (peaks 20, 80 Hz).
+  # 150 Hz still let the hum pass the pitch test (13/68 silence frames called speech on a
+  # real clip); 200 Hz -> 0/68 with the same speech coverage. Pitch survives via harmonics.
+  highpass_hz: 200
+  # home2 uses 600 on the AGC'd ch0; the raw mics are ~10 dB quieter and not AGC'd,
+  # so the absolute gate is low and the adaptive floor + snr_gate_db does the work
+  energy_threshold_int16: 100.0
+  snr_gate_db: 6.0
+  correlation_threshold: 0.6
+  f0_range_hz: [85, 255]
+  hangover_s: 0.3
+  floor_up: 0.01
+  floor_down: 0.2
+
+tracker:
+  alpha: 0.5
+  beta: 0.05
+  range_alpha: 0.2
+  min_confidence: 0.15
+  hold_s: 3.0
+
+distance:
+  model_path: results/distance_model.json      # simulation prior written by run_distance_sim
+  hw_model_path: results/distance_model_hw.json  # written by calibrate_distance (preferred if present)
+  features: [cdr_db, level_db]   # saved model when the room RT60 is unknown
+  model_rt60_path: results/distance_model_rt60.json
+  features_rt60: [cdr_db, rt60_s] # used when the RT60 is known (config or firmware estimate)
+  room_rt60_s: null               # set if measured; live radar otherwise tries firmware RT60
+  ridge: 1.0
+  ref_level_db: -30.0
+  max_range_m: 5.0
+  # microphone-only near/mid/far that learns its reference online (src/analysis/relrange.py);
+  # replaces the metric model on the radar when enabled (model range still logged)
+  relative:
+    enabled: true
+    # which feature is compared with the session history: speech_db (loudness above the
+    # silence model; moves with vocal effort) or cdr_db (direct-to-reverberant; effort-invariant)
+    cue: speech_db
+    # hardware prior, not a room calibration: normal speech at 1 m on the raw mics (fixed gain).
+    # From one 0.5 m clip (-38.8 dB) - 6 dB; washed out after a few real utterances
+    prior_speech_db_1m: -44.0
+    prior_weight: 2
+    history: 20             # utterances remembered
+    min_band_db: 3.0        # mid band half-width floor; 1 m -> 3 m is only ~7.5 dB with reverb (sim)
+    spread_k: 1.0
+    hysteresis_db: 0.5
+    min_snr_db: 3.0
+    band_radius_m: [0.75, 1.75, 3.0]   # where near/mid/far are drawn on the radar
+
+sim:
+  room_dim: [8.0, 7.0, 3.0]
+  array_pos: [3.8, 3.4, 1.1]      # off-centre: a mirror-symmetric placement makes mic pairs
+                                  # perfectly coherent for on-axis talkers (sim artefact); head ~1.1 m
+  source_height: 1.5              # mouth of a standing/seated person
+  max_order: 25
+  source_level_dbfs_1m: -30.0
+  lead_silence_s: 0.6
+  utterance_s: 1.5
+  fan: {az_deg: 200, dist_m: 2.0, height: 0.4}   # directional noise source (HVAC, motor)
+
+doa_sweep:
+  angles_deg: [0, 45, 90, 135, 180, 225, 270, 315]
+  snr_db: [0, 10, 20]
+  rt60_s: [0.3, 0.6]
+  distance_m: 1.5
+  seeds: 1
+  noise_types: [diffuse, fan]
+  variants: [srp, srp_harmonic, srp_no_nsub, srp_no_snrw, srp_plain, gcc]
+
+distance_sweep:
+  distances_m: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
+  angles_deg: [30, 160, 250]
+  rt60_s: [0.3, 0.45, 0.6]
+  noise_dbfs: -55.0
+  level_jitter_db: 4.0      # +-4 dB vocal-effort variation between talkers
+  seeds: 2
+
+beamform:
+  loading: 0.01            # MVDR diagonal loading, relative to per-bin power
+
+beam_sweep:
+  target_deg: 0
+  interferer_deg: [45, 90, 135, 180]
+  rt60_s: [0.3, 0.6]
+  distance_m: 1.2
+  sir_db: 0.0
+  noise_dbfs: -60.0
+  seeds: 1
+
+radar_demo:
+  waypoints: [[0, 1.0], [45, 1.5], [90, 2.5], [150, 2.0], [210, 1.0], [300, 3.0], [350, 1.5]]
+  utterance_s: 1.6
+  pause_s: 0.6
+  f0_hz: 130
+  rt60_s: 0.45
+  noise_dbfs: -55.0
+
+radar:
+  max_range_m: 4.0
+  trail: 25
+  fps: 15
+  zero_location: N    # robot front at the top of the radar
+  direction: 1        # 1 = counter-clockwise
+
+output_dir: results

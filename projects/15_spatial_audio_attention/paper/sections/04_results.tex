@@ -1,0 +1,182 @@
+\section{Results}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/doa_error.pdf}
+\caption{DOA mean absolute error (log scale) versus SNR, averaged over
+RT$_{60}$ 0.3 and 0.6\,s, talker at 1.5\,m. Removing either use of the
+silence model hurts in one noise condition; removing both fails with a
+directional noise source.}
+\label{fig:doa}
+\end{figure*}
+
+\paragraph{Angle.} Figure~\ref{fig:doa}. At 10--20\,dB SNR the full
+method is within $2^\circ$. At 0\,dB the two uses of the silence model
+matter in different conditions (pooled per-clip MAE, RT$_{60}$ 0.3/0.6\,s;
+per-frame medians in brackets). With diffuse noise, dropping the
+speech-presence weights raises the error from
+\doadiffusesrpsnrZerortThree/\doadiffusesrpsnrZerortSix$^\circ$
+(\doadiffusesrpsnrZerortThreeMed/\doadiffusesrpsnrZerortSixMed) to
+\doadiffusesrpnosnrwsnrZerortThree/\doadiffusesrpnosnrwsnrZerortSix$^\circ$:
+after subtraction, noise-only bins carry structured residue that PHAT
+normalises to full weight. With the fan, plain SRP-PHAT locks on the fan
+(\doafansrpplainsnrZerortThree/\doafansrpplainsnrZerortSix$^\circ$, medians
+\doafansrpplainsnrZerortThreeMed/\doafansrpplainsnrZerortSixMed), while
+the full method keeps a median of
+\doafansrpsnrZerortThreeMed/\doafansrpsnrZerortSixMed$^\circ$. The
+MAE of \doadiffusesrpsnrZerortSix/\doafansrpsnrZerortSix$^\circ$ at
+RT$_{60}$ 0.6\,s comes from a single clip per cell, and from the VAD
+high-pass added for the hardware (Table~\ref{tab:vadhp}): without it the
+same cells were 3.0/2.6$^\circ$. GCC-PHAT with least squares reaches
+\doadiffusegccsnrZerortThree--\doafangccsnrZerortSix$^\circ$ at 0\,dB. The
+$F_0$-harmonic comb changes nothing measurable on our synthetic talker,
+whose spectrum is already purely harmonic. At 0\,dB, 7 of the 8 clips per
+cell have any VAD-speech frame.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+VAD high-pass & diff.\ 0.3 & diff.\ 0.6 & fan 0.3 & fan 0.6 \\
+\midrule
+none & \vadhpdiffusertThreehpnoneMae{} & \vadhpdiffusertSixhpnoneMae{} & \vadhpfanrtThreehpnoneMae{} & \vadhpfanrtSixhpnoneMae{} \\
+100\,Hz & \vadhpdiffusertThreehpOneZeroZeroMae{} & \vadhpdiffusertSixhpOneZeroZeroMae{} & \vadhpfanrtThreehpOneZeroZeroMae{} & \vadhpfanrtSixhpOneZeroZeroMae{} \\
+150\,Hz & \vadhpdiffusertThreehpOneFiveZeroMae{} & \vadhpdiffusertSixhpOneFiveZeroMae{} & \vadhpfanrtThreehpOneFiveZeroMae{} & \vadhpfanrtSixhpOneFiveZeroMae{} \\
+200\,Hz & \vadhpdiffusertThreehpTwoZeroZeroMae{} & \vadhpdiffusertSixhpTwoZeroZeroMae{} & \vadhpfanrtThreehpTwoZeroZeroMae{} & \vadhpfanrtSixhpTwoZeroZeroMae{} \\
+\bottomrule
+\end{tabular}
+\caption{Simulation: DOA MAE (deg) of the full method at 0\,dB SNR versus
+the VAD high-pass cut-off (columns: noise, RT$_{60}$). The simulated noise
+has no hum; the filter only removes $F_0$ energy and lets one reverberant
+clip fail at 150--200\,Hz (max errors
+\vadhpdiffusertSixhpTwoZeroZeroMax{} and \vadhpfanrtSixhpTwoZeroZeroMax$^\circ$).}
+\label{tab:vadhp}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/radar_demo_track.pdf}
+\caption{Streaming estimates for a talker moving through 7 positions
+(black: truth). Top: azimuth. Bottom: distance.}
+\label{fig:demo}
+\end{figure}
+
+\paragraph{Tracking a moving talker.} Figure~\ref{fig:demo}: after
+0.5\,s of settling per position, the tracked azimuth has a median error of
+\demoAzMedErr$^\circ$ (90th percentile \demoAzPNinetyErr$^\circ$). The
+distance track (model trained in the same room) has a median error of
+\demoRangeMedErr\,m and under-estimates the 3\,m position. The relative
+near/mid/far estimate (no room model) gets the modal band right at
+\demoBandWpCorrect{} of \demoBandWpN{} positions (\demoBandAcc\,\% of
+frames): right at 1\,m and 3\,m, wrong in between, where the speech level
+changes by only a few dB.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/distance_features.pdf}
+\caption{Distance features versus true distance (\distN{} clips), coloured
+by RT$_{60}$; $\rho$ is Spearman's correlation with $\log r$ over all
+rooms. CDR is monotone within each room but offset between rooms.}
+\label{fig:distfeat}
+\end{figure*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/distance_cv.pdf}
+\caption{Distance MAE. Blue: leave-one-angle-out; red: leave-one-RT$_{60}$-out.}
+\label{fig:distcv}
+\end{figure}
+
+\paragraph{Distance.} Figure~\ref{fig:distfeat}: the CDR is the strongest
+cue ($\rho=\rhocdrdb$ pooled, \rhoCdrRoomMax{} to \rhoCdrRoomMin{} within a room). Level
+($\rho=\rholeveldb$) suffers from the $\pm$4\,dB vocal-effort jitter, SNR
+($\rhosnrdb$) from how much speech leaks into the noise estimate, and tilt
+($\rhotiltdb$) carries little information. Figure~\ref{fig:distcv}: across
+angles, CDR alone gives \distcvcdrdb\,m MAE and CDR + level
+\distcvcdrlevel\,m, against \distPredictMean\,m for predicting the mean and
+\distPrior\,m for an inverse-square law on level. Adding the room's
+RT$_{60}$ gives \distcvcdrrtSixZero\,m, and across rooms (leave one
+RT$_{60}$ out) \distxroomcdrrtSixZero\,m versus \distxroomcdrlevel\,m
+without it.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/beamform_gain.pdf}
+\caption{Output SINR gain over microphone 1 against a competing talker
+(target at $0^\circ$, both at 1.2\,m, SIR 0\,dB), with steering from the
+estimated DOA.}
+\label{fig:beam}
+\end{figure}
+
+\paragraph{Selective cancellation.} Figure~\ref{fig:beam}: MVDR gains
+\beamMvdrMin--\beamMvdrMax\,dB (mean \beamMvdrMean\,dB), less in the more
+reverberant room and at $45^\circ$ separation, where the estimated target
+DOA was also furthest off (\beamDoaErrMax$^\circ$). Delay-and-sum gains
+\beamDsMean\,dB: at 1\,kHz the array spans 0.19 wavelengths, so only
+superdirective weights give selectivity.
+
+\subsection{Hardware session}
+\label{sec:hw}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/hw_session.pdf}
+\caption{Hardware session. Left: noise spectrum on the raw microphones in
+a real room (silence of a labelled clip), with the VAD's $F_0$ search band
+and the two high-pass cut-offs tried. Right: per-utterance cues in an
+\hwLiveMin-minute live session (\hwLiveUtt{} utterances), coloured by the
+band the online speech-level estimate assigned.}
+\label{fig:hw}
+\end{figure*}
+
+A ReSpeaker USB v2.0 (6-channel firmware) on a laptop in a home office;
+the firmware estimates RT$_{60}$\,=\,\hwFwRtSixty\,s, beyond the simulated
+rooms. Data: one labelled clip (front, 0.5\,m), a short live log with the
+simulation's VAD and an \hwLiveMin-minute live log with the final
+configuration, in which the talker moved between about 1\,m, close and
+about 3\,m without labels.
+
+\paragraph{The VAD failed first.} The noise floor is
+\hwNoiseDb\,dBFS with \hwNoiseLowPct\,\% of its power below 100\,Hz
+(Figure~\ref{fig:hw}, left); speech raises the broadband level by less than
+1\,dB. With the simulation's VAD, \hwLiveZeroSpeech{} of
+\hwLiveZeroFrames{} frames were speech during \hwLiveZeroSec\,s of talking,
+so the radar never produced a distance. The angle from those few frames was
+stable: SRP-PHAT works in 200--3800\,Hz, above the hum. Table~\ref{tab:hwvad}:
+a high-pass on the VAD input restores coverage; at 150\,Hz the hum's
+harmonics still pass the pitch test in silence, at 200\,Hz they do not. With
+200\,Hz, \hwLiveSpeechPct\,\% of the long session's frames are voiced
+speech.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+VAD input & speech while talking & ``speech'' in silence \\
+\midrule
+broadband & \hwVadTalkNone/\hwVadTalkN & \hwVadFalseNone/\hwVadSilN \\
+150\,Hz high-pass & \hwVadTalkOneFiveZero/\hwVadTalkN & \hwVadFalseOneFiveZero/\hwVadSilN \\
+200\,Hz high-pass & \hwVadTalkTwoZeroZero/\hwVadTalkN & \hwVadFalseTwoZeroZero/\hwVadSilN \\
+\bottomrule
+\end{tabular}
+\caption{Hardware VAD on the labelled clip (frames).}
+\label{tab:hwvad}
+\end{table}
+
+\paragraph{The distance model does not transfer.} On the 0.5\,m clip the
+CDR is \hwClipCdr\,dB (simulation at 0.5\,m: about $+7$ to $+10$\,dB) at an SNR
+of \hwClipSnr\,dB, and the simulation-trained model reads
+\hwClipModelRange\,m. This is the room dependence of
+Figure~\ref{fig:distfeat} in a more reverberant room than any simulated
+one, plus a quieter talker.
+
+\paragraph{Online near/mid/far.} In the long session the speech-level
+estimate spent \hwBandspeechdbNear/\hwBandspeechdbMid/\hwBandspeechdbFar\,\%
+of utterances near/mid/far and changed band between consecutive utterances
+\hwSwitchSpeech\,\% of the time. Replaying the same utterances with the CDR
+as the cue gives \hwBandcdrdbNear/\hwBandcdrdbMid/\hwBandcdrdbFar\,\% and
+\hwSwitchCdr\,\% changes. The two cues agree on \hwBandAgree\,\% of
+utterances and are only weakly related (Spearman \hwRhoSpeechCdr;
+Figure~\ref{fig:hw}, right). In use, near and far were told apart, and
+speaking louder or softer moved the band. Without distance labels we cannot
+say which cue is right more often.

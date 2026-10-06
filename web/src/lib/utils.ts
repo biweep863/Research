@@ -18,6 +18,7 @@ const TOPIC_COLORS: Record<string, string> = {
   Ocean: "bg-cyan-50 text-cyan-700 ring-cyan-200",
   Theory: "bg-lime-50 text-lime-800 ring-lime-200",
   Audio: "bg-blue-50 text-blue-700 ring-blue-200",
+  Robotics: "bg-orange-50 text-orange-800 ring-orange-200",
 };
 
 export function topicColor(topic: string) {
