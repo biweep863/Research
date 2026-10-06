@@ -1,0 +1,85 @@
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Causal framing and latency}
+Every system shares one framing. With hop $R$ and analysis length $N$,
+frame $t$ covers input samples $[(t{+}1)R-N,\,(t{+}1)R)$, so it ends at the
+newest sample. Only the last $2R$ samples of each frame are synthesised and
+overlap-added at hop $R$. The product of analysis and synthesis windows
+there is a periodic Hann of length $2R$, which gives perfect
+reconstruction. An output sample is final once the next frame has been
+processed, so
+\begin{equation}
+L = 2R + D R,
+\end{equation}
+with $D$ frames of lookahead. Compute time is reported separately as a
+real-time factor (RTF). The asymmetric analysis
+window~\cite{mauler2007lowdelay,wang2023lowlatency} rises over $N-R$
+samples ($N$ = 32\,ms) and falls over $R$. With $N=2R$ it reduces to the
+ordinary sqrt-Hann pair. For every learned model, we test that streaming
+chunk by chunk reproduces the offline output exactly after a delay of
+$L-R$, and that changing future input leaves earlier outputs unchanged.
+
+\subsection{Systems}
+\begin{itemize}
+\item \textbf{AsymDF}: per-frame compressed complex spectra of both ears
+($|X|^{0.3}e^{j\angle X}$), frame-wise LayerNorm, a linear layer, two
+unidirectional GRU layers (128 units), and a per-ear complex deep
+filter~\cite{schroeter2022deepfilternet} over the current and two past
+frames.
+\item \textbf{Sym.\ window DF}: the same network with $N=2R$.
+\item \textbf{Conv-TasNet}~\cite{luo2019convtasnet}: a binaural causal
+variant with a shared learned basis of length $2R$ (at least $4R$ filters),
+a $2{\times}6$-block dilated TCN with per-frame LayerNorm (bounded
+streaming state), and per-ear masks.
+\item \textbf{Non-causal twins}: bidirectional GRUs and centred
+convolutions.
+\item \textbf{Common-gain head}: one real gain applied to both ears, which
+preserves cues by construction.
+\item \textbf{Oracle}: the ideal ratio mask
+$\sqrt{|S|^2/(|S|^2+|X{-}S|^2)}$, per ear or common, under each window.
+\item \textbf{Binaural Wiener}: decision-directed~\cite{ephraim1984mmse}
+common gain with minimum-tracking noise estimation.
+\end{itemize}
+
+\paragraph{Training.}
+The loss is the joint binaural SNR plus energy-weighted $|\Delta$ILD$|$ and
+$1-\cos\Delta$IPD (below 1.5\,kHz). The SNR depends on scale, so neither
+ear can change the ILD for free. Optimisation uses AdamW at $10^{-3}$ with
+a cosine decay and 100 warm-up steps. TasNet starts from a pass-through
+basis with a 10$\times$ lower basis learning rate, so every family starts
+at the identity.
+
+\subsection{Data}
+Speech is LibriSpeech~\cite{panayotov2015librispeech}
+(\SpeechTrainHours\,h for training, speaker-disjoint splits), and noise is
+DEMAND~\cite{thiemann2013demand}. We render binaural room impulse responses
+by passing every image source~\cite{allen1979image} of a pyroomacoustics
+shoebox~\cite{scheibler2018pyroomacoustics} (order 6, RT60 0.2--0.8\,s)
+through the measured KEMAR~\cite{gardner1995kemar} HRIR of its arrival
+direction. A level-matched binaural diffuse tail decays at the room's
+RT60. There are \RoomsTrain\ training rooms, each with one talker
+(0.5--2.5\,m, any azimuth) and six noise directions. The \textbf{target}
+is the direct path plus reflections within 50\,ms. Mixtures are drawn
+fresh on the GPU at SNR $-5$ to 15\,dB.
+\begin{itemize}
+\item \textbf{Test set}: \NumTest\ $\times$ \TestSeconds\,s, with unseen
+speakers and rooms.
+\item \textbf{Held-out set}: \NumHeldout\ mixtures with a different head
+(CIPIC~\cite{algazi2001cipic}), unseen rooms, and unseen noise
+environments.
+\end{itemize}
+
+\subsection{Metrics}
+\begin{itemize}
+\item \textbf{Quality}: SI-SDR improvement~\cite{leroux2019sdr} and
+ESTOI~\cite{jensen2016estoi}, both averaged over the ears.
+\item \textbf{Target cue errors}: $|\Delta$ITD$|$ from band-limited
+(0.1--1.5\,kHz) GCC-PHAT with a 1/32-sample peak search, and broadband
+$|\Delta$ILD$|$, both against the clean target. The JNDs are 20\,$\mu$s
+and 1\,dB~\cite{klumpp1956itd,mills1960ild}.
+\item \textbf{Statistics}: means with bootstrap 95\% CIs over utterances,
+and paired Wilcoxon tests between adjacent latencies.
+\item \textbf{Compute}: the median and p99 time per chunk while streaming
+on one CPU thread at batch size one.
+\end{itemize}

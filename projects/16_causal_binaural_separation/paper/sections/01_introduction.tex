@@ -1,0 +1,37 @@
+\section{Introduction}
+The neural separators that define the state of the art, such as
+Demucs~\cite{defossez2020demucs}, Wave-U-Net~\cite{stoller2018waveunet}
+and non-causal Conv-TasNet~\cite{luo2019convtasnet}, decide what a sample
+is from a context that reaches into the future. A hearing aid or a hearable
+cannot wait. Its output is heard together with the direct sound leaking
+past the earpiece, and once the device delay grows beyond a few
+milliseconds the listener hears comb filtering, echo, or a doubled own
+voice. Tolerance studies put the usable budget at roughly 5--10\,ms in
+total, and lower for open fittings~\cite{stone1999delay,stone2008opencanal}.
+Such a device must therefore be \emph{strictly causal}, with a few
+milliseconds of buffering at most. If it is binaural, it must also keep the
+interaural time and level differences (ITD, ILD) that let the listener
+place the talker and unmask speech in noise~\cite{doclo2015assisted}.
+
+This paper prices that constraint. On \DataKind\ spatialised through
+measured heads in simulated rooms, we sweep the \emph{algorithmic latency}
+$L$ (synthesis window plus lookahead) from 1 to 32\,ms and measure, at each
+$L$:
+(i) how good \emph{any} mask can be (an oracle ratio mask, with symmetric
+and asymmetric windows);
+(ii) what causal networks reach: an asymmetric-window GRU with deep
+filtering over past frames (AsymDF), the same network with a short
+symmetric window, and a causal binaural Conv-TasNet;
+(iii) what the same networks gain when allowed to hear the whole
+utterance;
+(iv) whether a fixed budget is better spent on window length or on
+lookahead; and
+(v) the measured CPU cost of streaming at batch size one.
+
+Our hypothesis was that below about 8\,ms the loss is dominated by
+frequency resolution rather than by the missing future. If so, spending
+capacity on the \emph{past} (a long analysis window, recurrent state,
+filtering over past frames) should recover most of it, keeping the 4\,ms
+causal model within 1\,dB SI-SDRi of the 32\,ms one and its target cues
+within the perceptual just-noticeable differences (JNDs). Section~\ref{sec:results}
+reports which parts of this survive.

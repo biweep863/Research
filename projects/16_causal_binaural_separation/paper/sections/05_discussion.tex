@@ -1,0 +1,40 @@
+\section{Discussion}
+\paragraph{Verdict on the hypothesis.}
+We expected the low-latency loss to come mainly from frequency resolution
+rather than from the missing future. The decomposition supports half of
+that. The future is essentially worthless to these models: non-causal
+twins and matched-hop lookahead change SI-SDRi by a few hundredths of a dB.
+But the window is not the main cost either. The oracle says a 4\,ms window
+costs \GapResolutionFourms\,dB, while learning costs
+\LongGapLearningFourms\,dB even after 12k steps. The 1\,dB gap criterion is
+met, but only because short hops train faster per step, so we treat it as
+uninformative rather than as confirmation. The cue criterion fails on
+timing: no model, and not even the oracle mask, keeps $|\Delta$ITD$|$
+under 20\,$\mu$s, while $|\Delta$ILD$|$ is comfortably under 1\,dB. The
+window-versus-lookahead criterion does not falsify the hypothesis:
+lookahead buys nothing at a matched hop.
+
+\paragraph{What this means for a hearing device.}
+Within a 5\,ms budget, the cheapest way to improve quality is not latency
+but capacity, data, and training. Strict causality removes almost nothing
+that a small model could use. A 4\,ms AsymDF already streams at RTF
+\RtfstftasymFourms\ on one CPU thread. The open problem is binaural timing:
+a mask that leaves even a little noise in the low band moves the perceived
+location. That argues for cue-preserving structure (common gains below
+1.5\,kHz) or an ITD-specific loss, not for more lookahead.
+
+\paragraph{Limitations.}
+\begin{itemize}
+\item The models are small (\stftasymFourmsearParams k parameters for
+AsymDF) and far from the oracle, so whether the future becomes useful once
+the learning gap closes is untested. The GPU configuration (1--2M
+parameters, 40k steps, $\approx$100\,h of speech) is sized to answer that.
+\item Training at equal steps confounds latency with supervision density.
+A frame-matched budget would be cleaner.
+\item The target keeps early reflections, so SI-SDRi is not comparable to
+dry-target benchmarks.
+\item There is one seed per cell.
+\item PESQ was unavailable on the build machine.
+\item All mixtures are simulated, although with real speech, real noise and
+measured heads.
+\end{itemize}

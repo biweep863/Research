@@ -1,0 +1,28 @@
+\begin{tabular}{llrrrrr}
+\toprule
+Model & $L$ & SI-SDRi & ESTOI & $|\Delta$ITD$|$ & $|\Delta$ILD$|$ & held-out \\
+ & (ms) & (dB) & & ($\mu$s) & (dB) & SI-SDRi \\
+\midrule
+Unprocessed & -- & 0.00 & 0.577 & 73.8 & 1.21 & 0.00 \\
+AsymDF & 2 & 2.76 & 0.589 & 52.1 & 0.56 & 0.52 \\
+AsymDF & 4 & 2.54 & 0.584 & 59.9 & 0.60 & 0.44 \\
+AsymDF (common head) & 4 & 2.24 & 0.577 & 63.4 & 0.70 & 1.58 \\
+AsymDF (12k steps) & 4 & 3.57 & 0.620 & 47.8 & 0.36 & 1.00 \\
+AsymDF (non-causal) & 4 & 2.55 & 0.584 & 63.8 & 0.58 & 0.53 \\
+AsymDF (non-causal) (12k steps) & 4 & 3.60 & 0.618 & 47.0 & 0.36 & 0.93 \\
+AsymDF & 8 & 2.15 & 0.578 & 66.2 & 0.69 & 0.49 \\
+AsymDF & 32 & 1.09 & 0.571 & 75.1 & 0.94 & -0.61 \\
+AsymDF (12k steps) & 32 & 1.98 & 0.575 & 69.3 & 0.73 & 0.31 \\
+AsymDF (non-causal) & 32 & 1.23 & 0.570 & 73.2 & 0.91 & 0.05 \\
+Sym. window DF & 2 & 2.73 & 0.592 & 57.3 & 0.55 & 0.93 \\
+Sym. window DF & 4 & 2.52 & 0.586 & 63.4 & 0.60 & 0.79 \\
+Sym. window DF & 8 & 1.99 & 0.579 & 70.0 & 0.74 & 0.55 \\
+Conv-TasNet & 2 & 2.42 & 0.563 & 64.7 & 0.57 & 1.00 \\
+Conv-TasNet & 4 & 2.10 & 0.554 & 68.8 & 0.64 & 1.10 \\
+Conv-TasNet (common head) & 4 & 2.09 & 0.555 & 63.3 & 0.67 & 1.07 \\
+Conv-TasNet (non-causal) & 4 & 2.20 & 0.549 & 61.6 & 0.59 & 1.05 \\
+Conv-TasNet & 8 & 1.98 & 0.550 & 68.3 & 0.60 & 1.12 \\
+Conv-TasNet & 32 & 1.71 & 0.548 & 71.2 & 0.61 & 0.46 \\
+Conv-TasNet (non-causal) & 32 & 1.96 & 0.547 & 60.1 & 0.50 & 0.64 \\
+\bottomrule
+\end{tabular}
