@@ -1,0 +1,166 @@
+{
+  "simulator": "pyroomacoustics",
+  "rows": [
+    {
+      "noise": "diffuse",
+      "rt60_s": 0.3,
+      "highpass_hz": null,
+      "n_detected": 8,
+      "mae_deg": 3.2119047087718897,
+      "median_deg": 1.233500078924095,
+      "max_deg": 12.882457971556107,
+      "mean_speech_frames": 8.875
+    },
+    {
+      "noise": "diffuse",
+      "rt60_s": 0.3,
+      "highpass_hz": 100,
+      "n_detected": 8,
+      "mae_deg": 1.764158205825595,
+      "median_deg": 1.5354251578063014,
+      "max_deg": 3.678541984576384,
+      "mean_speech_frames": 17.5
+    },
+    {
+      "noise": "diffuse",
+      "rt60_s": 0.3,
+      "highpass_hz": 150,
+      "n_detected": 8,
+      "mae_deg": 1.8641731345524981,
+      "median_deg": 1.6842788733790286,
+      "max_deg": 4.636461005371359,
+      "mean_speech_frames": 16.0
+    },
+    {
+      "noise": "diffuse",
+      "rt60_s": 0.3,
+      "highpass_hz": 200,
+      "n_detected": 7,
+      "mae_deg": 2.1029108954633875,
+      "median_deg": 1.0546167258018215,
+      "max_deg": 4.636461005371359,
+      "mean_speech_frames": 10.125
+    },
+    {
+      "noise": "diffuse",
+      "rt60_s": 0.6,
+      "highpass_hz": null,
+      "n_detected": 7,
+      "mae_deg": 3.0276233899228413,
+      "median_deg": 2.2394957905224544,
+      "max_deg": 6.818580811225303,
+      "mean_speech_frames": 10.125
+    },
+    {
+      "noise": "diffuse",
+      "rt60_s": 0.6,
+      "highpass_hz": 100,
+      "n_detected": 8,
+      "mae_deg": 3.1682818133685338,
+      "median_deg": 2.0506578206838526,
+      "max_deg": 7.762450552800971,
+      "mean_speech_frames": 17.0
+    },
+    {
+      "noise": "diffuse",
+      "rt60_s": 0.6,
+      "highpass_hz": 150,
+      "n_detected": 7,
+      "mae_deg": 2.824056431584848,
+      "median_deg": 1.1077118381375612,
+      "max_deg": 9.019712031970585,
+      "mean_speech_frames": 14.5
+    },
+    {
+      "noise": "diffuse",
+      "rt60_s": 0.6,
+      "highpass_hz": 200,
+      "n_detected": 7,
+      "mae_deg": 15.04400645811056,
+      "median_deg": 2.9838772720815427,
+      "max_deg": 73.09885049408658,
+      "mean_speech_frames": 11.375
+    },
+    {
+      "noise": "fan",
+      "rt60_s": 0.3,
+      "highpass_hz": null,
+      "n_detected": 8,
+      "mae_deg": 4.219175763252469,
+      "median_deg": 2.5992528741156917,
+      "max_deg": 13.60760397679823,
+      "mean_speech_frames": 8.875
+    },
+    {
+      "noise": "fan",
+      "rt60_s": 0.3,
+      "highpass_hz": 100,
+      "n_detected": 8,
+      "mae_deg": 2.9966604055405455,
+      "median_deg": 2.9935879275762005,
+      "max_deg": 6.13337756403439,
+      "mean_speech_frames": 18.625
+    },
+    {
+      "noise": "fan",
+      "rt60_s": 0.3,
+      "highpass_hz": 150,
+      "n_detected": 8,
+      "mae_deg": 5.0585567513227225,
+      "median_deg": 4.171152085101923,
+      "max_deg": 10.935605156707425,
+      "mean_speech_frames": 16.625
+    },
+    {
+      "noise": "fan",
+      "rt60_s": 0.3,
+      "highpass_hz": 200,
+      "n_detected": 7,
+      "mae_deg": 5.754939361415735,
+      "median_deg": 7.366749236852485,
+      "max_deg": 10.935605156707425,
+      "mean_speech_frames": 12.875
+    },
+    {
+      "noise": "fan",
+      "rt60_s": 0.6,
+      "highpass_hz": null,
+      "n_detected": 7,
+      "mae_deg": 2.5712775447267324,
+      "median_deg": 2.717010487682387,
+      "max_deg": 4.931057704905697,
+      "mean_speech_frames": 9.125
+    },
+    {
+      "noise": "fan",
+      "rt60_s": 0.6,
+      "highpass_hz": 100,
+      "n_detected": 8,
+      "mae_deg": 3.1778271524600576,
+      "median_deg": 3.293719189635695,
+      "max_deg": 5.66839528133076,
+      "mean_speech_frames": 18.125
+    },
+    {
+      "noise": "fan",
+      "rt60_s": 0.6,
+      "highpass_hz": 150,
+      "n_detected": 8,
+      "mae_deg": 11.799370153643146,
+      "median_deg": 5.367753765626546,
+      "max_deg": 59.66847788746733,
+      "mean_speech_frames": 17.0
+    },
+    {
+      "noise": "fan",
+      "rt60_s": 0.6,
+      "highpass_hz": 200,
+      "n_detected": 7,
+      "mae_deg": 14.12643344339209,
+      "median_deg": 4.920018588523504,
+      "max_deg": 59.66847788746733,
+      "mean_speech_frames": 12.0
+    }
+  ],
+  "wall_s": 9.95708703994751
+}

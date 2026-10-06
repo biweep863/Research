@@ -1,0 +1,38 @@
+\section{Introduction}
+
+Robots that take spoken commands in homes and competitions face the
+cocktail-party problem with very little hardware. A common choice is the
+ReSpeaker USB Mic Array v2.0: four omnidirectional microphones on a
+32\,mm-radius circle with an on-chip DSP that outputs one processed channel
+and a firmware direction-of-arrival (DOA) estimate. Our robot's speech
+pipeline uses exactly that processed channel: it feeds a neural denoiser
+(DeepFilterNet3 \cite{schroeter2023deepfilternet3}), then a voice activity
+detector (VAD) built from an energy gate, an autocorrelation pitch test in
+85--255\,Hz and an MFCC speaker lock, then speech recognition. Spatial
+information is discarded, and the published firmware DOA is smoothed with
+a linear average, which maps a talker crossing $0^\circ$ to $180^\circ$.
+
+We ask what the raw microphones can add, in three steps a robot needs:
+\emph{where} the talker is (angle), \emph{how far} (distance), and
+\emph{attending} to them by suppressing other directions before the
+denoiser. Our organising idea is that the VAD already provides the most
+useful reference signal: frames without voice describe the room -- fans,
+motors, diffuse noise -- and their cross-spectra can be used to clean the
+localisation and to train the spatial filter.
+
+Contributions: (i) a streaming localiser (pitch VAD $\to$ silence model
+$\to$ SRP-PHAT $\to$ distance features $\to$ wrap-safe tracker) with an
+ablation of each use of the silence model; (ii) an analysis of which
+acoustic cues give distance on a 6.4\,cm array, showing that the
+coherent-to-diffuse ratio works within a room and that a room covariate
+(RT60) is what makes it transfer; (iii) a measurement of MVDR versus
+delay-and-sum selectivity on this aperture with an estimated, not oracle,
+steering direction; (iv) a first hardware session in a real room, which
+shows that low-frequency hum on the raw microphones breaks the VAD (fixed
+by high-passing its input) and that the simulation-trained distance model
+does not transfer; (v) a microphone-only near/mid/far estimate that learns
+its reference online instead of being calibrated per room; (vi) tools for
+the hardware study (live radar, labelled recording, calibration, session
+analysis) and an integration plan for a ROS~2 pipeline. The angle,
+distance-regression and beamforming numbers are from simulation; the
+hardware results are a first, partly unlabelled session.
