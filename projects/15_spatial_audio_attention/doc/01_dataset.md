@@ -43,7 +43,20 @@ perfectly harmonic.
 speaker id, note, firmware DOA/VAD samples and firmware RT60 when the USB
 control interface is reachable. Each clip: 2 s silence, then talking.
 Recordings live in `data/recordings/` and are git-ignored (WAV size); the
-derived numbers go to `results/hw_calibration.json`.
+derived numbers go to `results/hw_calibration.json` / `results/hw_session.json`.
 
 Planned grid: angles {0, 45, 90, 135, 180, 225, 270, 315} × distances
 {0.5, 1, 2, 3} m, two speakers, plus a few clips with a fan / TV on.
+
+### Session 2026-10-05 (what exists)
+Room: a home office, firmware RT60 estimate 0.9 s, hum-dominated noise floor
+(−42 dBFS on the raw mics). Host: MacBook Air, macOS.
+
+| file (git-ignored)                        | what                                                 |
+|-------------------------------------------|------------------------------------------------------|
+| `data/recordings/20261005_175712_a0_d0.5` | one labelled clip, front, 0.5 m, 2 s silence + talk  |
+| `data/hw_live.csv`                        | 26 s live log, VAD without high-pass                 |
+| `data/hw_rel.csv`                         | 18 min live log, 200 Hz VAD, relative range (speech level); protocol ~1 m → near → ~3 m → back, **not labelled** |
+
+`make hw` turns these into `results/hw_session.json` (committed). The CSVs
+have one row per 16 ms frame (`live_radar.LOG_FIELDS`).

@@ -104,7 +104,8 @@ class Radar:
             th = np.deg2rad(to_robot(fw_doa))  # same frame mapping; verify on HW
             self.fw_line.set_data([th, th], [0, self.rmax])
         state = "SPEECH" if (est and est.is_speech) else "silence"
-        self.title.set_text(f"{state}" + (f"   F0 {est.f0_hz:5.0f} Hz" if est and est.is_speech else ""))
+        self.title.set_text(f"{state}" + (f"   F0 {est.f0_hz:5.0f} Hz" if est and est.is_speech else "")
+                            + (f"   {est.range_band.upper()}" if est and est.range_band else ""))
         self.text.set_text(extra)
         self.fig.canvas.draw_idle()
         self.fig.canvas.flush_events()
@@ -116,17 +117,21 @@ def _fmt(est, loc, fw):
     f = loc.last_features or {}
     lines = [
         f"t {est.t:7.2f}s  rms {20 * np.log10(est.rms + 1e-12):6.1f} dBFS  gate {20 * np.log10(est.threshold + 1e-12):6.1f}",
-        f"track az {est.track_az_deg:6.1f}  range {est.track_range_m:4.2f} m  conf {est.track_conf:.2f}",
-        "cdr {:5.1f} dB  level {:6.1f}  snr {:5.1f}  tilt {:5.1f}".format(
-            f.get("cdr_db", np.nan), f.get("level_db", np.nan), f.get("snr_db", np.nan), f.get("tilt_db", np.nan)),
+        f"track az {est.track_az_deg:6.1f}  range {est.track_range_m:4.2f} m  conf {est.track_conf:.2f}"
+        + (f"  [{est.range_band.upper()}]" if est.range_band else ""),
+        "cdr {:5.1f} dB  level {:6.1f}  speech {:6.1f}  snr {:5.1f}".format(
+            f.get("cdr_db", np.nan), f.get("level_db", np.nan), f.get("speech_db", np.nan), f.get("snr_db", np.nan)),
     ]
+    if loc.rel is not None and (ref := loc.rel.reference()) is not None:
+        lines.append(f"relative ref {ref[0]:6.1f} dB +-{ref[1]:.1f}  ({len(loc.rel.hist)} utterances learned)")
     if fw is not None and fw.doa is not None:
         lines.append(f"firmware DOA {fw.doa:3d}  VAD {fw.vad}  RT60 {fw.rt60 if fw.rt60 is None else round(fw.rt60, 2)}")
     return "\n".join(lines)
 
 
 LOG_FIELDS = ["t", "is_speech", "f0_hz", "rms", "az_meas", "doa_conf", "range_meas", "track_az_robot",
-              "track_range_m", "track_conf", "cdr_db", "level_db", "snr_db", "tilt_db", "fw_doa"]
+              "track_range_m", "track_conf", "cdr_db", "level_db", "snr_db", "tilt_db", "fw_doa",
+              "speech_db", "range_band", "model_range_m"]
 
 
 def main():
@@ -197,6 +202,8 @@ def main():
                                 f"{est.track_range_m:.2f}", f"{est.track_conf:.3f}",
                                 *(f"{f.get(k, np.nan):.2f}" for k in ("cdr_db", "level_db", "snr_db", "tilt_db")),
                                 "" if fw is None or fw.doa is None else fw.doa,
+                                f"{f.get('speech_db', np.nan):.2f}", est.range_band or "",
+                                f"{f.get('model_range_m', np.nan):.2f}",
                             ])
                 now = time.monotonic()
                 fw_doa = None if fw is None else fw.doa
@@ -216,7 +223,7 @@ def main():
                     e = last_est
                     print(f"t={e.t:6.2f} {'SPEECH ' if e.is_speech else 'silence'} f0={e.f0_hz:5.0f} "
                           f"az={array_to_robot_deg(e.track_az_deg, a['azimuth_offset_deg'], a['mirror']):6.1f} "
-                          f"r={e.track_range_m:4.2f} conf={e.track_conf:.2f}"
+                          f"r={e.track_range_m:4.2f} {e.range_band or '':4s} conf={e.track_conf:.2f}"
                           + (f" fw={fw_doa}" if fw_doa is not None else ""))
                     last_print = now
                 if isinstance(src, WavSource) and src.done:

@@ -5,6 +5,6 @@ year: 2026
 topic: "Robotics"
 type: "Preprint"
 venue: "arXiv preprint"
-tldr: "4-mic ReSpeaker sim: a silence-learned noise model cuts 0 dB DOA error from ~70 to ~3 deg; distance needs the room (CDR+RT60: 0.33 m vs 0.75 m baseline); MVDR +7.4 dB vs a rival talker."
+tldr: "4-mic ReSpeaker: a silence-learned noise model keeps 0 dB DOA at a 4-5 deg median (plain SRP-PHAT: 35-79 deg) in sim; on hardware, room hum broke the VAD until a 200 Hz high-pass, and metric distance did not transfer, so range becomes an online near/mid/far."
 pdf: "paper/main.pdf"
 created: "2026-10-04"

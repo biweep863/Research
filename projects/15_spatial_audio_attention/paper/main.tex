@@ -6,7 +6,7 @@
 and Selective Beamforming on a 4-Mic ReSpeaker}
 \author[1]{Luis Benvenuto}
 \affil[1]{Independent Research}
-\date{October 4, 2026}
+\date{October 6, 2026}
 
 \begin{document}
 \twocolumn[
@@ -19,27 +19,30 @@ microphones of a ReSpeaker USB v2.0 (6.4\,cm aperture) can add to a
 robot's speech pipeline: the talker's angle, the talker's distance, and
 the suppression of sound from other directions before neural denoising.
 The common thread is a \emph{silence model}: the pitch-based voice
-activity detector the pipeline already runs splits the stream into voice
-and silence, and the silence frames give the cross-spectra of everything
-that is not the talker. In image-source simulations of a reverberant room
-with a voiced talker, using that model twice in SRP-PHAT -- subtracting
-the noise cross-spectra and weighting bins by speech presence -- reduces
-the angle error at 0\,dB SNR with a directional fan from
-\doafansrpplainsnrZerortThree/\doafansrpplainsnrZerortSix$^\circ$ (plain
-SRP-PHAT, RT$_{60}$ 0.3/0.6\,s) to \doafansrpsnrZerortThree/\doafansrpsnrZerortSix$^\circ$, and a
+activity detector (VAD) the pipeline already runs splits the stream into
+voice and silence, and the silence frames give the cross-spectra of
+everything that is not the talker. In image-source simulations with a
+voiced talker at 0\,dB SNR and a directional fan, plain SRP-PHAT has a
+median per-frame error of \doafansrpplainsnrZerortThreeMed/\doafansrpplainsnrZerortSixMed$^\circ$
+(RT$_{60}$ 0.3/0.6\,s); subtracting the silence cross-spectra and
+weighting bins by speech presence brings it to
+\doafansrpsnrZerortThreeMed/\doafansrpsnrZerortSixMed$^\circ$, and a
 streaming tracker follows a moving talker with a median error of
 \demoAzMedErr$^\circ$. Distance cannot come from time differences on this
-aperture; the coherent-to-diffuse ratio is the useful cue (Spearman
-\rhocdrdb{} with log-distance across rooms), but it is room-relative:
-cross-room distance error is \distxroomcdrlevel\,m with CDR and level and
-\distxroomcdrrtSixZero\,m once the room's RT60 is given as a covariate,
-against \distPredictMean\,m for predicting the mean. An MVDR beamformer
-steered at the estimated talker, with its noise covariance learned while
-the target is silent, improves output SINR against a competing talker by
-\beamMvdrMean\,dB on average (\beamMvdrMin--\beamMvdrMax), while
-delay-and-sum gains \beamDsMean\,dB. All results are simulation-only; the
-code ships a live radar, recording and calibration tools for the hardware
-evaluation, and a plan to integrate the method into a ROS~2 HRI pipeline.
+aperture; the coherent-to-diffuse ratio is the useful cue, but it is
+room-relative: cross-room error is \distxroomcdrlevel\,m without and
+\distxroomcdrrtSixZero\,m with the room's RT$_{60}$ (predicting the mean:
+\distPredictMean\,m). An MVDR beamformer steered at the estimated talker
+improves output SINR against a competing talker by \beamMvdrMean\,dB on
+average. A first hardware session in a real room changes two things. The
+raw microphones carry low-frequency hum that the simulation lacked
+(\hwNoiseLowPct\,\% of the noise power below 100\,Hz); it broke the VAD
+(\hwLiveZeroSpeech{} speech frames in \hwLiveZeroSec\,s of talking) until
+its input was high-passed at 200\,Hz. The simulation-trained distance
+model does not transfer, so we replace it with a microphone-only
+near/mid/far estimate that learns its reference from the session's own
+utterances; it separates near from far talkers but moves with vocal
+effort. Code, live radar and hardware tools are released.
 \end{abstract}
 \vspace{1em}
 \end{@twocolumnfalse}

@@ -47,7 +47,14 @@ competing directions already suppressed.
 - H3 is falsified if MVDR SINR gain is ≤ 3 dB on average.
 
 ## Status
-Simulation pilot done (this branch); all three hypotheses hold in simulation
-(see `04_results.md`). Hardware session pending: it decides whether the
-simulation's room model (image-source, shoebox) is representative, and how
-the firmware DOA compares.
+- **Simulation:** done; all three hypotheses hold (`04_results.md`).
+- **Hardware, first session (2026-10-05):** the ReSpeaker works end to end on
+  macOS (raw mics + firmware over USB). The live radar follows the talker's
+  direction. The VAD failed on the real room's hum (9 speech frames in 26 s) and
+  was fixed with a 200 Hz high-pass on its input. The simulation-trained
+  distance model does not transfer (0.5 m read as 2.5–5 m), so the radar now
+  shows near/mid/far learned online from the session itself (no room
+  calibration). It separates near from far but is sensitive to vocal effort.
+- **Still open:** labelled DOA grid + orientation calibration (H1 error and
+  firmware comparison), labelled distance clips to choose the cue, two-talker
+  MVDR on hardware (H3). Checklist in `03_experiments_log.md`.

@@ -67,3 +67,48 @@ beamformer's own (harmless) linear filtering of the target as distortion.
 **Synthetic voiced talker instead of a speech corpus.** No network/data
 dependency, controllable F0, and it exercises the pitch VAD exactly. Threat
 to validity acknowledged in `01_dataset.md`; hardware recordings replace it.
+
+## Hardware session (2026-10-05)
+
+**VAD input high-passed at 200 Hz.** Room hum on the raw mics (65 % of the
+power < 100 Hz, peaks 20 / 80 Hz) dominated the broadband RMS gate: 9 speech
+frames in 26 s of talking. 150 Hz fixed coverage but let hum harmonics pass the
+85–255 Hz pitch test (13/68 silence frames called speech, which also poisons
+Φn); 200 Hz gives the same coverage with 0/68. Speech pitch survives through
+its harmonics. Only the VAD input is filtered: SRP and the distance features
+already work in their own bands. *Cost:* in simulation (no hum) 200 Hz lets
+one reverberant 0 dB clip go wrong (`run_vad_highpass_sim`); 100 Hz is best
+there. Hardware evidence wins; 100 Hz is the setting to try in a quiet room.
+
+**Microphone-only range = near/mid/far learned online, not a room model.**
+The simulation-trained metric model read 2.5–5 m for a talker at 0.5 m in a
+real room (RT60 0.9 s, quieter talker). A per-room calibration would fix it
+but the robot changes rooms in competition, and the user asked for something
+that adapts by itself. `relrange.py` compares each utterance with the
+session's own utterance history (median ± max(3 dB, MAD)), with hysteresis.
+Noise reference = the silence model (re-learned continuously); voice reference
+= past utterances. The only constant is a hardware prior (normal speech at 1 m
+on the raw mics, −44 dB, a property of the fixed-gain mics, not the room),
+which real utterances wash out after three. *Rejected:* fixed near/far
+cut-offs (that is a calibration); terciles of the history (forces three bands
+on a talker who never moves). The metric model is still computed and logged
+(`model_range_m`) for comparison.
+
+**Band floor 3 dB, hysteresis 0.5 dB.** 1 m → 3 m is ~7.5 dB of speech level
+in the simulated room (reverberation flattens the inverse-square law);
+4 dB never left "mid" for 1 m, 2.5 dB flickered at 2 m.
+
+**Cue configurable, speech level by default for now.** `distance.relative.cue`:
+`speech_db` (noise-subtracted speech power; moves with vocal effort) or
+`cdr_db` (direct-to-reverberant; effort-invariant but room- and
+SNR-sensitive). Live, the two agree on 59 % of utterances and the CDR switches
+less (18 % vs 28 %), but without distance labels the choice is not settled;
+the labelled protocol is in `03_experiments_log.md`.
+
+**Radar demo scored in two passes.** Metric model (relative off) for the
+azimuth / metres numbers, relative on for the band accuracy, so the paper's
+metric numbers stay comparable to the pilot.
+
+**macOS is a supported host for the hardware tools.** sounddevice and pyusb
+both work; firmware control transfers need no driver change. A recording
+interrupted mid-stream can wedge CoreAudio (PortAudio −9986): replug.

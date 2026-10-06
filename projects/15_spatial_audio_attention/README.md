@@ -11,8 +11,8 @@ reference for what "noise" is?
 ```bash
 # from repo root (Windows: .venv/Scripts/python.exe is picked automatically)
 cd projects/15_spatial_audio_attention
-make test     # 33 unit tests, ~2 s
-make run      # DOA / distance / beamforming sims + moving-talker demo (~2.5 min)
+make test     # 37 unit tests, ~2 s
+make run      # DOA / distance / beamforming / VAD high-pass sims + moving-talker demo (~4 min)
 make figures  # paper/figures/*.pdf + paper/macros.tex
 make demo     # replay the simulated moving talker on the live radar
 make paper    # compile paper/main.pdf
@@ -20,15 +20,21 @@ make paper    # compile paper/main.pdf
 Extra deps (installed in the repo venv): `pyroomacoustics sounddevice soundfile pyusb`.
 Optional: `deepfilternet` for `make beamform ARGS=--deepfilter`.
 
-## On the robot (hardware session)
+## On the robot / a laptop (hardware session)
+Tested on macOS (MacBook, USB) on 2026-10-05; Linux on the robot works like home2.
 ```bash
 make live ARGS="--list-devices"            # find the ReSpeaker (needs 6-ch firmware)
-make live                                  # radar from the ReSpeaker; firmware DOA shown dashed
+make live ARGS="--device 2"                # radar; title shows SPEECH + NEAR/MID/FAR; firmware DOA dashed
 make live ARGS="--no-plot --log run.csv"   # headless (ssh / docker) + per-frame CSV
 make record ANGLE=90 DIST=1.5              # 2 s silence, then talk; labels in a .json sidecar
 make calibrate                             # orientation offset + distance model from recordings
 make beamform WAV=data/recordings/<clip>.wav ARGS=--deepfilter   # listen to the spatial filter
+make hw                                    # summarise data/hw_*.csv + newest clip -> results/hw_session.json
 ```
+Range on the radar is **near / mid / far learned online** from the session's own
+utterances (`distance.relative`, no room calibration); the metric model is still
+logged. Choose the cue with `distance.relative.cue: speech_db | cdr_db`.
+If PortAudio fails with `-9986` on macOS, replug the ReSpeaker.
 Protocol: `doc/03_experiments_log.md` → *Hardware session checklist*.
 Angles: degrees counter-clockwise from the robot front, front at the top of the radar.
 After `make calibrate`, paste its `azimuth_offset_deg` / `mirror` into the config.
@@ -44,23 +50,35 @@ CPU only (numpy + image-source simulation), ~30–60 min.
 - `src/analysis/vad.py` — home2 pitch VAD (energy + autocorrelation F0 in 85–255 Hz), returns F0, adaptive noise floor
 - `src/analysis/doa.py` — SRP-PHAT (1° grid, frequency-domain steering), GCC-PHAT baseline, SNR / F0-harmonic bin weights
 - `src/analysis/distance.py` — CDR (Schwarz & Kellermann), level, SNR, tilt features; ridge log-distance model
-- `src/analysis/localizer.py` — streaming pipeline: VAD → silence noise model → SRP → distance → tracker
+- `src/analysis/localizer.py` — streaming pipeline: VAD (200 Hz high-pass) → silence noise model → SRP → distance → tracker
+- `src/analysis/relrange.py` — microphone-only near/mid/far that learns its reference during the session
 - `src/analysis/tracker.py` — wrap-safe alpha-beta tracker (fixes the 359°/1° → 180° average in home2 `respeaker.py`)
 - `src/analysis/beamform.py` — delay-and-sum and MVDR toward the tracked talker
 - `src/data/simulate.py` — pyroomacoustics scenes with ReSpeaker geometry, voiced talkers, diffuse + fan noise
 - `src/data/respeaker_io.py` — 6-ch capture, WAV replay, firmware DOA/VAD/RT60 over USB
 - `src/experiments/live_radar.py` — the radar; `record_session.py`, `calibrate_distance.py`, `beamform_file.py` — hardware tools
 - `src/experiments/run_*_sim.py`, `run_radar_demo.py` — simulation experiments → `results/*.json`
+- `src/experiments/analyze_hw_session.py` — hardware session summary → `results/hw_session.json`
 - `doc/06_home2_integration.md` — the plan to bring this into the home2 ROS 2 pipeline
 
-## Headline (simulation; hardware pending)
+## Headline
+Simulation (`04_results.md`):
 - **Angle:** the silence-learned noise model is what makes DOA robust. At 0 dB SNR with a
-  directional fan, plain SRP-PHAT is off by 69–76°; subtracting the silence cross-spectra and
-  weighting bins by speech presence brings it to 3–4°. Moving-talker demo: median 1.0° error.
-- **Distance:** not available from timing differences (6.4 cm aperture). The direct-to-reverberant
-  cue (CDR) is strongly monotone *within* a room (Spearman −0.90 to −0.95), but its offset depends
-  on the room: cross-room error 0.55 m (CDR+level) → **0.33 m with the room RT60 as a covariate**
-  (always guessing the mean distance: 0.75 m).
-- **Selective cancellation:** MVDR steered at the estimated talker, noise covariance from
-  target-silent frames: +2.6 to +10.8 dB SINR against a competing talker. Delay-and-sum: ≈0 dB
-  (the array is too small for it).
+  directional fan, plain SRP-PHAT is off by 35–79° (median); subtracting the silence
+  cross-spectra and weighting bins by speech presence brings it to 4–5°. Moving-talker
+  demo: median 0.7° error.
+- **Distance:** not available from timing differences (6.4 cm aperture). The CDR is strongly
+  monotone *within* a room (Spearman −0.90 to −0.95) but room-relative: cross-room error
+  0.53 m (CDR+level) → **0.33 m with the room RT60** (guessing the mean: 0.75 m).
+- **Selective cancellation:** MVDR at the estimated talker: +2.6 to +10.8 dB SINR against a
+  competing talker (mean 7.4); delay-and-sum ≈0 dB.
+
+Hardware, first session (2026-10-05):
+- The ReSpeaker works end to end on macOS; the radar follows the talker's direction.
+- The real room's hum broke the VAD (**9 speech frames in 26 s** of talking, so no distance
+  at all); a **200 Hz high-pass** on the VAD input fixed it (12 → 135 frames on a clip,
+  0 false detections in silence). In simulation the same filter costs one reverberant
+  0 dB clip — a documented trade-off.
+- The simulated distance model does not transfer (0.5 m read as 2.5–5 m; room RT60 0.9 s).
+  The radar now shows **near/mid/far learned online**: separates near from far, moves
+  with vocal effort. Labelled DOA / distance grid and two-talker MVDR still to do.

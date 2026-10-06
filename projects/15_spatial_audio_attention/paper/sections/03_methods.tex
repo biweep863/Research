@@ -6,7 +6,9 @@ $X_m(f)=S(f)e^{-j2\pi f\tau_m(\theta)}$, $\tau_m=-p_m^\top u(\theta)/c$. The
 largest inter-microphone delay is 0.19\,ms ($\approx$3 samples).
 
 \paragraph{VAD and silence model.} Per frame, the mean of the four
-channels over the last 1024 samples passes an energy gate and an
+channels over the last 1024 samples, high-passed at 200\,Hz (fourth-order
+Butterworth, zero phase; added after the hardware session,
+Section~\ref{sec:hw}), passes an energy gate and an
 autocorrelation test: the normalised autocorrelation peak in the lag band
 of 85--255\,Hz must exceed 0.6 (the robot pipeline's rule), which also
 yields $F_0$. The gate is $\max(g_0, \phi\cdot 10^{6/20})$ where $\phi$
@@ -37,6 +39,19 @@ using bins where the diffuse coherence $\mathrm{sinc}(2\pi fd/c)<0.7$ in
 standardised features to $\log r$; RT$_{60}$ can be appended as a room
 covariate (the ReSpeaker firmware reports an estimate).
 
+\paragraph{Relative range.} Without a room model the array can only say
+whether the talker is nearer or farther than usual. Per speech frame with
+SNR above 3\,dB we take a cue $x$: the noise-subtracted speech power
+$x=10\log_{10}\mathrm{tr}_{200\text{--}3800\,\text{Hz}}\Phi_s$ (default) or the CDR.
+Each utterance (closed by 0.6\,s of silence) adds the median of its $x$ to
+a history of the last 20. With $c$ the history's median and
+$w=\max(3\,\text{dB}, 1.48\,\mathrm{MAD})$, the running median $\bar x$ of
+the current utterance is \emph{near} if $\bar x>c+w$, \emph{far} if
+$\bar x<c-w$, \emph{mid} otherwise, with 0.5\,dB hysteresis. Until three
+utterances exist the history is padded with a hardware prior (normal
+speech at 1\,m on the raw, fixed-gain microphones). The noise reference is
+the continuously re-learned silence model; nothing is calibrated per room.
+
 \paragraph{Tracking.} An alpha-beta filter on the circle (residuals
 wrapped to $[-180^\circ,180^\circ)$) and an EMA of $\log r$; measurements
 below a confidence threshold are ignored, and tracks expire after 3\,s.
@@ -61,7 +76,7 @@ Table~\ref{tab:setup}.
 
 \begin{table}[t]
 \centering\small
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}lp{0.8\linewidth}@{}}
 \toprule
 DOA & 8 angles $\times$ SNR \{0,10,20\} $\times$ RT$_{60}$ \{0.3,0.6\} $\times$ \{diffuse, fan\} \\
 Distance & 6 distances 0.5--3\,m $\times$ 3 angles $\times$ RT$_{60}$ \{0.3,0.45,0.6\} $\times$ 2 \\

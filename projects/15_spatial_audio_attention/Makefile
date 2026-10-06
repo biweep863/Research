@@ -2,13 +2,14 @@ CONFIG ?= configs/local_small.yaml
 # Windows venv uses Scripts/, POSIX uses bin/
 PY ?= $(firstword $(wildcard ../../.venv/Scripts/python.exe ../../.venv/bin/python) python)
 
-.PHONY: run figures paper all test clean demo live record calibrate beamform
+.PHONY: run figures paper all test clean demo live record calibrate beamform hw
 
 run:
 	$(PY) -m src.experiments.run_doa_sim --config $(CONFIG)
 	$(PY) -m src.experiments.run_distance_sim --config $(CONFIG)
 	$(PY) -m src.experiments.run_beamform_sim --config $(CONFIG)
 	$(PY) -m src.experiments.run_radar_demo --config $(CONFIG)
+	$(PY) -m src.experiments.run_vad_highpass_sim --config $(CONFIG)
 
 figures:
 	$(PY) -m src.figures.plot_results --results results --out paper/figures --macros paper/macros.tex
@@ -33,6 +34,10 @@ live:
 # labelled clip: make record ANGLE=90 DIST=1.5 [ARGS="--note 'fan on'"]
 record:
 	$(PY) -m src.experiments.record_session --config $(CONFIG) --angle $(ANGLE) --distance $(DIST) $(ARGS)
+
+# summarise the hardware session logs (data/hw_*.csv + newest clip) -> results/hw_session.json
+hw:
+	$(PY) -m src.experiments.analyze_hw_session --config $(CONFIG)
 
 calibrate:
 	$(PY) -m src.experiments.calibrate_distance --config $(CONFIG) --dir data/recordings

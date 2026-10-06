@@ -124,6 +124,8 @@ def extract_features(
     return {
         "cdr_db": cdr_db(Phi_s, freqs, mics, None if cdr_method == "doa_independent" else az_rad, c=c),
         "level_db": float(10 * np.log10(max(p_x, _EPS))),
+        # noise-subtracted speech power: the level cue for the online relative range
+        "speech_db": float(10 * np.log10(p_s)),
         "snr_db": float(10 * np.log10(p_s / p_n)),
         "tilt_db": float(10 * np.log10(p_hi / p_lo)),
     }

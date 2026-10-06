@@ -23,6 +23,7 @@ import scipy.signal
 from .distance import DistanceModel, extract_features
 from .doa import harmonic_weights, peak_azimuth, snr_weights, srp_phat
 from .geometry import SPEED_OF_SOUND, respeaker_v2_positions
+from .relrange import RelativeRange
 from .stft import ema_alpha
 from .tracker import SpeakerTracker, circular_mean_deg
 from .vad import INT16_SCALE, adaptive_threshold, frame_vad, update_floor
@@ -38,6 +39,7 @@ class FrameEstimate:
     az_deg: float = float("nan")  # raw measurement, array frame
     doa_conf: float = 0.0
     range_m: float = float("nan")  # raw measurement
+    range_band: str | None = None  # near / mid / far (relative range mode)
     features: dict | None = None
     track_az_deg: float = float("nan")
     track_range_m: float = float("nan")
@@ -108,6 +110,10 @@ class Localizer:
         self.hangover = int(round(v["hangover_s"] * self.fs / self.hop))
         self.reset_frames = int(round(a.get("reset_after_silence_s", 0.6) * self.fs / self.hop))
         self.floor_up, self.floor_down = float(v["floor_up"]), float(v["floor_down"])
+        # raw mics carry strong sub-100 Hz rumble (HVAC, desk, USB); it dominates the
+        # broadband RMS gate and leaks periodicity into the F0 band -> high-pass the VAD input
+        hp = v.get("highpass_hz")
+        self.vad_sos = scipy.signal.butter(4, hp, "highpass", fs=self.fs, output="sos") if hp else None
 
         shape = (len(self.freqs), self.M, self.M)
         self.fast = _Ema(shape, ema_alpha(a["doa_tau_s"], self.hop, self.fs))
@@ -118,6 +124,12 @@ class Localizer:
         self.model = distance_model or DistanceModel()
         # room RT60 covariate for the distance model (config, or firmware estimate live)
         self.room_rt60 = cfg.get("distance", {}).get("room_rt60_s")
+        # microphone-only near/mid/far that learns its reference during the session
+        rcfg = cfg.get("distance", {}).get("relative")
+        self.rel = RelativeRange.from_config(rcfg) if rcfg and rcfg.get("enabled") else None
+        self.rel_cue = (rcfg or {}).get("cue", "speech_db")
+        if self.rel is not None and self.rel_cue != "speech_db":
+            self.rel.prior = []  # the hardware prior is a speech level, not a CDR
         self.totals = _Totals()
 
         self._buf = np.zeros((self.M, 0))
@@ -153,6 +165,8 @@ class Localizer:
         frame = self._buf[:, p : p + self.nfft]
         vstart = max(0, p + self.nfft - self.vad_window)
         mono = self._buf[:, vstart : p + self.nfft].mean(axis=0)
+        if self.vad_sos is not None:
+            mono = scipy.signal.sosfiltfilt(self.vad_sos, mono)
 
         thr = adaptive_threshold(self.floor, self.abs_thr, self.snr_gate_db)
         vad = frame_vad(mono, self.fs, thr, self.corr_thr, self.f0_range)
@@ -178,6 +192,8 @@ class Localizer:
         else:
             self._since_speech += 1
             self._speech_run = 0
+            if self.rel is not None and self._since_speech == self.reset_frames:
+                self.rel.end_utterance()
             if self._since_speech > self.hangover:
                 self.floor = update_floor(self.floor, vad.rms, self.floor_up, self.floor_down)
                 self.noise.update(xx)
@@ -190,6 +206,8 @@ class Localizer:
         else:
             st = self.tracker.predict(t)
             self._copy_track(est, st)
+        if self.rel is not None and est.track_active:
+            est.range_band = self.rel.band
         self._frame += 1
         return est
 
@@ -210,7 +228,11 @@ class Localizer:
             )
             self._add_room(feats)
             range_m = self.model.predict(feats)
-            est.features, est.range_m = feats, range_m
+            if self.rel is not None:
+                feats["model_range_m"] = range_m
+                est.range_band, range_m = self.rel.update(feats[self.rel_cue], feats["snr_db"])
+                range_m = range_m if np.isfinite(range_m) else None
+            est.features, est.range_m = feats, (range_m if range_m is not None else float("nan"))
             self.last_features = feats
         st = self.tracker.update(est.t, est.az_deg, range_m, conf)
         self._copy_track(est, st)

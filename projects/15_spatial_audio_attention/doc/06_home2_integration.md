@@ -48,9 +48,13 @@ audio_capturer.py ─┬─ /hri/rawAudioChunk            (ch0, unchanged: nothi
    `assets/`. Two VAD options: (a) internal pitch VAD on the raw mics
    (default; same logic as `voice_detection.py`), (b) subscribe to
    `/hri/voice_activity`. Read firmware `RT60` once a minute via the existing
-   `Tuning` and feed it as the room covariate. Publish:
+   `Tuning` and feed it as the room covariate. Range output: the online
+   near/mid/far (`distance.relative`, default) — the metric model needs a
+   per-room calibration (hardware session, `04_results.md`). Keep
+   `vad.highpass_hz: 200`; re-check it on the robot, whose own fans/motors set
+   a different low-frequency floor. Publish:
    - `speaker_position` (custom `SpeakerPosition.msg`: header, azimuth_deg,
-     range_m, confidence, is_speech, f0_hz), and
+     range_m, range_band (near/mid/far), confidence, is_speech, f0_hz), and
    - a `geometry_msgs/PointStamped` for RViz / tf consumers.
    Timer-free: one estimate per 16 ms frame, publish every 4 frames.
 4. **`spatial_filter.py` node.** MVDR per STFT frame on the multichannel
@@ -77,11 +81,19 @@ audio_capturer.py ─┬─ /hri/rawAudioChunk            (ch0, unchanged: nothi
   `make beamform` outputs; STT word error rate on two-talker clips (via
   `hear_streaming`) not worse than ch0 + DF. Real-time on the robot CPU.
 
+7. **Learning range from vision (later).** When the person detector sees
+   the talker (bearing within a few degrees of the DOA) its depth is a free
+   distance label: feed it to the relative range as the history's anchor, or
+   fit the metric model online. Out of scope for the microphone-only study.
+
 ## Risks
 - **Firmware/channel mapping.** Mic order and orientation of ch1–4 vs the
   ODAS layout must be confirmed (`make calibrate` fits offset and mirror).
 - **ch0 vs raw levels.** Raw mics are not AGC'd; any threshold copied from
   home2 must be re-tuned (see `05_decisions.md`).
+- **Low-frequency hum.** The raw mics hear room/robot hum that ch0's on-chip
+  processing hides; it broke the VAD in the first session. The 200 Hz
+  high-pass on the VAD input is required on raw channels.
 - **Robot self-noise.** Motors/fans on the robot are near-field and
   directional; the silence model handles stationary ones, not bursts.
 - **Own voice.** The robot's TTS is loud at the array; gate localization off

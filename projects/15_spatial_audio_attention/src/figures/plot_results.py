@@ -61,6 +61,9 @@ def fig_doa(doa, out, m):
             continue
         key = _name(f"doa {r['noise']} {r['variant']} snr{r['snr_db']} rt{int(round(r['rt60_s'] * 10))}")
         m(key, f"{r['mae_pooled_deg']:.1f}")
+        if r.get("median_framewise_deg") is not None:
+            m(key + "Med", f"{r['median_framewise_deg']:.1f}")
+        m(key + "N", str(r["n"]))
 
 
 def fig_distance(dist, out, m):
@@ -168,6 +171,86 @@ def fig_radar(demo, out, m):
     m("demoAzMedErr", f"{s['median_track_az_err_deg']:.1f}")
     m("demoAzPNinetyErr", f"{s['p90_track_az_err_deg']:.1f}")
     m("demoRangeMedErr", f"{s['median_track_range_err_m']:.2f}")
+    rb = s.get("relative_bands")
+    if rb and rb["per_waypoint"]:
+        m("demoBandAcc", f"{100 * rb['frame_accuracy']:.0f}")
+        m("demoBandWpCorrect", str(sum(p["pred"] == p["true"] for p in rb["per_waypoint"])))
+        m("demoBandWpN", str(len(rb["per_waypoint"])))
+
+
+def tab_vad_highpass(vh, out, m):
+    """Macros only (table typeset in 04_results.tex): DOA MAE / max per cut-off."""
+    for r in vh["rows"]:
+        k = _name(f"vadhp {r['noise']} rt{int(round(r['rt60_s'] * 10))} hp{r['highpass_hz'] or 'none'}")
+        m(k + "Mae", f"{r['mae_deg']:.1f}")
+        m(k + "Max", f"{r['max_deg']:.0f}")
+        m(k + "Det", str(r["n_detected"]))
+
+
+def fig_hw(hw, out, m):
+    """Hardware session: room-noise spectrum on the raw mics, and the two range cues per utterance."""
+    n = hw["noise"]
+    apply_style()
+    fig, axes = plt.subplots(1, 2, figsize=(TEXT_W, TEXT_W * 0.3))
+    f, p = np.array(n["psd_hz"]), np.array(n["psd_db"])
+    axes[0].plot(f, p, color="0.3", lw=1)
+    for fc, ls in ((150, ":"), (200, "--")):
+        axes[0].axvline(fc, color="tab:red", ls=ls, lw=1, label=f"VAD high-pass {fc} Hz")
+    axes[0].axvspan(85, 255, color="tab:blue", alpha=0.1, label="F0 search band")
+    axes[0].set_xlim(0, 1000)
+    axes[0].set_xlabel("frequency (Hz)")
+    axes[0].set_ylabel("noise PSD (dB)")
+    axes[0].legend(frameon=False, fontsize=7)
+    axes[0].set_title("room noise, raw mics (silence)")
+    lr = hw.get("live_relative")
+    if lr:
+        us = [u for u in lr["utterances"] if u["n"] >= 5 and (u["snr_db_med"] or -99) > 3]
+        col = {"near": "tab:red", "mid": "0.5", "far": "tab:blue"}
+        for b in ("near", "mid", "far"):
+            sel = [u for u in us if u["band_speech_db"] == b]
+            axes[1].scatter([u["speech_db_med"] for u in sel], [u["cdr_db_med"] for u in sel], s=8,
+                            color=col[b], alpha=0.7, label=f"{b} (speech-level band)")
+        axes[1].set_xlabel("noise-subtracted speech level (dBFS)")
+        axes[1].set_ylabel("CDR (dB)")
+        axes[1].legend(frameon=False, fontsize=7)
+        axes[1].set_title(f"live session, {len(us)} utterances")
+    fig.tight_layout()
+    fig.savefig(out / "hw_session.pdf")
+    plt.close(fig)
+
+    bf = n["band_power_frac"]
+    m("hwNoiseDb", f"{n['broadband_dbfs']:.1f}")
+    m("hwNoiseLowPct", f"{100 * (bf['0-60'] + bf['60-100']):.0f}")
+    m("hwNoiseHpTwoHundredDb", f"{n['highpass_200_dbfs']:.1f}")
+    for r in hw["vad_ablation"]:
+        k = "None" if r["highpass_hz"] is None else _name(str(r["highpass_hz"]))
+        m(f"hwVadTalk{k}", str(r["speech_in_talk"]))
+        m(f"hwVadFalse{k}", str(r["speech_in_silence"]))
+    r0 = hw["vad_ablation"][0]
+    m("hwVadTalkN", str(r0["talk_frames"]))
+    m("hwVadSilN", str(r0["silence_frames"]))
+    c = hw["clip"]
+    m("hwClipModelRange", f"{c['model_range_m']:.1f}")
+    m("hwClipCdr", f"{c['features']['cdr_db']:.1f}")
+    m("hwClipSnr", f"{c['features']['snr_db']:.1f}")
+    m("hwFwRtSixty", f"{hw['device']['firmware_rt60_s']:.1f}")
+    if "live_no_highpass" in hw:
+        l0 = hw["live_no_highpass"]
+        m("hwLiveZeroSpeech", str(l0["speech_frames"]))
+        m("hwLiveZeroFrames", str(l0["frames"]))
+        m("hwLiveZeroSec", f"{l0['seconds']:.0f}")
+    if lr:
+        a = lr["cue_agreement"]
+        m("hwLiveSpeechPct", f"{100 * lr['speech_frames'] / lr['frames']:.0f}")
+        m("hwLiveMin", f"{lr['seconds'] / 60:.0f}")
+        m("hwLiveUtt", str(a["n_utterances_ge5_frames"]))
+        m("hwRhoSpeechCdr", f"{a['spearman_speech_vs_cdr']:.2f}")
+        m("hwBandAgree", f"{100 * a['band_agreement_speech_vs_cdr']:.0f}")
+        m("hwSwitchSpeech", f"{100 * a['switch_rate_speech_db']:.0f}")
+        m("hwSwitchCdr", f"{100 * a['switch_rate_cdr_db']:.0f}")
+        for cue in ("speech_db", "cdr_db"):
+            for b, v in a[f"bands_{cue}"].items():
+                m(f"hwBand{_name(cue)}{b.capitalize()}", f"{100 * v:.0f}")
 
 
 def main():
@@ -184,7 +267,8 @@ def main():
         macros.append(f"\\newcommand{{\\{k}}}{{{v}}}")
 
     for name, fn in [("doa_sim.json", fig_doa), ("distance_sim.json", fig_distance),
-                     ("beamform_sim.json", fig_beam), ("radar_demo.json", fig_radar)]:
+                     ("beamform_sim.json", fig_beam), ("radar_demo.json", fig_radar),
+                     ("vad_highpass_sim.json", tab_vad_highpass), ("hw_session.json", fig_hw)]:
         d = _load(R, name)
         if d is None:
             print(f"missing {name}, skipped")

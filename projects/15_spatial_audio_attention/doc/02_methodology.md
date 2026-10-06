@@ -5,7 +5,8 @@
  ReSpeaker 6ch ──► ch1..4 (raw mics, float [-1,1])
                      │  STFT: 512-pt Hann, hop 256 (16 ms), 16 kHz
                      ▼
-         ┌─── VAD (mic average, last 1024 samples) ───┐
+         ┌─── VAD (mic average, last 1024 samples, ───┐
+         │      4th-order Butterworth high-pass 200 Hz)│  (hardware: room hum)
          │ RMS > max(abs gate, floor·10^(6/20))        │  home2 voice_detection logic,
          │ autocorr peak in 85–255 Hz lag band > 0.6   │  + F0 output, + adaptive floor
          └───────────────┬─────────────────────────────┘
@@ -18,7 +19,10 @@
   SRP-PHAT on Φx_fast − Φn, bin weights 1 − tr Φn / tr Φx  (+ optional F0 comb)
                 │ azimuth, confidence
                 ▼
-  features on (Φx_slow, Φn): CDR, level, SNR, tilt  ─► ridge model ─► log-distance
+  features on (Φx_slow, Φn): CDR, level, speech, SNR, tilt
+                ├─► ridge model ─► log-distance          (metric; needs the room)
+                └─► relative range: near / mid / far     (default on the radar;
+                    vs this session's utterance history    learns online)
                 │
                 ▼
   alpha-beta tracker on the circle (+ log-range EMA) ─► radar / ROS topic
@@ -48,6 +52,15 @@ Spatial statistics are reset when speech resumes after > 0.6 s of silence
   Untrained prior: inverse square on level, `r = 10^{(L_1m − L)/20}`.
   With room RT60 known, physics suggests `r ≈ r_c(RT60) · 10^{−CDR/20}`,
   hence RT60 as a covariate.
+- **Relative range** (`relrange.py`). Cue `x` = `speech_db` (10 log of the
+  noise-subtracted speech power, 200–3800 Hz) or `cdr_db`, per speech frame
+  with SNR > 3 dB. Each utterance (ends after 0.6 s of silence) commits
+  `median(x)` to a history of the last 20. Reference `c = median(history)`,
+  half-width `w = max(3 dB, 1.4826·MAD)`; until 3 utterances exist the history is
+  padded with a 2-utterance hardware prior (speech at 1 m: −44 dB). The current
+  utterance's running median `x̄` is near if `x̄ > c + w`, far if `x̄ < c − w`,
+  else mid; leaving the current band costs 0.5 dB extra (hysteresis). Bands
+  are drawn at 0.75 / 1.75 / 3 m.
 - **MVDR.** `w = (Φn + δI)^{-1} a / (aᴴ(Φn + δI)^{-1} a)`, δ = 0.01·tr Φn / 4.
 - **Metrics.** Angular error `|wrap(θ̂ − θ)|`; distance MAE (m); beamformer
   output SINR gain = (target/residual power after w) − (same at mic 1), with
@@ -60,7 +73,14 @@ Spatial statistics are reset when speech resumes after > 0.6 s of silence
   leave-one-RT60-out (generalise across rooms), against predict-the-mean and
   the inverse-square prior.
 - Beamforming: target DOA *estimated* (onset subtraction), not oracle.
-- Hardware: leave-one-recording-out for both orientation offset and distance.
+- Hardware: leave-one-recording-out for both orientation offset and distance
+  (`calibrate_distance.py`, needs the labelled grid). Session summary
+  (`analyze_hw_session.py`): noise spectrum of a clip's silence, VAD high-pass
+  ablation on that clip, live-log counts, per-utterance cues and an offline
+  replay of the relative range with each cue.
+- Relative range in simulation: band of the true distance (edges at the
+  geometric means of the drawn radii, 1.15 / 2.29 m) vs the modal predicted
+  band per demo position.
 
 ## Statistical caveat
 Local sweep: 8 clips per DOA cell, 108 distance clips, 8 beamforming scenes.
