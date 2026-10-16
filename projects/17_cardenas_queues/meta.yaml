@@ -1,0 +1,10 @@
+slug: lazaro_cardenas_queues
+title: "A Hundred Feeders, One Bottleneck: Where the Queue Forms on Avenida Lázaro Cárdenas, Monterrey"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Decision"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "OSM confirms 133 feeder lanes into 5 per direction, but lane ratios never locate the queue (0%); utilisation does (100%): a 5-to-3-lane merge at 4.4 km, where one extra lane cuts delay 37%."
+pdf: "paper/main.pdf"
+created: "2026-10-12"

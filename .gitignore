@@ -34,3 +34,7 @@ projects/16_causal_binaural_separation/data/
 projects/16_causal_binaural_separation/results/ckpt/
 projects/16_causal_binaural_separation/results/audio/
 projects/16_causal_binaural_separation/results/sanity/
+
+# Project 17: cached OSM extract, field counts, full-scale results
+projects/17_lazaro_cardenas_queues/data/
+projects/17_lazaro_cardenas_queues/results/full/

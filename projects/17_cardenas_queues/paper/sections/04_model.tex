@@ -1,0 +1,59 @@
+\section{Model}
+\label{sec:model}
+
+\paragraph{Cells and feeders.} Each direction is a line of 100\,m cells
+in travel order. The capacity of cell $i$'s downstream boundary is
+\begin{equation}
+Q_i = s_0\,\big(\ell^{\mathrm{exp}}_i + \ell^{\mathrm{lat}}_i g_i\big)\,
+\big(1 - f\,n^{\mathrm{acc}}_i\big),
+\end{equation}
+with saturation flow $s_0 = 1900$\,veh/h/lane \cite{hcm2000}, express and
+frontage lanes $\ell$, green ratio $g_i$ at signalised cells (\ThG\ at
+base), and a friction loss $f$ (\ThFriction\% at base) for each
+unsignalised access $n^{\mathrm{acc}}_i$ in the cell. Every approach is a
+point queue that discharges at most at its own capacity. That capacity is
+$s_0(1-g-0.1)$ per lane at a signal, 1600\,veh/h per lane for a ramp, and
+700\,veh/h per lane for a give-way merge. Through traffic enters at the
+upstream end (\ThUp\,veh/h at base).
+
+\paragraph{Demand.} An approach delivers
+$q = \ell\,r_{\mathrm{class}}\,\tau$\,veh/h: its lanes, times a per-lane
+peak rate by class, times the fraction that turns onto the corridor
+($\tau = 1$ when the street ends there, \ThTurnCross\ when it crosses).
+Base rates are \ThQMajor, \ThQTertiary, \ThQMinor\ and \ThQService\
+veh/h/lane for major, tertiary, residential and service. We cannot
+measure these, so the Monte Carlo varies each one over a range roughly
+twice that wide (log-uniform). Departures attract vehicles by the same
+rule. Their split fractions $\beta_i$ are scaled so that the vehicles
+leaving by side streets equal those that entered by them, which keeps
+corridor flow bounded.
+
+\paragraph{Three levels.} \emph{Closed forms}: each lane group is a
+server. We use Erlang C, M/D/1, Kingman \cite{kingman1961heavy} and
+Webster \cite{webster1958signal}, and validate them against a
+vehicle-level discrete-event simulator. \emph{Tandem model}: the flow at
+cell $k$ is $\lambda_k = \min(\lambda_{k-1}, Q_{k-1})(1-\beta_{k-1}) +
+a_k$, where $a_k$ is the flow from feeders that join at $k$, and
+utilisation is $\rho_k = \lambda_k / Q_k$. \emph{CTM}
+\cite{daganzo1994ctm,daganzo1995ctm}: triangular fundamental diagram
+(60\,km/h free flow, 20\,km/h backward wave, 150\,veh/km/lane jam
+density), $\Delta t = 6$\,s. Feeders merge with Daganzo's priority rule
+(priority proportional to lanes). Diverges are partially FIFO: a fraction
+$\phi$ of exiting vehicles is held back when the continuing flow is
+blocked ($\phi = 1$ is strict FIFO, $\phi=0$ lets exits leave freely;
+base \ThFifo). Discharge from a queued cell falls by a capacity drop of
+\ThDrop\% \cite{hall1991capacity,chung2007capacity}. Demand follows a
+trapezoidal peak over a five-hour horizon: 45\% of peak, rising for 30
+minutes to a two-hour plateau, then falling. Total delay is the
+vehicle-hours spent in excess of free flow on the corridor plus all
+vehicle-hours waiting in feeder queues. An active bottleneck is a cell
+boundary with density above critical upstream and below it downstream
+\cite{cassidy1999bottlenecks}.
+
+\paragraph{Predictors.} For each segment between junctions we compute,
+without simulation: the local lane ratio (feeder lanes entering the
+segment over its corridor lanes); the cumulative lane ratio (all feeder
+lanes up to the segment over its lanes, the localised ``150 into 6''
+argument); feeder lanes alone (cumulative numerator); capacity alone
+($1/\min Q$, geometry and signals without demand); and $\max\rho$. The
+ground truth is where the CTM places the principal active bottleneck.
