@@ -1,0 +1,56 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Waiting for the Stars: Optimal Routes Through the Real, Moving Solar Neighbourhood}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{October 16, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent How far apart do stepping stones have to be before a civilisation can
+hop across the Galaxy, and does the motion of the stars change that answer? We
+treat the \NStars\ stars of the Gaia Catalogue of Nearby Stars within
+\CatRadius~pc as a graph with full 6D phase-space information and solve the
+routing problems exactly. With stars frozen in place, reach percolates sharply.
+A ship whose single hop is limited to $r$ reaches almost nothing below
+$r\approx\RTen$~pc and half of all stars within \EvalRadius~pc at
+$r_{50}=\RFifty$~pc (95\% CI \RFiftyLo--\RFiftyHi). That is about twice the
+median nearest-neighbour spacing and \PctAbovePoisson\% above a Poisson field
+of the same density. With Gaia alone the Sun is trapped in a \PocketGaiaSize-star
+pocket whose way out is a single \PocketBridge~pc hop. Two nearby brown dwarfs
+that Gaia cannot see open it. Once the stars move and colonies may wait for a
+neighbour to drift within range, the problem becomes an exact earliest-arrival
+search on a temporal graph whose edges are open on a single closed-form time
+window. Waiting cuts the range needed to reach half the stars by \RedHundred\%
+within 100~kyr and by \RedFiveHundred\% within 500~kyr. Below the static
+threshold, expansion is carried by the stars themselves at about \FrontOneKms~km/s. We
+map propulsion to range: a fusion ship at \VFusionPctC\% of $c$ must survive
+\TauFusionStatic~yr per hop to percolate, or \TauFusionMoving~yr if it can wait.
+Refuelling only at known exoplanet hosts needs a \TankRatio$\times$ longer
+tank. Photon sails that brake on starlight reach far fewer stars, because most
+targets are too dim to stop them. Optimised multi-probe tours are
+\TwoOptMin--\TwoOptMax\% shorter than the nearest-neighbour rule of earlier
+models.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_data_model.tex}
+\input{sections/04_static.tex}
+\input{sections/05_moving.tex}
+\input{sections/06_engineering.tex}
+\input{sections/07_conclusion.tex}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

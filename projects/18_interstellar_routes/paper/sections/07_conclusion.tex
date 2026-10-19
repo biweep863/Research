@@ -1,0 +1,35 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations.} (i) \emph{Completeness.} Gaia misses most brown dwarfs
+and some bright stars. We add the most important ones by hand and bound the
+remaining effect by injection, which lowers the threshold by about
+\PctBDTwenty\%. The true neighbourhood is therefore somewhat \emph{easier} to
+cross than our graph. (ii) \emph{Kinematics.} Stars move on straight lines.
+Galactic curvature, binary orbits and close-encounter scattering are ignored.
+This is adequate for $\lesssim1$~Myr inside 50~pc but not for Galaxy-scale
+extrapolation. (iii) \emph{Missing RVs} are drawn from a conditional velocity
+ellipsoid. Their individual values are uncertain, though the statistics are
+unbiased. (iv) \emph{Boundaries.} The moving-star results lose inflowing stars
+after about 500~kyr and are conservative there. (v) \emph{Engineering} models
+are deliberately simple: one range per ship, refuelling as a binary property of
+a star, and a sail-braking law scaled from one calibrated case. (vi) We treat
+a colony's ability to relaunch as given, with an optional settling delay.
+Sociology is out of scope.
+
+\paragraph{Conclusion.} Routed exactly on the measured solar neighbourhood, the
+interstellar graph has a sharp percolation threshold near \RFifty~pc per hop,
+about twice the typical spacing. That threshold falls by half once ships may
+wait $\sim$$10^5$ years for the stars themselves to close the gaps. In this
+regime the expansion front moves at stellar speeds. A fusion ship that survives
+a couple of centuries per hop crosses the neighbourhood. Sails need luminous
+stopping points, and refuelling only at known planet hosts multiplies the
+required tank by \TankRatio. The time-dependent formulation is exact, cheap and
+scales directly to the 100-pc GCNS and to deeper Gaia releases. Natural next
+steps are Galactic-potential orbits, gravitational-assist edges between stars,
+and stochastic colony survival.
+
+\paragraph{Reproducibility.} \texttt{make test \&\& make all} in
+\texttt{projects/18\_interstellar\_routes} downloads and caches the catalogue,
+runs every experiment, and regenerates the figures and every number in this
+paper (about 3~minutes on a laptop CPU for the 50-pc configuration).

@@ -1,0 +1,42 @@
+\section{Data and model}
+\label{sec:model}
+
+\paragraph{Catalogue.} We select every Gaia DR3 source with parallax
+$\varpi>20$~mas (inside \CatRadius~pc) and $\varpi/\sigma_\varpi\ge10$, and keep
+only members of the Gaia Catalogue of Nearby Stars (GCNS)
+\cite{smart2021gcns}. This step matters. About 18\% of the raw parallax cut is
+not in the GCNS, and those rows have a median tangential speed of 2.6~km/s,
+which is the signature of distant background sources with spurious parallaxes.
+With them included, star density rises with distance and stars appear to fall
+toward the Sun. After the cut the density is flat at \Density~pc$^{-3}$ in
+every 10-pc shell. Four bright stars that saturate Gaia ($\alpha$~Cen~A/B,
+Sirius~A, Procyon~A) and the two nearest brown dwarfs (Luhman~16AB
+\cite{luhman2013discovery} and WISE~0855$-$0714 \cite{luhman2014discovery}) are
+added from the literature. The result is \NStars\ objects. \PctRV\% have a
+radial velocity, from Gaia DR3 or the GCNS literature compilation.
+\NHosts\ are confirmed exoplanet hosts (NASA Exoplanet Archive, matched by
+Gaia DR3 identifier).
+
+\paragraph{Missing radial velocities.} We fit a Gaussian velocity ellipsoid
+$\mathcal N(\mu,\Sigma)$ to stars with RVs and draw each missing RV from that
+Gaussian \emph{conditioned on the star's measured tangential velocity}. Drawing
+RVs unconditionally breaks the coherence of the velocity field and makes faint
+stars converge on the Sun. In our tests that error tripled the star count
+inside 15~pc within 1~Myr. A unit test checks that the conditional fill is
+unbiased on a synthetic field.
+
+\paragraph{Kinematics.} Positions (pc) and velocities (pc/Myr) follow from
+standard astrometric formulae and agree with \texttt{astropy} to $10^{-10}$.
+Stars move on straight lines. Over $\lesssim1$~Myr inside 50~pc, Galactic
+curvature bends paths by far less than the inter-star spacing, the same regime
+used for Gaia encounter studies. With linear motion, Gliese~710 passes
+the Sun at 0.051~pc (10,600~au) in 1.29~Myr, in line with the Gaia DR3
+encounter analysis \cite{bailerjones2022gl710}.
+
+\paragraph{Ships.} A ship refuels at every star it visits, unless stated
+otherwise, and has a maximum single-hop range $r$. Range is the natural single
+number because for a coasting ship it is the product of cruise speed and the
+time the craft must survive in transit (Section~\ref{sec:engineering}). We
+score stars within an evaluation radius well inside the catalogue: \EvalRadius~pc
+for frozen stars and \TdEval~pc for moving stars. The outer shell acts as a
+boundary buffer.

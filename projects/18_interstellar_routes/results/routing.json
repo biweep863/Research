@@ -1,0 +1,605 @@
+{
+  "eval_radius_pc": 25,
+  "r50_static": 2.1613783585477,
+  "r50_moving": {
+    "T_myr": 0.5,
+    "r50": 1.0369774919614148
+  },
+  "techs": [
+    {
+      "tech": "chemical",
+      "v_exhaust_kms": 4.4,
+      "mass_ratio": 10,
+      "v_cruise_kms": 5.065687204104785,
+      "v_cruise_c": 1.6897313687940692e-05,
+      "tau_star_static_yr": 417194.91589770484,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 0.0005180739927994868,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 0.00155422197839846,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 0.005180739927994868,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 0.015542219783984602,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 0.05180739927994868,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 0.155422197839846,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 0.5180739927994867,
+          "reach_static": 0.0
+        }
+      ],
+      "tau_star_moving_yr": 200160.1134922753
+    },
+    {
+      "tech": "chemical",
+      "v_exhaust_kms": 4.4,
+      "mass_ratio": 100,
+      "v_cruise_kms": 10.131374405316869,
+      "v_cruise_c": 3.379462736623237e-05,
+      "tau_star_static_yr": 208597.45800841096,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 0.0010361479853031336,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 0.0031084439559094005,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 0.010361479853031336,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 0.031084439559094006,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 0.10361479853031336,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 0.31084439559094007,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 1.0361479853031337,
+          "reach_static": 0.0
+        }
+      ],
+      "tau_star_moving_yr": 100080.05677471242
+    },
+    {
+      "tech": "nuclear thermal",
+      "v_exhaust_kms": 9.0,
+      "mass_ratio": 10,
+      "v_cruise_kms": 10.361632914347275,
+      "v_cruise_c": 3.4562687078496405e-05,
+      "tau_star_static_yr": 203961.95894512694,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 0.0010596968031323863,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 0.003179090409397158,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 0.010596968031323862,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 0.03179090409397158,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 0.10596968031323861,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 0.31790904093971584,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 1.0596968031323861,
+          "reach_static": 0.0
+        }
+      ],
+      "tau_star_moving_yr": 97856.05551476472
+    },
+    {
+      "tech": "nuclear thermal",
+      "v_exhaust_kms": 9.0,
+      "mass_ratio": 100,
+      "v_cruise_kms": 20.72326580393897,
+      "v_cruise_c": 6.912537407441707e-05,
+      "tau_star_static_yr": 101980.97959438783,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 0.0021193936037329887,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 0.006358180811198965,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 0.02119393603732989,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 0.06358180811198966,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 0.21193936037329889,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 0.6358180811198966,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 2.119393603732989,
+          "reach_static": 0.12136017197576705
+        }
+      ],
+      "tau_star_moving_yr": 48928.02781583076
+    },
+    {
+      "tech": "electric",
+      "v_exhaust_kms": 100.0,
+      "mass_ratio": 10,
+      "v_cruise_kms": 115.12924898998949,
+      "v_cruise_c": 0.0003840298377018861,
+      "tau_star_static_yr": 18356.577200154705,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 0.011774408349555954,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 0.03532322504866786,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 0.11774408349555954,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 0.3532322504866786,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 1.1774408349555954,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 3.532322504866786,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 11.774408349555955,
+          "reach_static": 1.0
+        }
+      ],
+      "tau_star_moving_yr": 8807.04542577311
+    },
+    {
+      "tech": "electric",
+      "v_exhaust_kms": 100.0,
+      "mass_ratio": 100,
+      "v_cruise_kms": 230.25846402171027,
+      "v_cruise_c": 0.0007680595621311803,
+      "tau_star_static_yr": 9178.289953681407,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 0.023548813226158455,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 0.07064643967847536,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 0.23548813226158455,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 0.7064643967847537,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 2.3548813226158454,
+          "reach_static": 0.9302325581395349
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 7.064643967847537,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 23.548813226158458,
+          "reach_static": 1.0
+        }
+      ],
+      "tau_star_moving_yr": 4403.523362313313
+    },
+    {
+      "tech": "fusion",
+      "v_exhaust_kms": 10000.0,
+      "mass_ratio": 10,
+      "v_cruise_kms": 11507.269088607733,
+      "v_cruise_c": 0.038384118017431024,
+      "tau_star_static_yr": 183.65599438122405,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 1.176862408346562,
+          "reach_static": 0.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 3.5305872250396857,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 11.768624083465621,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 35.30587225039686,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 117.6862408346562,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 353.05872250396857,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 1176.862408346562,
+          "reach_static": 1.0
+        }
+      ],
+      "tau_star_moving_yr": 88.11374079135732
+    },
+    {
+      "tech": "fusion",
+      "v_exhaust_kms": 10000.0,
+      "mass_ratio": 100,
+      "v_cruise_kms": 22980.679810565885,
+      "v_cruise_c": 0.0766552966804985,
+      "tau_star_static_yr": 91.96329109937389,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 2.3502620803469867,
+          "reach_static": 0.9296462771154974
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 7.050786241040959,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 23.502620803469867,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 70.5078624104096,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 235.02620803469864,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 705.0786241040959,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 2350.2620803469867,
+          "reach_static": 1.0
+        }
+      ],
+      "tau_star_moving_yr": 44.12178116783972
+    },
+    {
+      "tech": "antimatter",
+      "v_exhaust_kms": 98931.51114,
+      "mass_ratio": 10,
+      "v_cruise_kms": 108717.837307208,
+      "v_cruise_c": 0.3626436703327874,
+      "tau_star_static_yr": 19.439118726292563,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 11.118705477241145,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 33.35611643172343,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 111.18705477241144,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 333.56116431723433,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 1111.8705477241144,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 3335.611643172343,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 11118.705477241145,
+          "reach_static": 1.0
+        }
+      ],
+      "tau_star_moving_yr": 9.326422883347364
+    },
+    {
+      "tech": "antimatter",
+      "v_exhaust_kms": 98931.51114,
+      "mass_ratio": 100,
+      "v_cruise_kms": 192164.09193923254,
+      "v_cruise_c": 0.6409904145728461,
+      "tau_star_static_yr": 10.997782810270726,
+      "reach_by_lifetime": [
+        {
+          "tau_yr": 100,
+          "r_hop_pc": 19.652855451275226,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 300,
+          "r_hop_pc": 58.95856635382567,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 1000,
+          "r_hop_pc": 196.52855451275227,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 3000,
+          "r_hop_pc": 589.5856635382568,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 10000,
+          "r_hop_pc": 1965.2855451275225,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 30000,
+          "r_hop_pc": 5895.856635382567,
+          "reach_static": 1.0
+        },
+        {
+          "tau_yr": 100000,
+          "r_hop_pc": 19652.855451275227,
+          "reach_static": 1.0
+        }
+      ],
+      "tau_star_moving_yr": 5.276472391161499
+    }
+  ],
+  "pilots": [
+    {
+      "r_pc": 2.5,
+      "n_queries": 200,
+      "greedy_success": 0.08,
+      "greedy_stretch_median": 1.0127127425219418,
+      "optimal_stretch_median": 1.775577461431118,
+      "astar_expansion_ratio_median": 0.10085782362092832
+    },
+    {
+      "r_pc": 3.0,
+      "n_queries": 200,
+      "greedy_success": 0.49,
+      "greedy_stretch_median": 1.066945791042039,
+      "optimal_stretch_median": 1.3049521809761402,
+      "astar_expansion_ratio_median": 0.049339249094276144
+    },
+    {
+      "r_pc": 4.0,
+      "n_queries": 200,
+      "greedy_success": 0.995,
+      "greedy_stretch_median": 1.0829599898039106,
+      "optimal_stretch_median": 1.100866597263286,
+      "astar_expansion_ratio_median": 0.01918752124682932
+    }
+  ],
+  "fuel": {
+    "radius_pc": 30,
+    "hop_pc": 3.0,
+    "n_stars": 8709,
+    "n_hosts": 310,
+    "need_quantiles": {
+      "0.1": 5.003913118622958,
+      "0.5": 7.496317850495235,
+      "0.9": 9.962767170753876
+    },
+    "reach_frac_by_tank": [
+      {
+        "tank_pc": 3,
+        "frac": 0.023646667969513386
+      },
+      {
+        "tank_pc": 5,
+        "frac": 0.09966777408637874
+      },
+      {
+        "tank_pc": 7.5,
+        "frac": 0.5258940785616573
+      },
+      {
+        "tank_pc": 10,
+        "frac": 0.9081493062341216
+      },
+      {
+        "tank_pc": 15,
+        "frac": 0.9990228649599374
+      },
+      {
+        "tank_pc": 20,
+        "frac": 0.9994137189759624
+      },
+      {
+        "tank_pc": 30,
+        "frac": 0.9994137189759624
+      }
+    ],
+    "refuel_anywhere_r50": 2.1764853067666157,
+    "nearest_host_pc": 1.3019705311704333
+  },
+  "sail": {
+    "v_launch_c": 0.2,
+    "by_lifetime": [
+      {
+        "tau_yr": 100,
+        "sail": {
+          "reach": 0.0009771350400625367,
+          "t50_yr": null
+        },
+        "rocket_same_speed": {
+          "reach": 1.0,
+          "t50_yr": 336.3364067490883
+        }
+      },
+      {
+        "tau_yr": 300,
+        "sail": {
+          "reach": 0.0013679890560875513,
+          "t50_yr": null
+        },
+        "rocket_same_speed": {
+          "reach": 1.0,
+          "t50_yr": 336.3364067490883
+        }
+      },
+      {
+        "tau_yr": 1000,
+        "sail": {
+          "reach": 0.39300371311315224,
+          "t50_yr": null
+        },
+        "rocket_same_speed": {
+          "reach": 1.0,
+          "t50_yr": 336.3364067490883
+        }
+      },
+      {
+        "tau_yr": 3000,
+        "sail": {
+          "reach": 0.8333007621653312,
+          "t50_yr": 3933.7209142471515
+        },
+        "rocket_same_speed": {
+          "reach": 1.0,
+          "t50_yr": 336.3364067490883
+        }
+      },
+      {
+        "tau_yr": 10000,
+        "sail": {
+          "reach": 0.9636505765096737,
+          "t50_yr": 3932.3904117718666
+        },
+        "rocket_same_speed": {
+          "reach": 1.0,
+          "t50_yr": 336.3364067490883
+        }
+      }
+    ],
+    "brake_speed_kms_quantiles": {
+      "0.1": 295.8378308641102,
+      "0.5": 1225.3711623335198,
+      "0.9": 6910.192773983075
+    },
+    "frac_targets_brake_above_0p01c": 0.2057846394371702
+  }
+}

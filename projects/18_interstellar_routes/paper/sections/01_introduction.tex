@@ -1,0 +1,47 @@
+\section{Introduction}
+\label{sec:intro}
+
+Interstellar distances are measured in parsecs: one parsec is
+$3.1\times10^{13}$~km, and even the nearest star, Proxima Centauri, is
+\SunFirstHop~pc away. Any civilisation that spreads beyond its own system
+therefore moves \emph{star to star}, and the natural mathematical object is a
+graph. The stars are the nodes, a hop is an edge, and the engineering limits of
+a ship (fuel, speed, how long the hardware or crew survives) cap the length of
+the edges it can use.
+
+This framing goes back to the Fermi-paradox literature
+\cite{hart1975explanation,newman1981galactic}. Those studies asked how long a
+fleet of probes would take to cover the Galaxy, on synthetic star fields with
+the stars held fixed \cite{bjork2007exploring,cotta2009computational}. Two things
+have changed since then. First, Gaia now gives positions, proper motions and,
+for most nearby stars, radial velocities \cite{gaia2023dr3,smart2021gcns}, so
+the real 6D star field can be routed instead of a random one. Second,
+Carroll-Nellenback et al.\ \cite{carroll2019fermi} argued that stellar motions
+alone can carry settlement across the Galaxy. That claim was made with a
+statistical front model, not with the routes themselves.
+
+We ask four concrete questions on the real catalogue.
+\begin{enumerate}
+\item \textbf{Static reach.} With stars frozen, what hop range $r$ is needed
+to reach a given fraction of the neighbourhood from the Sun, and where are the
+bottlenecks?
+\item \textbf{Moving stars.} If a colony may \emph{wait} for a neighbour to
+drift within range, how much smaller can $r$ be? This is an exact
+time-dependent shortest-path problem, and it is the main contribution.
+\item \textbf{Engineering.} Which propulsion technologies, per-hop lifetimes,
+refuelling rules and pilot heuristics turn that range into a route?
+\item \textbf{Exploration.} How much do optimised multi-probe tours gain over
+the greedy rule used by earlier models?
+\end{enumerate}
+
+\paragraph{Contributions.} (i) An exact reduction of minimum-range routing to
+the bottleneck of the Euclidean MST, applied to \NStars\ Gaia stars, with
+astrometric bootstrap errors, a Poisson null model and a test for unseen brown
+dwarfs. (ii) A closed-form temporal graph for linearly moving stars, in which
+every edge is open on exactly one time window, and an exact earliest-arrival
+Dijkstra over it. Waiting for stars lowers the percolation range by up to
+\RedThousand\% within 1~Myr. (iii) A propulsion-to-range map, an exact
+fuel-bottleneck algorithm for refuelling only at exoplanet hosts, and a
+luminosity-limited photon-sail network. (iv) A reproduction of the classic
+probe-exploration model on real stars. Every number in the text is generated
+from the code and checked by unit tests against brute-force references.

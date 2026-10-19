@@ -34,3 +34,6 @@ projects/16_causal_binaural_separation/data/
 projects/16_causal_binaural_separation/results/ckpt/
 projects/16_causal_binaural_separation/results/audio/
 projects/16_causal_binaural_separation/results/sanity/
+
+# Project 18: cached Gaia / GCNS / exoplanet downloads
+projects/18_interstellar_routes/data/
