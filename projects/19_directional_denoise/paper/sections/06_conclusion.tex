@@ -1,0 +1,15 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+On a 4-microphone ReSpeaker, directional noise cancellation has to come
+from combining the microphones with phase. Switching one off does nothing.
+An MVDR beamformer steered by a transfer function learned in the silence
+before the talker speaks cuts Whisper's word error rate by a third at 0\,dB
+SNR. Against a second voice, it is the difference between transcribing the
+talker and transcribing the television.
+
+DeepFilterNet3 does not add to recognition at any attenuation limit.
+Above 12\,dB, and in the robot's chunked mode, it subtracts, even as
+intelligibility metrics improve. The limit should be set for the
+recognizer, not by ear, and the array should be pointed before the
+denoiser is turned up.

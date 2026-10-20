@@ -1,0 +1,596 @@
+{
+ "takes": [
+  {
+   "name": "live_a0_d0.5_cafeteria_L_t10",
+   "noise": "cafeteria",
+   "channel": "L",
+   "angle": 0.0,
+   "text_id": "t10",
+   "same_interferer_played": 0.044856831581987174,
+   "snr_gain_exact": {}
+  },
+  {
+   "name": "live_a270_d0.5_talker_L_t9",
+   "noise": "talker",
+   "channel": "L",
+   "angle": 270.0,
+   "text_id": "t9",
+   "same_interferer_played": 0.9983028025452987,
+   "superposition": {
+    "gain": 0.6840304862307826,
+    "residual_db": -6.425512571985037,
+    "room_floor_db": null
+   },
+   "snr_gain_exact": {
+    "ref": 0.0,
+    "mean": -0.599481258777701,
+    "mute": -0.4592008435943735,
+    "mvdr_doa": 3.2904399660561805,
+    "mvdr_rtf": 2.9268042711921045,
+    "gsc": 2.3621115508722625
+   }
+  }
+ ],
+ "rows": [
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.3548387096774194,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebollas, tajo, chile y un poco de sal. Todo se hace de combate, se mueve en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.2903225806451613,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebolla, ajo, chino y un poco de sal. Todo se hace en el combate, se mueve en el licuador y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.41935483870967744,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebolla, ajo, ching y un poco de sal. Todo se hace en el comadre, se mueve en el licuador y se desmira todo el d\u00eda caro."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.3225806451612903,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace de combate, se mueve en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.41935483870967744,
+   "hyp": "Para preparar las tizas se necesitan tomates, bollas, ajo, chino y un poco de sal. Todo se est\u00e1 en el plan. Se mueve al lavador y se tiene que todav\u00eda no."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.25806451612903225,
+   "hyp": "Para preparar las cejas se necesitan tomates, cebollas, ajo, chingas y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.25806451612903225,
+   "hyp": "Para preparar la ceniza se necesitan tomates, cebollas, ajo, chicha y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.2903225806451613,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebollas, ajo, chica y un poco de sal. Todo se hace en el compadre, se muele en el licuador y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.2903225806451613,
+   "hyp": "Para preparar las hizas se necesitan tomates, cebollas, ajo, chingas y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.3548387096774194,
+   "hyp": "Para prepararlas necesitan tomate, olla, ajo, chile y un poco de sal. Todo se hace en el mar, se muele en el licuador y se tiene todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.3225806451612903,
+   "hyp": "Para preparar las pizza se necesitan tomates, cebollas, ajo, chino y un poco de sal. Todo se hace en el combate, se mueve en el licuador y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.41935483870967744,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebollas, taco, chingas y un poco de sal. Todo se hace en el comate, se mueve en el licuador y se sirve todav\u00eda para el agua."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.3548387096774194,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebollas, ajo, chico y un poco de sal. Todo se hace en el comar, se mueve en el licuador y se sirve todav\u00eda pero no."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.25806451612903225,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se mueve en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.5483870967741935,
+   "hyp": "Para preparar las listas se necesitan tomates, bollas, ajos, chiles y un poco de sal. Todos te hacen a encontrar que se mueven al licuador y se sientan todav\u00eda."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.22580645161290322,
+   "hyp": "Para preparar las alzas se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.45161290322580644,
+   "hyp": "Para preparar las pastillas se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todos se hacen en comp\u00e1s, se desmuelve en el ecuador y se divinen todo al d\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comar, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.12903225806451613,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comal, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.12903225806451613,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comal, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.12903225806451613,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comal, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.3870967741935484,
+   "hyp": "Para preparar las tazas se necesitan tomates, cebollas, ajo, chino y un poco de sal. Todos se hacen al camar\u00f3n, se muele en el licuado y se sirve todav\u00eda caliente. Gracias."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.06451612903225806,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comal, se muele en la licuadora y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.4838709677419355,
+   "hyp": "Para preparar las alzadas se necesitan tomates, cebollas, ajo, chino y un poco de sal. Todos se hacen al lim\u00f3n, se muelen en el licuador y se tienen todav\u00eda calificados. Gracias."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.3548387096774194,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebollas, ajo, chingas y un poco de sal. Todo se hace de combate, se huele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.25806451612903225,
+   "hyp": "Para preparar las pizzas se necesitan tomates, cebolla, ajo, chingas y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.3225806451612903,
+   "hyp": "Para preparar las pinta se necesitan tomates, cebolla, ajo, chit y un poco de sal. Todo se hace en el compadre, se mueve en el licuador y se sirve todav\u00eda pero no."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.3225806451612903,
+   "hyp": "Para preparar las pizzas se necesitan tomates y cebollas, ajo, chingas y un poco de sal. Todo se hace en el tomate, se huele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.6451612903225806,
+   "hyp": "Para preparar las listas se necesitan un comate, un huella, un ajo, un chico y un poco de agua. Todo se extra\u00f1a el comate, se envuelve al licuador y el tir\u00f3n es todav\u00eda caliente."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "off",
+   "atten": null,
+   "wer": 1.1481481481481481,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso en mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. He could arrange that satisfactorily, for Kerry would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 1.2222222222222223,
+   "hyp": "El jueves pasado llegamos tarde porque los tubos descompuso en mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. He could arrange that satisfactorily, for Carrie would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 2.259259259259259,
+   "hyp": "had turned up collars and trousers at the bottom. Many little wrinkles gathered in his eyes as he contemplated this, and his bride most of it. Many rang the bell. No answer. He could arrange that satisfactorily, for Carrie would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 1.1851851851851851,
+   "hyp": "El jueves pasado llegamos tarde porque lo no se descompuso en mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. He could arrange that satisfactorily, for Carrie would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 2.888888888888889,
+   "hyp": "El d\u00eda de pasado llegamos a la tarde, y a los que se han puesto a la tarde, y a los que se han puesto en el camino, y a los que se han puesto en el camino, y a los que se han puesto en la tarde, hasta que lleg\u00f3 el d\u00eda. \u00c9l podr\u00eda arreglar satisfactoriamente, o que Terry ser\u00eda feliz de esperar si necesariamente. Su first impulse fue que \u00e9l le fue a la tarde y le fue a la tarde y le fue a la tarde."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "off",
+   "atten": null,
+   "wer": 1.2592592592592593,
+   "hyp": "El jueves pasado llegamos tarde porque los dos musas confuso en mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. He could arrange that satisfactorily, for Kerry would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 1.2592592592592593,
+   "hyp": "El jueves pasado llegamos tarde porque los dos cosas confuso en mitad del camino tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro He could arrange that satisfactorily or Kerry would be glad to wait if necessary His first impulse was to write but four words in reply Go to the devil"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 1.4444444444444444,
+   "hyp": "El jueves pasado llegamos tarde porque los dos cosas confuso en mitad del camino y luego esperamos casi media hora bajo el sol hasta que lleg\u00f3 No answer He could arrange that satisfactorily for Kerry would be glad to wait if necessary His first impulse was to write but four words in reply Go to the devil"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 1.5555555555555556,
+   "hyp": "El plazo pasado llegamos a la tarde porque los bobos se compuso en el camino. No vimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 la tarde. He could arrange that satisfactorily, for Carrie would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 1.0,
+   "hyp": "\u00a1Suscr\u00edbete al canal!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "off",
+   "atten": null,
+   "wer": 1.1851851851851851,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas es compuso en mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. He could arrange that satisfactorily, for Kerry would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 1.2592592592592593,
+   "hyp": "El jueves pasado llegamos tarde porque los dos musas compuso en mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. He could arrange that satisfactorily, for Carrie would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 2.2222222222222223,
+   "hyp": "had turned up collars and trousers at the bottom. Many little wrinkles gathered between his eyes as he contemplated this, and his brown wasted. Then he rang the bell. No answer. He could arrange that satisfactorily, for Kerry would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 1.3703703703703705,
+   "hyp": "El cu\u00e1les pasado llegamos tarde porque los compus\u00e9s compuso mitad de camino. Tuvimos que esperar casi media hora bajo el sur hasta que lleg\u00f3. He could arrange that satisfactorily, for Carrie would be glad to wait if necessary. His first impulse was to write but four words in reply, Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 1.0,
+   "hyp": "\u00a1Suscr\u00edbete al canal!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.07407407407407407,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sueldo hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.07407407407407407,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas escompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.037037037037037035,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.037037037037037035,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.5555555555555556,
+   "hyp": "El rey pasado llegamos tarde porque los autobuses compuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. El rey en el barco se qued\u00f3 en el barco."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.07407407407407407,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sur hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.037037037037037035,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.037037037037037035,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.0,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas se descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.4444444444444444,
+   "hyp": "El rey pasa a llegando tarde a poner los autobuses con pus a mitad del camino. Tuvimos que esperar casi media hora vacu el sol hasta que lleg\u00f3 otro. Gracias."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.07407407407407407,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sur hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.0,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas se descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.5185185185185185,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas escompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. Su primer impulso fue escribir cuatro palabras de respuesta. \u00a1Va al diablo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.037037037037037035,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas descompuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.3333333333333333,
+   "hyp": "El cohen pasado llegando a un tarde porque los autobuses compuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro. Gracias."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "off",
+   "atten": null,
+   "wer": 2.2222222222222223,
+   "hyp": "had turned up collars and trousers at the bottom. Many little wrinkles gathered between his eyes as he contemplated this, and his brawn wasted. Then he rang the bell. No answer. He could arrange that satisfactorily, for Kerry would be glad to wait, if necessary. His first impulse was to write but four words in reply. Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 1.2962962962962963,
+   "hyp": "El jueves pasado llegamos tarde porque los todos los ojos confuso en mitad del camino tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro He could arrange that satisfactorily or Kerry would be glad to wait if necessary His first impulse was to write but four words in reply Go to the devil"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 1.4444444444444444,
+   "hyp": "El d\u00eda pasado llegamos tarde. Porque los todos los ojos se confuso en mitad del camino. Tuvimos que esperar casi media hora bajo el sol. No le dieron. He could arrange that satisfactorily, for Carrie would be glad to wait if necessary. His first impulse was to write but four words in reply. Go to the devil."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 1.8148148148148149,
+   "hyp": "El cu\u00e1ndo pasado llegamos tarde, por lo que los ojos son los que contemplaron en el camino, y el bravo wasted. Y luego, no respondi\u00f3. He could arrange that satisfactorily, o Carrie would be glad to wait, si necesariamente. His first impulse was to write but four words in reply. Go to the demo."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 2.2962962962962963,
+   "hyp": "had turned up collars and trousers at the bottom! Many little wrinkles gathered between his eyes as he contemplated this ... in his rock window. Then he rang the bell to the no answer. He could arrange that satisfactorily, or Kerry would be glad to wait if necessary. His first impulse was to write but four words in reply. Go to the devil!"
+  }
+ ]
+}

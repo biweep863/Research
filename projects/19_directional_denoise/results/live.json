@@ -1,0 +1,596 @@
+{
+ "takes": [
+  {
+   "name": "live_a0_d0.5_cafeteria_L_t10",
+   "noise": "cafeteria",
+   "channel": "L",
+   "angle": 0.0,
+   "text_id": "t10",
+   "same_interferer_played": 0.044856831581987174,
+   "snr_gain_exact": {}
+  },
+  {
+   "name": "live_a270_d0.5_talker_L_t9",
+   "noise": "talker",
+   "channel": "L",
+   "angle": 270.0,
+   "text_id": "t9",
+   "same_interferer_played": 0.9983028025452987,
+   "superposition": {
+    "gain": 0.6840304862307826,
+    "residual_db": -6.425512571985037,
+    "room_floor_db": null
+   },
+   "snr_gain_exact": {
+    "ref": 0.0,
+    "mean": -0.599481258777701,
+    "mute": -0.4592008435943735,
+    "mvdr_doa": 3.2904399660561805,
+    "mvdr_rtf": 2.9268042711921045,
+    "gsc": 2.3621115508722625
+   }
+  }
+ ],
+ "rows": [
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.3548387096774194,
+   "hyp": "Para preparar las uisas se necesitan tomates, cebollas, ajo, chinc y un poco de sal. Todo se hace con m\u00e1s, se muele el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.4838709677419355,
+   "hyp": "Para preparar las uvillas se necesitan tomates, cebollas, ajo, chino y un poco de sal. Todo se hace con m\u00e1s, se muele en el licuador y se decidieron todav\u00eda que no lo vayan."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.6451612903225806,
+   "hyp": "Para preparar las listas se necesitan tomates, cebollas, \u00e1lcool, chim y un poco de sal. Todo se hace con mal, se mueve el equipador y se disminuye todo el d\u00eda con el agua."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.3548387096774194,
+   "hyp": "Para prepararlas se necesitan tomates, cebollas, ajo, chino y un poco de sal. Todo se hace en el coma, se mueve en el jugador y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ref",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 1.1612903225806452,
+   "hyp": "Para que m\u00e1s te necesitan como antes, voy a dar algo sin oposidad. Todos te est\u00e1n en contra, sin vuelta de la coca, sin t\u00edo, sin toro, sin toro, sin toro, sin toro, sin toro, sin toro."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.3548387096774194,
+   "hyp": "Para preparar las incas se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace con m\u00e1s y se muele el licuador y se sirve todav\u00eda cari\u00e9ndolo."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.3548387096774194,
+   "hyp": "Para preparar las risas se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el cuadro y se siguen todav\u00eda con el gato."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.41935483870967744,
+   "hyp": "Para preparar las l\u00edseas se necesitan tomates, cebollas, ajo, chinc y un poco de sal. Todo se hace en el combate, se huele en el cuadro y se diminue todav\u00eda con el toque."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.3548387096774194,
+   "hyp": "Para prepararla se necesitan tomates, cebollas, ajo, ching y un poco de sal. Todo se hace en el combate, se muele el color y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mean",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.7419354838709677,
+   "hyp": "Para que por m\u00e1s que est\u00e9n necesitando, antes voy a acompartir y un poco de estar. Todos ten\u00e9s que estar en el tema, se mueve y se mueve, y se mueve todo bien."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.41935483870967744,
+   "hyp": "Para preparar las uisas se necesitan tomates, cebollas, ajo, chino y un poco de sal. Todo se hace con mar y se mueve en el licuador y se siren todav\u00eda cari\u00e9ndolo."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.4838709677419355,
+   "hyp": "Para preparar las uisas se necesitan tomates, cebollas, ajo, chino y un poco de sal. Todo se hace con mar, se muele el licuador y se siguen todav\u00eda con el agua."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.5161290322580645,
+   "hyp": "Para preparar las listas se necesitan tomates, cebollas, tango, ching y un poco de sal. Todo se hace con mal, se mueve en el jugador y se disminue todav\u00eda con el agua."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.4838709677419355,
+   "hyp": "Para prepararlas se necesitan tomates, cebollas, ajos, chis y un poco de sal. Todo se hace con un mar y se mueve en el jugador y se sirve todav\u00eda cari\u00f1o."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mute",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.8709677419354839,
+   "hyp": "Para mi problema es que me necesitando antes, voy a dar un ac\u00fastico y un compuesto. Todos te hacen en el tema, te mueven al mejor y si no, todo bien."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.25806451612903225,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y poco de sal. Todo se hace en el compadre, se huele en el licuador y se sirve todav\u00eda calormente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el combate, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_doa",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.6774193548387096,
+   "hyp": "Para preparar las transacciones, necesitan tomates, cebollas, arco, chile y botones. Todos los transacciones en compadre, se mueven en el deporte y se implementan todav\u00eda en el deporte."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comar, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comar, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.22580645161290322,
+   "hyp": "Para preparar las textas se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comar, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.22580645161290322,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comando, se muele en el licuador y se sirve todav\u00eda en calor."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "mvdr_rtf",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.6451612903225806,
+   "hyp": "Para preparar las cosas se necesitan tomates, cebollas, ajos, cilio y poco de sal. Todos los cebollos se muelen y reto, y se firme todav\u00eda en el piso."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comar, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comar, se muele en el licuador y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comar, se muele en el cuadro y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.16129032258064516,
+   "hyp": "Para preparar la salsa se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace en el comar, se muele en el cuadro y se sirve todav\u00eda caliente."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "gsc",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.6774193548387096,
+   "hyp": "Para reparar las cosas, se necesitan tomates, cebollas, acos, chiles o cosas. Todos se hacen algo mal, se mueven en el coche y se estiren todav\u00eda calientos."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.3870967741935484,
+   "hyp": "Para preparar las uisas, se necesitan tomates, cebollas, ajo, chile y un poco de sal. Todo se hace con bar, se huele en el licuador y se hirme todav\u00eda canotando."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.4838709677419355,
+   "hyp": "Para preparar las uisas se necesitan tomates, cebolla, ajo, chinc y un poco de sal. Todo se hace con mal, se huele el licuador y se siguen todav\u00eda con el agua."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.3870967741935484,
+   "hyp": "Para preparar las ullitas se necesitan tomates, cebolla, ajo, chile y un poco de sal. Todo se hace en el comar, se huele el licuador y se siguen todav\u00eda con el agua."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.5483870967741935,
+   "hyp": "Para prepararlas se necesitan tomates, cebollas, ajos, cinclas y un poco de sal. Todo se hace con m\u00e1s y se huele el licuador y se sirve todav\u00eda con el agua."
+  },
+  {
+   "take": "live_a0_d0.5_cafeteria_L_t10",
+   "method": "ch0_chip",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.7741935483870968,
+   "hyp": "Para preparar las pistas, se necesitan comandes, mu\u00e9llas, \u00e1culos y limpi\u00facosas. Todos los estados de coma se encuentran en el ecuador y el t\u00edo de la ma\u00f1ana."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "off",
+   "atten": null,
+   "wer": 1.4814814814814814,
+   "hyp": "el jueves pasado llegaron los carros porque los tom\u00f3 sus compusas mientras camin\u00f3. Tuvimos que esperar casi media hora bajo su sol hasta que lleg\u00f3 otro. No hubiera podido arrumar el que satisfactor\u00eda, pero a Kerry estar\u00eda contento de esperar si lo necesitaba. Su primer impulso fue escribir cuatro palabras en repetici\u00f3n. \u00a1Vamos al dejo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.4444444444444444,
+   "hyp": "el jueves pasado llegaron a buscarle porque los tubos se compuso en mitad del camino y vivimos que esper\u00e9 casi media hora bajo su oreja hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 2.259259259259259,
+   "hyp": "que se han convertido en colores y tr\u00e1nsitos en el fondo. M\u00e1s peque\u00f1os rincos se han reunido en sus ojos y se han compuesto en el camino, y los moscos esperaban que se subiera casi media hora bajo su ojo hasta que lleg\u00f3. No, no, no. Se podr\u00eda arrumar sin satisfactorios, pero Kari estar\u00eda contento de esperar con necesidad. El primer infos fue para escribir cuatro palabras en repartimiento. \u00a1Vamos al dejo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 1.4444444444444444,
+   "hyp": "el cohes pasado llegamos a la casa, porque los domiciles confusen en el tal camino, tuvimos que esperar casi media hora bajo todo, hasta que lleg\u00f3 otro. No responde. Se podr\u00eda arrangar satisfactoriamente, pero Kari estar\u00eda contento de esperar con necesidad. Su primer impulso fue escribir cuatro palabras y responder, \u00a1Vamos al templo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ref",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 3.2222222222222223,
+   "hyp": "que se han convertido en colores y tr\u00e1uzas en la baza. Se puede posar y dejarlo en casa. Y los controlos, se han de seguir en baza con los colores. Y los controlos, se han de seguir en baza con los colores. Y los controlos, se han de seguir en baza con los colores. Se puede posar y dejarlo en casa. Se puede arreglar con satisfacci\u00f3n, por que el cari se estar\u00e1 contento de que sea necesario. Este primer impulso es para que el reto se reparte. \u00a1Vamos al templo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "off",
+   "atten": null,
+   "wer": 2.7037037037037037,
+   "hyp": "los colores y los tr\u00e1nsitos se han convertido en colores y los tr\u00e1nsitos en el fondo. Muchos los rincos se han reunido con los veyes, como se han confuso en el camino, y su espalda se ha convertido en el fondo. Y \u00e9l se ha convertido en el fondo, sin respeto. \u00c9l podr\u00eda arreglarlo, pero satisfactoriamente, para que Carrie sea contenta de esperar, si es necesario. Su primer impulso fue que escribimos cuatro palabras y responde, \u00a1Vamos al dejo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 2.2222222222222223,
+   "hyp": "los colores y los tr\u00e1nsitos de la caja. Muchos peque\u00f1os rincos se abrieron en sus ojos y se confus\u00f3 en el camino. Y su bravo se desplaz\u00f3. Y le arregl\u00f3 la caja hasta que lleg\u00f3 el rinc\u00f3n. No respondi\u00f3. Se pod\u00eda arrumar con satisfacci\u00f3n. 4. Kari estar\u00eda contento de esperar si es necesario. Su primer impulso fue escribir cuatro palabras en repetici\u00f3n. \u00a1Vamos al dejo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 2.2962962962962963,
+   "hyp": "que se han convertido en colores y tr\u00e1nsitos de la bala. M\u00e1s peque\u00f1os rincos se han reunido con sus ojos y se han concentrado en este. Y hemos despertado casi medio hora en la costura hasta que lleg\u00f3. No, no, no. Se podr\u00eda arrangar sin satisfactorio, pero Kari estar\u00eda contento de esperar si es necesario. Su primer influsi\u00f3n fue para escribir cuatro palabras en repetici\u00f3n. \u00a1Vamos al dejo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 1.962962962962963,
+   "hyp": "los colores y los tr\u00e1nsitos de la cadena. Y luego de los dos, los dos se compuso en quitar y caminar. Y los dos esperan casi media hora bajo todo, hasta que lleg\u00f3 el momento. Se podr\u00eda arrangar satisfactoriamente, pero el cari se estar\u00eda contento de esperar. Su primer impulso fue escribir cuatro palabras en la repartida. \u00a1Vamos al D\u00e9mol!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mean",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 2.8518518518518516,
+   "hyp": "El proceso de encarga de los colores y los espacios de los espacios, que pueden apostar al d\u00eda, y que los controles, que pueden estar abiertos, que pueden estar abiertos, y que pueden estar abiertos, y que pueden estar abiertos, y que pueden estar abiertos. Y que pueden estar abiertos. No. Si pudiera arreglarlo satisfecho, el coraz\u00f3n de la escena estar\u00eda contento de esperar, es necesario. Este primer impulso es para hacer un cuervo de recopilaci\u00f3n. \u00a1V\u00e1monos a la escena!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "off",
+   "atten": null,
+   "wer": 1.6666666666666667,
+   "hyp": "El juez pasado lleg\u00f3 a los c\u00e1lbueros porque los robuces compuso mitad de la vida. Tuvi\u00f3 que esperara en casi media hora el bajoso hasta que lleg\u00f3 otro. \u00c9l podr\u00eda arrangar el satisfactorio, el cuarto cari se estar\u00eda contento de esperar si es necesario. Su primer impulso fue escribir cuatro palabras en represi\u00f3n. \u00a1Vamos al debo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 2.074074074074074,
+   "hyp": "los colores y los colores de la caja. Y luego de eso, llegamos a la caja. Porque los producers confusen y te ayudan a caminar. Y hay m\u00e1s que esperar casi media hora el bajoso, hasta que lleg\u00f3. No, no, no. \u00c9l podr\u00eda arrangar el satisfactorio. 4. Kerry estar\u00eda contento de esperar si es necesario. Su primer impulso fue escribir cuatro palabras en repetici\u00f3n. \u00a1Vamos al dejo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 2.1481481481481484,
+   "hyp": "los colores y los tr\u00e1nsitos de la ca\u00f1a. Y luego, despu\u00e9s de eso, llegamos a ver que los dos son confusos en el camino y debemos esperar casi media hora el vacuoso hasta que lleg\u00f3. No, no. \u00c9l podr\u00eda arreglarlo sin satisfactorio, para que Carrie estara contenta de esperar si es necesario. Su primer infal se fue a hacer escribir cuatro palabras en repetici\u00f3n. \u00a1Vamos al divino!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 2.111111111111111,
+   "hyp": "el suelo de cincuenta a\u00f1os y ensaladas, muchos rincos uno de los unos fueron confundidos a la fila de camino. Y \u00e9l se esper\u00f3 en casi media hora bajo todo hasta que lleg\u00f3 el vato. No absurdo. Puedo arreglarlo con satisfacci\u00f3n, pero el cari\u00f1o de ser contento ser\u00e1 en latitud. Su primer impulso fue dar un beso de cuatro palabras y repobr\u00edrte. Vengan a la Apple."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mute",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 2.925925925925926,
+   "hyp": "que se han convertido en colores y tr\u00e1uzas en el borde. Y pueden postar y dejar un tal. Y los controlos, todos los que est\u00e1n en borde, los controlos, los controlos, los controlos, los controlos, los controlos. Y los controlos, los controlos, los controlos, los controlos. Y si se han convertido en el borde, no hay problema. Si se pudiera arrangar satisfactoriamente, el borde estar\u00eda contento de esperar y necesariamente. El primer impulso fue el manejo de 4 word 3 plus. \u00a1Vamos al di\u00e1logo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.1111111111111111,
+   "hyp": "el jueves pasado llegamos tarde porque el autob\u00fas es compuso a mitad del camino tuvimos que esperar casi media hora bajo el sueldo hasta que lleg\u00f3 otro"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.07407407407407407,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas es compuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.1111111111111111,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas es compuso a mitad del camino. Tuvi\u00e9ramos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.07407407407407407,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas es compuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_doa",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.3333333333333333,
+   "hyp": "En el pasado llegamos a ver porque los autobuses compusen mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.1111111111111111,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas es compuso a mitad del camino. Tuvimos que esperar casi media hora bajo el suelo hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.1111111111111111,
+   "hyp": "El juez pasado llegamos tarde porque el autob\u00fas es compuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.1111111111111111,
+   "hyp": "el juez pasado llegamos tarde porque el autob\u00fas es compuso a mitad del camino tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.1111111111111111,
+   "hyp": "El juez pasado llegamos tarde porque el autob\u00fas es compuso a mitad del camino. Tuvimos que esperar casi media hora bajo el sol, hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "mvdr_rtf",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.4444444444444444,
+   "hyp": "El nuevo pasado llegamos a ver poner los dos buses con bus a mitad de camino Tuvimos que esperar casi media hora al bajo el sur hasta que lleg\u00f3 otro"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "off",
+   "atten": null,
+   "wer": 0.1111111111111111,
+   "hyp": "El jueves pasado llegamos tarde porque el autob\u00fas se compuso a mitad del camino. Tuvi\u00e9ramos que esperar casi media hora bajo el sur hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 0.14814814814814814,
+   "hyp": "el jueves pasado llegamos a ver porque el autob\u00fas es compuso a mitad del camino tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 0.2222222222222222,
+   "hyp": "el cual es pasado llegamos a saber porque el autob\u00fas es compuso a mitad del camino tuvimos que esperar casi media hora bajo el sol hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 0.3333333333333333,
+   "hyp": "El jueves pasado llegamos a ver por qu\u00e9 los dos buses confusan mitad del camino. Tuvi\u00e9ramos que esperar casi media hora bajo el sol, hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "gsc",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 0.4444444444444444,
+   "hyp": "El cuento ha estado llegando a tarde, con los buses con putas a mitad de camino. Tuvimos que esperar casi media hora bajo el suelo, hasta que lleg\u00f3 otro."
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "off",
+   "atten": null,
+   "wer": 2.0,
+   "hyp": "los colores y los colores de la cadera. Muchos peque\u00f1os rincos se reunieron entre sus ojos cuando se concentraron en el camino. Y se despej\u00f3 casi media hora bajo el sol, hasta que lleg\u00f3. No respondi\u00f3. Se podr\u00eda arrumar que satisfactoriamente, el 4 de cari se estar\u00eda contento de esperar, si es necesario. Su primer impulso fue escribir cuatro palabras en repetici\u00f3n. \u00a1Vamos al Demal!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "cont",
+   "atten": "12",
+   "wer": 2.0,
+   "hyp": "los colores y los colores de la cadera. Muchos peque\u00f1os rincos se unieron entre sus ojos cuando se concentraron en el camino. Y se esperaba casi media hora bajo el sol, hasta que lleg\u00f3 el fondo. No respondi\u00f3. Pueden arrangar que satisfactoriamente, o que Carrie estar\u00eda contenta de esperar si es necesario. Su primer impulso fue para escribir cuatro palabras en repetici\u00f3n. \u00a1Vamos al dejo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "cont",
+   "atten": "inf",
+   "wer": 1.9259259259259258,
+   "hyp": "los colores y los colores de la cadera. M\u00e1s peque\u00f1os rincos se unieron entre sus ojos y se concentraron en este. Y se esperaba que se subiera casi media hora bajo el sol, hasta que lleg\u00f3 el sol. Pueden arrangar el s\u00e1bado, pero Kari estar\u00eda contento de esperar si es necesario. Su primer impulso fue escribir cuatro palabras en repetici\u00f3n. \u00a1Vamos al dejo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "home2",
+   "atten": "12",
+   "wer": 1.8888888888888888,
+   "hyp": "los colores y los colores en el fondo. Muchos los rincos se han quedado entre sus ojos cuando se contempl\u00f3 el desayuno. Y se esperaba en casi media hora bajo el suelo hasta que lleg\u00f3. No pod\u00eda arrumar que satisfactor\u00eda para que Carrie se desgraciara si es necesario. Su primer impulso fue que escribimos cuatro palabras en repite. \u00a1Vamos al demo!"
+  },
+  {
+   "take": "live_a270_d0.5_talker_L_t9",
+   "method": "ch0_chip",
+   "dfn": "home2",
+   "atten": "inf",
+   "wer": 1.0,
+   "hyp": "su directors, los warrantos y las autoridades. Cual Abdullah es su ex. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+  }
+ ]
+}

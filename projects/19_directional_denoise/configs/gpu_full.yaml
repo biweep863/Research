@@ -1,0 +1,71 @@
+project: directional_denoise
+seed: 0
+
+# Hardware (resolved by name: indices change on replug)
+devices:
+  array: "ReSpeaker 4 Mic Array"       # 6-ch firmware: ch0 chip beam, ch1-4 raw, ch5 playback
+  array_channels: 6
+  array_fs: 16000
+  reference: "Akane"                     # close-talk reference mic (empty to skip)
+  speaker: "Altavoces (High Definition Audio"
+
+playback:
+  fs: 48000
+  chirp_db: -14          # marker level (dBFS peak)
+  beep_db: -24           # "talk now" cue
+  max_peak_db: -1.5      # interferer peak cap (auto-lowers crest-heavy noises)
+  lead_s: 0.6
+  gap_s: 0.6
+  tail_s: 0.8
+  pre_silence_s: 2.0     # silence before the beep in talk takes (VAD noise model, as project 15)
+
+# Session protocol (doc/01_dataset.md)
+session:
+  dir: data/session
+  noise_level_db: -16    # calibrated 2026-10-18 (Windows volume 60): pink -> ~-37 dBFS raw (>200 Hz), floor -59
+  noise_seconds: 20
+  speech_seconds: 22
+  noises: [pink, fan, cafeteria, talker, music]
+  noise_angle: 0
+  noise_dist: 0.5
+  noise_channel: L
+  speaker_angles: {L: 22.5, R: 67.5, LR: 45}   # setup 2026-10-18: 0 deg = USB port, + towards R; refined from the chirps
+  talker_angles: [0, 45, 90, 135, 180, 225, 270, 315]
+  talker_dist: 1.0
+
+audio:
+  fs: 16000
+  nfft: 512
+  hop: 128
+  c: 343.0
+  mic_radius: 0.032
+  mic_channels: [1, 2, 3, 4]
+  band_hz: [200, 7000]
+
+results_dir: results/full
+analysis:
+  work_dir: data/work_full
+  lead_s: 1.5            # talker-silent start of every scene = the noise model (p15 "silence model")
+  max_s: 16.0
+  highpass_hz: 100      # mains hum (p15: 65-85% of raw-mic noise power < 100 Hz)
+  utterances: []         # empty = all
+  noises: [pink, fan, cafeteria, talker, music]
+  snrs: [-5, 0, 5, 10]   # input SNR on the mic average, speech-active frames
+  write_snrs: [-5, 0, 5, 10]
+  loading: 0.001         # MVDR diagonal loading (RTF steering)
+  loading_ff: 0.01       # MVDR diagonal loading (far-field DOA steering, p15 value)
+  gsc_mu: 0.05
+  gsc_gate_db: 3.0
+
+dfn:
+  python: ../../.venv-dfn/Scripts/python.exe
+  methods: [ref, mean, mute, ds, mvdr_doa, mvdr_rtf, gsc, oracle]
+  attens: [3, 6, 12, 18, 24, 36, null]
+  estoi_clean: false     # ESTOI vs the close-talk mic only (halves scoring time)
+  home2_methods: [ref, mean, mvdr_rtf, gsc, oracle]
+  home2_attens: [12]
+  keep_audio_for: ["speech_a270_d0.5_t1__talker_L__snr+0", "speech_a90_d0.5_t6__fan_R__snr+0"]
+
+asr:
+  model: large-v3-turbo  # same transcripts as large-v3 on our clips, 2.4x faster (0.37 s/clip on the RTX 3060)
+  language: es

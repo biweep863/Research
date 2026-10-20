@@ -1,0 +1,16 @@
+{
+ "angle_deg": 90.0,
+ "distance_m": 0.5,
+ "fs": 16000,
+ "channels": 6,
+ "silence_s": 2.0,
+ "seconds": 16.9319375,
+ "note": "exported from project 19 session (speech_a90_d0.5_t6);",
+ "speaker": "luis",
+ "effort": "normal",
+ "overflows": 0,
+ "firmware_error": "not read: Windows, no libusb driver",
+ "firmware_rt60": null,
+ "firmware_log": [],
+ "angle_frame": "talker's own marks: 0 deg = USB port, approximate (+-20 deg)"
+}

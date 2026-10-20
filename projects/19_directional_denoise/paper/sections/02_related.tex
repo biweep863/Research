@@ -1,0 +1,34 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Beamforming.} The MVDR beamformer~\cite{capon1969mvdr} and its
+adaptive form, the generalized sidelobe canceller~\cite{griffiths1982gsc},
+are the classic linear tools for directional noise
+suppression~\cite{benesty2008mvdr,gannot2017consolidated}. In reverberant
+rooms the free-field steering vector is replaced by the relative transfer
+function (RTF), which can be estimated without geometry by covariance
+whitening, the principal generalized eigenvector of the noisy and noise-only
+covariances~\cite{markovich2009rtf}. Small arrays are the hard case: at
+1\,kHz a 6.4\,cm aperture is a fifth of a wavelength, so any gain beyond
+delay-and-sum comes from superdirective weights, which are sensitive to
+steering errors.
+
+\paragraph{Beamforming for ASR.} The CHiME challenges~\cite{barker2015chime3}
+established that beamforming before recognition helps, and mask-based
+covariance estimation~\cite{heymann2016mask} made the noise statistics
+learnable. Here the noise statistics come from the simplest source a robot
+already has: the seconds before the person speaks, the \emph{silence
+model} of our earlier work on the same array.
+
+\paragraph{Neural single-channel enhancement.} DeepFilterNet~\cite{schroeter2022deepfilternet,schroeter2023deepfilternet3}
+is a real-time full-band enhancer that removes stationary and many
+non-stationary noises. It is trained to sound clean, not to recognize well,
+and enhancement artifacts are known to hurt ASR even when perceptual
+metrics improve~\cite{iwamoto2022artifacts}. Whisper~\cite{radford2023whisper}
+is itself trained on noisy data, which leaves less for a front end to add.
+
+\paragraph{Gap.} We found no hardware study of the pipeline as robots
+actually deploy it: a commodity 4-mic array, a neural denoiser with a
+user-set attenuation limit, and an off-the-shelf recognizer. Such a study
+would need both exact signal-level accounting, where the speech and noise
+components are known, and recognition on live audio.

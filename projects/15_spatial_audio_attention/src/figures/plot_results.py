@@ -277,6 +277,15 @@ def main():
         print(f"figures from {name}")
     hw = _load(R, "hw_calibration.json")
     m("hwAvailable", "yes" if hw else "no")
+    if hw:  # labelled grid of session 2 (2026-10-18, recorded with project 19)
+        m("hwCalN", str(hw["n_recordings"]))
+        m("hwCalOffset", f"{hw['orientation']['azimuth_offset_deg']:.0f}")
+        m("hwCalLoo", f"{hw['doa_loo_median_err_deg']:.0f}")
+        m("hwCalSpearMax", f"{max(abs(v) for v in hw['spearman_log_distance'].values()):.2f}")
+        mae = hw["loo_mae_m"]
+        m("hwCalMaeBest", f"{min(v for k, v in mae.items() if k not in ('predict_mean', 'sim_prior')):.2f}")
+        m("hwCalMaeMean", f"{mae['predict_mean']:.2f}")
+        m("hwCalMaeSim", f"{mae['sim_prior']:.1f}")
     Path(args.macros).write_text("\n".join(macros) + "\n")
     print(f"wrote {args.macros} ({len(macros)} macros)")
 

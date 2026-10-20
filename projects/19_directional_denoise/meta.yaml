@@ -1,0 +1,10 @@
+slug: directional_denoise
+title: "Point the Array, Not the Denoiser: Directional Noise Cancellation before DeepFilterNet3 on a 4-Mic ReSpeaker, Judged by Whisper"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Robotics"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Real 4-mic ReSpeaker: muting a mic gains 0.4 dB, RTF-MVDR 4.3 dB and cuts Whisper WER 74->50% at 0 dB; DeepFilterNet3 never lowers WER, hurts above 12 dB and in 64 ms chunks."
+pdf: "paper/main.pdf"
+created: "2026-10-19"

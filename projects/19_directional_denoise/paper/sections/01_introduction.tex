@@ -1,0 +1,39 @@
+\section{Introduction}
+\label{sec:intro}
+
+A typical robot speech pipeline reads one channel from a USB microphone
+array and denoises it with a neural model. It passes the result to a
+recognizer. Ours reads the processed channel of a ReSpeaker array,
+DeepFilterNet3~\cite{schroeter2023deepfilternet3} cleans it with an
+attenuation limit of 12\,dB, and Whisper~\cite{radford2023whisper}
+transcribes it. The other four channels, the raw microphones, are thrown
+away. Two questions follow:
+\begin{enumerate}
+\item What do those microphones add when the noise comes from a direction?
+\item How should the denoiser's only knob, \texttt{atten\_lim\_db}, be set
+  when the listener is a recognizer rather than a person?
+\end{enumerate}
+
+A first intuition is to switch off the microphone that faces the noise.
+It is worth testing because it is how one would reason about directional
+microphones. The array's microphones are omnidirectional and 4.5\,cm
+apart, so the expectation is that it cannot work. The tool that should
+work is a beamformer that combines all four with phase. Whether it works
+on this array, in a real room, with noise statistics a robot can actually
+obtain, is an empirical question. Project~15, our earlier work on this
+array, answered it only in simulation.
+
+\paragraph{Contributions.}
+\begin{enumerate}
+\item \textbf{A recording protocol with exact scoring.} Chirp-aligned
+  speech-only and noise-only takes on a fixed array give exact speech and
+  noise components for every linear front end, and real recordings
+  underneath. Live takes check the protocol.
+\item \textbf{Hardware numbers for nine front ends} on \NScenes{} scenes,
+  from the intuitive mute to an RTF-steered MVDR and an adaptive GSC. Each
+  uses only the 1.5\,s before the talker speaks.
+\item \textbf{A recognition sweep} of DeepFilterNet3's attenuation limit,
+  continuous and in the robot's chunked mode, with \NTranscripts{} Whisper
+  transcriptions.
+\item \textbf{A live comparison with the array's own processed channel.}
+\end{enumerate}

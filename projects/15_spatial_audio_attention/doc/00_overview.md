@@ -55,6 +55,11 @@ competing directions already suppressed.
   distance model does not transfer (0.5 m read as 2.5–5 m), so the radar now
   shows near/mid/far learned online from the session itself (no room
   calibration). It separates near from far but is sensitive to vocal effort.
-- **Still open:** labelled DOA grid + orientation calibration (H1 error and
-  firmware comparison), labelled distance clips to choose the cue, two-talker
-  MVDR on hardware (H3). Checklist in `03_experiments_log.md`.
+- **Hardware, second session (2026-10-18, Windows, shared with project 19):**
+  - Labelled grid: orientation offset 35°, mirrored; DOA leave-one-out error
+    16°.
+  - Distance clips: no cue tracks distance (|Spearman| ≤ 0.30).
+  - MVDR on real interferers: +2.9 dB (DOA) / +4.3 dB (RTF); see project 19.
+- **Still open:** firmware DOA comparison (needs libusb on Windows or the
+  robot), and a DOA estimator that survives a loudspeaker interferer at
+  0 dB.

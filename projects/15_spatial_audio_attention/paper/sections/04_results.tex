@@ -180,3 +180,25 @@ utterances and are only weakly related (Spearman \hwRhoSpeechCdr;
 Figure~\ref{fig:hw}, right). In use, near and far were told apart, and
 speaking louder or softer moved the band. Without distance labels we cannot
 say which cue is right more often.
+
+\paragraph{Second session: the labelled grid.} A second session on
+Windows, shared with a companion study of directional noise
+cancellation, recorded \hwCalN{} labelled clips: 8 angles at 0.5\,m, and 7
+clips at one angle from 0.4 to 2\,m with soft, normal and loud voice. The
+talker placed himself by approximate marks, about $\pm$20$^\circ$.
+\begin{itemize}
+\item \textbf{Orientation.} Fitting the array-to-marks mapping gives a
+  mirrored frame rotated by \hwCalOffset$^\circ$.
+\item \textbf{Angle.} The leave-one-out median error is
+  \hwCalLoo$^\circ$, bounded by the marks.
+\item \textbf{Distance fails.} No distance cue tracks distance
+  ($|\rho|\le$\,\hwCalSpearMax{} against log-distance). The best model's
+  leave-one-out error, \hwCalMaeBest\,m, equals predicting the mean
+  (\hwCalMaeMean\,m), and the simulation prior is off by \hwCalMaeSim\,m.
+\end{itemize}
+The companion study also scores the estimator against a loudspeaker
+playing an interferer at 0\,dB SNR. The median error is 58$^\circ$
+(5$^\circ$ at 10\,dB), far above the 4--5$^\circ$ of the simulated fan.
+MVDR toward the talker gains +2.9\,dB when steered by this DOA and
++4.3\,dB when steered by a transfer function estimated from the silence
+model.
