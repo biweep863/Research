@@ -1,0 +1,73 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{A Hundred Feeders, One Bottleneck: Where the Queue Forms on
+Avenida L\'azaro C\'ardenas, Monterrey}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{October 12, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Avenida L\'azaro C\'ardenas links Monterrey with San Pedro Garza
+Garc\'ia and is congested every peak. A common explanation counts lanes:
+over a hundred feeder lanes pour into an avenue with five or six lanes per
+direction. We test that explanation as a queueing problem. From an
+OpenStreetMap extract (\InvFetched) we build an inventory of the
+\InvLengthKm\,km corridor: \InvApproachesNoService\ street approaches
+(plus \InvServiceApproaches\ driveways and plaza entrances) deliver
+\InvFeederLanesNoService\ feeder lanes (\InvFeederLanes\ with driveways)
+into \InvMainlineLanes\ corridor lanes per direction, a ratio of about
+\InvLaneRatioNoService:1. These figures fall inside the unsourced ranges
+that motivated the study. We model each direction as a tandem queue,
+validate a vehicle-level simulator against Erlang C, M/D/1 and Webster's
+signal delay (mean error \ValErr\%), and run a Cell Transmission Model
+whose total delay at a single bottleneck reproduces the fluid queue
+exactly. Feeder lanes deliver on average \AnaEBPerLane\,veh/h per lane, or
+\AnaEBPerLanePct\% of a lane's saturation flow, so lane counts overstate
+the pressure by an order of magnitude. Across a Monte Carlo over every
+demand and control assumption, the local lane ratio never points to the
+segment where the queue forms (hit rate \McHitLR\%), and feeder lanes
+alone never do either. Steady-state utilisation $\rho$ finds the bottleneck
+in \McHitRho\% of congested draws and separates congested from
+free-flowing runs perfectly (AUC \McAuc). Geometry alone (minimum
+capacity) does as well, because the bottleneck is a \mbox{5\,$\to$\,3}-lane
+merge at about \PeakEBHeadKm\,km, between the Alfonso Reyes overpass and
+the Arroyo Seco bridge, where the frontage road joins the express lanes.
+Filling that gap moves the queue elsewhere. A field estimate at Alfonso Reyes
+(\FcWBLo--\FcWBHi\,veh/h joining towards San Pedro, against \FcWBAssumed\
+assumed) lowers westbound utilisation at the merge from \NcWBMaxRho\ to
+\AnaWBMaxRho. Over a working day (7:00--20:00) with tidal demand, heading
+towards San Pedro in the morning, the westbound direction stays below
+capacity even at 7:00 ($\rho = \DayWBRhoSeven$). That matches the
+observer's report of little or no morning queue towards San Pedro. The
+eastbound queue forms at \DayEBStart\ and \DayEBClears. At base parameters the eastbound queue reaches
+\PeakEBQueueKm\,km and costs \PeakEBDelay\,veh\,h per peak. How much of
+that is spillback into exits is the largest single uncertainty (from
+\PeakEBFifoLo\ to \PeakEBFifoHi\,veh\,h). An extra lane over 600\,m at the
+merge changes delay by a median \ItvLaneMedian\% and helped in every draw.
+Ramp metering, consolidating minor accesses and signal retiming give mixed
+or negligible results. The practical rule: count capacity, not lanes,
+and look for the merge.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction.tex}
+\input{sections/02_related.tex}
+\input{sections/03_data.tex}
+\input{sections/04_model.tex}
+\input{sections/05_results.tex}
+\input{sections/06_interventions.tex}
+\input{sections/07_conclusion.tex}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

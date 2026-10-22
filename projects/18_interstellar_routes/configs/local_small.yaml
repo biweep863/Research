@@ -1,0 +1,54 @@
+project: interstellar_routes
+seed: 0
+
+# --- Catalogue (Gaia DR3, cached under data/cache) ---
+data:
+  radius_pc: 50          # catalogue sphere around the Sun (~49k stars)
+  poe_min: 10            # parallax_over_error cut -> 1/parallax distances are fine
+  cache_dir: data/cache
+
+# --- Experiment 1: static percolation / bottleneck ---
+static:
+  eval_radius_pc: 25     # stars scored (inner ball; outer shell = boundary buffer)
+  knn_k: 16
+  r_grid: [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0]
+  n_boot: 30             # astrometric bootstrap draws (Gaia errors + RV fill)
+  radius_sweep_pc: [10, 15, 20, 25]
+  bd_fracs: [0.0, 0.1, 0.2, 0.3]   # unseen brown dwarfs per catalogue star
+  bd_draws: 5
+
+# --- Experiment 2: moving stars, waiting allowed ---
+timedep:
+  eval_radius_pc: 15
+  t_max_myr: 1.0
+  horizons_myr: [0.0, 0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1.0]
+  r_grid: [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25]
+  sweep_r_pc: 1.5          # range used for the settle / ship-speed sweeps
+  v_sweep_c: [0.001, 0.01, 0.1]
+  v_ship_c: 0.1          # cruise speed as a fraction of c
+  settle_myr: 0.0        # colony "rebuild" delay before relaunch
+  settle_sweep_myr: [0.0, 0.01, 0.1]
+  n_boot: 3
+
+# --- Experiment 3: propulsion & cost-aware routing ---
+routing:
+  eval_radius_pc: 25
+  mass_ratios: [10, 100]
+  lifetimes_yr: [100, 300, 1000, 3000, 10000, 30000, 100000]
+  sail_v_launch_c: 0.2
+  sail_range_cap_pc: 6.0      # max candidate pair distance for the sail graph
+  route_ranges_pc: [2.5, 3.0, 4.0]  # static range graphs above the percolation threshold
+  n_astar_queries: 50
+  n_route_queries: 200        # random targets for A*/Dijkstra/greedy comparison
+  fuel_radius_pc: 30          # sub-catalogue for the refuel-at-hosts analysis
+  fuel_hop_pc: 3.0            # per-leg range (life support) in the fuel analysis
+  tank_grid_pc: [3, 5, 7.5, 10, 15, 20, 30]
+  sail_lifetimes_yr: [100, 300, 1000, 3000, 10000]
+
+# --- Experiment 4: multi-probe exploration ---
+exploration:
+  radius_pc: 12
+  n_probes: [1, 4, 8, 16]
+  v_probe_c: 0.1
+
+output_dir: results

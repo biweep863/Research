@@ -1,0 +1,134 @@
+project: lazaro_cardenas_queues
+seed: 0
+output_dir: results
+
+# --------------------------------------------------------------------------- #
+# Data: OpenStreetMap extract of the corridor (cached in data/osm_raw.json)
+# --------------------------------------------------------------------------- #
+osm:
+  cache: data/osm_raw.json
+  name_regex: "Lázaro Cárdenas"
+  bbox: [25.600, -100.365, 25.672, -100.265]        # s, w, n, e (Overpass order)
+  overpass_urls:
+    - https://overpass-api.de/api/interpreter
+    - https://overpass.kumi.systems/api/interpreter
+  overpass_timeout_s: 45
+  api_url: https://api.openstreetmap.org/api/0.6/map
+  api_sleep_s: 1.0
+  # Rough centre line (lon, lat) from Garza Sada / Carretera Nacional (east)
+  # to San Pedro (west); only used to choose download tiles and chainage.
+  spine_lonlat:
+    - [-100.2690, 25.6125]
+    - [-100.2724, 25.6138]
+    - [-100.2775, 25.6159]
+    - [-100.2857, 25.6211]
+    - [-100.2923, 25.6255]
+    - [-100.3007, 25.6309]
+    - [-100.3071, 25.6351]
+    - [-100.3102, 25.6369]
+    - [-100.3173, 25.6413]
+    - [-100.3217, 25.6442]
+    - [-100.3261, 25.6467]
+    - [-100.3327, 25.6510]
+    - [-100.3374, 25.6537]
+    - [-100.3458, 25.6584]
+    - [-100.3548, 25.6627]
+    - [-100.3600, 25.6650]
+
+# Corridor extraction
+corridor:
+  corridor_highways: [trunk, trunk_link, primary, primary_link, secondary, secondary_link, tertiary, tertiary_link]
+  exclude_name_regex: "General|Prolongación|Calle "
+  max_offset_m: 120            # a way named Lázaro Cárdenas must lie this close to the trunk centre line
+  feeder_highways: [motorway, motorway_link, trunk, trunk_link, primary, primary_link, secondary, secondary_link,
+                    tertiary, tertiary_link, unclassified, residential, living_street, service]
+  # Lanes per direction of travel when the way has no lanes tag.
+  default_lanes: {motorway: 3, trunk: 3, primary: 3, secondary: 2, tertiary: 2, unclassified: 1,
+                  residential: 1, living_street: 1, service: 1, link: 1}
+  access_cluster_m: 60         # inbound approaches of the same street within this distance = one access
+  major_classes: [motorway, motorway_link, trunk, trunk_link, primary, primary_link, secondary, secondary_link]
+  junction_cluster_m: 250      # major approaches this close form one junction (segment boundary)
+  # Junctions whose feeders are unnamed ramps in OSM get a label by chainage (m).
+  junction_labels:
+    - {c0: 0, c1: 700, name: "Garza Sada / Carr. Nacional"}
+  infer_signals: true          # lateral junctions with major/tertiary >= 2-lane feeders are signalised
+
+# Reference numbers quoted by the LLM conversation that motivated the project.
+llm_claims:
+  accesses: [80, 100]
+  feeder_lanes: [130, 160]
+  mainline_lanes_per_dir: [5, 6]
+  length_km: [9, 10]
+
+# --------------------------------------------------------------------------- #
+# Demand model (assumptions; swept in the Monte Carlo)
+# --------------------------------------------------------------------------- #
+demand:
+  # Peak-hour flow per approach lane by road class (veh/h/lane), [low, base, high].
+  per_lane_vph:
+    major: [500, 800, 1100]       # trunk/primary/secondary and their links
+    tertiary: [250, 450, 650]
+    minor: [30, 100, 200]          # residential, unclassified, living street
+    service: [5, 25, 80]           # plaza entrances, parking aisles, driveways
+    retorno: [20, 80, 200]         # U-turns / median crossings from the other direction
+  # Fraction of an approach's flow that turns onto the corridor.
+  turn_terminal: [0.8, 1.0, 1.0]   # street ends at the corridor (T-junction, ramp)
+  turn_crossing: [0.15, 0.3, 0.45] # street continues across the corridor
+  # Exits attract flow with the same per-lane rates; corridor-end inflow.
+  upstream_vph: [2500, 3500, 4500] # through demand entering each end of the corridor
+  peak_factor_offpeak: 0.45        # off-peak demand as a fraction of the peak
+  field_counts: field_counts.csv       # optional field counts (see src/data/counts.py); empty = all assumed
+
+# Control and capacity
+control:
+  s0: 1900                      # saturation flow per lane (HCM base)
+  g_main: [0.45, 0.55, 0.65]    # green ratio of the corridor lane group at a signal
+  lost_frac: 0.10               # lost time per cycle as a fraction of the cycle
+  minor_cap_per_lane: 700       # unsignalised merge of a minor street (gap acceptance, HCM-like)
+  link_cap_per_lane: 1600       # ramps / slip lanes
+  friction_per_access: [0.0, 0.015, 0.03]   # capacity loss per unsignalised access in a cell
+
+# --------------------------------------------------------------------------- #
+# Experiments
+# --------------------------------------------------------------------------- #
+validation:
+  mu: 1800                      # veh/h, one lane-equivalent server
+  rho_grid: [0.3, 0.5, 0.7, 0.8, 0.9]
+  n_vehicles: 40000
+  reps: 5
+  servers_grid: [1, 2, 3]
+
+ctm:
+  vf_kmh: 60
+  w_kmh: 20
+  kj_vpkm: 150
+  dt_s: 6
+  fifo: [0.0, 0.5, 1.0]         # diverge blocking: 0 exits free, 1 strict FIFO (Daganzo 1995)
+  cap_drop: [0.0, 0.08, 0.15]   # queue discharge loss at an active bottleneck (5-15% in the literature)
+  horizon_h: 5.0
+  peak_start_h: 0.75
+  peak_len_h: 2.0
+  ramp_h: 0.5
+
+peak:
+  demand_scale_grid: [0.6, 0.8, 1.0, 1.2, 1.4]
+  peak_len_grid_h: [1.0, 2.0, 3.0]
+
+# A working day, 7:00-20:00: hourly demand multipliers (x the peak-hour demand
+# above), one value per hour starting at start_h.  Tidal assumption: at 7:00
+# everyone travels south -> north (towards San Pedro, WB); the evening reverses.
+daily:
+  start_h: 7
+  hours: 13
+  WB: [1.00, 0.95, 0.70, 0.55, 0.50, 0.55, 0.65, 0.60, 0.55, 0.55, 0.60, 0.55, 0.45]
+  EB: [0.35, 0.40, 0.50, 0.50, 0.50, 0.55, 0.65, 0.60, 0.65, 0.85, 1.00, 0.95, 0.70]
+  draws: 24
+
+montecarlo:
+  draws: 48
+
+interventions:
+  draws: 24
+  metering_top_k: 4             # meter the k largest feeder ramps upstream of the bottleneck
+  extra_lane_len_m: 600         # +1 lane over this length ending at the bottleneck
+  retime_delta_g: 0.10          # extra green ratio for the corridor at the bottleneck signal

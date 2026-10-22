@@ -1,0 +1,51 @@
+# Full run: 100 pc Gaia DR3 catalogue (~372k stars), wider balls and horizons,
+# more bootstrap draws. CPU-only (no GPU needed); ~16 GB RAM recommended.
+project: interstellar_routes
+seed: 0
+
+data:
+  radius_pc: 100
+  poe_min: 10
+  cache_dir: data/cache
+
+static:
+  eval_radius_pc: 60
+  knn_k: 16
+  r_grid: [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0, 8.0]
+  n_boot: 100
+  radius_sweep_pc: [10, 20, 30, 40, 50, 60]
+  bd_fracs: [0.0, 0.1, 0.2, 0.3]
+  bd_draws: 10
+
+timedep:
+  eval_radius_pc: 30
+  t_max_myr: 2.0
+  horizons_myr: [0.0, 0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5, 2.0]
+  r_grid: [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5]
+  sweep_r_pc: 1.5          # range used for the settle / ship-speed sweeps
+  v_sweep_c: [0.001, 0.01, 0.1]
+  v_ship_c: 0.1
+  settle_myr: 0.0
+  settle_sweep_myr: [0.0, 0.01, 0.1]
+  n_boot: 10
+
+routing:
+  eval_radius_pc: 60
+  mass_ratios: [10, 100]
+  lifetimes_yr: [100, 300, 1000, 3000, 10000, 30000, 100000]
+  sail_v_launch_c: 0.2
+  sail_range_cap_pc: 6.0
+  route_ranges_pc: [2.5, 3.0, 4.0]  # static range graphs above the percolation threshold
+  n_astar_queries: 50
+  n_route_queries: 1000
+  fuel_radius_pc: 50
+  fuel_hop_pc: 3.0            # per-leg range (life support) in the fuel analysis
+  tank_grid_pc: [3, 5, 7.5, 10, 15, 20, 30]
+  sail_lifetimes_yr: [100, 300, 1000, 3000, 10000]
+
+exploration:
+  radius_pc: 20
+  n_probes: [1, 4, 8, 16, 32]
+  v_probe_c: 0.1
+
+output_dir: results/full
