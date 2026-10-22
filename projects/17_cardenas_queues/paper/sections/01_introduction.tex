@@ -1,0 +1,40 @@
+\section{Introduction}
+\label{sec:intro}
+
+Avenida L\'azaro C\'ardenas runs about ten kilometres from the Garza Sada
+and Carretera Nacional interchange in south Monterrey to Avenida Gómez
+Mor\'in in San Pedro Garza Garc\'ia. It carries traffic between the
+residential south and the Valle Oriente business district, and its peaks
+are long. The usual explanation goes like this: dozens of streets, ramps
+and plaza entrances feed the avenue, and if you add up their lanes you get
+well over a hundred, all emptying into five or six lanes per direction.
+
+That argument is a lane count. A queueing system does not care how many
+lanes arrive. It cares how many vehicles per hour arrive and how many per
+hour can leave, at each point where they meet. A one-lane residential
+street that sends a hundred vehicles an hour is not the same as a lane of
+Garza Sada sending a thousand. A queue forms where demand exceeds capacity,
+and it backs up from there. So we ask:
+
+\begin{quote}
+\emph{Where does the queue form on L\'azaro C\'ardenas, and is that place
+predicted by the ratio of feeder lanes to corridor lanes, or by the
+utilisation (demand over capacity) of each merge?}
+\end{quote}
+
+We expected utilisation to win, and we set a falsification rule before
+running anything: if the lane ratio finds the simulated bottleneck at
+least as often as utilisation does, the hypothesis fails.
+
+The study makes four contributions. (i) An inventory of the corridor from
+OpenStreetMap: every approach that can deliver vehicles, its lanes, class
+and side, with internal express-to-frontage transfers removed
+(Section~\ref{sec:data}). Its totals turn out to agree with the figures
+that motivated the work. (ii) A queueing model at three levels: closed
+forms validated by a vehicle-level simulator, a steady-state tandem
+model, and a Cell Transmission Model with merges, partially FIFO
+diverges and capacity drop (Section~\ref{sec:model}). (iii) A Monte
+Carlo over every assumption we could not measure, scoring five
+predictors of where the queue forms (Section~\ref{sec:results}).
+(iv) Four interventions evaluated where the queue actually forms
+(Section~\ref{sec:interventions}).

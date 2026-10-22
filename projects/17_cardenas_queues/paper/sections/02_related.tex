@@ -1,0 +1,41 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Queues and signals.} Steady-state delay at a server follows
+from utilisation: exactly for M/M/1 and M/M/c (Erlang C)
+\cite{kleinrock1975queueing}, through Kingman's heavy-traffic formula for
+G/G/1 \cite{kingman1961heavy}, and through the Allen--Cunneen correction
+for many servers \cite{allen1990probability}. Webster
+\cite{webster1958signal} derived the delay at a fixed-time signal, and
+the Highway Capacity Manual \cite{hcm2000} extends it to oversaturation
+over a finite period. When demand exceeds capacity only during a peak,
+the right tool is the deterministic fluid queue built from cumulative
+curves \cite{newell1982queueing}.
+
+\paragraph{Kinematic waves.} The LWR model
+\cite{lighthill1955kinematic,richards1956shock} treats traffic as a
+compressible fluid. Daganzo's Cell Transmission Model (CTM)
+\cite{daganzo1994ctm,daganzo1995ctm} discretises it with merge and diverge
+rules. Newell \cite{newell1993kinematic} showed that, for a triangular
+fundamental diagram, a spatial queue causes the same total delay as a
+point queue at the bottleneck, which gives us an exact check. Empirical
+work locates queues at active bottlenecks, the boundary between queued
+traffic upstream and freely flowing traffic downstream
+\cite{cassidy1999bottlenecks}. Lane drops are a classic case
+\cite{bertini2005lanedrop}, and the queue's discharge rate falls by a few
+percent once the queue forms (capacity drop)
+\cite{hall1991capacity,chung2007capacity}. Local ramp metering with ALINEA
+\cite{papageorgiou1991alinea} uses that drop: it keeps the bottleneck just
+below critical density.
+
+\paragraph{Open street data.} OpenStreetMap \cite{haklay2008osm} is the
+standard open source of street geometry, and tools such as OSMnx
+\cite{boeing2017osmnx} turn it into graphs. Lane tags are common on
+arterials but sparse on local streets, which our inventory reports
+explicitly.
+
+\paragraph{Delta.} We do not propose a new traffic model. We put a
+widely repeated lane-count argument about one specific Monterrey corridor
+to a falsifiable test, using open data and standard, validated models,
+and we separate the part of the answer that comes from geometry from the
+part that comes from assumed demand.

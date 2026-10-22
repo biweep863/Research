@@ -1,0 +1,42 @@
+\section{Limitations and conclusion}
+\label{sec:conclusion}
+
+\paragraph{Limitations.} Apart from one roadside estimate at Alfonso
+Reyes, there are no traffic counts in this study. Demand is a parametric model, varied over wide ranges, and every absolute
+delay should be read in that light. The conclusions we draw are the ones
+that survive the whole Monte Carlo: where the queue forms, and which
+predictors find it. The repository accepts field counts
+(\texttt{data/field\_counts.csv}, vehicles per hour per approach and
+direction, or vehicles per minute on green and red); the Alfonso Reyes
+estimate shows how much one count can change: it removed the predicted
+westbound queue. Fifteen minutes of video at a few junctions, especially
+eastbound, would replace the largest remaining assumptions with data. OpenStreetMap is incomplete in two places
+that matter. Signals are under-mapped, so we infer them at major
+frontage junctions. The five-to-three-lane merge that dominates the
+results is a mapped feature that should be checked on site; if the
+frontage road actually continues there, the bottleneck moves, as the
+filled-gap experiment shows. The CTM aggregates express and frontage
+lanes into one cross-section, applies green ratios as average capacities
+rather than cycles, treats each approach as a vertical queue, and gives
+every vehicle the same route behaviour. How strongly the queue blocks
+exits ($\phi$) changes delay several-fold and is the first thing a field
+study should measure. The model has no route choice, so traffic does not
+shift to Gómez Mor\'in, Vasconcelos or Garza Sada when L\'azaro C\'ardenas
+fills up.
+
+\paragraph{Conclusion.} The lane count behind the popular explanation is
+right: about \InvFeederLanesNoService\ street lanes, \InvFeederLanes\
+with driveways, into \InvMainlineLanes\ per direction. But it is the
+wrong quantity. Feeder lanes carry a few percent of their saturation flow,
+and their number does not locate the queue: the local lane ratio found
+the bottleneck in \McHitLR\% of congested runs. Utilisation found it in
+\McHitRho\% and predicted whether congestion occurs at all. Remove the
+lane drop, though, and the lane ratio becomes the better locator
+(\McGapHitLR\% against \McGapHitRho\%, in a small sample): where many
+accesses join in a short stretch, their friction matters. On this
+corridor, at this map, the answer is geometric: a merge from five lanes
+to three between Alfonso Reyes and the Arroyo Seco bridge. The
+intervention that helps in every run is capacity at that merge, not
+fewer driveways or retimed signals. The rule generalises beyond
+Monterrey: to find where a corridor jams, compare demand with capacity at
+each merge, and look first for the place where lanes disappear.

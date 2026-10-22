@@ -37,3 +37,6 @@ projects/16_causal_binaural_separation/results/sanity/
 
 # Project 18: cached Gaia / GCNS / exoplanet downloads
 projects/18_interstellar_routes/data/
+# Project 17: cached OSM extract, field counts, full-scale results
+projects/17_lazaro_cardenas_queues/data/
+projects/17_lazaro_cardenas_queues/results/full/
