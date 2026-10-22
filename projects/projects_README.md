@@ -25,7 +25,8 @@ projects/
 ├── 11_abyss_novelty/             What reaches the abyss (light/radio/sound/eDNA) + open-set AI for unknown species
 ├── 12_optimal_floor/             Optimal floor to live on: elevator mechanism, lobby trips, traffic, stairs, fleet
 ├── 13_hodge_preferences/         Hodge decomposition of the pairwise NTK: ranking learned before cycles
-└── 16_causal_binaural_separation/ Causal binaural speech enhancement at 1–32 ms latency: window vs future vs learning
+├── 16_causal_binaural_separation/ Causal binaural speech enhancement at 1–32 ms latency: window vs future vs learning
+└── 17_lazaro_cardenas_queues/    Queueing model of Av. Lázaro Cárdenas (Monterrey): OSM inventory, CTM, where the queue forms
 ```
 
 See `PROJECT_TEMPLATE.md` for the structure and intake questions used to add a
