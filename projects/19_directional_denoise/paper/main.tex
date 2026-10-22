@@ -1,0 +1,59 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros.tex}
+
+\title{Point the Array, Not the Denoiser: Directional Noise Cancellation
+before DeepFilterNet3 on a 4-Mic ReSpeaker, Judged by Whisper}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{October 19, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent Service robots often use a 4-microphone array as one microphone.
+They take the chip's processed channel and clean it with a neural
+denoiser whose only control is an attenuation limit. We measure, on real
+hardware, what the four raw microphones of a ReSpeaker USB array add in
+front of DeepFilterNet3, and how that limit should be set when the
+listener is a speech recognizer.
+
+One 40-minute session gives \NScenes{} scenes. We recorded a talker at 8
+positions and 5 interferers from 2 loudspeakers separately on the fixed
+array, then mixed them, so the speech and noise components of every output
+are known. Two live takes check the result against reality.
+
+The intuitive fix, switching off the microphone nearest the noise, gains
+\Gainmute\,dB, because on a 6.4\,cm array every microphone hears the noise
+at the same level. An MVDR beamformer steered by a relative transfer
+function estimated from the 1.5\,s before the talker speaks gains
+\Gainmvdrrtf\,dB (oracle: \Gainoracle\,dB). At 0\,dB input SNR it lowers
+Whisper's word error rate from \Werrefattoff\,\% to \Wermvdrrtfattoff\,\%
+($p=$\,\PRtfVsRef{}; clean speech: \WerClean\,\%).
+
+DeepFilterNet3 never lowers the word error rate. At the robot's setting
+of 12\,dB the change is within noise (\DiffRtfDfnTwelve{} points). Without
+a limit it adds \DiffRtfDfnInf{} points, while ESTOI rises monotonically.
+Running it in the robot's independent 64\,ms chunks adds \DiffRtfHomeTwo{}
+points. Live, with a second talker, the chip's processed channel lets
+Whisper transcribe the \emph{other} voice (WER
+\LivetalkerchZerochipDfn\,\%), while MVDR followed by DeepFilterNet3 gets
+\LivetalkermvdrrtfDfn\,\%.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction}
+\input{sections/02_related}
+\input{sections/03_methods}
+\input{sections/04_results}
+\input{sections/05_discussion}
+\input{sections/06_conclusion}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

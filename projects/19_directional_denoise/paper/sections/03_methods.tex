@@ -1,0 +1,73 @@
+\section{Setup and methods}
+\label{sec:methods}
+
+\paragraph{Hardware.} A ReSpeaker USB Mic Array v2.0 with its 6-channel
+firmware: ch0 is the chip's own processed beam (the channel the robot
+pipeline uses today), ch1--4 are the raw microphones on a 32\,mm circle.
+An Akane Omnia~300 USB microphone 10--20\,cm from the talker's mouth is the
+close-talk reference. The interferer is a stereo pair of desktop speakers
+about 0.5\,m from the array, driven one side at a time. Seen from the array,
+the two sides are about 110$^\circ$ apart. On Windows the 4 raw channels are
+only delivered with the operating system's \emph{audio enhancements}
+disabled: with them on, every audio API returns 2 identical channels at
+48\,kHz.
+
+\paragraph{Session.} One talker (the author) recorded 40 minutes:
+\begin{itemize}
+\item 15\,s of room silence;
+\item 10 noise-only takes: 5 interferers $\times$ 2 speakers, 20\,s each;
+\item 8 speech-only takes: one Spanish prompt read from each of 8 positions
+  around the array at 0.5\,m;
+\item 2 live takes, reading while an interferer plays;
+\item 7 distance clips for the localization study.
+\end{itemize}
+The interferers are pink noise, a synthetic fan, real cafeteria babble
+(DEMAND~\cite{thiemann2013demand}), an English talker
+(LibriSpeech~\cite{panayotov2015librispeech}) and synthetic music. Every
+take starts and ends with a chirp from the speaker. A matched filter on the
+two chirps aligns each recording to the played signal, and the two USB
+clocks to each other, to a fraction of a sample. All signals are
+high-passed at 100\,Hz: the raw microphones carry mains hum that
+dominates their noise power.
+
+\paragraph{Scenes.} Speech and noise recorded separately on a fixed array
+add: $\mathbf{y}=\mathbf{s}+g\,\mathbf{n}$ is what the array would have
+heard with both sources on. $g$ sets the input SNR to $-5$, 0, 5 or 10\,dB,
+giving \NScenes{} scenes. Each scene begins with 1.5\,s in which the
+talker is silent. That stretch is the only noise information any method may
+use (the \emph{silence model}). Because every front end below is linear,
+$\mathbf{s}$ and $\mathbf{n}$ pass through the same weights separately,
+which makes the output SNR exact.
+
+\paragraph{Front ends} (STFT 512/128 at 16\,kHz, output referenced to ch1):
+\begin{itemize}
+\item \textbf{raw mic}: ch1 alone.
+\item \textbf{mute}: the intuitive idea of switching off the microphone that
+  hears the noise most. We drop the mic with the largest silence-model power
+  and average the rest. \textbf{soft} is its per-band version: real
+  inverse-noise-power weights.
+\item \textbf{delay-and-sum} and \textbf{MVDR (DOA)}: far-field steering at
+  the direction estimated by SRP-PHAT~\cite{dibiase2001srp} on the mixture
+  minus the silence model.
+\item \textbf{MVDR (RTF)}: steering by the RTF from covariance
+  whitening~\cite{markovich2009rtf}, with no geometry and no DOA.
+\item \textbf{GSC}: a fixed beam along the RTF, a blocking matrix orthogonal
+  to it, and a per-bin NLMS canceller~\cite{griffiths1982gsc} that adapts
+  only while the fixed beam stays within 3\,dB of its noise-only level.
+\item \textbf{oracle}: MVDR with the true noise covariance and speech RTF,
+  as an upper bound.
+\end{itemize}
+
+\paragraph{DeepFilterNet3 and recognition.} Each output goes through
+DeepFilterNet3~\cite{schroeter2023deepfilternet3} with \texttt{atten\_lim\_db}
+$\in\{6,12,18,24,\infty\}$. The value 12 is the robot's setting. A value of
+0 also means \emph{no limit} in the library, not off.
+\begin{itemize}
+\item \textbf{Continuous mode} runs one pass per utterance.
+\item \textbf{Chunk mode} reproduces the robot pipeline: 64\,ms chunks, each
+  peak-normalized and enhanced independently.
+\end{itemize}
+Whisper \texttt{small}~\cite{radford2023whisper} transcribes every version.
+Its configuration is greedy decoding, Spanish, no VAD filter and no context.
+WER is computed against the prompt. ESTOI~\cite{jensen2016estoi} is computed
+against the close-talk microphone. The 0\,dB scenes get the full sweep.

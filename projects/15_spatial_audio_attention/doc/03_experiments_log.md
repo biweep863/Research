@@ -63,3 +63,16 @@ first live distance test. Still open (needs a marked floor and ~30 min):
    vs `cue: cdr_db`, and the effect of vocal effort.
 8. `make beamform WAV=<two-talker clip> ARGS=--deepfilter` and listen.
 9. `make hw` and append here / to `04_results.md`.
+
+## Session 2 (2026-10-18, Windows 11, with project 19)
+- Windows "audio enhancements" (VocaEffectPack) turn the 6-ch stream into
+  2 identical channels at 48 kHz. Disable them in `mmsys.cpl` → Advanced and
+  replug.
+- Checklist steps done:
+  - 2: angle marks only; 0° = USB port, ±20°.
+  - 4: 8 angles at 0.5 m.
+  - 5: covered by project 19's interferer takes.
+  - 6: `make calibrate`: offset 35.2°, mirror, LOO 15.8°.
+  - 7: 7 distance clips, 2 m maximum.
+  - 8: superseded by project 19.
+- Not done: the firmware DOA (no libusb driver), and the 3 m clips (no room).

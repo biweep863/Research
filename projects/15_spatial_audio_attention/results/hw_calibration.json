@@ -1,0 +1,341 @@
+{
+  "simulator": "pyroomacoustics",
+  "n_recordings": 15,
+  "rows": [
+    {
+      "file": "20261018_dist_a270_d0.4_normal.wav",
+      "angle_deg": 270.0,
+      "distance_m": 0.4,
+      "speaker": "luis",
+      "note": "exported from project 19 session (dist_a270_d0.4_normal); p15 distance clip, free speech",
+      "az_array_deg": 138.79780394993816,
+      "doa_conf": 0.6523193887944291,
+      "f0_hz": 111.24666892973597,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -6.575035835189586,
+        "level_db": -42.75503348469802,
+        "speech_db": -43.60907866837251,
+        "snr_db": 6.6290164219893715,
+        "tilt_db": -21.0891822251801
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 81,
+      "n_noise_frames": 398
+    },
+    {
+      "file": "20261018_dist_a270_d0.4_soft.wav",
+      "angle_deg": 270.0,
+      "distance_m": 0.4,
+      "speaker": "luis",
+      "note": "exported from project 19 session (dist_a270_d0.4_soft); p15 distance clip, free speech",
+      "az_array_deg": 136.87713123948686,
+      "doa_conf": 0.6217980102635852,
+      "f0_hz": 107.34549552956638,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -7.2833016088023985,
+        "level_db": -45.47516042503822,
+        "speech_db": -46.472809211173455,
+        "snr_db": 5.879623535197669,
+        "tilt_db": -23.728806823683616
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 23,
+      "n_noise_frames": 643
+    },
+    {
+      "file": "20261018_dist_a270_d1_loud.wav",
+      "angle_deg": 270.0,
+      "distance_m": 1.0,
+      "speaker": "luis",
+      "note": "exported from project 19 session (dist_a270_d1_loud); p15 distance clip, free speech",
+      "az_array_deg": 133.82669269385858,
+      "doa_conf": 0.30958994621136277,
+      "f0_hz": 107.19417743560882,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -7.052272788890123,
+        "level_db": -42.46869059642276,
+        "speech_db": -43.34506249663374,
+        "snr_db": 6.501031992314871,
+        "tilt_db": -21.461292821522026
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 156,
+      "n_noise_frames": 214
+    },
+    {
+      "file": "20261018_dist_a270_d1_normal_a.wav",
+      "angle_deg": 270.0,
+      "distance_m": 1.0,
+      "speaker": "luis",
+      "note": "exported from project 19 session (dist_a270_d1_normal_a); p15 distance clip, free speech",
+      "az_array_deg": 139.6845523856202,
+      "doa_conf": 0.3959741498450703,
+      "f0_hz": 116.64495424994664,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -5.39963673369156,
+        "level_db": -42.40904930751252,
+        "speech_db": -42.9684752355398,
+        "snr_db": 8.617702108413315,
+        "tilt_db": -21.402164623950032
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 65,
+      "n_noise_frames": 450
+    },
+    {
+      "file": "20261018_dist_a270_d1_normal_b.wav",
+      "angle_deg": 270.0,
+      "distance_m": 1.0,
+      "speaker": "luis",
+      "note": "exported from project 19 session (dist_a270_d1_normal_b); p15 distance clip, free speech",
+      "az_array_deg": 138.72297040830793,
+      "doa_conf": 0.3803314994055606,
+      "f0_hz": 117.38415203493803,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -3.941568240017907,
+        "level_db": -41.80415680954208,
+        "speech_db": -42.619351029090296,
+        "snr_db": 6.681246550650297,
+        "tilt_db": -24.75195522791852
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 101,
+      "n_noise_frames": 418
+    },
+    {
+      "file": "20261018_dist_a270_d2_loud.wav",
+      "angle_deg": 270.0,
+      "distance_m": 2.0,
+      "speaker": "luis",
+      "note": "exported from project 19 session (dist_a270_d2_loud); p15 distance clip, free speech",
+      "az_array_deg": 39.99108746273937,
+      "doa_conf": 0.3766176295600571,
+      "f0_hz": 117.2010860918526,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -3.6959461256020956,
+        "level_db": -40.29934358956705,
+        "speech_db": -40.6294327503739,
+        "snr_db": 11.025440584646782,
+        "tilt_db": -19.27968024817074
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 170,
+      "n_noise_frames": 282
+    },
+    {
+      "file": "20261018_dist_a270_d2_normal.wav",
+      "angle_deg": 270.0,
+      "distance_m": 2.0,
+      "speaker": "luis",
+      "note": "exported from project 19 session (dist_a270_d2_normal); p15 distance clip, free speech",
+      "az_array_deg": 48.61627082308886,
+      "doa_conf": 0.24334782798000734,
+      "f0_hz": 116.26009839126388,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -7.177502608659803,
+        "level_db": -42.86841546896967,
+        "speech_db": -43.419083786933484,
+        "snr_db": 8.690699163764714,
+        "tilt_db": -17.29176115522196
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 105,
+      "n_noise_frames": 386
+    },
+    {
+      "file": "20261018_speech_a0_d0.5_t8.wav",
+      "angle_deg": 0.0,
+      "distance_m": 0.5,
+      "speaker": "luis",
+      "note": "exported from project 19 session (speech_a0_d0.5_t8);",
+      "az_array_deg": 45.03408281372095,
+      "doa_conf": 0.5377007347713,
+      "f0_hz": 116.63707519694871,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -7.136589641648085,
+        "level_db": -41.20289720859538,
+        "speech_db": -41.68911858412535,
+        "snr_db": 9.263911457609941,
+        "tilt_db": -28.462753124801537
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 157,
+      "n_noise_frames": 510
+    },
+    {
+      "file": "20261018_speech_a135_d0.5_t5.wav",
+      "angle_deg": 135.0,
+      "distance_m": 0.5,
+      "speaker": "luis",
+      "note": "exported from project 19 session (speech_a135_d0.5_t5);",
+      "az_array_deg": 262.19824761855523,
+      "doa_conf": 0.4592405453218146,
+      "f0_hz": 108.75894098776303,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -7.011178118557871,
+        "level_db": -41.83728595387278,
+        "speech_db": -42.29439094179686,
+        "snr_db": 9.547126560872144,
+        "tilt_db": -24.008941842064374
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 167,
+      "n_noise_frames": 335
+    },
+    {
+      "file": "20261018_speech_a180_d0.5_t4.wav",
+      "angle_deg": 180.0,
+      "distance_m": 0.5,
+      "speaker": "luis",
+      "note": "exported from project 19 session (speech_a180_d0.5_t4);",
+      "az_array_deg": 272.79620743807214,
+      "doa_conf": 0.4583966363524696,
+      "f0_hz": 113.07080532659684,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -5.969524243252544,
+        "level_db": -38.88045265985416,
+        "speech_db": -39.20881240367332,
+        "snr_db": 11.049129771205234,
+        "tilt_db": -23.08141784812889
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 132,
+      "n_noise_frames": 397
+    },
+    {
+      "file": "20261018_speech_a225_d0.5_t3.wav",
+      "angle_deg": 225.0,
+      "distance_m": 0.5,
+      "speaker": "luis",
+      "note": "exported from project 19 session (speech_a225_d0.5_t3);",
+      "az_array_deg": 170.4798476120429,
+      "doa_conf": 0.21703851074722874,
+      "f0_hz": 128.75738713133183,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -3.5532593492292093,
+        "level_db": -42.04798988574148,
+        "speech_db": -42.5374533699189,
+        "snr_db": 9.229608932993273,
+        "tilt_db": -17.99700836906026
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 156,
+      "n_noise_frames": 712
+    },
+    {
+      "file": "20261018_speech_a270_d0.5_t1.wav",
+      "angle_deg": 270.0,
+      "distance_m": 0.5,
+      "speaker": "luis",
+      "note": "exported from project 19 session (speech_a270_d0.5_t1); relabelled 315->270 by the talker (three quarters of the circle)",
+      "az_array_deg": 140.55018479614432,
+      "doa_conf": 0.47448602382477606,
+      "f0_hz": 118.79519262236226,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -6.238069044374804,
+        "level_db": -37.74405691238439,
+        "speech_db": -37.899880802334266,
+        "snr_db": 14.367021672363522,
+        "tilt_db": -25.346901868614754
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 261,
+      "n_noise_frames": 251
+    },
+    {
+      "file": "20261018_speech_a315_d0.5_t2.wav",
+      "angle_deg": 315.0,
+      "distance_m": 0.5,
+      "speaker": "luis",
+      "note": "exported from project 19 session (speech_a315_d0.5_t2);",
+      "az_array_deg": 111.27308331220897,
+      "doa_conf": 0.4037564086197973,
+      "f0_hz": 109.72898714054618,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -5.388447081101839,
+        "level_db": -42.181175108181385,
+        "speech_db": -42.59450883186297,
+        "snr_db": 10.00652886645197,
+        "tilt_db": -19.178052998522144
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 129,
+      "n_noise_frames": 320
+    },
+    {
+      "file": "20261018_speech_a45_d0.5_t7.wav",
+      "angle_deg": 45.0,
+      "distance_m": 0.5,
+      "speaker": "luis",
+      "note": "exported from project 19 session (speech_a45_d0.5_t7);",
+      "az_array_deg": 327.3394264726455,
+      "doa_conf": 0.3961983189702901,
+      "f0_hz": 107.1672553291461,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -6.371488773256231,
+        "level_db": -36.96625794244974,
+        "speech_db": -37.24391387130324,
+        "snr_db": 11.764755819928606,
+        "tilt_db": -30.03475490758971
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 272,
+      "n_noise_frames": 412
+    },
+    {
+      "file": "20261018_speech_a90_d0.5_t6.wav",
+      "angle_deg": 90.0,
+      "distance_m": 0.5,
+      "speaker": "luis",
+      "note": "exported from project 19 session (speech_a90_d0.5_t6);",
+      "az_array_deg": 271.7641637918496,
+      "doa_conf": 0.3540222540745547,
+      "f0_hz": 119.33441853971468,
+      "fw_doa_deg": null,
+      "features": {
+        "cdr_db": -6.301230885658821,
+        "level_db": -41.28061260812615,
+        "speech_db": -42.303534776415994,
+        "snr_db": 5.564437818738294,
+        "tilt_db": -34.378435596633544
+      },
+      "sim_prior_range_m": 5.0,
+      "n_speech_frames": 201,
+      "n_noise_frames": 458
+    }
+  ],
+  "orientation": {
+    "azimuth_offset_deg": 35.19269588570343,
+    "mirror": true,
+    "median_err_in_sample_deg": 14.491856499916764
+  },
+  "doa_loo_median_err_deg": 15.757664625018663,
+  "spearman_log_distance": {
+    "cdr_db": 0.2611931938211259,
+    "level_db": 0.042882464657199776,
+    "snr_db": 0.07406971168061778,
+    "tilt_db": 0.3040756584783257
+  },
+  "loo_mae_m": {
+    "sim_prior": 4.213333333333334,
+    "inverse_square_fitted": 0.39758085120294984,
+    "ridge_cdr": 0.4007333482856779,
+    "ridge_configured": 0.4148278752114898,
+    "ridge_all": 0.4330604029333237,
+    "predict_mean": 0.4088888888888891
+  }
+}

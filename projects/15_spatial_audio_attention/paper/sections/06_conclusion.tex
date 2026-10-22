@@ -11,11 +11,13 @@ talker with an MVDR filter steered at the estimate. On hardware, the
 direction followed the talker once the VAD was protected from the room's
 hum, while metric distance did not transfer to an unseen room; a relative
 near/mid/far estimate that learns from the session itself is what the
-microphones alone can offer. Next steps are the labelled hardware grid
-(angle error against the firmware DOA, and labelled distances to choose the
-range cue), a two-talker beamforming test, and integration as ROS~2 nodes
-ahead of the existing DeepFilterNet3 denoiser, where a person detector can
-supply the distance reference the array lacks.
+microphones alone can offer. A labelled grid confirms it: about
+16$^\circ$ of angle error in quiet, and no usable distance cue between 0.4
+and 2\,m. Against a loud directional interferer the silence model is no
+longer enough for the angle, but a beamformer steered without it still
+helps. Next steps are the firmware DOA comparison and integration as ROS~2
+nodes ahead of the existing DeepFilterNet3 denoiser, where a person detector
+can supply the distance reference the array lacks.
 
 \paragraph{Reproducibility.} \texttt{make all} in
 \texttt{projects/15\_spatial\_audio\_attention} regenerates every

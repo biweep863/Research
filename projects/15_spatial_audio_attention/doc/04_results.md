@@ -125,16 +125,36 @@ no distance labels — the protocol was ~1 m, near, ~3 m, back):
 - Observed by the user: near vs far is distinguished, but talking louder or
   softer moves the band.
 
-**Not done:** labelled DOA grid (8 angles) and orientation calibration
-(`make calibrate`); labelled distance clips to score the two cues; two-talker
-clips for MVDR. The array→robot offset is uncalibrated (array 307° for a talker
-the user placed at the front; firmware DOA 204°).
+## Hardware session 2 (2026-10-18, Windows, recorded with project 19)
+15 labelled clips (`data/recordings/20261018_*`, exported by project 19's
+`export_p15.py`): 8 angles at 0.5 m and 7 distance clips at 270°
+(0.4/1/2 m, soft/normal/loud). The talker's angle marks are approximate
+(about ±20°). `make calibrate` → `results/hw_calibration.json`:
+- **Orientation:** `azimuth_offset_deg: 35.2`, `mirror: true` (in-sample
+  median 14.5°).
+- **DOA leave-one-out median error: 15.8°.** This is bounded by the marks;
+  the firmware DOA was not read (pyusb needs a libusb driver on Windows).
+- **Distance does not work** at 0.4–2 m in this room. The largest
+  |Spearman| against log-distance is 0.30 (tilt; CDR 0.26, level 0.04).
+  The leave-one-out MAE of every model (0.40–0.43 m) equals predicting the
+  mean (0.41 m), and the simulation prior is off by 4.2 m. Vocal effort
+  moves the level more than distance does.
+- **The DOA estimator under a directional interferer** (project 19, 320
+  mixed scenes, label = SRP-PHAT on the clean take): median error 65/58/11/5°
+  at −5/0/5/10 dB SNR. Simulation (diffuse noise + fan) gave 4–5° at 0 dB.
+  Against a loudspeaker playing speech or babble at 0 dB, the silence model
+  is not enough.
+- **H3 on hardware** (project 19): MVDR toward the talker gains +2.9 dB with
+  this project's DOA steering and +4.3 dB with RTF steering (median over 320
+  scenes). In a live take with a second talker it cuts Whisper's WER from
+  200 % (chip ch0 + DFN3) to 7–11 %.
 
 ## Verdict
-- **H1 (angle)** holds in simulation; on hardware the direction followed the
-  talker in live use once the VAD worked, but the labelled error (and the
-  firmware comparison) is still unmeasured.
+- **H1 (angle)** holds in simulation. On hardware the labelled
+  leave-one-out error is 16° in quiet (bounded by the marks), but 58° at
+  0 dB against a loudspeaker interferer.
 - **H2 (distance)** holds in simulation only with the room covariate, and the
   simulated model does not transfer to the real room. Microphone-only output is
   near/mid/far, learned online: right at the extremes, unreliable in between.
-- **H3 (selectivity)** holds in simulation; untested on hardware.
+- **H3 (selectivity)** holds on hardware: MVDR +2.9 dB (DOA) and +4.3 dB
+  (RTF) SNR, with large WER gains (project 19).

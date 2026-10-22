@@ -1,0 +1,68 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Hypotheses.}
+\begin{itemize}
+\item \textbf{H1, holds.} Muting or weighting microphones gains under
+  1\,dB (\Gainmute{} and \Gainmutesoft\,dB, WER \DiffMuteVsRef{} points,
+  $p=$\,\PMuteVsRef). Phase-aware front ends gain 3--4\,dB.
+  \begin{itemize}
+  \item We predicted \emph{at least 5\,dB} for MVDR. Only the oracle
+    reaches that, so the bottleneck is the noise model from 1.5\,s of
+    silence, not the array.
+  \end{itemize}
+\item \textbf{H2, half right.} The spatial front end matters most for
+  speech-like interferers, as predicted. But DeepFilterNet3 alone does not
+  ``handle'' stationary noise for the recognizer either: it improves ESTOI
+  and leaves the WER flat or worse.
+\item \textbf{H3, holds, but the optimum does not move.} WER is minimal
+  from ``off'' to 12\,dB and grows beyond, both with and without a
+  beamformer in front.
+\item \textbf{H4, holds.} The robot's independent 64\,ms chunks cost 6--11
+  points.
+\end{itemize}
+
+\paragraph{Falsification test.} We set this test in advance:
+MVDR$\to$DeepFilterNet3 against DeepFilterNet3 alone at noise angles
+$\geq$\,90$^\circ$. On those 44 scenes the difference is $-26.3$ WER
+points, 38\,\% relative, far beyond the 10\,\% threshold. The difference is
+the same below 90$^\circ$, and over all 0\,dB scenes it is
+\DiffRtfDfnVsRefDfn{} points ($p=$\,\PRtfDfnVsRefDfn). The 4-microphone front end is worth adding.
+
+\paragraph{Recommendations for the robot.}
+\begin{enumerate}
+\item Read the raw channels, not ch0.
+\item Run an RTF-steered MVDR whose noise covariance is updated in the
+  silence before each utterance. The voice activity detector already
+  provides that silence.
+\item Run DeepFilterNet3 continuously, or not at all, at 12\,dB or below.
+  Never run it without a limit in front of the recognizer.
+\end{enumerate}
+The setting \texttt{atten\_lim\_db}\,=\,0 deserves a warning, because the
+library reads it as ``no limit''.
+
+\paragraph{Limitations.}
+\begin{itemize}
+\item One talker, one room and one session. The talker's angle marks were
+  approximate, so separations come from the clean takes.
+\item Scenes are mixed. The live check shows they are optimistic by 1--2\,dB
+  of SNR gain, but the two live takes agree with them in direction and size.
+\item Whisper \texttt{small} with greedy decoding; a larger model is more
+  noise-robust and may shrink every gap.
+\item The 0\,dB scenes are hard on purpose: the absolute WERs are high, the
+  differences are what matters.
+\item The cafeteria live take could not be checked for superposition: a
+  bug in the noise generator replayed a different excerpt.
+\end{itemize}
+
+\paragraph{Project~15.} The same session gives project~15 its missing
+hardware numbers:
+\begin{itemize}
+\item \textbf{Orientation.} The array is mirrored and rotated by
+  \PFifteenOffset$^\circ$ relative to the talker's marks.
+\item \textbf{Direction.} The leave-one-out median error is
+  \PFifteenLooErr$^\circ$, bounded by the marks' accuracy.
+\item \textbf{Distance fails.} No distance cue correlates with distance
+  (|Spearman|\,$\leq$\,\PFifteenSpearmanMax). The best model's error is
+  \PFifteenMaeBest\,m, against \PFifteenMaeMean\,m for predicting the mean.
+\end{itemize}

@@ -35,12 +35,10 @@ low-frequency hum; and the microphones are perfectly matched and positioned.
 The first two showed on hardware: the room was more reverberant than any
 simulated one and the noise was hum-dominated.
 
-\paragraph{Limitations.} Small simulation sweeps (8 clips per DOA cell,
-108 distance clips, 8 beamforming scenes) without confidence intervals; a
-larger configuration is provided. The hardware session has one labelled
-clip and one unlabelled live session from one talker in one room: the
-labelled angle grid, the orientation calibration and therefore the angle
-error and the comparison with the firmware DOA, labelled distances to choose
-between the cues, and a two-talker beamforming test are still to be done
-(the tools and protocol are in the repository). One interferer, equal
-levels; no moving interferer; no own-voice (TTS) handling.
+\paragraph{Limitations.} The simulation sweeps are small (8 clips per DOA
+cell, 108 distance clips, 8 beamforming scenes) and have no confidence
+intervals; a larger configuration is provided. The hardware comes from two
+sessions of one talker in one room. The labelled angles were approximate,
+and the firmware DOA was not read on Windows. The distance clips span only
+0.4--2\,m. There is one interferer at a time, no moving interferer and no
+own-voice (TTS) handling.

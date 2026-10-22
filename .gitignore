@@ -35,6 +35,9 @@ projects/16_causal_binaural_separation/results/ckpt/
 projects/16_causal_binaural_separation/results/audio/
 projects/16_causal_binaural_separation/results/sanity/
 
+# Project 19: session recordings, mixed scenes, DFN outputs; DeepFilterNet venv (Python 3.11)
+projects/19_directional_denoise/data/
+.venv-dfn/
 # Project 18: cached Gaia / GCNS / exoplanet downloads
 projects/18_interstellar_routes/data/
 # Project 17: cached OSM extract, field counts, full-scale results
