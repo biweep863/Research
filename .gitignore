@@ -43,3 +43,5 @@ projects/18_interstellar_routes/data/
 # Project 17: cached OSM extract, field counts, full-scale results
 projects/17_lazaro_cardenas_queues/data/
 projects/17_lazaro_cardenas_queues/results/full/
+# Project 20: rendered documents, model-written files and build scratch
+projects/20_format_tax/data/

@@ -1,0 +1,40 @@
+project: format_tax
+seed: 0
+device: auto
+results_dir: results/full
+work_dir: data/work_full
+
+corpus:
+  n_docs: 18
+  doc:                       # the size knobs of src/data/doc_generator.make_doc
+    n_sections: [2, 4, 8]   # size sweep: fixed vs per-content markup cost
+    facts_per_section: 2
+    filler_per_section: 2
+    table_rows: 4
+    list_len: 5
+
+# Phase R: token counts only (no weights), several vocabularies
+tokenizers:
+  - {name: Qwen/Qwen2.5-1.5B-Instruct, short: qwen25}
+  - {name: microsoft/Phi-3.5-mini-instruct, short: phi35}
+  - {name: Qwen/Qwen3-8B, short: qwen3}
+  - {name: meta-llama/Meta-Llama-3-8B, short: llama3}
+  - {name: gpt2, short: gpt2}
+read:
+  loader_repeats: 3
+
+models:
+  - {name: Qwen/Qwen2.5-1.5B-Instruct, short: qwen25-1.5b, dtype: fp16}
+  - {name: microsoft/Phi-3.5-mini-instruct, short: phi35-mini, dtype: bf16}
+  - {name: Qwen/Qwen3-8B, short: qwen3-8b, dtype: bf16, quant: 4bit, no_think: true}
+
+understand:
+  conditions: [native, budget]   # budget = truncated to the plain-text token count
+  prefill_repeats: 3
+  max_new_tokens: 24
+
+write:
+  generations: [txt, md, json, html, tex, docx_code, docx_xml, pptx_code, xlsx_code, csv]
+  n_docs: 6                      # first n docs of the corpus (2 per size)
+  max_attempts: 3                # 1 try + 2 retries with the build error
+  max_new_tokens: 4096

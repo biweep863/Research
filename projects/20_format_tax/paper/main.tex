@@ -1,0 +1,64 @@
+\documentclass[10pt,twocolumn]{article}
+\input{../../shared/latex/twocolumn_preamble.tex}
+\input{macros_full.tex}
+
+\title{The Format Tax: What It Costs a Local LLM to Read, Understand and
+Write TXT, Markdown, LaTeX, HTML, JSON, PDF, DOCX, PPTX and XLSX}
+\author[1]{Luis Benvenuto}
+\affil[1]{Independent Research}
+\date{October 25, 2026}
+
+\begin{document}
+\twocolumn[
+\maketitle
+\begin{@twocolumnfalse}
+\begin{abstract}
+\noindent People hand language models documents in many file formats and
+ask for files back in many more. We measure what each format costs a
+local model over the whole life of a document, with the content held
+fixed. We generate \NDocs{} synthetic reports with planted facts and render
+each one in twelve forms a model can be given: plain and marked-up text,
+text extracted from PDF, DOCX, PPTX and XLSX, and the raw XML inside the
+office files. We then ask three open models (1.5B--8B) about
+\NQuestionsPerDoc{} questions per document and have them write the
+report back in thirteen deliverables, building and checking every file.
+
+Reading is a token question. Extracted text costs what plain text costs.
+HTML and JSON cost \TokRatioHtml{} and \TokRatioJson{} times as many
+tokens, and raw office XML \TokRatioDocxXml--\TokRatioPptxXml{} times. With
+the whole document in context, the format barely matters to Qwen3-8B
+(\AccSpread{}-point spread; no format differs from Markdown after Holm
+correction). With the context cut to the plain text's length, raw XML
+falls to \AccXmlBudgetMean\,\% and JSON to \AccBudgetJson\,\%, against
+\AccBudgetMd\,\% for Markdown. Even among questions whose answer is still
+in the cut context, raw XML scores \AccBudgetEvidenceXml\,\% against
+\AccBudgetEvidencePlain\,\%. On a 12\,GB consumer GPU, markup also pushes
+prompts past a memory cliff: above \CliffTokens{} tokens, prefill per
+token became up to \CliffSlowdown{} times slower.
+
+Writing is a pipeline question, because a model never emits a PDF, DOCX
+or PPTX directly. We define the \emph{format tax} as the time per valid
+file relative to Markdown, counting failures and retries. For Qwen3-8B,
+a PDF costs
+\TaxPdfViaMd{}$\times$ through Markdown and \TaxPdfViaTex{}$\times$
+through LaTeX. A Word file costs \TaxDocxCode{}$\times$ through
+python-docx. A slide deck costs \TaxPptxCode{}$\times$, and only
+\ValidPptxCode\,\% of decks were ever valid. Two of the three models
+never produced a LaTeX file that compiled: they do not escape the dollar
+sign.
+\end{abstract}
+\vspace{1em}
+\end{@twocolumnfalse}
+]
+
+\input{sections/01_introduction}
+\input{sections/02_related}
+\input{sections/03_methods}
+\input{sections/04_results}
+\input{sections/05_discussion}
+\input{sections/06_conclusion}
+
+\FloatBarrier
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

@@ -1,0 +1,20 @@
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+Deliverable & \multicolumn{4}{c}{phi35-mini} & \multicolumn{4}{c}{qwen25-1.5b} & \multicolumn{4}{c}{qwen3-8b} \\
+ & valid & tokens & tax & facts & valid & tokens & tax & facts & valid & tokens & tax & facts \\
+\midrule
+TXT & 100 & 966 & 0.5 & 100 & 100 & 658 & 1.1 & 100 & 100 & 656 & 1.0 & 100 \\
+Markdown & 100 & 1744 & 1.0 & 99 & 100 & 673 & 1.0 & 88 & 100 & 685 & 1.0 & 100 \\
+JSON & 100 & 2874 & 2.8 & 87 & 83 & 888 & 1.8 & 69 & 100 & 895 & 1.3 & 100 \\
+HTML & 100 & 2118 & 1.2 & 100 & 100 & 1010 & 2.3 & 88 & 100 & 1093 & 1.7 & 100 \\
+LaTeX (compiles) & 0 & 6888 & $\infty$ & 0 & 0 & 2112 & $\infty$ & 0 & 100 & 757 & 2.5 & 100 \\
+PDF via MD & 100 & 1744 & 1.0 & 99 & 100 & 673 & 1.0 & 88 & 100 & 685 & 1.0 & 100 \\
+PDF via HTML & 100 & 2118 & 1.2 & 100 & 100 & 1010 & 2.3 & 88 & 100 & 1093 & 1.7 & 100 \\
+PDF via LaTeX & 0 & 6888 & $\infty$ & 0 & 0 & 2112 & $\infty$ & 0 & 100 & 757 & 2.5 & 100 \\
+DOCX via python-docx & 50 & 5376 & 47.0 & 50 & 33 & 1210 & 6.5 & 15 & 100 & 2156 & 5.2 & 100 \\
+DOCX via raw XML & 50 & 7576 & 98.7 & 0 & 0 & 4016 & $\infty$ & 0 & 100 & 2803 & 4.4 & 83 \\
+PPTX via python-pptx & 0 & 6102 & $\infty$ & 0 & 50 & 1250 & 4.0 & 20 & 40 & 5085 & 31.6 & 36 \\
+XLSX via openpyxl & 100 & 618 & 1.4 & 100 & 100 & 384 & 0.8 & 36 & 100 & 178 & 0.3 & 100 \\
+CSV & 100 & 306 & 0.6 & 59 & 50 & 315 & 1.4 & 50 & 100 & 73 & 0.1 & 100 \\
+\bottomrule
+\end{tabular}

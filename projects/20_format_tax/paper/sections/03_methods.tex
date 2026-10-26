@@ -1,0 +1,69 @@
+\section{Setup}
+\label{sec:methods}
+
+\paragraph{Documents.} A seeded generator writes ``annual reports'' of
+fictional networks. Each one has a title, author and date. Its sections
+hold paragraphs that each plant one fact (\emph{In March, the Kadunnu
+observatory recorded 120 km of cable, according to a note filed by Orka
+Lolen}) plus filler sentences. There is also one bullet list, one table
+(unit, budget (k\$), staff, score) and one equation. Every name is a
+random syllable string, so no answer comes from pretraining. About
+\NQuestionsPerDoc{} questions per document cover fact values, people,
+table cells, the row with the most staff, list length and list items,
+which of two facts came earlier in the year, and the equation constant.
+
+\paragraph{Formats.} The same content tree is rendered into TXT, Markdown,
+JSON (indent 2), HTML5 and LaTeX by hand-written renderers, and into DOCX,
+PPTX and XLSX by python-docx, python-pptx and openpyxl. PDF is the LaTeX
+compiled by pdflatex. A model can receive a binary file in two ways: as
+the text a standard loader extracts (pypdf, python-docx, python-pptx,
+openpyxl) or as the raw XML parts of the zip package. That gives
+twelve \emph{read formats}.
+
+\paragraph{Models.} Local, open-weight instruction models on one RTX 3060
+(12\,GB): Qwen2.5-1.5B-Instruct~\cite{qwen2025qwen25},
+Phi-3.5-mini-instruct~\cite{abdin2024phi3}, and
+Qwen3-8B~\cite{qwen2025qwen3} in NF4 4-bit~\cite{dettmers2023qlora} with
+thinking disabled. Decoding is greedy.
+
+\paragraph{Read.} We count tokens per format under five tokenizers.
+\emph{Content density} is tokens(TXT)/tokens(format). Fitting
+tokens(format) $= a + b\cdot$tokens(TXT) over a size sweep (2, 4 and 8
+sections) splits markup into a fixed cost $a$ and a per-content cost $b$.
+Loader time is the median time to turn the file into the model's string.
+
+\paragraph{Understand.} The prompt places the document in
+\texttt{<document>} tags and appends the question. All questions about one
+(document, format) share a token prefix. It is prefilled once, timed with
+CUDA synchronization (the \emph{read latency}), and each question is
+answered from a copy of its KV cache, as prefix caching does in serving
+systems~\cite{kwon2023vllm}. A numeric answer is correct if the first
+number on the first answer line matches. A text answer is correct if the
+normalized gold appears in a short answer, and a comparison answer must not
+also name the other entity. In the \emph{budget} condition each format is
+cut to the token count of its TXT version. Formats are compared with
+Markdown with exact McNemar tests~\cite{mcnemar1947} paired by question,
+Holm-adjusted~\cite{holm1979}.
+
+\paragraph{Write.} The model receives the report as plain text and one of
+ten instructions, which give the thirteen deliverables of
+Table~\ref{tab:write}. Each reply's first fenced block
+is built and validated:
+\begin{itemize}
+\item JSON must parse.
+\item LaTeX must compile with pdflatex.
+\item HTML and Markdown are turned into PDF with xhtml2pdf (via
+  python-markdown for Markdown).
+\item python-docx, python-pptx and openpyxl code runs in a subprocess with
+  a 60\,s timeout and must save a file that opens.
+\item Raw \texttt{word/document.xml} is packed into a blank .docx that
+  python-docx must open.
+\item CSV must have at least 2 rows of equal width.
+\end{itemize}
+A failed build is returned to the model with the error, up to
+\MaxAttempts{} attempts. The cost of a deliverable is its \emph{time per
+valid file}: all generation and build time, failures included, divided by
+the number of valid files. The \textbf{format tax} is that time divided by
+the same quantity for Markdown. Fidelity is the share of planted strings
+that the built file, read back by the loaders, still contains.
+Spreadsheet routes write only the table and are scored on its cells.

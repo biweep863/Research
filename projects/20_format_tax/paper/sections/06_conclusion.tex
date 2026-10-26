@@ -1,0 +1,15 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+The format a document arrives in, and the format a model is asked to
+produce, carry a cost that is easy to miss because it does not show up
+as an error. Reading, the cost is tokens. Markup and raw XML multiply
+them, dilute the content at a fixed budget, and on a consumer GPU can tip
+a prompt over a memory cliff. Writing, the cost is the pipeline. A PDF,
+Word file or slide deck is only ever as cheap as the text, code or XML
+the model can get right on the first try.
+
+Markdown is the one format that is cheap to read and cheap to write, and
+it converts into a PDF at almost no extra cost. Binary office files are
+best read as extracted text. When they must be written, a model's code is
+the expensive part: a fixed converter is cheaper.

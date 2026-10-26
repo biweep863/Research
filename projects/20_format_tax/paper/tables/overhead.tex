@@ -1,0 +1,18 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Format & tokens/TXT & density & loader (ms) & fixed & per TXT tok \\
+\midrule
+TXT & 1.00 & 100\% & -- & 0 & 1.00 \\
+Markdown & 1.02 & 98\% & -- & 36 & 0.94 \\
+JSON & 1.63 & 61\% & -- & 369 & 0.83 \\
+HTML & 1.55 & 65\% & -- & 379 & 0.72 \\
+LaTeX & 1.31 & 76\% & -- & 137 & 1.01 \\
+PDF (pypdf) & 1.02 & 98\% & 16.2 & -13 & 1.04 \\
+DOCX (text) & 0.96 & 104\% & 8.3 & 23 & 0.91 \\
+PPTX (text) & 1.03 & 97\% & 5.2 & 53 & 0.91 \\
+XLSX (cells) & 1.22 & 82\% & 3.1 & 230 & 0.72 \\
+DOCX (raw XML) & 6.12 & 16\% & 0.2 & 2510 & 0.63 \\
+PPTX (raw XML) & 9.51 & 11\% & 0.4 & 4064 & 0.63 \\
+XLSX (raw XML) & 5.28 & 19\% & 0.2 & 2115 & 0.66 \\
+\bottomrule
+\end{tabular}

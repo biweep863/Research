@@ -1,0 +1,41 @@
+\section{Introduction}
+\label{sec:intro}
+
+Much everyday use of a language model is file work. People paste a
+PDF, upload a Word file or a slide deck, and ask for a report, a
+spreadsheet or a presentation back. Each step involves a format choice
+that is usually made by habit: extract the PDF or send its layout, keep
+the HTML tags or strip them, ask for LaTeX or for Markdown, have the model
+write python-docx code or the XML inside the .docx.
+
+Earlier work measured slices of this. Prompt formatting changes
+accuracy~\cite{he2024promptformatting,sclar2024formatting}, table
+serialization changes table understanding~\cite{sui2024tablemeetsllm},
+and forced output formats can hurt reasoning~\cite{tam2024speakfreely}.
+We know of no study that holds one document fixed and follows it through
+every common format, both into the model and out of it, and charges each
+format for everything it costs: tokens, wall-clock time, wrong answers,
+failed builds and retries.
+
+That is what this paper does. We use local models, so every time is
+measured, not estimated, and nothing depends on an API's pricing. Our
+contributions:
+\begin{itemize}
+\item \textbf{One content, twelve read forms, thirteen deliverables.} A
+  generator plants checkable facts in reports and renders each report,
+  losslessly, into every format. The office formats can be read either as
+  extracted text or as raw XML.
+\item \textbf{A markup cost model.} Tokens grow as a fixed cost plus a
+  per-content multiplier. For raw slide XML the multiplier is
+  \SlopePptxXml{}: every word of content brings \SlopePptxXml{} tokens with
+  it.
+\item \textbf{Markup dilution.} At the same token budget, markup costs
+  accuracy beyond the content it pushes out of the window.
+\item \textbf{The memory cliff.} On a consumer GPU, markup does not only
+  make reading proportionally slower. It can push the prompt past the
+  point where the GPU runs out of memory and the driver spills to system
+  RAM.
+\item \textbf{The format tax.} Time per valid file, relative to Markdown,
+  for every route to a PDF, DOCX, PPTX or spreadsheet, including the
+  ones through code and raw XML.
+\end{itemize}

@@ -1,0 +1,28 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Input format.} Sui et al.~\cite{sui2024tablemeetsllm} compare
+table serializations (Markdown, HTML, JSON, XML, \ldots) on structural
+understanding tasks and find that HTML with format explanations does well.
+He et al.~\cite{he2024promptformatting} show that the same prompt
+written as plain text, Markdown, JSON or YAML can move GPT accuracy by tens
+of points. Sclar et al.~\cite{sclar2024formatting} find similar sensitivity
+to formatting choices that carry no meaning. These studies vary the
+\emph{prompt}. We vary the \emph{document}: what the model is asked
+\emph{about}, in the formats it comes in from files.
+
+\paragraph{Output format.} Tam et al.~\cite{tam2024speakfreely} show
+that forcing JSON or XML output can hurt reasoning. FOFO~\cite{xia2024fofo}
+measures whether models follow domain-specific formats. Both score the
+\emph{text}. Neither builds the file nor asks what a valid DOCX, PDF, PPTX
+or XLSX costs, when the model can only produce it through code, markup or
+raw OOXML.
+
+\paragraph{Document conversion and context.} Pipelines turn PDFs and
+office files into model input with extractors and layout models
+(Docling~\cite{auer2024docling}). The choice is usually made for
+extraction quality, not for what the result costs the model. Token cost
+differs by language under the same tokenizer~\cite{petrov2023tokenizer},
+and models use long contexts unevenly~\cite{liu2024lost}. We measure the
+analogous cost across formats, and a fixed-budget condition in which markup
+competes with content for the context.

@@ -1,0 +1,54 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{What to send a model.} Extract the text. A PDF, DOCX, PPTX or
+XLSX read through a standard loader costs what plain text costs and
+answers as well. The loader takes milliseconds. Raw office XML costs
+4--8$\times$ the tokens and, at any fixed budget, most of the answers. JSON
+and HTML are worth stripping when context is tight: they lose 20--30
+points at the plain-text budget. With a large context and a capable
+model, format matters little to accuracy. It still matters to time,
+memory and money, which all scale with tokens, and on a local GPU
+possibly much faster than linearly.
+
+\paragraph{What to ask a model for.} Ask for Markdown, then convert. A PDF
+through Markdown cost as much as the Markdown itself. A PDF through LaTeX
+cost \TaxPdfViaTex$\times$ for the 8B model and was never produced by the
+two smaller models. LaTeX's failures were about escaping, not layout. Office files
+are the expensive end. The cost is not in the file but in the code that
+makes it, which the model has to get right against a library API, without
+seeing the result. A slide deck was the worst case on every measure. An
+agent that has to deliver a .docx or .pptx is better served by writing
+Markdown and converting it with a fixed, tested tool (pandoc, a template)
+than by writing python-docx or python-pptx code each time.
+
+\paragraph{Raw XML is a surprise as an output.} The 8B model never failed
+to produce a valid \texttt{document.xml}, while its python-docx code
+needed repair in most cases. For a capable model, the format with no API
+to misremember was the reliable one. It was not the faithful one, though:
+\RecallDocxXml\,\% of the facts against \RecallDocxCode\,\% for code.
+
+\paragraph{Limitations.}
+\begin{itemize}
+\item \textbf{Small, local models.} The largest model has 8B parameters,
+  in 4-bit. Frontier models would fail less, and their tax would shrink
+  towards the token ratio. Token counts do not
+  depend on model quality. The write results are a lower bound on
+  reliability.
+\item \textbf{Synthetic documents.} The reports are short (about
+  \TxtTokens{} tokens of plain text) and regular. Real office files carry
+  styles, revision marks and embedded objects that make raw XML heavier
+  than ours, and longer documents would reach the memory cliff sooner.
+\item \textbf{Few documents for writing.} Writing used
+  \NWriteDocsQwenTwoFiveOneFiveb{} documents for the 1.5B model,
+  \NWriteDocsQwenThreeEightb{} for the 8B model (the sixth ran out of
+  memory) and \NWriteDocsPhiThreeFiveMini{} for Phi-3.5-mini, which we
+  stopped after 7 hours: past the memory cliff, one 8-section document
+  would have taken most of a day. Validity rates are coarse at that size, and the tax ratios
+  carry the variance of a few slow failures.
+\item \textbf{One stack.} The memory cliff belongs to one GPU, one
+  attention implementation and one driver. Its position will move with
+  all three. Its existence will not, as long as markup adds tokens.
+\item \textbf{Fidelity is string recall.} It checks that names and numbers
+  survive, not layout, styling or whether a slide reads well.
+\end{itemize}

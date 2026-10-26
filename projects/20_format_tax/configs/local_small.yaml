@@ -1,0 +1,36 @@
+project: format_tax
+seed: 0
+device: auto
+results_dir: results
+work_dir: data/work
+
+corpus:
+  n_docs: 3
+  doc:                       # the size knobs of src/data/doc_generator.make_doc
+    n_sections: 3
+    facts_per_section: 2
+    filler_per_section: 1
+    table_rows: 4
+    list_len: 5
+
+# Phase R: token counts only (no weights), several vocabularies
+tokenizers:
+  - {name: Qwen/Qwen2.5-1.5B-Instruct, short: qwen25}
+  - {name: microsoft/Phi-3.5-mini-instruct, short: phi35}
+  - {name: gpt2, short: gpt2}
+read:
+  loader_repeats: 3
+
+models:
+  - {name: Qwen/Qwen2.5-1.5B-Instruct, short: qwen25-1.5b, dtype: fp16}
+
+understand:
+  conditions: [native, budget]   # budget = truncated to the plain-text token count
+  prefill_repeats: 3
+  max_new_tokens: 24
+
+write:
+  generations: [txt, md, json, html, tex, docx_code, docx_xml, pptx_code, xlsx_code, csv]
+  n_docs: 3                     # first n docs of the corpus
+  max_attempts: 2                # 1 try + 1 retry with the build error
+  max_new_tokens: 2048

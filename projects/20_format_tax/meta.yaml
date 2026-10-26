@@ -1,0 +1,10 @@
+slug: format_tax
+title: "The Format Tax: What It Costs a Local LLM to Read, Understand and Write TXT, Markdown, LaTeX, HTML, JSON, PDF, DOCX, PPTX and XLSX"
+authors: ["Luis Benvenuto"]
+year: 2026
+topic: "Efficiency"
+type: "Preprint"
+venue: "arXiv preprint"
+tldr: "Same report in 12 formats, 3 local LLMs: raw office XML costs 4-8x the tokens; Markdown is cheapest to read and write; a PDF via LaTeX costs 2.5x, DOCX 5x, PPTX 32x the time per valid file."
+pdf: "paper/main.pdf"
+created: "2026-10-24"
